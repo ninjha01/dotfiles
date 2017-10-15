@@ -1,0 +1,354 @@
+;;; -*- coding: utf-8 -*-
+
+;; ----- ido-last-directory-list -----
+(
+ ("/Users/Nishant/Google Drive/Grad School/TA/algo/tomato_garden/" . "median/")
+ ("/Users/Nishant/Google Drive/Grad School/TA/algo/" . "tomato_garden/")
+ ("/Users/Nishant/Google Drive/Grad School/TA/" . "algo/")
+ ("/Users/Nishant/Desktop/rohrlich/public_html/" . "boilerplate/")
+ ("/Users/Nishant/Desktop/rohrlich/" . "public_html/")
+ ("/Users/Nishant/Google Drive/Grad School/COMP/review/" . "three/")
+ ("/Users/Nishant/Google Drive/Grad School/COMP/" . "review/")
+ ("/Users/Nishant/Google Drive/Grad School/SYS/" . "hw/")
+ ("/Users/Nishant/Google Drive/Grad School/LOGIC/Textbook Files/" . "Coq Files/")
+ ("/Users/Nishant/Google Drive/Grad School/LOGIC/" . "Textbook Files/")
+ ("/Users/Nishant/Google Drive/Grad School/" . "TA/")
+ ("/Users/Nishant/Google Drive/Projects/Thoth/website/public_html/content/" . "essays/")
+ ("/Users/Nishant/Google Drive/Projects/Thoth/website/myweb/html/" . "images/")
+ ("/Users/Nishant/Desktop/website/myweb/html/" . "html5up-editorial/")
+ ("/Users/Nishant/Desktop/website/myweb/" . "html/")
+ ("/Users/Nishant/Desktop/website/public_html/" . "builders/")
+ ("/Users/Nishant/Desktop/website/" . "public_html/")
+ ("/Users/Nishant/Downloads/html5up-editorial/assets/" . "css/")
+ ("/Users/Nishant/Downloads/html5up-editorial/" . "assets/")
+ ("/Users/Nishant/Mast/allergens/" . "edited/")
+ ("/Users/Nishant/Mast/" . "allergens/")
+ ("/Users/Nishant/Google Drive/Projects/Thoth/website/public_html/" . "content/")
+ ("/Users/Nishant/Google Drive/Archives/Personal/" . "Quarterly Review/")
+ ("/Users/Nishant/Google Drive/Projects/Mast/allergens/" . "edited/")
+ ("/Users/Nishant/Google Drive/Projects/Mast/" . "allergens/")
+ ("/Users/Nishant/Desktop/present/" . "remark/")
+ ("/Users/Nishant/Desktop/Mast/allergens/" . "edited/")
+ ("/Users/Nishant/Desktop/Mast/" . "presentation/")
+ ("/Volumes/nj7kv/public_html/" . "builders/")
+ ("/Users/Nishant/Google Drive/Projects/Thoth/website/myweb/" . "html/")
+ ("/Users/Nishant/Google Drive/Projects/Thoth/website/" . "public_html/")
+ ("/Users/Nishant/Google Drive/Projects/Thoth/" . "website/")
+ ("/Users/Nishant/Google Drive/Third Year/Fall/CS 2150/Labs/" . "Lab_8/")
+ ("/Users/Nishant/Google Drive/Third Year/Fall/CS 2150/" . "Labs/")
+ ("/Users/Nishant/Google Drive/Third Year/Fall/" . "CS 2150/")
+ ("/Users/Nishant/Google Drive/Projects/Ophion/looper/" . "doc/")
+ ("/Users/Nishant/Google Drive/Projects/Ophion/" . "looper/")
+ ("/Users/Nishant/Google Drive/Third Year/DatDA/challenge/" . "Challenge Submission/")
+ ("/Users/Nishant/Google Drive/Projects/" . "Thoth/")
+ ("/Users/Nishant/Google Drive/Archives/" . "Personal/")
+ ("/Users/Nishant/Google Drive/Third Year/Mobile App Dev/Core Services/core-skills-android-s17-core-sunkern-2-1/app/src/main/res/" . "layout/")
+ ("/Users/Nishant/Google Drive/Third Year/Mobile App Dev/Core Services/core-skills-android-s17-core-sunkern-2-1/app/src/main/java/cs4720/cs/virginia/edu/" . "coreskills/")
+ ("/Users/Nishant/Google Drive/Third Year/Mobile App Dev/Core Services/core-skills-android-s17-core-sunkern-2-1/app/src/main/java/cs4720/cs/virginia/" . "edu/")
+ ("/Users/Nishant/Google Drive/Third Year/Mobile App Dev/Core Services/core-skills-android-s17-core-sunkern-2-1/app/src/main/java/cs4720/cs/" . "virginia/")
+ ("/Users/Nishant/Google Drive/Third Year/Mobile App Dev/Core Services/core-skills-android-s17-core-sunkern-2-1/app/src/main/java/cs4720/" . "cs/")
+ ("/Users/Nishant/Google Drive/Third Year/Mobile App Dev/Core Services/core-skills-android-s17-core-sunkern-2-1/app/src/main/java/" . "cs4720/")
+ ("/Users/Nishant/Google Drive/Third Year/Mobile App Dev/Core Services/core-skills-android-s17-core-sunkern-2-1/app/src/main/" . "res/")
+ ("/Users/Nishant/Google Drive/Third Year/Mobile App Dev/Core Services/core-skills-android-s17-core-sunkern-2-1/app/src/" . "main/")
+ ("/Users/Nishant/Google Drive/Third Year/Mobile App Dev/Core Services/core-skills-android-s17-core-sunkern-2-1/app/" . "src/")
+ ("/Users/Nishant/Google Drive/Third Year/Mobile App Dev/Core Services/core-skills-android-s17-core-sunkern-2-1/" . "app/")
+ ("/Users/Nishant/Google Drive/Third Year/Mobile App Dev/Core Services/" . "core-skills-android-s17-core-sunkern-2-1/")
+ ("/Users/Nishant/Downloads/sim/" . "pipe/")
+ ("/Users/Nishant/Downloads/" . "sim/")
+ ("/Users/Nishant/Google Drive/Third Year/Comp Arch/hcl2d/" . "SEQ/")
+ ("/Volumes/nj7kv/" . "public_html/")
+ ("/Volumes/" . "nj7kv/")
+ ("/" . "home/")
+ ("/Users/Nishant/Downloads/Movies/Samurai Jack/" . "Season 1/")
+ ("/Users/Nishant/Google Drive/The Projects/" . "Project Frizzled/")
+ ("/Users/Nishant/Google Drive/Third Year/Comp Arch/Labs/hcl2d/" . "SEQ/")
+ ("/Users/Nishant/Google Drive/Third Year/Comp Arch/Labs/" . "hcl2d/")
+ ("/Users/Nishant/Google Drive/Third Year/Comp Arch/" . "perflab/")
+ ("/Users/" . "Nishant/")
+ ("/Users/Nishant/Google Drive/Third Year/Mobile App Dev/" . "Core Services/")
+ ("/Users/Nishant/Desktop/" . "Presentation/")
+ ("/scp:nj7kv@labunix01.cs.virginia.edu:/" . "bin/")
+ ("/scp:nj7kv@labunix01.cs.virginia.edu:/home/nj7kv/" . "hcl2d/")
+ ("/scp:nj7kv@labunix01.cs.virginia.edu:/home/" . "nj7kv/")
+ ("/nj7kv@labunix01.cs.virginia.edu:/home/nj7kv/" . "hcl2d/")
+ ("/nj7kv@labunix01.cs.virginia.edu:/home/" . "nj7kv/")
+ ("/nj7kv@labunix01.cs.virginia.edu:/" . "home/")
+ ("/Users/Nishant/Google Drive/The Archives/" . "Backups/")
+ ("/Users/Nishant/" . "Desktop/")
+ ("/Users/Nishant/Google Drive/Third Year/" . "Fall/")
+ ("/Users/Nishant/Google Drive/" . "Grad School/")
+)
+
+;; ----- ido-work-directory-list -----
+(
+ "/Users/Nishant/Desktop/"
+ "/Users/Nishant/Google Drive/Grad School/COMP/review/four/"
+ "/Users/Nishant/"
+ "/Users/Nishant/Desktop/in class 10:11:17/"
+ "/Users/Nishant/Google Drive/Grad School/COMP/review/three/"
+ "/Users/Nishant/Google Drive/Grad School/ML/hw/two/"
+ "/Users/Nishant/Google Drive/Grad School/LOGIC/Textbook Files/Coq Files/"
+ "/Users/Nishant/Google Drive/Grad School/ML/9_20_17_in_class /"
+ "/Users/Nishant/Desktop/Presentation/"
+ "/Users/Nishant/Google Drive/Grad School/ML/writing/one/"
+ "/Users/Nishant/Google Drive/Grad School/COMP/"
+ "/Users/Nishant/Desktop/website/"
+ "/Users/Nishant/Google Drive/Projects/Thoth/website/"
+ "/Users/Nishant/Google Drive/Projects/Thoth/website/public_html/boilerplate/"
+ "/Users/Nishant/Google Drive/Projects/Thoth/website/public_html/builders/"
+ "/Users/Nishant/Google Drive/Projects/Thoth/website/public_html/content/essays/"
+ "/Users/Nishant/Desktop/nalin/public_html/content/"
+ "/Users/Nishant/Desktop/nalin/public_html/boilerplate/"
+ "/Users/Nishant/Google Drive/Grad School/TA/algo/tomato_garden/tests/"
+ "/Users/Nishant/Google Drive/Grad School/TA/algo/tomato_garden/tests/winners/"
+ "/Users/Nishant/Google Drive/Grad School/TA/algo/tomato_garden/"
+ "/Users/Nishant/Google Drive/Grad School/TA/algo/tomato_garden/median/"
+ "/Users/Nishant/Google Drive/Grad School/TA/algo/tomato_garden/random/"
+ "/Users/Nishant/Google Drive/Projects/Mast/allergens/edited/"
+ "/Users/Nishant/Desktop/rohrlich/public_html/boilerplate/"
+ "/Users/Nishant/Desktop/rohrlich/public_html/builders/"
+ "/Users/Nishant/Google Drive/Grad School/TA/algo/"
+ "/Users/Nishant/Google Drive/Grad School/SYS/hw/"
+ "/Users/Nishant/Desktop/Toolbelt/"
+ "/Users/Nishant/Google Drive/Grad School/LOGIC/"
+ "/Users/Nishant/Google Drive/"
+ "/Users/Nishant/Google Drive/Grad School/LOGIC/Textbook Files/"
+ "/Users/Nishant/Google Drive/Grad School/ML/class/"
+ "/Users/Nishant/Google Drive/Grad School/COMP/review/two/"
+ "/Users/Nishant/Google Drive/Grad School/ML/hw/one/"
+ "/Users/Nishant/Google Drive/Grad School/ML/hw/"
+ "/Users/Nishant/Google Drive/Projects/contacts/"
+ "/Users/Nishant/Google Drive/Grad School/LOGIC/Textbook Files/html/"
+ "/Users/Nishant/Google Drive/Grad School/COMP/review/"
+ "/Users/Nishant/Google Drive/Grad School/LOGIC/Textbook/html/"
+ "/Users/Nishant/Google Drive/Grad School/LOGIC/Textbook/"
+ "/Users/Nishant/Google Drive/Grad School/SYS/"
+ "/Users/Nishant/Google Drive/Grad School/ALGO/"
+ "/Users/Nishant/Google Drive/Grad School/ML/russell/"
+ "/Users/Nishant/Google Drive/Grad School/ML/"
+ "/Users/Nishant/Google Drive/Grad School/PERS/"
+ "/Users/Nishant/Google Drive/Grad School/RECON/"
+ "/Users/Nishant/Google Drive/Grad School/SOFT/"
+ "/Users/Nishant/Google Drive/Projects/Mast/allergens/"
+ "/Users/Nishant/Google Drive/Projects/Thoth/current/Turing/"
+)
+
+;; ----- ido-work-file-list -----
+(
+ "flowers.rb"
+ "flower_days.rb"
+ "review4B.md"
+ ".emacs"
+ "submission.md"
+ "breast.py"
+ "iris.py"
+ "review3A.md"
+ "review4.md"
+ "four.py"
+)
+
+;; ----- ido-dir-file-cache -----
+(
+ ("/Users/Nishant/Desktop/" (23010 9101 406834 64000) ".DS_Store" "flowers.rb" "../" "./")
+
+ ("/Users/Nishant/Google Drive/Grad School/ML/" (23006 44792 10771 489000) "writing/" "ml_notes.md" "decision.md" "in class 10:11:17/" ".ipynb_checkpoints/" "9_20_17_in_class /" "class/" "Problems of Philosophy by Bertrand Russell.pdf" "student-alcohol-consumption.zip" "hw/" ".DS_Store" "russell/" "../" "./")
+
+ ("/Users/Nishant/Google Drive/Grad School/ALGO/" (23002 22969 258687 381000) "Problem Set 1.gdoc" "Introduction to Algorithms by Thomas H. Cormen.pdf" "How to Solve It by George Polya.pdf" "Text Sol/" "corpus.txt" ".DS_Store" "algo_notes.md" "submit.py" "../" "./")
+
+ ("/Users/Nishant/Google Drive/Grad School/ML/hw/one/" (23005 34905 536887 488000) "normalStockHist.png" "stockHist.png" "newStockHist.png" "polyfit.py" "Homework 1.pdf" "work1.pdf" "work1.md" "degree6.png" ".DS_Store" "degree1.png" "stocks.py" "#polyfit.py#" "~$temp.docx" "degree2.png" "../" "./")
+
+ ("/Users/Nishant/Google Drive/" (23010 6903 967399 200000) "Grad School/" "Archives/" ".tmp.drivedownload/" "Projects/" ".DS_Store" "Offer+Letter+(US)+2017-10-06+15_42+PDT.pdf" "../" "./")
+
+ ("/Users/Nishant/Google Drive/Grad School/LOGIC/" (23003 56224 643951 980000) "Software Foundations.pdf" "Textbook Files/" "Notes/" "DNA.v" ".DS_Store" "../" "./")
+
+ ("/Users/Nishant/Google Drive/Projects/Thoth/website/public_html/content/essays/" (23010 6904 381126 408000) "strange_loops.md" "writing.md" "undergrad_advice.md" "control_problem.md" "../" "./")
+
+ ("/Users/Nishant/Google Drive/Projects/Thoth/website/public_html/builders/" (23010 6904 380443 359000) "writing_builder.cpp" "project_builder.cpp" "menu_builder.out" "writing_builder.out" "Makefile" "menu_builder.cpp" "project_builder.out" "../" "./")
+
+ ("/Users/Nishant/Google Drive/Projects/Thoth/website/public_html/boilerplate/" (23010 6904 381867 159000) "generic.html" "template/" ".DS_Store" "home.html" "../" "./")
+
+ ("/Users/Nishant/Google Drive/Projects/Thoth/website/" (23010 6904 382757 339000) ".git/" "build.sh" "README.md" "init.sh" "details.md" "public_html/" ".DS_Store" "myweb/" "../" "./")
+
+ ("/Users/Nishant/Google Drive/Grad School/COMP/review/four/" (23007 55871 464247 894000) "paper4B.pdf" "paper4A.pdf" "review4B.md" "sub4B.docx" "sub4A.docx" "review4A.md" "../" "./")
+
+ ("/Users/Nishant/" (23006 49572 530973 432000) "platform-tools/" "gradle-3.2.1/" ".viminfo" ".bash_history" ".gitconfig" ".cache/" ".python_history" "Downloads/" ".ispell_english" ".bash_profile" ".git/" ".rstudio-desktop/" ".swt/" "Documents/" ".npm/" ".credentials/" ".swo" ".jupyter/" ".Trash/" ".Rapp.history" "Dropbox/" ".emacs~" ".drjava" ".gradle/" ".ghc/" "Applications/" ".emacs" "Movies/" ".ssh/" "profile.jpg" ".sh_history" ".RData" "cover_letter.pdf" ".dropbox/" "Public/" "PycharmProjects/" ".sqlite_history" "Google Drive/" ".bash_sessions/" ".cups/" ".android/" ".lpass/" ".emacs.d/" "keystore.jks" ".bash_profile.pysave" "Calibre Library/" ".emulator_console_auth_token" ".oracle_jre_usage/" ".lesshst" ".matplotlib/" "Library/" "Desktop/" ".ipython/" ".p2/" "resume.pdf" ".cpan/" ".rdm" "Pictures/" ".local/" ".swp" ".bash_profile~" ".bashrc" ".subversion/" ".bash_rc" ".tooling/" ".wget-hsts" "Archive/" ".CFUserTextEncoding" ".lldb/" "VirtualBox VMs/" "eclipse/" "calendar/" ".DS_Store" ".vim/" ".anyconnect" "Mast/" "fission/" "Music/" ".config/" ".eclipse/" ".bash_profile.macports-saved_2017-05-06_at_20:22:09" ".Rhistory" "../" "./")
+
+ ("/Users/Nishant/Desktop/in class 10:11:17/" (23006 36741 284983 857000) "RF In-Class Activity.pdf" "submission.md" "~$bmission.docx" "submission.docx" "breast.py" "chart1.png" "chart2.png" "plot_ensemble_oob.py" "../" "./")
+
+ ("/Users/Nishant/Google Drive/Grad School/COMP/" (22996 61413 68375 376000) "exam1_review.md" "review/" "Sample Exam Questions with answers.gdoc" "project/" "comp_notes.md" "hw/" ".DS_Store" "../" "./")
+
+ ("/Users/Nishant/Google Drive/Grad School/ML/writing/one/" (23005 18557 956995 0) "Function of Dream Sleep.pdf" "Current Perspectives.pdf" "submission.docx" "one.md" "REM Sleep Deprivation.pdf" "Assignment1.pdf" "ideas.md" ".DS_Store" "../" "./")
+
+ ("/Users/Nishant/Google Drive/Grad School/LOGIC/Textbook Files/Coq Files/" (23004 10528 567957 227000) "Bib.v" ".Basics.aux" "Lists.v" "polymorpic.v" ".depend" "#Tactics.v#" "Preface.v" "Induction.v" "Postscript.v" "ProofObjects.v" ".Induction.aux" "Auto.v" "Tactics.v" "Maps.v" "Extraction.v" "IndPrinciples.v" "Rel.v" "Makefile" "Basics.v" "Logic.v" "ImpCEvalFun.v" ".Preface.aux" "Poly.v" ".DS_Store" "IndProp.v" "Imp.v" ".Lists.aux" "ImpParser.v" "../" "./")
+
+ ("/Users/Nishant/Google Drive/Grad School/ML/hw/two/" (23005 34906 661852 442000) "Example 2.6.jpg" "table.png" "results.csv" "tree2.jpg" "degree8.png" ".ipynb_checkpoints/" "lenses.csv" "submission2.pdf" "four-table.png" "tree.jpg" "submission2.docx" "Assignment2.pdf" "2.7.jpg" "four-table2.png" "four.py" "three.py" ".DS_Store" "submission2.md" "temp.csv" "2.11.jpg" "lenses.data.txt" "../" "./")
+
+ ("/Users/Nishant/Google Drive/Grad School/COMP/review/" (23006 17404 463235 449000) "four/" "two/" "one/" "three/" "outline.md" ".DS_Store" "../" "./")
+
+ ("/Users/Nishant/Google Drive/Grad School/" (23002 43330 222347 208000) "TA/" "PERS/" "ML/" "SYS/" "COMP/" "ALGO/" "LOGIC/" "admin/" ".DS_Store" "../" "./")
+
+ ("/Users/Nishant/Google Drive/Grad School/ML/hw/" (23003 43542 331752 0) "two/" "work2.md" "zero/" "one/" ".DS_Store" "../" "./")
+
+ ("/Users/Nishant/Google Drive/Grad School/ML/9_20_17_in_class /" (23002 43364 58843 522000) ".ipynb_checkpoints/" "Untitled.ipynb" "knn_inclass_activity.ipynb" "knn_inclass_activity.pdf" "iris.data.txt" "../" "./")
+
+ ("/Users/Nishant/Desktop/Presentation/" (22998 8922 531802 773000) "reveal.js/" "demo.mp4" "id.png" "actual.png" "remark/" "presentation.html" "database.png" "alpha.png" "parsed.png" "presentation.md" "../" "./")
+
+ ("/Users/Nishant/Desktop/website/" (22994 21543 826624 267000) ".git/" "README.md" "bob.sh" "init.sh" "details.md" "public_html/" ".DS_Store" "myweb/" "../" "./")
+
+ ("/Users/Nishant/Google Drive/Projects/Thoth/website/myweb/" (22993 33867 560052 881000) "html/" "../" "./")
+
+ ("/Users/Nishant/Google Drive/Projects/Thoth/website/myweb/html/" (22993 35699 516699 507000) "strange_loops.html" "assets/" "LICENSE.txt" "style.css" "elements.html" "resume.pdf" "writing.html" "undergrad_advice.html" "images/" ".DS_Store" "index.html" "control_problem.html" "favicon.ico" "../" "./")
+
+ ("/Users/Nishant/Google Drive/Projects/Mast/presentation/final/" (22985 6523 0 0) "reveal.js/" "chaos.png" "demo.mp4" "remark/" "presentation.html" "alpha.png" "fire.png" ".DS_Store" "presentation.md" "icon.png" "../" "./")
+
+ ("/Users/Nishant/Google Drive/Grad School/SYS/" (22993 12592 816742 947000) "Stochastic Model Checking.pdf" "slides/" "CyberPhysicalSystems.acsm" "sys_notes.md" "CPS Notes0831.pdf" "hw/" ".DS_Store" "../" "./")
+
+ ("/Users/Nishant/Google Drive/Grad School/LOGIC/Textbook Files/" (22992 5920 734414 201000) "Basics.glob" ".Extraction.vo.aux" "Exam1.glob" "Bib.v" "Logic.v.d" ".Basics.aux" ".Tactics.aux" "impdriver.ml" "Basics.v.d" "Exam1.v" ".Poly.aux" "Coq Files/" "Maps.v.d" "IndProp.v.d" ".depend" ".Rel.aux" "deps.map" "lf/" ".Lists.vo.aux" ".ImpParser.vo.aux" ".ProofObjects.aux" "imp2.ml" "ProofObjects.html" "Preface.v.d" "Preface.v" ".ProofObjects.vo.aux" "Makefile-e" "Preface.html" ".Bib.vo.aux" ".Preface.vo.aux" ".Bib.aux" "Basics.vo" "Induction.html" ".IndProp.vo.aux" ".Postscript.vo.aux" ".Rel.vo.aux" ".Basics.vo.aux" ".ImpCEvalFun.aux" ".Logic.vo.aux" "Poly.v.d" "Postscript.html" ".Maps.aux" "common/" ".Imp.aux" "Postscript.v" "ProofObjects.v" ".Auto.vo.aux" "Imp.html" ".Induction.aux" "IndPrinciples.v.d" "Imp.v.d" "README" ".Tactics.vo.aux" "Auto.v" ".Exam1.aux" "Tactics.v" "imp2.mli" "Preface.vo" "imp.mli" ".ImpCEvalFun.vo.aux" "Preface.glob" "imp1.mli" "_CoqProject" "Extraction.v.d" "IndProp.html" ".Auto.aux" "Maps.v" "Postscript.v.d" "IndPrinciples.html" "Bib.v.d" ".Maps.vo.aux" "ImpCEvalFun.html" "Extraction.v" "Rel.html" "IndPrinciples.v" "Auto.html" "imp.ml" "Basics.html" ".IndPrinciples.vo.aux" ".Logic.aux" "Rel.v" ".IndPrinciples.aux" "deps.html" "ImpParser.v.d" "Logic.html" "Makefile" "Basics.v" "Logic.v" "ImpCEvalFun.v" ".Induction.vo.aux" "toc.html" ".IndProp.aux" ".Postscript.aux" "Maps.html" "ImpCEvalFun.v.d" ".Imp.vo.aux" "imp1.ml" "Extraction.html" "LICENSE" ".Poly.vo.aux" "Rel.v.d" ".Preface.aux" "Poly.v" ".DS_Store" "ProofObjects.v.d" "index.html" "coqindex.html" "IndProp.v" "Bib.html" "ImpParser.html" "Tactics.html" "Imp.v" "Tactics.v.d" "Poly.html" "Auto.v.d" ".Lists.aux" "ImpParser.v" ".Extraction.aux" ".ImpParser.aux" "../" "./")
+
+ ("/Users/Nishant/Google Drive/Grad School/SYS/hw/" (22993 12415 382244 0) "Two/" "One/" ".DS_Store" "../" "./")
+
+ ("/Users/Nishant/Google Drive/Grad School/TA/algo/tomato_garden/random/" (22982 61056 0 0) "gen_random.out" "garden.txt" "gen_random.cpp" "random_garden.png" ".DS_Store" "../" "./")
+
+ ("/Users/Nishant/Google Drive/Grad School/TA/algo/tomato_garden/median/" (22982 61056 0 0) "new_median_garden.png" "garden.txt" "gen_median.cpp" "closestpair_wrong.py" "closestpair_bad.py" "closestpair_good.py" ".DS_Store" "gen_median.out" "temp.csv" "closestpair_bad2.py" "../" "./")
+
+ ("/Users/Nishant/Google Drive/Grad School/TA/algo/tomato_garden/" (22985 3177 0 0) "#build.sh#" "random/" "sample_run.txt" "line/" "build.sh" "timed_out_results.csv" "tests/" "results.xls" "median/" ".DS_Store" "../" "./")
+
+ ("/Users/Nishant/Google Drive/Grad School/TA/algo/tomato_garden/tests/" (22985 25998 366453 417000) "Culver, Grace(grc4yc)_Submission attachment(s)_closestpair.py" "random/" "nathan/" "Alleva,_Erin(eaa4de)_Submission_attachment(s)_closestpair.py" "Pope, Nicole(np4ft)_Submission attachment(s)_closestpair.py" "line/" "testing/" "Mu, Alvin(am7eu)_Submission attachment(s)_closestpair.py" "Ya, Joshua(jy2xj)_Submission attachment(s)_closestpair (1).py" "run.sh" "Ya, Joshua(jy2xj)_Submission attachment(s)_closestpair.py" "Zhou, Jennifer(jz5ez)_Submission attachment(s)_closestpair.py" "O'Rourke, Ted(ejo3xk)_Submission attachment(s)_closestpair.py" "Poudel, Subhan(sp4ck)_Submission attachment(s)_closestpair.py" "Goldman, JonKyle(jg2qq)_Submission attachment(s)_closestpair.py" "Simon, Riya(rps2ff)_Submission attachment(s)_closestPair.py" "median/" "Zhou, Jennifer(jz5ez)_Submission attachment(s)_closestpair (1).py" "Palaoro, Victoria(vrp8ea)_Submission attachment(s)_closestpair.py" "McKay, Brandon(bmm8ce)_Submission attachment(s)_closestpair.py" "Ramada, Mark(mar2ax)_Submission attachment(s)_closestpair.py" "Yeung, Chris(cy4bv)_Submission attachment(s)_closestpair.py" "Park, Felix(fjp7mb)_Submission attachment(s)_closestpair.py" ".DS_Store" "Aly_Abdullah(aa4tf)_Submission_attachment(s)_closestpair.py" "Walters, Adama(alw5jc)_Submission attachment(s)_closestpair.py" "Pentakalos, John(jxp9pd)_Submission attachment(s)_nearestPoints.py" "Yeung, Chris(cy4bv)_Submission attachment(s)_closestpair (1).py" "../" "./")
+
+ ("/Users/Nishant/Desktop/nalin/public_html/content/" (22992 62794 72925 459000) "projects.md" "../" "./")
+
+ ("/Users/Nishant/Desktop/nalin/public_html/boilerplate/" (22992 61724 120978 484000) "bottom_home.html" "top_home.html" ".#bottom_generic.html" "../" "./")
+
+ ("/Users/Nishant/Google Drive/Projects/Thoth/website/myweb/html/assets/css/" (22992 57048 255001 135000) "font-awesome.min.css" "main.css" "ie8.css" "ie9.css" "../" "./")
+
+ ("/Users/Nishant/Google Drive/Grad School/TA/algo/tomato_garden/tests/only_random/" (22981 29228 0 0) "Tuzinkiewicz_Nic(nat5ds)_Submission_attachment(s)_closestpair.py" "times.csv" "time.sh" "testing/" "Shah_Nirali(nss8hh)_Submission_attachment(s)_closestpair.py" "Sekar_Madhav(mrs4ct)_Submission_attachment(s)_closestpair.py" "run.sh" "Rossi_Edmund(ejr8yc)_Submission_attachment(s)_closestpair.py" "random/" "Poudel_Subhan(sp4ck)_Submission_attachment(s)_closestpair.py" "only_random.txt" "Nguyen_Dan(dn6dm)_Submission_attachment(s)_closestpair.py" "median/" "line/" "Kuo_Monica(mdk6jd)_Submission_attachment(s)_closestpair.py" "grades.csv" "Garrett_Tyler(tjg3ea)_Submission_attachment(s)_closestpair.py" "Finucane_Kean(kf9zy)_Submission_attachment(s)_closestpair.py" "Brill_Carson(cgb7uu)_Submission_attachment(s)_closestpair.py" "86115.log" "74987.log" ".DS_Store" "../" "./")
+
+ ("/Users/Nishant/Google Drive/Projects/Mast/allergens/edited/" (22977 12592 0 0) "validate.out" "validate.cpp" "trimTop.out" "trimTop.cpp" "trimBottom.out" "trimBottom.cpp" "stripper.sh" "sold.txt" "save_page.js" "run.cpp" "extractText.py" "database.csv" "csvGen.out" "csvGen.cpp" "allergen99.md" "allergen98.md" "allergen97.md" "allergen96.md" "allergen95.md" "allergen94.md" "allergen93.md" "allergen92.md" "allergen91.md" "allergen901.md" "allergen900.md" "allergen90.md" "allergen9.md" "allergen899.md" "allergen898.md" "allergen897.md" "allergen896.md" "allergen895.md" "allergen894.md" "allergen893.md" "allergen892.md" "allergen891.md" "allergen890.md" "allergen89.md" "allergen889.md" "allergen888.md" "allergen887.md" "allergen886.md" "allergen885.md" "allergen884.md" "allergen883.md" "allergen882.md" "allergen881.md" "allergen880.md" "allergen88.md" "allergen879.md" "allergen878.md" "allergen877.md" "allergen876.md" "allergen875.md" "allergen874.md" "allergen873.md" "allergen872.md" "allergen871.md" "allergen870.md" "allergen87.md" "allergen869.md" "allergen868.md" "allergen867.md" "allergen866.md" "allergen865.md" "allergen864.md" "allergen863.md" "allergen862.md" "allergen861.md" "allergen860.md" "allergen86.md" "allergen859.md" "allergen858.md" "allergen857.md" "allergen856.md" "allergen855.md" "allergen854.md" "allergen853.md" "allergen852.md" "allergen851.md" "allergen850.md" "allergen85.md" "allergen849.md" "allergen848.md" "allergen847.md" "allergen846.md" "allergen845.md" "allergen844.md" "allergen843.md" "allergen842.md" "allergen841.md" "allergen840.md" "allergen84.md" "allergen839.md" "allergen838.md" "allergen837.md" "allergen836.md" "allergen835.md" "allergen834.md" "allergen833.md" "allergen832.md" "allergen831.md" "allergen830.md" "allergen83.md" "allergen829.md" "allergen828.md" "allergen827.md" "allergen826.md" "allergen825.md" "allergen824.md" "allergen823.md" "allergen822.md" "allergen821.md" "allergen820.md" "allergen82.md" "allergen819.md" "allergen818.md" "allergen817.md" "allergen816.md" "allergen815.md" "allergen814.md" "allergen813.md" "allergen812.md" "allergen811.md" "allergen810.md" "allergen81.md" "allergen809.md" "allergen808.md" "allergen807.md" "allergen806.md" "allergen805.md" "allergen804.md" "allergen803.md" "allergen802.md" "allergen801.md" "allergen800.md" "allergen80.md" "allergen8.md" "allergen799.md" "allergen798.md" "allergen797.md" "allergen796.md" "allergen795.md" "allergen794.md" "allergen793.md" "allergen792.md" "allergen791.md" "allergen790.md" "allergen79.md" "allergen789.md" "allergen788.md" "allergen787.md" "allergen786.md" "allergen785.md" "allergen784.md" "allergen783.md" "allergen782.md" "allergen781.md" "allergen780.md" "allergen78.md" "allergen779.md" "allergen778.md" "allergen777.md" "allergen776.md" "allergen775.md" "allergen774.md" "allergen773.md" "allergen772.md" "allergen771.md" "allergen770.md" "allergen77.md" "allergen769.md" "allergen768.md" "allergen767.md" "allergen766.md" "allergen765.md" "allergen764.md" "allergen763.md" "allergen762.md" "allergen761.md" "allergen760.md" "allergen76.md" "allergen759.md" "allergen758.md" "allergen757.md" "allergen756.md" "allergen755.md" "allergen754.md" "allergen753.md" "allergen752.md" "allergen751.md" "allergen750.md" "allergen75.md" "allergen749.md" "allergen748.md" "allergen747.md" "allergen746.md" "allergen745.md" "allergen744.md" "allergen743.md" "allergen742.md" "allergen741.md" "allergen740.md" "allergen74.md" "allergen739.md" "allergen738.md" "allergen737.md" "allergen736.md" "allergen735.md" "allergen734.md" "allergen733.md" "allergen732.md" "allergen731.md" "allergen730.md" "allergen73.md" "allergen729.md" "allergen728.md" "allergen727.md" "allergen726.md" "allergen725.md" "allergen724.md" "allergen723.md" "allergen722.md" "allergen721.md" "allergen720.md" "allergen72.md" "allergen719.md" "allergen718.md" "allergen717.md" "allergen716.md" "allergen715.md" "allergen714.md" "allergen713.md" "allergen712.md" "allergen711.md" "allergen710.md" "allergen71.md" "allergen709.md" "allergen708.md" "allergen707.md" "allergen706.md" "allergen705.md" "allergen704.md" "allergen703.md" "allergen702.md" "allergen701.md" "allergen700.md" "allergen70.md" "allergen7.md" "allergen699.md" "allergen698.md" "allergen697.md" "allergen696.md" "allergen695.md" "allergen694.md" "allergen693.md" "allergen692.md" "allergen691.md" "allergen690.md" "allergen69.md" "allergen689.md" "allergen688.md" "allergen687.md" "allergen686.md" "allergen685.md" "allergen684.md" "allergen683.md" "allergen682.md" "allergen681.md" "allergen680.md" "allergen68.md" "allergen679.md" "allergen678.md" "allergen677.md" "allergen676.md" "allergen675.md" "allergen674.md" "allergen673.md" "allergen672.md" "allergen671.md" "allergen670.md" "allergen67.md" "allergen669.md" "allergen668.md" "allergen667.md" "allergen666.md" "allergen665.md" "allergen664.md" "allergen663.md" "allergen662.md" "allergen661.md" "allergen660.md" "allergen66.md" "allergen659.md" "allergen658.md" "allergen657.md" "allergen656.md" "allergen655.md" "allergen654.md" "allergen653.md" "allergen652.md" "allergen651.md" "allergen650.md" "allergen65.md" "allergen649.md" "allergen648.md" "allergen647.md" "allergen646.md" "allergen645.md" "allergen644.md" "allergen643.md" "allergen642.md" "allergen641.md" "allergen640.md" "allergen64.md" "allergen639.md" "allergen638.md" "allergen637.md" "allergen636.md" "allergen635.md" "allergen634.md" "allergen633.md" "allergen632.md" "allergen631.md" "allergen630.md" "allergen63.md" "allergen629.md" "allergen628.md" "allergen627.md" "allergen626.md" "allergen625.md" "allergen624.md" "allergen623.md" "allergen622.md" "allergen621.md" "allergen620.md" "allergen62.md" "allergen619.md" "allergen618.md" "allergen617.md" "allergen616.md" "allergen615.md" "allergen614.md" "allergen613.md" "allergen612.md" "allergen611.md" "allergen610.md" "allergen61.md" "allergen609.md" "allergen608.md" "allergen607.md" "allergen606.md" "allergen605.md" "allergen604.md" "allergen603.md" "allergen602.md" "allergen601.md" "allergen600.md" "allergen60.md" "allergen6.md" "allergen599.md" "allergen598.md" "allergen597.md" "allergen596.md" "allergen595.md" "allergen594.md" "allergen593.md" "allergen592.md" "allergen591.md" "allergen590.md" "allergen59.md" "allergen589.md" "allergen588.md" "allergen587.md" "allergen586.md" "allergen585.md" "allergen584.md" "allergen583.md" "allergen582.md" "allergen581.md" "allergen580.md" "allergen58.md" "allergen579.md" "allergen578.md" "allergen577.md" "allergen576.md" "allergen575.md" "allergen574.md" "allergen573.md" "allergen572.md" "allergen571.md" "allergen570.md" "allergen57.md" "allergen569.md" "allergen568.md" "allergen567.md" "allergen566.md" "allergen565.md" "allergen564.md" "allergen563.md" "allergen562.md" "allergen561.md" "allergen560.md" "allergen56.md" "allergen559.md" "allergen558.md" "allergen557.md" "allergen556.md" "allergen555.md" "allergen554.md" "allergen553.md" "allergen552.md" "allergen551.md" "allergen550.md" "allergen55.md" "allergen549.md" "allergen548.md" "allergen547.md" "allergen546.md" "allergen545.md" "allergen544.md" "allergen543.md" "allergen542.md" "allergen541.md" "allergen540.md" "allergen54.md" "allergen539.md" "allergen538.md" "allergen537.md" "allergen536.md" "allergen535.md" "allergen534.md" "allergen533.md" "allergen532.md" "allergen531.md" "allergen530.md" "allergen53.md" "allergen529.md" "allergen528.md" "allergen527.md" "allergen526.md" "allergen525.md" "allergen524.md" "allergen523.md" "allergen522.md" "allergen521.md" "allergen520.md" "allergen52.md" "allergen519.md" "allergen518.md" "allergen517.md" "allergen516.md" "allergen515.md" "allergen514.md" "allergen513.md" "allergen512.md" "allergen511.md" "allergen510.md" "allergen51.md" "allergen509.md" "allergen508.md" "allergen507.md" "allergen506.md" "allergen505.md" "allergen504.md" "allergen503.md" "allergen502.md" "allergen501.md" "allergen500.md" "allergen50.md" "allergen5.md" "allergen499.md" "allergen498.md" "allergen497.md" "allergen496.md" "allergen495.md" "allergen494.md" "allergen493.md" "allergen492.md" "allergen491.md" "allergen490.md" "allergen49.md" "allergen489.md" "allergen488.md" "allergen487.md" "allergen486.md" "allergen485.md" "allergen484.md" "allergen483.md" "allergen482.md" "allergen481.md" "allergen480.md" "allergen48.md" "allergen479.md" "allergen478.md" "allergen477.md" "allergen476.md" "allergen475.md" "allergen474.md" "allergen473.md" "allergen472.md" "allergen471.md" "allergen470.md" "allergen47.md" "allergen469.md" "allergen468.md" "allergen467.md" "allergen466.md" "allergen465.md" "allergen464.md" "allergen463.md" "allergen462.md" "allergen461.md" "allergen460.md" "allergen46.md" "allergen459.md" "allergen458.md" "allergen457.md" "allergen456.md" "allergen455.md" "allergen454.md" "allergen453.md" "allergen452.md" "allergen451.md" "allergen450.md" "allergen45.md" "allergen449.md" "allergen448.md" "allergen447.md" "allergen446.md" "allergen445.md" "allergen444.md" "allergen443.md" "allergen442.md" "allergen441.md" "allergen440.md" "allergen44.md" "allergen439.md" "allergen438.md" "allergen437.md" "allergen436.md" "allergen435.md" "allergen434.md" "allergen433.md" "allergen432.md" "allergen431.md" "allergen430.md" "allergen43.md" "allergen429.md" "allergen428.md" "allergen427.md" "allergen426.md" "allergen425.md" "allergen424.md" "allergen423.md" "allergen422.md" "allergen421.md" "allergen420.md" "allergen42.md" "allergen419.md" "allergen418.md" "allergen417.md" "allergen416.md" "allergen415.md" "allergen414.md" "allergen413.md" "allergen412.md" "allergen411.md" "allergen410.md" "allergen41.md" "allergen409.md" "allergen408.md" "allergen407.md" "allergen406.md" "allergen405.md" "allergen404.md" "allergen403.md" "allergen402.md" "allergen401.md" "allergen400.md" "allergen40.md" "allergen4.md" "allergen399.md" "allergen398.md" "allergen397.md" "allergen396.md" "allergen395.md" "allergen394.md" "allergen393.md" "allergen392.md" "allergen391.md" "allergen390.md" "allergen39.md" "allergen389.md" "allergen388.md" "allergen387.md" "allergen386.md" "allergen385.md" "allergen384.md" "allergen383.md" "allergen382.md" "allergen381.md" "allergen380.md" "allergen38.md" "allergen379.md" "allergen378.md" "allergen377.md" "allergen376.md" "allergen375.md" "allergen374.md" "allergen373.md" "allergen372.md" "allergen371.md" "allergen370.md" "allergen37.md" "allergen369.md" "allergen368.md" "allergen367.md" "allergen366.md" "allergen365.md" "allergen364.md" "allergen363.md" "allergen362.md" "allergen361.md" "allergen360.md" "allergen36.md" "allergen359.md" "allergen358.md" "allergen357.md" "allergen356.md" "allergen355.md" "allergen354.md" "allergen353.md" "allergen352.md" "allergen351.md" "allergen350.md" "allergen35.md" "allergen349.md" "allergen348.md" "allergen347.md" "allergen346.md" "allergen345.md" "allergen344.md" "allergen343.md" "allergen342.md" "allergen341.md" "allergen340.md" "allergen34.md" "allergen339.md" "allergen338.md" "allergen337.md" "allergen336.md" "allergen335.md" "allergen334.md" "allergen333.md" "allergen332.md" "allergen331.md" "allergen330.md" "allergen33.md" "allergen329.md" "allergen328.md" "allergen327.md" "allergen326.md" "allergen325.md" "allergen324.md" "allergen323.md" "allergen322.md" "allergen321.md" "allergen320.md" "allergen32.md" "allergen319.md" "allergen318.md" "allergen317.md" "allergen316.md" "allergen315.md" "allergen314.md" "allergen313.md" "allergen312.md" "allergen311.md" "allergen310.md" "allergen31.md" "allergen309.md" "allergen308.md" "allergen307.md" "allergen306.md" "allergen305.md" "allergen304.md" "allergen303.md" "allergen302.md" "allergen301.md" "allergen300.md" "allergen30.md" "allergen3.md" "allergen299.md" "allergen298.md" "allergen297.md" "allergen296.md" "allergen295.md" "allergen294.md" "allergen293.md" "allergen292.md" "allergen291.md" "allergen290.md" "allergen29.md" "allergen289.md" "allergen288.md" "allergen287.md" "allergen286.md" "allergen285.md" "allergen284.md" "allergen283.md" "allergen282.md" "allergen281.md" "allergen280.md" "allergen28.md" "allergen279.md" "allergen278.md" "allergen277.md" "allergen276.md" "allergen275.md" "allergen274.md" "allergen273.md" "allergen272.md" "allergen271.md" "allergen270.md" "allergen27.md" "allergen269.md" "allergen268.md" "allergen267.md" "allergen266.md" "allergen265.md" "allergen264.md" "allergen263.md" "allergen262.md" "allergen261.md" "allergen260.md" "allergen26.md" "allergen259.md" "allergen258.md" "allergen257.md" "allergen256.md" "allergen255.md" "allergen254.md" "allergen253.md" "allergen252.md" "allergen251.md" "allergen250.md" "allergen25.md" "allergen249.md" "allergen248.md" "allergen247.md" "allergen246.md" "allergen245.md" "allergen244.md" "allergen243.md" "allergen242.md" "allergen241.md" "allergen240.md" "allergen24.md" "allergen239.md" "allergen238.md" "allergen237.md" "allergen236.md" "allergen235.md" "allergen234.md" "allergen233.md" "allergen232.md" "allergen231.md" "allergen230.md" "allergen23.md" "allergen229.md" "allergen228.md" "allergen227.md" "allergen226.md" "allergen225.md" "allergen224.md" "allergen223.md" "allergen222.md" "allergen221.md" "allergen220.md" "allergen22.md" "allergen219.md" "allergen218.md" "allergen217.md" "allergen216.md" "allergen215.md" "allergen214.md" "allergen213.md" "allergen212.md" "allergen211.md" "allergen210.md" "allergen21.md" "allergen209.md" "allergen208.md" "allergen207.md" "allergen206.md" "allergen205.md" "allergen204.md" "allergen203.md" "allergen202.md" "allergen201.md" "allergen200.md" "allergen20.md" "allergen2.md" "allergen199.md" "allergen198.md" "allergen197.md" "allergen196.md" "allergen195.md" "allergen194.md" "allergen193.md" "allergen192.md" "allergen191.md" "allergen190.md" "allergen19.md" "allergen189.md" "allergen188.md" "allergen187.md" "allergen186.md" "allergen185.md" "allergen184.md" "allergen183.md" "allergen182.md" "allergen181.md" "allergen180.md" "allergen18.md" "allergen179.md" "allergen178.md" "allergen177.md" "allergen176.md" "allergen175.md" "allergen174.md" "allergen173.md" "allergen172.md" "allergen171.md" "allergen170.md" "allergen17.md" "allergen169.md" "allergen168.md" "allergen167.md" "allergen166.md" "allergen165.md" "allergen164.md" "allergen163.md" "allergen162.md" "allergen161.md" "allergen160.md" "allergen16.md" "allergen159.md" "allergen158.md" "allergen157.md" "allergen156.md" "allergen155.md" "allergen154.md" "allergen153.md" "allergen152.md" "allergen151.md" "allergen150.md" "allergen15.md" "allergen149.md" "allergen148.md" "allergen147.md" "allergen146.md" "allergen145.md" "allergen144.md" "allergen143.md" "allergen142.md" "allergen141.md" "allergen140.md" "allergen14.md" "allergen139.md" "allergen138.md" "allergen137.md" "allergen136.md" "allergen135.md" "allergen134.md" "allergen133.md" "allergen132.md" "allergen131.md" "allergen130.md" "allergen13.md" "allergen129.md" "allergen128.md" "allergen127.md" "allergen126.md" "allergen125.md" "allergen124.md" "allergen123.md" "allergen122.md" "allergen121.md" "allergen120.md" "allergen12.md" "allergen119.md" "allergen118.md" "allergen117.md" "allergen116.md" "allergen115.md" "allergen114.md" "allergen113.md" "allergen112.md" "allergen111.md" "allergen110.md" "allergen11.md" "allergen109.md" "allergen108.md" "allergen107.md" "allergen106.md" "allergen105.md" "allergen104.md" "allergen103.md" "allergen102.md" "allergen101.md" "allergen100.md" "allergen10.md" "allergen1.md" "a.out" ".md" ".DS_Store" ".#validate.cpp" ".#extractText.py" ".#edit_allergen10.md" ".#allergen895.html" "#validate.cpp#" "../" "./")
+
+ ("/Users/Nishant/Google Drive/Grad School/TA/algo/tomato_garden/tests/winners/" (22979 53821 0 0) "times.csv" "time.sh" "testing/" "run.sh" "random/" "median/" "line/" "investigate/" "garden.txt" "58138.log" ".DS_Store" "../" "./")
+
+ ("/Users/Nishant/Google Drive/Grad School/TA/algo/" (22971 60556 0 0) "tomato_garden/" ".DS_Store" "../" "./")
+
+ ("/Users/Nishant/Google Drive/Grad School/TA/algo/tomato_garden/line/" (22977 11870 0 0) "line_garden.png" "gen_line.out" "gen_line.cpp" "garden.txt" "closestpair_wrong.py" "closestpair_good.py" "closestpair_bad2.py" "closestpair_bad.py" ".DS_Store" "../" "./")
+
+ ("/Users/Nishant/Google Drive/Grad School/TA/" (22966 46779 0 0) "theory/" "algo/" ".DS_Store" "../" "./")
+
+ ("/Users/Nishant/Google Drive/Grad School/COMP/review/three/" (22968 10558 0 0) "threeB.docx" "threeA.docx" "review3B.md" "review3A.md" "paper3B.pdf" "paper3A.pdf" "../" "./")
+
+ ("/Users/Nishant/Desktop/rohrlich/public_html/boilerplate/" (22969 24730 0 0) "top_home.html" "bottom_home.html" ".DS_Store" ".#bottom_generic.html" "../" "./")
+
+ ("/Users/Nishant/Desktop/rohrlich/public_html/" (22969 23964 0 0) "style.css" "favicon.ico" "content/" "builders/" "boilerplate/" ".DS_Store" "../" "./")
+
+ ("/Users/Nishant/Desktop/rohrlich/" (22969 25044 0 0) "README.md" "public_html/" "myweb/" "checklist.md" "bob.sh" ".git/" ".DS_Store" "../" "./")
+
+ ("/Users/Nishant/Desktop/rohrlich/public_html/builders/" (22969 24656 0 0) "writing_builder.out" "writing_builder.cpp" "project_builder.out" "project_builder.cpp" "menu_builder.out" "menu_builder.cpp" "../" "./")
+
+ ("/Users/Nishant/Google Drive/Projects/Paperclip/thinkcell/" (22950 53178 0 0) "interval_map.cpp~" "interval_map.cpp" ".DS_Store" "../" "./")
+
+ ("/Users/Nishant/Google Drive/Projects/Thoth/current/" (22923 5650 0 0) "Turing/" "ideas.md" "command.md" ".DS_Store" "../" "./")
+
+ ("/Users/Nishant/Google Drive/Grad School/ML/russell/" (22953 41886 0 0) "Problems of Philosophy.md" "Problems of Philosophy.html" ".DS_Store" "../" "./")
+
+ ("/Users/Nishant/Google Drive/Projects/contacts/" (22951 65534 0 0) "temp.txt" "temp.jha" "temp.csv" "nih.txt" "nih.md" ".DS_Store" "../" "./")
+
+ ("/Users/Nishant/Google Drive/Grad School/COMP/review/two/" (22958 41920 0 0) "review2B.md" "review2A.md" "paper2B.pdf" "paper2A.pdf" ".DS_Store" "../" "./")
+
+ ("/Users/Nishant/Google Drive/Grad School/ML/class/" (22960 21730 0 0) "k_fold.py" "../" "./")
+
+ ("/Users/Nishant/Desktop/Toolbelt/" (22961 40421 0 0) "README.md" ".git/" ".DS_Store" "../" "./")
+
+ ("/Users/Nishant/Google Drive/Projects/Paperclip/" (22960 19435 0 0) "UVA Undergrad/" "UVA Resume.pdf" "thinkcell/" "Resume.gdoc" "Profile Pic Round.png" "Petition.tex" "Petition.pdf" "Petition.log" "Petition.aux" "letters/" "Kaplan/" ".DS_Store" "#Petition.tex#" "../" "./")
+
+ ("/Users/Nishant/Google Drive/Projects/Mast/app/src/main/java/indoor/nishant/mast/" (22922 8763 0 0) "TestAdapter.java" "SearchResultsActivity.java" "OnItemClickListener.java" "MyRecyclerViewAdapter.java" "MainActivity.java" "DataBaseHelper.java" "AllergenActivity.java" "Allergen.java" ".DS_Store" "#AllergenActivity.java#" "../" "./")
+
+ ("/Users/Nishant/Google Drive/Projects/Mast/allergens/" (22939 37384 0 0) "reference.docx" "raw/" "edited/" "Appstract.pdf" "Appstract.md" "Appstract.docx" ".DS_Store" "../" "./")
+
+ ("/Users/Nishant/Google Drive/Grad School/PERS/" (22942 58908 0 0) "pers_notes.md" ".DS_Store" "../" "./")
+
+ ("/Users/Nishant/Google Drive/Grad School/LOGIC/Textbook Files/html/" (22946 5320 0 0) "ToC.md" "toc.html" "Tactics.html" "Software Foundations.html" "run.sh" "Rel.html" "ProofObjects.html" "Preface.html" "Postscript.html" "Poly.html" "Maps.html" "Logic.html" "Lists.html" "Induction.html" "IndProp.html" "IndPrinciples.html" "index.html" "ImpParser.html" "ImpCEvalFun.html" "Imp.html" "full.md" "full.html" "full.docx" "Extraction.html" "deps.html" "coqindex.html" "common/" "Bib.html" "Basics.html" "Auto.html" ".DS_Store" "../" "./")
+
+ ("/Users/Nishant/Google Drive/Grad School/LOGIC/Textbook/html/" (22943 9592 0 0) "ToC.md" "toc.html" "Tactics.html" "Rel.html" "ProofObjects.html" "Preface.html" "Postscript.html" "Poly.html" "Maps.html" "Logic.html" "Lists.html" "Induction.html" "IndProp.html" "IndPrinciples.html" "index.html" "ImpParser.html" "ImpCEvalFun.html" "Imp.html" "Extraction.html" "deps.html" "coqindex.html" "Bib.html" "Basics.html" "Auto.html" "../" "./")
+
+ ("/Users/Nishant/Google Drive/Grad School/LOGIC/Textbook/" (22943 12637 0 0) "toc.html" "Tactics.vo" "Tactics.v.d" "Tactics.v" "Tactics.html" "Tactics.glob" "Rel.vo" "Rel.v.d" "Rel.v" "Rel.html" "Rel.glob" "README" "ProofObjects.vo" "ProofObjects.v.d" "ProofObjects.v" "ProofObjects.html" "ProofObjects.glob" "Preface.vo" "Preface.v.d" "Preface.v" "Preface.html" "Preface.glob" "Postscript.vo" "Postscript.v.d" "Postscript.v" "Postscript.html" "Postscript.glob" "Poly.vo" "Poly.v.d" "Poly.v" "Poly.html" "Poly.glob" "Maps.vo" "Maps.v.d" "Maps.v" "Maps.html" "Maps.glob" "Makefile-e" "Makefile" "Logic.vo" "Logic.v.d" "Logic.v" "Logic.html" "Logic.glob" "Lists.vo" "Lists.v.d" "Lists.v" "Lists.html" "Lists.glob" "LICENSE" "Induction.vo" "Induction.v.d" "Induction.v" "Induction.html" "Induction.glob" "IndProp.vo" "IndProp.v.d" "IndProp.v" "IndProp.html" "IndProp.glob" "IndPrinciples.vo" "IndPrinciples.v.d" "IndPrinciples.v" "IndPrinciples.html" "IndPrinciples.glob" "index.html" "ImpParser.vo" "ImpParser.v.d" "ImpParser.v" "ImpParser.html" "ImpParser.glob" "impdriver.ml" "ImpCEvalFun.vo" "ImpCEvalFun.v.d" "ImpCEvalFun.v" "ImpCEvalFun.html" "ImpCEvalFun.glob" "imp2.mli" "imp2.ml" "imp1.mli" "imp1.ml" "Imp.vo" "Imp.v.d" "Imp.v" "imp.mli" "imp.ml" "Imp.html" "Imp.glob" "html/" "Extraction.vo" "Extraction.v.d" "Extraction.v" "Extraction.html" "Extraction.glob" "deps.map" "deps.html" "deps.gif" "coqindex.html" "common/" "Bib.vo" "Bib.v.d" "Bib.v" "Bib.html" "Bib.glob" "Basics.vo" "Basics.v.d" "Basics.v" "Basics.html" "Basics.glob" "Auto.vo" "Auto.v.d" "Auto.v" "Auto.html" "Auto.glob" "_CoqProject" ".Tactics.vo.aux" ".Tactics.aux" ".Rel.vo.aux" ".Rel.aux" ".ProofObjects.vo.aux" ".ProofObjects.aux" ".Preface.vo.aux" ".Preface.aux" ".Postscript.vo.aux" ".Postscript.aux" ".Poly.vo.aux" ".Poly.aux" ".Maps.vo.aux" ".Maps.aux" ".Logic.vo.aux" ".Logic.aux" ".Lists.vo.aux" ".Lists.aux" ".Induction.vo.aux" ".Induction.aux" ".IndProp.vo.aux" ".IndProp.aux" ".IndPrinciples.vo.aux" ".IndPrinciples.aux" ".ImpParser.vo.aux" ".ImpParser.aux" ".ImpCEvalFun.vo.aux" ".ImpCEvalFun.aux" ".Imp.vo.aux" ".Imp.aux" ".Extraction.vo.aux" ".Extraction.aux" ".DS_Store" ".depend" ".Bib.vo.aux" ".Bib.aux" ".Basics.vo.aux" ".Basics.aux" ".Auto.vo.aux" ".Auto.aux" "../" "./")
+
+ ("/Users/Nishant/Google Drive/Grad School/RECON/" (22940 34008 0 0) "recon_notes.md" "../" "./")
+
+ ("/Users/Nishant/Google Drive/Grad School/SOFT/" (22940 29093 0 0) "notes.md" "../" "./")
+
+ ("/Users/Nishant/Google Drive/Projects/Thoth/website/public_html/content/" (22916 30335 0 0) "projects.md" "essays/" ".DS_Store" "../" "./")
+
+ ("/Users/Nishant/Google Drive/Projects/Thoth/current/Turing/" (22923 5656 0 0) "DoomCamera.jpg" "complete.md" "../" "./")
+
+ ("/home/" (22909 18088 134461 0) "../" "./")
+
+ ("/Volumes/" (22923 3730 0 0) "nj7kv-3/" "nj7kv-2/" "nj7kv-1/" "nj7kv/" "Macintosh HD/" "../" "./")
+
+ ("/Volumes/nj7kv/" (22911 57182 0 0) "checklist.md" ".git/" "myweb/" "public_html/" ".DS_Store" "README.md" "bob.sh" "../" "./")
+
+ ("/Volumes/nj7kv/myweb/html/" (22921 50293 0 0) "style.css" "index.html" "LICENSE.txt" "control_problem.html" "favicon.ico" "images/" "resume.pdf" ".DS_Store" "final/" "elements.html" "writing.html" "strange_loops.html" "assets/" "../" "./")
+
+ ("/Volumes/nj7kv/myweb/html/final/" (22923 3770 0 0) "presentation.md" "chaos.png" "remark/" "stat.png" "presentation.md~" "fire.png" "icon.png" ".DS_Store" "reveal.js/" "demo.mp4" "presentation.html" "alpha.png" "../" "./")
+
+ ("/Users/Nishant/Google Drive/Projects/Mast/app/src/main/java/indoor/nishant/" (22897 64918 0 0) "mast/" ".DS_Store" "../" "./")
+
+ ("/Users/Nishant/Downloads/" (22914 13181 0 0) "phantomjs-2.1.1-macosx/" "mystery.py" "Music/" "Movies/" "CHILD Study Results 446-0109-0205.xls" "CHILD Study Results 446-0001-0108.xls" "audacity-macos-2.1.3.dmg" ".localized" ".DS_Store" "../" "./")
+
+ ("/Users/Nishant/Google Drive/Archives/Backups/" (22912 52700 0 0) "TexpandBackup19_07_2016.txt " "Screenshot (Dec 5, 2016 10:32:25 AM).png" "podcasts_opml.xml" "passwords.kdbx" "Nova/" "myapps.txt" "JKamienski.pdf" "Backup.json" "Alfred/" ".passwords.kdbx.lock" ".DS_Store" ".bash_profile" "../" "./")
+
+ ("/Users/Nishant/Google Drive/Projects/Mast/" (22913 63234 0 0) "settings.gradle" "Screenshots:Recordings/" "README.md" "presentation/" "Mast.iml" "local.properties" "gradlew.bat" "gradlew" "gradle.properties" "gradle/" "build.gradle" "build/" "app/" "allergens/" ".idea/" ".gradle/" ".git/" ".DS_Store" "../" "./")
+
+ ("/Users/Nishant/Desktop/RedBalloon/" (22914 10596 0 0) "test.py" "one.py" "firstDecompress.txt" "f12.txt" "Archive.zip" "a0.txt" ".DS_Store" "../" "./")
+
+ ("/Users/Nishant/Google Drive/Projects/Thoth/website/myweb/html/assets/" (22910 31660 0 0) "sass/" "js/" "fonts/" "css/" ".DS_Store" "../" "./")
+
+ ("/Users/Nishant/Google Drive/Projects/Nostradamus/" (22911 28345 0 0) "Proposal.pdf" "Digital_Nostradamus.md" "Digital_Nostradamus.docx" ".DS_Store" "../" "./")
+
+ ("/Users/Nishant/Google Drive/Projects/Thoth/website/public_html/" (22910 34131 0 0) "style.css" "projects.md" "favicon.ico" "content/" "builders/" "boilerplate/" ".DS_Store" "../" "./")
+
+ ("/Users/Nishant/Google Drive/Projects/Thoth/website/myweb/html/images/" (22910 31751 0 0) "profile.jpg" ".DS_Store" "../" "./")
+
+ ("/Users/Nishant/Google Drive/Projects/Thoth/" (22910 28248 0 0) "website/" "current/" ".DS_Store" "../" "./")
+
+ ("/Users/Nishant/Google Drive/Projects/" (22909 4585 0 0) "Twilight/" "Thoth/" "Saturn/" "Paperclip/" "Ophion/" "Nostradamus/" "Mast/" "Feline/" "Alexandria/" ".DS_Store" "../" "./")
+
+ ("/Volumes/nj7kv/public_html/boilerplate/" (22910 29074 0 0) "top_home.html" "top_generic.html" "bottom_home.html" "bottom_generic.html~" ".DS_Store" "bottom_generic.html" "../" "./")
+
+ ("/Users/Nishant/Desktop/website/public_html/builders/" (22910 27998 0 0) "project_builder.out" "project_builder.cpp" "menu_builder.out" "menu_builder.cpp" ".DS_Store" "../" "./")
+
+ ("/Users/Nishant/Desktop/website/public_html/boilerplate/" (22910 25002 0 0) "top_home.html" "top_generic.html" "bottom_home.html" "bottom_generic.html~" "bottom_generic.html" ".DS_Store" "../" "./")
+
+ ("/Users/Nishant/Desktop/website/public_html/" (22910 25623 0 0) "style.css" "favicon.ico" "content/" "builders/" "boilerplate/" ".DS_Store" "../" "./")
+
+ ("/Users/Nishant/Desktop/website/myweb/html/" (22910 27783 0 0) "style.css" "strange_loops.html" "LICENSE.txt" "index.html" "images/" "favicon.ico" "elements.html" "control_problem.html" "assets/" ".DS_Store" ".#strange_loops.html" "../" "./")
+
+ ("/Volumes/nj7kv/public_html/builders/" (22910 26986 0 0) "menu_builder.cpp" "project_builder.cpp" "menu_builder.out" "project_builder.out" "../" "./")
+
+ ("/Volumes/nj7kv/public_html/" (22910 27013 0 0) "style.css" "builders/" "boilerplate/" "favicon.ico" "content/" ".DS_Store" "projects.md" "../" "./")
+
+ ("/Volumes/nj7kv/myweb/" (22910 27055 0 0) "html/" ".DS_Store" "../" "./")
+
+ ("/Users/Nishant/Desktop/website/public_html/content/essays/" (22910 17391 0 0) "strange_loops.md~" "strange_loops.md" "control_problem.md" ".DS_Store" "../" "./")
+
+ ("/Users/Nishant/Desktop/website/public_html/content/" (22910 12906 0 0) "projects.md" "essays/" "../" "./")
+
+ ("/Users/Nishant/Desktop/website/public_html/legos/" (22910 297 0 0) "top_home.html~" "top_home.html" "top_generic.html" "menu.html~" "menu.html" "bottom_home.html~" "bottom_home.html" "bottom_generic.html" ".#bottom_home.html" "../" "./")
+
+ ("/Users/Nishant/Google Drive/Projects/Mast/allergens/raw/" (22906 2624 0 0) "save_page.js" "run.cpp" "allergen99.html" "allergen98.html" "allergen97.html" "allergen96.html" "allergen95.html" "allergen94.html" "allergen93.html" "allergen92.html" "allergen91.html" "allergen901.html" "allergen900.html" "allergen90.html" "allergen9.html" "allergen899.html" "allergen898.html" "allergen897.html" "allergen896.html" "allergen895.html" "allergen894.html" "allergen893.html" "allergen892.html" "allergen891.html" "allergen890.html" "allergen89.html" "allergen889.html" "allergen888.html" "allergen887.html" "allergen886.html" "allergen885.html" "allergen884.html" "allergen883.html" "allergen882.html" "allergen881.html" "allergen880.html" "allergen88.html" "allergen879.html" "allergen878.html" "allergen877.html" "allergen876.html" "allergen875.html" "allergen874.html" "allergen873.html" "allergen872.html" "allergen871.html" "allergen870.html" "allergen87.html" "allergen869.html" "allergen868.html" "allergen867.html" "allergen866.html" "allergen865.html" "allergen864.html" "allergen863.html" "allergen862.html" "allergen861.html" "allergen860.html" "allergen86.html" "allergen859.html" "allergen858.html" "allergen857.html" "allergen856.html" "allergen855.html" "allergen854.html" "allergen853.html" "allergen852.html" "allergen851.html" "allergen850.html" "allergen85.html" "allergen849.html" "allergen848.html" "allergen847.html" "allergen846.html" "allergen845.html" "allergen844.html" "allergen843.html" "allergen842.html" "allergen841.html" "allergen840.html" "allergen84.html" "allergen839.html" "allergen838.html" "allergen837.html" "allergen836.html" "allergen835.html" "allergen834.html" "allergen833.html" "allergen832.html" "allergen831.html" "allergen830.html" "allergen83.html" "allergen829.html" "allergen828.html" "allergen827.html" "allergen826.html" "allergen825.html" "allergen824.html" "allergen823.html" "allergen822.html" "allergen821.html" "allergen820.html" "allergen82.html" "allergen819.html" "allergen818.html" "allergen817.html" "allergen816.html" "allergen815.html" "allergen814.html" "allergen813.html" "allergen812.html" "allergen811.html" "allergen810.html" "allergen81.html" "allergen809.html" "allergen808.html" "allergen807.html" "allergen806.html" "allergen805.html" "allergen804.html" "allergen803.html" "allergen802.html" "allergen801.html" "allergen800.html" "allergen80.html" "allergen8.html" "allergen799.html" "allergen798.html" "allergen797.html" "allergen796.html" "allergen795.html" "allergen794.html" "allergen793.html" "allergen792.html" "allergen791.html" "allergen790.html" "allergen79.html" "allergen789.html" "allergen788.html" "allergen787.html" "allergen786.html" "allergen785.html" "allergen784.html" "allergen783.html" "allergen782.html" "allergen781.html" "allergen780.html" "allergen78.html" "allergen779.html" "allergen778.html" "allergen777.html" "allergen776.html" "allergen775.html" "allergen774.html" "allergen773.html" "allergen772.html" "allergen771.html" "allergen770.html" "allergen77.html" "allergen769.html" "allergen768.html" "allergen767.html" "allergen766.html" "allergen765.html" "allergen764.html" "allergen763.html" "allergen762.html" "allergen761.html" "allergen760.html" "allergen76.html" "allergen759.html" "allergen758.html" "allergen757.html" "allergen756.html" "allergen755.html" "allergen754.html" "allergen753.html" "allergen752.html" "allergen751.html" "allergen750.html" "allergen75.html" "allergen749.html" "allergen748.html" "allergen747.html" "allergen746.html" "allergen745.html" "allergen744.html" "allergen743.html" "allergen742.html" "allergen741.html" "allergen740.html" "allergen74.html" "allergen739.html" "allergen738.html" "allergen737.html" "allergen736.html" "allergen735.html" "allergen734.html" "allergen733.html" "allergen732.html" "allergen731.html" "allergen730.html" "allergen73.html" "allergen729.html" "allergen728.html" "allergen727.html" "allergen726.html" "allergen725.html" "allergen724.html" "allergen723.html" "allergen722.html" "allergen721.html" "allergen720.html" "allergen72.html" "allergen719.html" "allergen718.html" "allergen717.html" "allergen716.html" "allergen715.html" "allergen714.html" "allergen713.html" "allergen712.html" "allergen711.html" "allergen710.html" "allergen71.html" "allergen709.html" "allergen708.html" "allergen707.html" "allergen706.html" "allergen705.html" "allergen704.html" "allergen703.html" "allergen702.html" "allergen701.html" "allergen700.html" "allergen70.html" "allergen7.html" "allergen699.html" "allergen698.html" "allergen697.html" "allergen696.html" "allergen695.html" "allergen694.html" "allergen693.html" "allergen692.html" "allergen691.html" "allergen690.html" "allergen69.html" "allergen689.html" "allergen688.html" "allergen687.html" "allergen686.html" "allergen685.html" "allergen684.html" "allergen683.html" "allergen682.html" "allergen681.html" "allergen680.html" "allergen68.html" "allergen679.html" "allergen678.html" "allergen677.html" "allergen676.html" "allergen675.html" "allergen674.html" "allergen673.html" "allergen672.html" "allergen671.html" "allergen670.html" "allergen67.html" "allergen669.html" "allergen668.html" "allergen667.html" "allergen666.html" "allergen665.html" "allergen664.html" "allergen663.html" "allergen662.html" "allergen661.html" "allergen660.html" "allergen66.html" "allergen659.html" "allergen658.html" "allergen657.html" "allergen656.html" "allergen655.html" "allergen654.html" "allergen653.html" "allergen652.html" "allergen651.html" "allergen650.html" "allergen65.html" "allergen649.html" "allergen648.html" "allergen647.html" "allergen646.html" "allergen645.html" "allergen644.html" "allergen643.html" "allergen642.html" "allergen641.html" "allergen640.html" "allergen64.html" "allergen639.html" "allergen638.html" "allergen637.html" "allergen636.html" "allergen635.html" "allergen634.html" "allergen633.html" "allergen632.html" "allergen631.html" "allergen630.html" "allergen63.html" "allergen629.html" "allergen628.html" "allergen627.html" "allergen626.html" "allergen625.html" "allergen624.html" "allergen623.html" "allergen622.html" "allergen621.html" "allergen620.html" "allergen62.html" "allergen619.html" "allergen618.html" "allergen617.html" "allergen616.html" "allergen615.html" "allergen614.html" "allergen613.html" "allergen612.html" "allergen611.html" "allergen610.html" "allergen61.html" "allergen609.html" "allergen608.html" "allergen607.html" "allergen606.html" "allergen605.html" "allergen604.html" "allergen603.html" "allergen602.html" "allergen601.html" "allergen600.html" "allergen60.html" "allergen6.html" "allergen599.html" "allergen598.html" "allergen597.html" "allergen596.html" "allergen595.html" "allergen594.html" "allergen593.html" "allergen592.html" "allergen591.html" "allergen590.html" "allergen59.html" "allergen589.html" "allergen588.html" "allergen587.html" "allergen586.html" "allergen585.html" "allergen584.html" "allergen583.html" "allergen582.html" "allergen581.html" "allergen580.html" "allergen58.html" "allergen579.html" "allergen578.html" "allergen577.html" "allergen576.html" "allergen575.html" "allergen574.html" "allergen573.html" "allergen572.html" "allergen571.html" "allergen570.html" "allergen57.html" "allergen569.html" "allergen568.html" "allergen567.html" "allergen566.html" "allergen565.html" "allergen564.html" "allergen563.html" "allergen562.html" "allergen561.html" "allergen560.html" "allergen56.html" "allergen559.html" "allergen558.html" "allergen557.html" "allergen556.html" "allergen555.html" "allergen554.html" "allergen553.html" "allergen552.html" "allergen551.html" "allergen550.html" "allergen55.html" "allergen549.html" "allergen548.html" "allergen547.html" "allergen546.html" "allergen545.html" "allergen544.html" "allergen543.html" "allergen542.html" "allergen541.html" "allergen540.html" "allergen54.html" "allergen539.html" "allergen538.html" "allergen537.html" "allergen536.html" "allergen535.html" "allergen534.html" "allergen533.html" "allergen532.html" "allergen531.html" "allergen530.html" "allergen53.html" "allergen529.html" "allergen528.html" "allergen527.html" "allergen526.html" "allergen525.html" "allergen524.html" "allergen523.html" "allergen522.html" "allergen521.html" "allergen520.html" "allergen52.html" "allergen519.html" "allergen518.html" "allergen517.html" "allergen516.html" "allergen515.html" "allergen514.html" "allergen513.html" "allergen512.html" "allergen511.html" "allergen510.html" "allergen51.html" "allergen509.html" "allergen508.html" "allergen507.html" "allergen506.html" "allergen505.html" "allergen504.html" "allergen503.html" "allergen502.html" "allergen501.html" "allergen500.html" "allergen50.html" "allergen5.html" "allergen499.html" "allergen498.html" "allergen497.html" "allergen496.html" "allergen495.html" "allergen494.html" "allergen493.html" "allergen492.html" "allergen491.html" "allergen490.html" "allergen49.html" "allergen489.html" "allergen488.html" "allergen487.html" "allergen486.html" "allergen485.html" "allergen484.html" "allergen483.html" "allergen482.html" "allergen481.html" "allergen480.html" "allergen48.html" "allergen479.html" "allergen478.html" "allergen477.html" "allergen476.html" "allergen475.html" "allergen474.html" "allergen473.html" "allergen472.html" "allergen471.html" "allergen470.html" "allergen47.html" "allergen469.html" "allergen468.html" "allergen467.html" "allergen466.html" "allergen465.html" "allergen464.html" "allergen463.html" "allergen462.html" "allergen461.html" "allergen460.html" "allergen46.html" "allergen459.html" "allergen458.html" "allergen457.html" "allergen456.html" "allergen455.html" "allergen454.html" "allergen453.html" "allergen452.html" "allergen451.html" "allergen450.html" "allergen45.html" "allergen449.html" "allergen448.html" "allergen447.html" "allergen446.html" "allergen445.html" "allergen444.html" "allergen443.html" "allergen442.html" "allergen441.html" "allergen440.html" "allergen44.html" "allergen439.html" "allergen438.html" "allergen437.html" "allergen436.html" "allergen435.html" "allergen434.html" "allergen433.html" "allergen432.html" "allergen431.html" "allergen430.html" "allergen43.html" "allergen429.html" "allergen428.html" "allergen427.html" "allergen426.html" "allergen425.html" "allergen424.html" "allergen423.html" "allergen422.html" "allergen421.html" "allergen420.html" "allergen42.html" "allergen419.html" "allergen418.html" "allergen417.html" "allergen416.html" "allergen415.html" "allergen414.html" "allergen413.html" "allergen412.html" "allergen411.html" "allergen410.html" "allergen41.html" "allergen409.html" "allergen408.html" "allergen407.html" "allergen406.html" "allergen405.html" "allergen404.html" "allergen403.html" "allergen402.html" "allergen401.html" "allergen400.html" "allergen40.html" "allergen4.html" "allergen399.html" "allergen398.html" "allergen397.html" "allergen396.html" "allergen395.html" "allergen394.html" "allergen393.html" "allergen392.html" "allergen391.html" "allergen390.html" "allergen39.html" "allergen389.html" "allergen388.html" "allergen387.html" "allergen386.html" "allergen385.html" "allergen384.html" "allergen383.html" "allergen382.html" "allergen381.html" "allergen380.html" "allergen38.html" "allergen379.html" "allergen378.html" "allergen377.html" "allergen376.html" "allergen375.html" "allergen374.html" "allergen373.html" "allergen372.html" "allergen371.html" "allergen370.html" "allergen37.html" "allergen369.html" "allergen368.html" "allergen367.html" "allergen366.html" "allergen365.html" "allergen364.html" "allergen363.html" "allergen362.html" "allergen361.html" "allergen360.html" "allergen36.html" "allergen359.html" "allergen358.html" "allergen357.html" "allergen356.html" "allergen355.html" "allergen354.html" "allergen353.html" "allergen352.html" "allergen351.html" "allergen350.html" "allergen35.html" "allergen349.html" "allergen348.html" "allergen347.html" "allergen346.html" "allergen345.html" "allergen344.html" "allergen343.html" "allergen342.html" "allergen341.html" "allergen340.html" "allergen34.html" "allergen339.html" "allergen338.html" "allergen337.html" "allergen336.html" "allergen335.html" "allergen334.html" "allergen333.html" "allergen332.html" "allergen331.html" "allergen330.html" "allergen33.html" "allergen329.html" "allergen328.html" "allergen327.html" "allergen326.html" "allergen325.html" "allergen324.html" "allergen323.html" "allergen322.html" "allergen321.html" "allergen320.html" "allergen32.html" "allergen319.html" "allergen318.html" "allergen317.html" "allergen316.html" "allergen315.html" "allergen314.html" "allergen313.html" "allergen312.html" "allergen311.html" "allergen310.html" "allergen31.html" "allergen309.html" "allergen308.html" "allergen307.html" "allergen306.html" "allergen305.html" "allergen304.html" "allergen303.html" "allergen302.html" "allergen301.html" "allergen300.html" "allergen30.html" "allergen3.html" "allergen299.html" "allergen298.html" "allergen297.html" "allergen296.html" "allergen295.html" "allergen294.html" "allergen293.html" "allergen292.html" "allergen291.html" "allergen290.html" "allergen29.html" "allergen289.html" "allergen288.html" "allergen287.html" "allergen286.html" "allergen285.html" "allergen284.html" "allergen283.html" "allergen282.html" "allergen281.html" "allergen280.html" "allergen28.html" "allergen279.html" "allergen278.html" "allergen277.html" "allergen276.html" "allergen275.html" "allergen274.html" "allergen273.html" "allergen272.html" "allergen271.html" "allergen270.html" "allergen27.html" "allergen269.html" "allergen268.html" "allergen267.html" "allergen266.html" "allergen265.html" "allergen264.html" "allergen263.html" "allergen262.html" "allergen261.html" "allergen260.html" "allergen26.html" "allergen259.html" "allergen258.html" "allergen257.html" "allergen256.html" "allergen255.html" "allergen254.html" "allergen253.html" "allergen252.html" "allergen251.html" "allergen250.html" "allergen25.html" "allergen249.html" "allergen248.html" "allergen247.html" "allergen246.html" "allergen245.html" "allergen244.html" "allergen243.html" "allergen242.html" "allergen241.html" "allergen240.html" "allergen24.html" "allergen239.html" "allergen238.html" "allergen237.html" "allergen236.html" "allergen235.html" "allergen234.html" "allergen233.html" "allergen232.html" "allergen231.html" "allergen230.html" "allergen23.html" "allergen229.html" "allergen228.html" "allergen227.html" "allergen226.html" "allergen225.html" "allergen224.html" "allergen223.html" "allergen222.html" "allergen221.html" "allergen220.html" "allergen22.html" "allergen219.html" "allergen218.html" "allergen217.html" "allergen216.html" "allergen215.html" "allergen214.html" "allergen213.html" "allergen212.html" "allergen211.html" "allergen210.html" "allergen21.html" "allergen209.html" "allergen208.html" "allergen207.html" "allergen206.html" "allergen205.html" "allergen204.html" "allergen203.html" "allergen202.html" "allergen201.html" "allergen200.html" "allergen20.html" "allergen2.html" "allergen199.html" "allergen198.html" "allergen197.html" "allergen196.html" "allergen195.html" "allergen194.html" "allergen193.html" "allergen192.html" "allergen191.html" "allergen190.html" "allergen19.html" "allergen189.html" "allergen188.html" "allergen187.html" "allergen186.html" "allergen185.html" "allergen184.html" "allergen183.html" "allergen182.html" "allergen181.html" "allergen180.html" "allergen18.html" "allergen179.html" "allergen178.html" "allergen177.html" "allergen176.html" "allergen175.html" "allergen174.html" "allergen173.html" "allergen172.html" "allergen171.html" "allergen170.html" "allergen17.html" "allergen169.html" "allergen168.html" "allergen167.html" "allergen166.html" "allergen165.html" "allergen164.html" "allergen163.html" "allergen162.html" "allergen161.html" "allergen160.html" "allergen16.html" "allergen159.html" "allergen158.html" "allergen157.html" "allergen156.html" "allergen155.html" "allergen154.html" "allergen153.html" "allergen152.html" "allergen151.html" "allergen150.html" "allergen15.html" "allergen149.html" "allergen148.html" "allergen147.html" "allergen146.html" "allergen145.html" "allergen144.html" "allergen143.html" "allergen142.html" "allergen141.html" "allergen140.html" "allergen14.html" "allergen139.html" "allergen138.html" "allergen137.html" "allergen136.html" "allergen135.html" "allergen134.html" "allergen133.html" "allergen132.html" "allergen131.html" "allergen130.html" "allergen13.html" "allergen129.html" "allergen128.html" "allergen127.html" "allergen126.html" "allergen125.html" "allergen124.html" "allergen123.html" "allergen122.html" "allergen121.html" "allergen120.html" "allergen12.html" "allergen119.html" "allergen118.html" "allergen117.html" "allergen116.html" "allergen115.html" "allergen114.html" "allergen113.html" "allergen112.html" "allergen111.html" "allergen110.html" "allergen11.html" "allergen109.html" "allergen108.html" "allergen107.html" "allergen106.html" "allergen105.html" "allergen104.html" "allergen103.html" "allergen102.html" "allergen101.html" "allergen100.html" "allergen10.html" "allergen1.html" "a.out" "../" "./")
+
+ ("/Users/Nishant/Google Drive/Projects/Mast/presentation/" (22905 60675 0 0) "trick.png" "reveal.js/" "remark/" "presentation.md" "presentation.html" "peanutsearch.png" "parsed.png" "id.png" "database.png" "actual.png" ".DS_Store" "../" "./")
+
+ ("/Users/Nishant/Google Drive/Archives/Personal/Facebook Archive/html/" (22909 57843 0 0) "videos.htm" "timeline.htm" "temp.md" "temp.html" "synced_photos.htm" "survey_responses.htm" "style.css" "security.htm" "pokes.htm" "places.htm" "photos.htm" "mobile_devices.htm" "messages.htm" "friends.htm" "events.htm" "contact_info.htm" "ads.htm" ".DS_Store" "../" "./")
+
+ ("/Users/Nishant/Desktop/website/myweb/html/html5up-editorial/" (22909 60340 0 0) "README.txt" "LICENSE.txt" "index.html" "images/" "generic.html" "elements.html" "assets/" "../" "./")
+
+ ("/Users/Nishant/Desktop/website/myweb/" (22909 60359 0 0) "html/" ".DS_Store" "../" "./")
+
+ ("/Users/Nishant/Downloads/html5up-editorial/assets/css/" (22798 21956 0 0) "main.css" "ie9.css" "ie8.css" "font-awesome.min.css" "../" "./")
+
+ ("/Users/Nishant/Downloads/html5up-editorial/assets/" (22798 21956 0 0) "sass/" "js/" "fonts/" "css/" "../" "./")
+
+ ("/Users/Nishant/Downloads/html5up-editorial/" (22905 60242 0 0) "README.txt" "LICENSE.txt" "index.html~" "index.html" "images/" "generic.html" "elements.html" "assets/" "../" "./")
+)
+
+;; ----- ido-unc-hosts-cache -----
+t
