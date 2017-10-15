@@ -1,0 +1,34 @@
+" Use jj to escape 
+inoremap jj <ESC>
+" Remap shortcut key
+let mapleader = "\<Space>"
+" Turn on Syntax Highlighting
+syntax on
+" Use utf-8 encoding
+set encoding=utf-8
+" Use 256 color palette
+set t_Co=256
+" Copy indentation level when creating a new line
+set autoindent 
+" Use system clipboard 
+set clipboard=unnamed
+" Intelligently indent
+set smartindent
+" Keep vim files in the ~/.vim folder
+set viminfo='100,h,n~/.vim/viminfo'
+" Case insensitive search
+set ignorecase
+" Unless there is mixed case, then make it case sensitive
+set smartcase
+" Highlight search terms
+set hlsearch
+" Highlight search terms as you type them
+set incsearch
+"Move around wrapped lines easier
+nnoremap j gj
+nnoremap k gk
+"Enter command mode without shift key
+nnoremap ; :
+vnoremap ; :
+" Use zenburn theme
+colors zenburn
