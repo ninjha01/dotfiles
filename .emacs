@@ -32,9 +32,10 @@
  '(inhibit-startup-screen t)
  '(package-selected-packages
    (quote
-    (smooth-scrolling markdown-mode flymd elpy ac-haskell-process haskell-mode evil-visual-mark-mode rtags flyparens auto-complete helm company-c-headers flycheck flycheck-swift dash pkg-info flymake-cppcheck flymake-google-cpplint flymake-shell context-coloring darkroom w3 javaimp company)))
+    (web-mode vlf smooth-scrolling markdown-mode flymd elpy ac-haskell-process haskell-mode evil-visual-mark-mode rtags flyparens auto-complete helm company-c-headers flycheck flycheck-swift dash pkg-info flymake-cppcheck flymake-google-cpplint flymake-shell context-coloring darkroom w3 javaimp company)))
  '(proof-splash-enable nil)
- '(tool-bar-mode nil))
+ '(tool-bar-mode nil)
+ '(vlf-application (quote dont-ask)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -88,3 +89,16 @@
 
 ;; Open and name shell command
 (global-set-key (kbd "M-s M-s") (lambda () (interactive) (shell) (rename-uniquely)))
+
+;; Opening Large Files
+(require 'vlf-setup)
+
+;; Use web-mode for...
+(require 'web-mode)
+(add-to-list 'auto-mode-alist '("\\.phtml\\'" . web-mode))
+(add-to-list 'auto-mode-alist '("\\.tpl\\.php\\'" . web-mode))
+(add-to-list 'auto-mode-alist '("\\.[agj]sp\\'" . web-mode))
+(add-to-list 'auto-mode-alist '("\\.as[cp]x\\'" . web-mode))
+(add-to-list 'auto-mode-alist '("\\.erb\\'" . web-mode))
+(add-to-list 'auto-mode-alist '("\\.mustache\\'" . web-mode))
+(add-to-list 'auto-mode-alist '("\\.djhtml\\'" . web-mode))

@@ -4,7 +4,7 @@ export TERM=xterm-256color;
 
 #Aliases
 alias up="cd ..";
-alias upup="cd ../../";
+alias 2up="cd ../../";
 alias rm="trash";
 alias loginlab="bash ~/scripts/loginlab.sh";
 alias upload="bash  ~/scripts/upload.sh";
