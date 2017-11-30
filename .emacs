@@ -50,8 +50,8 @@
 
 (if (display-graphic-p)
     (progn
-          (tool-bar-mode -1)
-	        (scroll-bar-mode -1)))
+      (tool-bar-mode -1)
+      (scroll-bar-mode -1)))
 
 (set-face-attribute 'region nil :background "#666" :foreground "#ffffff")
 (add-hook 'c++-mode-hook 'flycheck-mode)
