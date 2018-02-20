@@ -32,7 +32,7 @@
  '(inhibit-startup-screen t)
  '(package-selected-packages
    (quote
-    (web-mode vlf smooth-scrolling markdown-mode flymd elpy ac-haskell-process haskell-mode evil-visual-mark-mode rtags flyparens auto-complete helm company-c-headers flycheck flycheck-swift dash pkg-info flymake-cppcheck flymake-google-cpplint flymake-shell context-coloring darkroom w3 javaimp company)))
+    (yaml-mode web-mode vlf smooth-scrolling markdown-mode flymd elpy ac-haskell-process haskell-mode evil-visual-mark-mode rtags flyparens auto-complete helm company-c-headers flycheck flycheck-swift dash pkg-info flymake-cppcheck flymake-google-cpplint flymake-shell context-coloring darkroom w3 javaimp company)))
  '(proof-splash-enable nil)
  '(tool-bar-mode nil)
  '(vlf-application (quote dont-ask)))
@@ -102,3 +102,82 @@
 (add-to-list 'auto-mode-alist '("\\.erb\\'" . web-mode))
 (add-to-list 'auto-mode-alist '("\\.mustache\\'" . web-mode))
 (add-to-list 'auto-mode-alist '("\\.djhtml\\'" . web-mode))
+
+;; Use yaml-mode fore
+(require 'yaml-mode)
+(add-to-list 'auto-mode-alist '("\\.yml\\'" . yaml-mode))
+(put 'erase-buffer 'disabled nil)
+
+;;:::Cut and paste from registers 1-3:::::::
+
+(defun copy-to-register-1 ()
+  "Copy current line or text selection to register 1."
+  (interactive)
+  (let ($p1 $p2)
+    (if (region-active-p)
+        (progn (setq $p1 (region-beginning))
+               (setq $p2 (region-end)))
+      (progn (setq $p1 (line-beginning-position))
+             (setq $p2 (line-end-position))))
+    (copy-to-register ?1 $p1 $p2)
+    (message "Copied to register 1: 「%s」." (buffer-substring-no-properties $p1 $p2))))
+
+(global-set-key (kbd "C-x c 1") 'copy-to-register-1) ; CMD-c-1
+
+(defun paste-from-register-1 ()
+  "Paste text from register 1."
+  (interactive)
+  (when (use-region-p)
+    (delete-region (region-beginning) (region-end)))
+  (insert-register ?1 t))
+
+(global-set-key (kbd "C-x p 1") 'paste-from-register-1) ; CMD-v-1
+
+(defun copy-to-register-2 ()
+  "Copy current line or text selection to register 2."
+  (interactive)
+  (let ($p1 $p2)
+    (if (region-active-p)
+        (progn (setq $p1 (region-beginning))
+               (setq $p2 (region-end)))
+      (progn (setq $p1 (line-beginning-position))
+             (setq $p2 (line-end-position))))
+    (copy-to-register ?2 $p1 $p2)
+    (message "Copied to register 2: 「%s」." (buffer-substring-no-properties $p1 $p2))))
+
+(global-set-key (kbd "C-x c 2") 'copy-to-register-2) ; CMD-c-2
+
+(defun paste-from-register-2 ()
+  "Paste text from register 2."
+  (interactive)
+  (when (use-region-p)
+    (delete-region (region-beginning) (region-end)))
+  (insert-register ?2 t))
+
+(global-set-key (kbd "C-x p 2") 'paste-from-register-2) ; CMD-v-2
+
+(defun copy-to-register-3 ()
+  "Copy current line or text selection to register 3."
+  (interactive)
+  (let ($p1 $p2)
+    (if (region-active-p)
+        (progn (setq $p1 (region-beginning))
+               (setq $p2 (region-end)))
+      (progn (setq $p1 (line-beginning-position))
+             (setq $p2 (line-end-position))))
+    (copy-to-register ?3 $p1 $p2)
+    (message "Copied to register 3: 「%s」." (buffer-substring-no-properties $p1 $p2))))
+
+(global-set-key (kbd "C-x c 3") 'copy-to-register-3) ; CMD-c-3
+
+(defun paste-from-register-3 ()
+  "Paste text from register 3."
+  (interactive)
+  (when (use-region-p)
+    (delete-region (region-beginning) (region-end)))
+  (insert-register ?3 t))
+
+(global-set-key (kbd "C-x p 3") 'paste-from-register-3) ; CMD-v-3
+
+;;Desktop Mode
+(desktop-save-mode)
