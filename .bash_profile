@@ -1,8 +1,8 @@
 ###################################################################
 ##                                                               ##
 ##                Nishant's Bash Configuration                   ##
-##	              There are many like it                         ##
-##	               But this one is mine                          ##
+##	              There are many like it                     ##
+##	               But this one is mine                      ##
 ##                                                               ##
 ###################################################################
 
@@ -37,7 +37,7 @@ alias concatpdf="/System/Library/Automator/Combine PDF Pages.action/Contents/Res
 
 ### Utilities ###############
 alias nj7kv="cd /Volumes/nj7kv/public_html";
-alais saturn="cd ~/Google\ Drive/Projects/Saturn/; gradle -q run;"
+alias saturn="cd ~/Google\ Drive/Projects/Saturn/; gradle -q run;"
 #############################
 
 ### PATH Exports ############

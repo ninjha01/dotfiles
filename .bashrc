@@ -33,11 +33,12 @@ alias pdflatex="/Library/TeX/texbin/pdflatex";
 alias adb="~/platform-tools/adb shell;"
 alias emacs="/usr/local/Cellar/emacs/25.2/bin/emacs";
 alias concatpdf="/System/Library/Automator/Combine PDF Pages.action/Contents/Resources/join.py";
-
+#############################
 
 ### Utilities ###############
 alias nj7kv="cd /Volumes/nj7kv/public_html";
-alais saturn="cd ~/Google\ Drive/Projects/Saturn/; gradle -q run;"
+alias saturn="cd ~/Google\ Drive/Projects/Saturn/; gradle -q run;"
+#############################
 
 ### PATH Exports ############
 
