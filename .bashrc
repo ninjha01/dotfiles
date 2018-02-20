@@ -1,20 +1,31 @@
-#Aesthetics
+###################################################################
+##                                                               ##
+##                Nishant's Bash Configuration                   ##
+##	              There are many like it                     ##
+##	               But this one is mine                      ##
+##                                                               ##
+###################################################################
+
+# Aesthetics ######################################################
 export PS1="/\[\e[31m\]\W\[\e[m\]/: ";
 export TERM=xterm-256color;
+###################################################################
 
-#Aliases
+# Aliases #########################################################
 alias rm="trash";
 alias backup="bash  ~/scripts/backup.sh";
 alias blacklist="sudo emacs /etc/hosts";
 alias la="ls -a";
 alias cleanup="bash ~/scripts/cleanup.sh";
+###################################################################
 
-# Expanding History Capabilities
+# Expanding History Capabilities ##################################
 export HISTSIZE=10000;
 shopt -s histappend;
 PROMPT_COMMAND="history -a;$PROMPT_COMMAND";
+###################################################################
 
-## macOS Specific #############################################
+## macOS Specific #################################################
 
 ### Application renames #####
 alias pymol="/Applications/PyMOL.app/Contents/bin/pymol";
@@ -27,9 +38,8 @@ alias concatpdf="/System/Library/Automator/Combine PDF Pages.action/Contents/Res
 ### Utilities ###############
 alias nj7kv="cd /Volumes/nj7kv/public_html";
 alais saturn="cd ~/Google\ Drive/Projects/Saturn/; gradle -q run;"
-#############################
 
-### PATH Exports ##############################################
+### PATH Exports ############
 
 #Gradle 
 export GRADLE_HOME=/Users/Nishant/gradle-3.2.1/;
@@ -53,7 +63,6 @@ if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
 # The original version is saved in .bash_profile.pysave
 PATH="/Library/Frameworks/Python.framework/Versions/3.5/bin:${PATH}";
 export PATH;
-################################################################
+#############################
 
-
-###############################################################
+###################################################################
