@@ -32,7 +32,7 @@
  '(inhibit-startup-screen t)
  '(package-selected-packages
    (quote
-    (yaml-mode web-mode vlf smooth-scrolling markdown-mode flymd elpy ac-haskell-process haskell-mode evil-visual-mark-mode rtags flyparens auto-complete helm company-c-headers flycheck flycheck-swift dash pkg-info flymake-cppcheck flymake-google-cpplint flymake-shell context-coloring darkroom w3 javaimp company)))
+    (swift3-mode yaml-mode web-mode vlf smooth-scroll rtags markdown-mode helm flyparens flymd flycheck evil elpy company-c-headers ac-haskell-process)))
  '(proof-splash-enable nil)
  '(tool-bar-mode nil)
  '(vlf-application (quote dont-ask)))
@@ -56,6 +56,7 @@
 (set-face-attribute 'region nil :background "#666" :foreground "#ffffff")
 (add-hook 'c++-mode-hook 'flycheck-mode)
 (add-hook 'c-mode-hook 'flycheck-mode)
+(add-hook 'python-mode' 'flycheck-mode)
 
 (global-linum-mode t)
 					; COMPANY
@@ -178,16 +179,3 @@
   (insert-register ?3 t))
 
 (global-set-key (kbd "C-x p 3") 'paste-from-register-3) ; CMD-v-3
-
-;;Desktop Mode
-(desktop-save-mode)
-
-;;Save desktop on idle
-(require 'desktop)
-  (desktop-save-mode 1)
-  (defun my-desktop-save ()
-    (interactive)
-    ;; Don't call desktop-save-in-desktop-dir, as it prints a message.
-    (if (eq (desktop-owner) (emacs-pid))
-        (desktop-save desktop-dirname)))
-  (add-hook 'auto-save-hook 'my-desktop-save)
