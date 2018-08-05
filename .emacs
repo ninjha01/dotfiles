@@ -30,6 +30,8 @@
    (quote
     ("acaccddbc0ae7d5c2cdea2e64b0261ca383671205752c062c44590d944ad0842" default)))
  '(inhibit-startup-screen t)
+ '(mac-command-modifier nil)
+ '(mac-option-modifier (quote meta))
  '(package-selected-packages
    (quote
     (swift3-mode yaml-mode web-mode vlf smooth-scroll rtags markdown-mode helm flyparens flymd flycheck evil elpy company-c-headers ac-haskell-process)))
@@ -104,10 +106,14 @@
 (add-to-list 'auto-mode-alist '("\\.mustache\\'" . web-mode))
 (add-to-list 'auto-mode-alist '("\\.djhtml\\'" . web-mode))
 
-;; Use yaml-mode fore
+;; Use yaml-mode for...
 (require 'yaml-mode)
 (add-to-list 'auto-mode-alist '("\\.yml\\'" . yaml-mode))
 (put 'erase-buffer 'disabled nil)
+
+;; Use clisp for run-lisp
+(setq inferior-lisp-program "clisp")
+
 
 ;;:::Cut and paste from registers 1-3:::::::
 
