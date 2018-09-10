@@ -75,7 +75,10 @@
 ;; Make backups of files, even when they're in version control
 (setq vc-make-backup-files t)
 
-;; Frame Manipulation ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; Window Manipulation ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+;; move with S-r, S-l, etc.
+(windmove-default-keybindings 'meta)
 
 ;; Window manipulation undo tree
 (winner-mode 1)
