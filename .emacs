@@ -76,6 +76,10 @@
 (setq vc-make-backup-files t)
 
 ;; Frame Manipulation ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+;; Window manipulation undo tree
+(winner-mode 1)
+
 (defun rotate-windows ()
   "Rotate your windows"
   (interactive)
