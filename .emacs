@@ -34,7 +34,7 @@
  '(mac-option-modifier (quote meta))
  '(package-selected-packages
    (quote
-    (swift3-mode yaml-mode web-mode vlf smooth-scroll rtags markdown-mode helm flyparens flymd flycheck evil elpy company-c-headers ac-haskell-process)))
+    (multiple-cursors swift3-mode yaml-mode web-mode vlf smooth-scroll rtags markdown-mode helm flyparens flymd flycheck evil elpy company-c-headers ac-haskell-process)))
  '(proof-splash-enable nil)
  '(tool-bar-mode nil)
  '(vlf-application (quote dont-ask)))
@@ -114,6 +114,13 @@
 ;; Use clisp for run-lisp
 (setq inferior-lisp-program "clisp")
 
+;; Multiple Cursors
+(require 'multiple-cursors)
+(global-set-key (kbd "C-S-c C-S-c") 'mc/edit-lines)
+(global-set-key (kbd "C->") 'mc/mark-next-like-this)
+(global-set-key (kbd "C-<") 'mc/mark-previous-like-this)
+(global-set-key (kbd "C-c C-<") 'mc/mark-all-like-this)
+
 
 ;;:::Cut and paste from registers 1-3:::::::
 
@@ -185,3 +192,4 @@
   (insert-register ?3 t))
 
 (global-set-key (kbd "C-x p 3") 'paste-from-register-3) ; CMD-v-3
+
