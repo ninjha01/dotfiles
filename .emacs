@@ -32,8 +32,6 @@
 ;;Clear Scratch
 (setq initial-scratch-message "")
 
-
-
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -59,17 +57,20 @@
  ;; If there is more than one, they won't work right.
  )
 
-
 ;; Behavior Modification ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
-(setq ido-enable-flex-matching t)
-(setq ido-everywhere t)
-(ido-mode 1)
 
 (global-set-key (kbd "C-h") 'query-replace)
 
-;; Open and name shell command
+;; Open and name shell
 (global-set-key (kbd "M-s M-s") (lambda () (interactive) (shell) (rename-uniquely)))
+
+;; Write backup files to own directory
+(setq backup-directory-alist
+      `(("." . ,(expand-file-name
+                 (concat user-emacs-directory "backups")))))
+
+;; Make backups of files, even when they're in version control
+(setq vc-make-backup-files t)
 
 ;; Multiple Cursors
 (require 'multiple-cursors)
@@ -161,7 +162,12 @@
 (when window-system (set-exec-path-from-shell-PATH))
 (setq shell-command-switch "-ic")
 
-;; Open Files in Mode ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; Mode Manipulation ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(setq ido-enable-flex-matching t)
+(setq ido-everywhere t)
+(ido-mode 1)
+
 ;; Open .v files with Proof General's Coq mode
 (load "~/.emacs.d/lisp/PG/generic/proof-site")
 
