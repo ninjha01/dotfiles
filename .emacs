@@ -46,7 +46,7 @@
  '(mac-option-modifier (quote meta))
  '(package-selected-packages
    (quote
-    (multiple-cursors swift3-mode yaml-mode web-mode vlf smooth-scroll rtags markdown-mode helm flyparens flymd flycheck evil elpy company-c-headers ac-haskell-process)))
+    (html-check-frag multiple-cursors swift3-mode yaml-mode web-mode vlf smooth-scroll rtags markdown-mode helm flyparens flymd flycheck evil elpy company-c-headers ac-haskell-process)))
  '(proof-splash-enable nil)
  '(tool-bar-mode nil)
  '(vlf-application (quote dont-ask)))
@@ -282,8 +282,8 @@
 ;; macOS specific ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 ;; keybindings
-(setq mac-command-modifier 'meta)
-(setq mac-option-modifier 'super)
+(setq mac-command-modifier 'super)
+(setq mac-option-modifier 'meta)
 (setq ns-function-modifier 'hyper)
 
 ;; macOS shell tomfoolery
