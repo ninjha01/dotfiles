@@ -46,7 +46,7 @@
  '(mac-option-modifier (quote meta))
  '(package-selected-packages
    (quote
-    (html-check-frag multiple-cursors swift3-mode yaml-mode web-mode vlf smooth-scroll rtags markdown-mode helm flyparens flymd flycheck evil elpy company-c-headers ac-haskell-process)))
+    (go-mode html-check-frag multiple-cursors swift3-mode yaml-mode web-mode vlf smooth-scroll rtags markdown-mode helm flyparens flymd flycheck evil elpy company-c-headers ac-haskell-process)))
  '(proof-splash-enable nil)
  '(tool-bar-mode nil)
  '(vlf-application (quote dont-ask)))
@@ -78,7 +78,7 @@
 ;; Window Manipulation ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 ;; move with S-r, S-l, etc.
-(windmove-default-keybindings 'meta)
+(windmove-default-keybindings 'super)
 
 ;; Window manipulation undo tree
 (winner-mode 1)
@@ -270,6 +270,7 @@
 (add-to-list 'auto-mode-alist '("\\.erb\\'" . web-mode))
 (add-to-list 'auto-mode-alist '("\\.mustache\\'" . web-mode))
 (add-to-list 'auto-mode-alist '("\\.djhtml\\'" . web-mode))
+(add-to-list 'auto-mode-alist '("\\.html\\'" . web-mode))
 
 ;; Use yaml-mode for...
 (require 'yaml-mode)
@@ -287,7 +288,7 @@
 (setq ns-function-modifier 'hyper)
 
 ;; macOS shell tomfoolery
-(defun set-exec-path-from-shell-PATH ()
+(defun set-exec-path-om-shell-PATH ()
   (let ((path-from-shell (replace-regexp-in-string
                           "[ \t\n]*$"
                           ""
