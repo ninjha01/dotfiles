@@ -288,7 +288,7 @@
 (setq ns-function-modifier 'hyper)
 
 ;; macOS shell tomfoolery
-(defun set-exec-path-om-shell-PATH ()
+(defun set-exec-path-from-shell-PATH ()
   (let ((path-from-shell (replace-regexp-in-string
                           "[ \t\n]*$"
                           ""
