@@ -244,6 +244,9 @@
 
 ;; Mode Manipulation ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
+;; Flycheck
+(add-hook 'after-init-hook #'global-flycheck-mode)
+
 ;; Fuzzy Matching
 (setq ido-enable-flex-matching t)
 (setq ido-everywhere t)
