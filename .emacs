@@ -259,7 +259,8 @@
 (add-hook 'after-init-hook 'global-company-mode)
 (add-hook 'c++-mode-hook 'flycheck-mode)
 (add-hook 'c-mode-hook 'flycheck-mode)
-(add-hook 'python-mode' 'flycheck-mode)
+(add-hook 'python-mode 'flycheck-mode)
+(add-hook 'go-mode 'flycheck-mode)
 
 ;; Use web-mode for...
 (require 'web-mode)
