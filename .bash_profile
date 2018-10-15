@@ -17,6 +17,9 @@ alias backup="bash  ~/scripts/backup.sh";
 alias blacklist="sudo emacs /etc/hosts";
 alias la="ls -a";
 alias cleanup="bash ~/scripts/cleanup.sh";
+alias emi="emacs --daemon";
+alias emc="emacsclient -c -a \"\"";
+alias kille="emacsclient -e '(kill-emacs)'"
 ###################################################################
 
 # Expanding History Capabilities ##################################
