@@ -1,34 +1,32 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;                                                               ;;
 ;;                Nishant's Emacs Configuration                  ;;
-;;	              There are many like it                     ;;
-;;	               But this one is mine                      ;;
+;;                    There are many like it                     ;;
+;;                     But this one is mine                      ;;
 ;;                                                               ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-;; Init ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
-(package-initialize)
-
-(require 'package) 
+;; Init ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; Package system
+(require 'package)
+(setq package-enable-at-startup nil)
 (add-to-list 'package-archives
              '("melpa" . "https://melpa.org/packages/"))
-(when (< emacs-major-version 24)
-  ;; For important compatibility libraries like cl-lib
-  (add-to-list 'package-archives '("gnu" . "http://elpa.gnu.org/packages/")))
+(package-initialize)
 
-;; Aesthetics ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+(setq package-list '(which-key company rust-mode yaml-mode web-mode vlf smooth-scroll multiple-cursors markdown-mode helm-flycheck company-web company-shell company-go))
+(dolist (package package-list)
+  (unless (package-installed-p package)
+    (package-install package)))
 
-(set-frame-font "-*-Monaco-normal-normal-normal-*-14-*-*-*-m-0-iso10646-1" nil t)
-
-(if (display-graphic-p)
-    (progn
-      (tool-bar-mode -1)
-      (scroll-bar-mode -1)))
-
+;; Aesthetics ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+(global-hl-line-mode t)
+(global-prettify-symbols-mode t)
+(tool-bar-mode -1)
+(scroll-bar-mode -1)
+(setq inhibit-startup-screen t)
 (set-face-attribute 'region nil :background "#666" :foreground "#ffffff")
 
-(global-linum-mode t)
 ;;Clear Scratch
 (setq initial-scratch-message "")
 
@@ -41,23 +39,13 @@
  '(custom-safe-themes
    (quote
     ("acaccddbc0ae7d5c2cdea2e64b0261ca383671205752c062c44590d944ad0842" default)))
- '(inhibit-startup-screen t)
- '(mac-command-modifier nil)
- '(mac-option-modifier (quote meta))
  '(package-selected-packages
    (quote
-    (go-mode html-check-frag multiple-cursors swift3-mode yaml-mode web-mode vlf smooth-scroll rtags markdown-mode helm flyparens flymd flycheck evil elpy company-c-headers ac-haskell-process)))
- '(proof-splash-enable nil)
- '(tool-bar-mode nil)
+    package-list))
  '(vlf-application (quote dont-ask)))
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- )
+(custom-set-faces)
 
-;; Behavior Modificaiton ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; Behavior Modification ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (global-set-key (kbd "C-h") 'query-replace)
 
@@ -75,7 +63,10 @@
 ;; Make backups of files, even when they're in version control
 (setq vc-make-backup-files t)
 
-;; Window Manipulation ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; Don't jump around on scroll
+(setq scroll-conservatively 100)
+
+;; Window Manipulation ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 ;; move with S-r, S-l, etc.
 (windmove-default-keybindings 'super)
@@ -86,7 +77,7 @@
 (defun rotate-windows ()
   "Rotate your windows"
   (interactive)
-  (cond ((not (> (count-windows)1))
+  (cond ((not (> (count-windows) 1))
          (message "You can't rotate a single window!"))
         (t
          (setq i 1)
@@ -107,8 +98,8 @@
              (set-window-start w1 s2)
              (set-window-start w2 s1)
              (setq i (1+ i)))))))
-
-;; Buffer Manipulation  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+(global-set-key (kbd "C-S-r") 'rotate-windows)
+;; Buffer Manipulation  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (defun delete-current-buffer-file ()
   "Removes file connected to current buffer and kills buffer."
@@ -144,7 +135,17 @@
 
 (global-set-key (kbd "C-x C-r") 'rename-current-buffer-file)
 
-;; Movement ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; Movement ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(defun goto-line-with-feedback ()
+  "Show line numbers temporarily, while prompting for the line number input"
+  (interactive)
+  (unwind-protect
+      (progn
+        (linum-mode 1)
+        (goto-line (read-number "Goto line: ")))
+    (linum-mode -1)))
+(global-set-key (kbd "M-l") 'goto-line-with-feedback)
 
 ;; Multiple Cursors
 (require 'multiple-cursors)
@@ -207,7 +208,6 @@
     (message "Copied to register 2: 「%s」." (buffer-substring-no-properties $p1 $p2))))
 
 (global-set-key (kbd "C-x c 2") 'copy-to-register-2)
-
 (defun paste-from-register-2 ()
   "Paste text from register 2."
   (interactive)
@@ -226,7 +226,7 @@
                (setq $p2 (region-end)))
       (progn (setq $p1 (line-beginning-position))
              (setq $p2 (line-end-position))))
-    (copy-to-register ?3 $p1 $p2)
+    (copy-to-register ?3 $p1 $bp2)
     (message "Copied to register 3: 「%s」." (buffer-substring-no-properties $p1 $p2))))
 
 (global-set-key (kbd "C-x c 3") 'copy-to-register-3)
@@ -240,20 +240,38 @@
 
 (global-set-key (kbd "C-x p 3") 'paste-from-register-3) 
 
+;; Mode Manipulation ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
+;;Which-key
+(require 'which-key)
+(which-key-mode 1)
 
-;; Mode Manipulation ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;Org mode
+(require 'org)
+(setq org-agenda-files (quote ("~/ledger/todo.org")))
+(define-key global-map "\C-cl" 'org-store-link)
+(define-key global-map "\C-ca" 'org-agenda)
+(setq org-log-done t)
+
+(add-hook 'ido-setup-hook
+	  (lambda ()
+	    ;; Go straight home
+	    (define-key ido-file-completion-map
+	      (kbd "~")
+	      (lambda ()
+		(interactive)
+		(if (looking-back "/")
+		    (insert "~/")
+		  (call-interactively 'self-insert-command))))))
 
 ;; Flycheck
 (add-hook 'after-init-hook #'global-flycheck-mode)
+(setq-default flycheck-disabled-checkers '(emacs-lisp-checkdoc))
 
 ;; Fuzzy Matching
 (setq ido-enable-flex-matching t)
 (setq ido-everywhere t)
 (ido-mode 1)
-
-;; Open .v files with Proof General's Coq mode
-(load "~/.emacs.d/lisp/PG/generic/proof-site")
 
 ;; Opening Large Files
 (require 'vlf-setup)
@@ -284,7 +302,7 @@
 ;; Use clisp for run-lisp
 (setq inferior-lisp-program "clisp")
 
-;; macOS specific ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; macOS specific ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 ;; keybindings
 (setq mac-command-modifier 'super)
@@ -303,3 +321,4 @@
 
 (when window-system (set-exec-path-from-shell-PATH))
 (setq shell-command-switch "-ic")
+(put 'downcase-region 'disabled nil)
