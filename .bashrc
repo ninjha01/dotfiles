@@ -35,8 +35,8 @@ function gen_gif {
 # Emacs ###########################################################
 export EDITOR="/usr/local/bin/emacsclient -c -a \"\"";
 alias emi="emacs --daemon";
-alias emc="emacsclient -c -a \"\"";
-alias emcnw="emacsclient -nw -a \"\"";
+alias emc="emacsclient -n -c -a \"\"";
+alias emcnw="emacsclient -n -a -nw \"\"";
 alias kille="emacsclient -e '(kill-emacs)'"
 
 # Expanding History Capabilities ##################################
