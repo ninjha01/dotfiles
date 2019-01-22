@@ -14,7 +14,7 @@
              '("melpa" . "https://melpa.org/packages/"))
 (package-initialize)
 
-(setq package-list '(ace-window which-key company rust-mode yaml-mode web-mode vlf smooth-scroll multiple-cursors markdown-mode helm-flycheck company-web company-shell company-go))
+(setq package-list '(elpy beacon ace-window which-key company rust-mode yaml-mode web-mode vlf smooth-scroll multiple-cursors markdown-mode helm-flycheck company-web company-shell company-go))
 (dolist (package package-list)
   (unless (package-installed-p package)
     (package-install package)))
@@ -22,6 +22,7 @@
 ;; Aesthetics ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 (global-hl-line-mode t)
 (global-prettify-symbols-mode t)
+(beacon-mode t)
 (tool-bar-mode -1)
 (scroll-bar-mode -1)
 (setq inhibit-startup-screen t)
@@ -41,7 +42,7 @@
     ("acaccddbc0ae7d5c2cdea2e64b0261ca383671205752c062c44590d944ad0842" default)))
  '(package-selected-packages
    (quote
-    (ace-window which-key yaml-mode which-key web-mode vlf smooth-scroll rust-mode multiple-cursors markdown-mode helm-flycheck company-web company-shell company-go)))
+    (js-comint flycheck-rust beacon ace-window magit magit-topgit yaml-mode which-key web-mode vlf use-package smooth-scroll rust-mode multiple-cursors markdown-mode helm-flycheck flyparens company-web company-shell company-go)))
  '(vlf-application (quote dont-ask)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
@@ -51,9 +52,6 @@
  )
 
 ;; Behavior Modification ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
-(global-set-key (kbd "C-h") 'query-replace)
-
 ;; Open and name shell
 (global-set-key (kbd "M-s M-s") (lambda () (interactive) (shell) (rename-uniquely)))
 
@@ -72,10 +70,18 @@
 (setq scroll-conservatively 100)
 
 ;; Window Manipulation ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+;; better window switching
 (global-set-key (kbd "C-x o") 'ace-window)
 
 ;; move with S-r, S-l, etc.
 (windmove-default-keybindings 'super)
+
+;; Expand windows
+(global-set-key (kbd "C-^") 'enlarge-window)
+;;(global-set-key (kbd "C-") 'shrink-window)
+(global-set-key (kbd "C-,") 'shrink-window-horizontally)
+(global-set-key (kbd "C-.") 'enlarge-window-horizontally)
 
 ;; Window manipulation undo tree
 (winner-mode 1)
@@ -143,6 +149,27 @@
 
 ;; Movement ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
+;; Rearrange lines up and down
+(defun move-line-down ()
+  (interactive)
+  (let ((col (current-column)))
+    (save-excursion
+      (forward-line)
+      (transpose-lines 1))
+    (forward-line)
+    (move-to-column col)))
+
+(defun move-line-up ()
+  (interactive)
+  (let ((col (current-column)))
+    (save-excursion
+      (forward-line)
+      (transpose-lines -1))
+    (move-to-column col)))
+
+(global-set-key (kbd "<C-S-down>") 'move-line-down)
+(global-set-key (kbd "<C-S-up>") 'move-line-up)
+
 (defun goto-line-with-feedback ()
   "Show line numbers temporarily, while prompting for the line number input"
   (interactive)
@@ -159,6 +186,7 @@
 (global-set-key (kbd "C->") 'mc/mark-next-like-this)
 (global-set-key (kbd "C-<") 'mc/mark-previous-like-this)
 (global-set-key (kbd "C-c C-<") 'mc/mark-all-like-this)
+(global-set-key (kbd "C-S-<mouse-1>") 'mc/add-cursor-on-click)
 
 ;; Opening newlines
 (defun open-line-below ()
@@ -248,6 +276,10 @@
 
 ;; Mode Manipulation ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
+;;Subword-mode CamelCase handling
+(require 'subword)
+(subword-mode 1)
+
 ;;Which-key
 (require 'which-key)
 (which-key-mode 1)
@@ -273,6 +305,11 @@
 ;; Flycheck
 (add-hook 'after-init-hook #'global-flycheck-mode)
 (setq-default flycheck-disabled-checkers '(emacs-lisp-checkdoc))
+(add-hook 'python-mode-hook
+          (lambda ()
+	    (elpy-mode 1)
+	    (setq flycheck-python-pylint-executable "/usr/local/bin/pylint")
+	    (setq flycheck-pylintrc "~/.pylintrc")))
 
 ;; Fuzzy Matching
 (setq ido-enable-flex-matching t)
@@ -284,6 +321,11 @@
 
 ;; COMPANY
 (add-hook 'after-init-hook 'global-company-mode)
+(with-eval-after-load 'company
+  (define-key company-active-map (kbd "C-n") #'company-select-next)
+  (define-key company-active-map (kbd "C-p") #'company-select-previous))
+
+;; FLYCHECK
 (add-hook 'c++-mode-hook 'flycheck-mode)
 (add-hook 'c-mode-hook 'flycheck-mode)
 (add-hook 'python-mode 'flycheck-mode)
@@ -307,6 +349,10 @@
 
 ;; Use clisp for run-lisp
 (setq inferior-lisp-program "clisp")
+
+;; ELPY
+(setq python-shell-interpreter "python3"
+      python-shell-interpreter-args "-i")
 
 ;; macOS specific ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
