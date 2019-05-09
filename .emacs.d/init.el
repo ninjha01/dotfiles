@@ -355,6 +355,11 @@
 (setq python-shell-interpreter "python3"
       python-shell-interpreter-args "-i")
 
+;; pdf-tools
+(define-key pdf-view-mode-map (kbd "h") 'pdf-annot-add-highlight-markup-annotation)
+(define-key pdf-view-mode-map (kbd "t") 'pdf-annot-add-text-annotation)
+(define-key pdf-view-mode-map (kbd "D") 'pdf-annot-delete)
+
 ;; macOS specific ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 ;; keybindings
