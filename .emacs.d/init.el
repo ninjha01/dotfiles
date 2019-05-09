@@ -356,6 +356,7 @@
       python-shell-interpreter-args "-i")
 
 ;; pdf-tools
+(pdf-tools-install)
 (define-key pdf-view-mode-map (kbd "h") 'pdf-annot-add-highlight-markup-annotation)
 (define-key pdf-view-mode-map (kbd "t") 'pdf-annot-add-text-annotation)
 (define-key pdf-view-mode-map (kbd "D") 'pdf-annot-delete)
