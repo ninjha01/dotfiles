@@ -16,6 +16,7 @@ export PS1="[\t][\e[31m\]\W\[\e[m\]]: "
 alias rm="trash";
 alias blacklist="sudo emacs /etc/hosts";
 alias la="ls -a";
+alias sexit="killall Terminal"
 alias cleanup="bash ~/scripts/cleanup.sh";
 alias activate='source venv/bin/activate';
 alias venv='python3 -m venv venv; activate'
@@ -38,6 +39,14 @@ alias emi="emacs --daemon";
 alias emc="emacsclient -n -c -a \"\"";
 alias emcnw="emacsclient -n -a -nw \"\"";
 alias kille="emacsclient -e '(kill-emacs)'"
+alias remc="kille;emc;sexit"
+
+alias emid="emacs --daemon=\"detached\"";
+alias emcd="emacsclient -s detached -n -c -a \"\"";
+alias emcnwd="emacsclient -s detached -n -a -nw \"\"";
+alias killed="emacsclient -s detached -e '(kill-emacs)'"
+alias remcd="killed;emc;sexit"
+
 
 # Expanding History Capabilities ##################################
 export HISTSIZE=10000;
