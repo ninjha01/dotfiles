@@ -14,7 +14,7 @@
              '("melpa" . "https://melpa.org/packages/"))
 (package-initialize)
 
-(setq package-list '(pdf-tools elpy beacon ace-window which-key company rust-mode yaml-mode web-mode vlf smooth-scroll multiple-cursors markdown-mode helm-flycheck company-web company-shell company-go))
+(setq package-list '(mood-line elpy beacon ace-window which-key company rust-mode yaml-mode web-mode vlf smooth-scroll multiple-cursors markdown-mode helm-flycheck company-web company-shell company-go))
 (dolist (package package-list)
   (unless (package-installed-p package)
     (package-install package)))
@@ -23,6 +23,7 @@
 (global-hl-line-mode t)
 (global-prettify-symbols-mode t)
 (beacon-mode t)
+(mood-line-mode)
 (tool-bar-mode -1)
 (scroll-bar-mode -1)
 (setq inhibit-startup-screen t)
@@ -42,7 +43,7 @@
     ("acaccddbc0ae7d5c2cdea2e64b0261ca383671205752c062c44590d944ad0842" default)))
  '(package-selected-packages
    (quote
-    (js-comint flycheck-rust beacon ace-window magit magit-topgit yaml-mode which-key web-mode vlf use-package smooth-scroll rust-mode multiple-cursors markdown-mode helm-flycheck flyparens company-web company-shell company-go)))
+    (prettier-js tide js-comint flycheck-rust beacon ace-window magit magit-topgit yaml-mode which-key web-mode vlf use-package smooth-scroll rust-mode multiple-cursors markdown-mode helm-flycheck flyparens company-web company-shell company-go)))
  '(vlf-application (quote dont-ask)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
@@ -51,7 +52,15 @@
  ;; If there is more than one, they won't work right.
  )
 
+;; EWW
+;; Hide all images
+(setq shr-inhibit-images t)
+
 ;; Behavior Modification ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+;; Electric mode
+(electric-pair-mode 1)
+
 ;; Open and name shell
 (global-set-key (kbd "M-s M-s") (lambda () (interactive) (shell) (rename-uniquely)))
 
@@ -59,9 +68,9 @@
 (save-place-mode 1)
 
 ;; Write backup files to own directory
-(setq backup-directory-alist
-      `(("." . ,(expand-file-name
-                 (concat user-emacs-directory "backups")))))
+(setq backup-directory-alist `(("." . "~/.saves")))
+(setq auto-save-file-name-transforms
+  `((".*" "~/.emacs-saves/" t)))
 
 ;; Make backups of files, even when they're in version control
 (setq vc-make-backup-files t)
@@ -353,13 +362,39 @@
 
 ;; ELPY
 (setq python-shell-interpreter "python3"
+      elpy-rpc-python-command "python3"
       python-shell-interpreter-args "-i")
+(setenv "WORKON_HOME" "~/miniconda3/envs/")
 
-;; pdf-tools
-(pdf-tools-install)
-(define-key pdf-view-mode-map (kbd "h") 'pdf-annot-add-highlight-markup-annotation)
-(define-key pdf-view-mode-map (kbd "t") 'pdf-annot-add-text-annotation)
-(define-key pdf-view-mode-map (kbd "D") 'pdf-annot-delete)
+;; Tide Mode
+(defun setup-tide-mode ()
+  (interactive)
+  (tide-setup)
+  (flycheck-mode +1)
+  (setq flycheck-check-syntax-automatically '(save mode-enabled))
+  (eldoc-mode +1)
+  (tide-hl-identifier-mode +1)
+  ;; company is an optional dependency. You have to
+  ;; install it separately via package-install
+  ;; `M-x package-install [ret] company`
+  (company-mode +1))
+
+;; aligns annotation to the right hand side
+(setq company-tooltip-align-annotations t)
+
+;; formats the buffer before saving
+(add-hook 'before-save-hook 'tide-format-before-save)
+(add-hook 'typescript-mode-hook #'setup-tide-mode)
+
+(require 'web-mode)
+(add-to-list 'auto-mode-alist '("\\.tsx\\'" . web-mode))
+(add-hook 'web-mode-hook
+          (lambda ()
+            (when (string-equal "tsx" (file-name-extension buffer-file-name))
+              (setup-tide-mode))))
+;; enable typescript-tslint checker
+(flycheck-add-mode 'typescript-tslint 'web-mode)
+
 
 ;; macOS specific ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
