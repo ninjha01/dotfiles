@@ -10,7 +10,7 @@
 export TERM=xterm-256color;
 export CLICOLOR=1
 export LSCOLORS='GxFxCxDxBxegedabagaced'
-export PS1="[\t][\e[31m\]\W\[\e[m\]]: "
+export PS1="[\t][\[\e[31m\]\W\[\e[m\]]: "
 
 # Utils ############################################################
 alias rm="trash";
