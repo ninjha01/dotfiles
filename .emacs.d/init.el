@@ -58,6 +58,9 @@
 
 ;; Behavior Modification ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
+;; Magit
+(global-set-key (kbd "C-x g") 'magit-status)
+
 ;; Electric mode
 (electric-pair-mode 1)
 
