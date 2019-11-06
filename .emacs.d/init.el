@@ -55,6 +55,8 @@
 ;; EWW
 ;; Hide all images
 (setq shr-inhibit-images t)
+;; set background color to servicable gray
+(setq shr-color-visible-luminance-min 70)
 
 ;; Behavior Modification ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
