@@ -84,9 +84,6 @@
 ;; Magit
 (global-set-key (kbd "C-x g") 'magit-status)
 
-;; Electric mode
-(electric-pair-mode 1)
-
 ;; Open and name shell
 (global-set-key (kbd "M-s M-s") (lambda () (interactive) (shell) (rename-uniquely)))
 
