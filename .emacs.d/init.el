@@ -14,7 +14,7 @@
              '("melpa" . "https://melpa.org/packages/"))
 (package-initialize)
 
-(setq package-list '((browse-kill-ring counsel dumb-jump ivy mood-line elpy beacon ace-window which-key company rust-mode yaml-mode web-mode vlf smooth-scroll multiple-cursors markdown-mode helm-flycheck company-web company-shell company-go))
+(setq package-list '((docker projectile browse-kill-ring counsel dumb-jump ivy mood-line elpy beacon ace-window which-key company rust-mode yaml-mode web-mode vlf smooth-scroll multiple-cursors markdown-mode helm-flycheck company-web company-shell company-go))
 (dolist (package package-list)
   (unless (package-installed-p package)
     (package-install package)))
@@ -60,6 +60,13 @@
 
 ;; Behavior Modification ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
+;; Projectile
+(require 'projectile)
+(define-key projectile-mode-map (kbd "s-p") 'projectile-command-map)
+(define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map)
+(projectile-mode 1)
+
+      
 ;; Browse Kill ring
 (global-set-key (kbd "C-c y") 'browse-kill-ring)
 
