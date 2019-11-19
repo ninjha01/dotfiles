@@ -5,7 +5,7 @@
              '("melpa" . "https://melpa.org/packages/"))
 (package-initialize)
 
-(setq package-list '(god-mode todoist docker projectile browse-kill-ring counsel dumb-jump ivy mood-line elpy beacon ace-window which-key company rust-mode yaml-mode web-mode vlf smooth-scroll multiple-cursors markdown-mode helm-flycheck company-web company-shell company-go))
+(setq package-list '(magit god-mode todoist docker projectile browse-kill-ring counsel dumb-jump ivy mood-line elpy beacon ace-window which-key company rust-mode yaml-mode web-mode vlf smooth-scroll multiple-cursors markdown-mode helm-flycheck company-web company-shell company-go))
 (dolist (package package-list)
   (unless (package-installed-p package)
     (package-install package)))
