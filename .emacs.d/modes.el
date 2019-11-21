@@ -5,12 +5,11 @@
              '("melpa" . "https://melpa.org/packages/"))
 (package-initialize)
 
-(setq package-list '(ace-window beacon browse-kill-ring company company-go company-shell company-web
-				counsel docker dumb-jump elpy flycheck-rust flyparens god-mode
-				helm-flycheck ivy js-comint magit magit-topgit markdown-mode
-				mood-line multiple-cursors prettier-js projectile rust-mode
-				smooth-scroll tide todoist use-package vlf web-mode which-key
-				yaml-mode))
+(setq package-list '(fireplace elisp-format ace-window beacon browse-kill-ring company company-go
+			       company-shell company-web counsel docker dumb-jump elpy flycheck-rust
+			       flyparens god-mode helm-flycheck ivy js-comint magit magit-topgit
+			       markdown-mode mood-line multiple-cursors prettier-js projectile
+			       rust-mode tide todoist use-package vlf web-mode which-key yaml-mode))
 (dolist (package package-list)
   (unless (package-installed-p package)
     (package-install package)))
