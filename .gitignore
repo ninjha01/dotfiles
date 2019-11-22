@@ -3,5 +3,5 @@
 
 # Except the dotfiles I explicitely want to share
 !.bashrc
-!.emacs.d
-!.vim
+!.emacs.d/
+!.vim/
