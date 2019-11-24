@@ -189,6 +189,10 @@
       elpy-rpc-python-command "python3"
       python-shell-interpreter-args "-i")
 (setenv "WORKON_HOME" "~/miniconda3/envs/")
+(add-hook 'elpy-mode-hook
+	  '(lambda ()
+	     (when (eq major-mode 'python-mode)
+	       (add-hook 'before-save-hook 'elpy-black-fix-code))))
 
 
 
