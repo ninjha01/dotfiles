@@ -216,7 +216,17 @@
             (when (string-equal "tsx" (file-name-extension buffer-file-name))
               (setup-tide-mode))))
 (setq web-mode-content-types-alist
-  '(("jsx" . "\\.js[x]?\\'")))
+      '(("jsx" . "\\.js[x]?\\'")))
+
+;;;; Set up web mode
+(defun my-web-mode-hook ()
+  "Hooks for Web mode."
+  ;;; Indentation
+  (setq web-mode-markup-indent-offset 2)
+  (setq web-mode-css-indent-offset 2)
+  (setq web-mode-code-indent-offset 2))
+
+(add-hook 'web-mode-hook  'my-web-mode-hook)
 
 ;;;; Tide Mode
 (defun setup-tide-mode ()
@@ -230,10 +240,11 @@
   ;; install it separately via package-install
   ;; `M-x package-install [ret] company`
   (company-mode +1))
+(add-hook 'typescript-mode-hook #'setup-tide-mode)
+
 
 ;;;;; formats the buffer before saving
 (add-hook 'before-save-hook 'tide-format-before-save)
-(add-hook 'typescript-mode-hook #'setup-tide-mode)
 
 
 ;;;;; enable typescript-tslint checker
