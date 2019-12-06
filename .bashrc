@@ -45,7 +45,7 @@ alias emid="emacs --daemon=\"detached\"";
 alias emcd="emacsclient -s detached -n -c -a \"\"";
 alias emcnwd="emacsclient -s detached -n -a -nw \"\"";
 alias killed="emacsclient -s detached -e '(kill-emacs)'"
-alias remcd="killed;emc;sexit"
+alias remcd="killed;emcd;sexit"
 
 
 # Expanding History Capabilities ##################################
