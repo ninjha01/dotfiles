@@ -52,3 +52,6 @@ alias remcd="killed;emc;sexit"
 export HISTSIZE=10000;
 shopt -s histappend;
 PROMPT_COMMAND="history -a;$PROMPT_COMMAND";
+
+# Expanding Bash completion #######################################
+[ -f /usr/local/etc/bash_completion ] && . /usr/local/etc/bash_completion
