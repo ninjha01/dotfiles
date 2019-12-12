@@ -4,7 +4,7 @@
 (add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/"))
 (package-initialize)
 
-(setq package-list '(magit-todos ace-window beacon browse-kill-ring company company-go company-shell
+(setq package-list '(forge magit-todos ace-window beacon browse-kill-ring company company-go company-shell
 				company-web counsel docker dumb-jump elisp-format elpy fireplace
 				flycheck-rust flyparens god-mode helm-flycheck ivy js-comint magit
 				magit-topgit markdown-mode mood-line multiple-cursors prettier-js
@@ -164,6 +164,8 @@
 ;;; Magit
 (magit-todos-mode 1)
 (global-set-key (kbd "C-x g") 'magit-status)
+(with-eval-after-load 'magit
+  (require 'forge))
 
 
 ;;; Flycheck
