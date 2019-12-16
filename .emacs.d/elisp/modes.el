@@ -95,7 +95,7 @@
 
 ;;; Org mode
 (require 'org)
-(setq org-agenda-files (quote ("~/ledger/todo.org")))
+(setq org-agenda-files (quote ("~/Google Drive/org/work.org")))
 (define-key global-map "\C-cl" 'org-store-link)
 (define-key global-map "\C-ca" 'org-agenda)
 (setq org-log-done t)

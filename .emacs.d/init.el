@@ -5,7 +5,7 @@
 ;;                     But this one is mine                      ;;
 ;;                                                               ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-(add-to-list 'load-path "~/.emacs.d/")
+(add-to-list 'load-path "~/.emacs.d/elisp/")
 (load-library "style")
 (load-library "modes")
 (load-library "keys")
