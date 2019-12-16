@@ -42,7 +42,6 @@
 ;;;; (setq search-default-mode #'char-fold-to-regexp)
 (global-set-key "\C-s" 'swiper)
 (global-set-key (kbd "C-c C-r") 'ivy-resume)
-(global-set-key (kbd "<f6>") 'ivy-resume)
 (global-set-key (kbd "M-x") 'counsel-M-x)
 (global-set-key (kbd "C-x C-f") 'counsel-find-file)
 (global-set-key (kbd "<f1> f") 'counsel-describe-function)
@@ -164,6 +163,9 @@
 ;;; Magit
 (magit-todos-mode 1)
 (global-set-key (kbd "C-x g") 'magit-status)
+(setq ediff-split-window-function 'split-window-horizontally) ;; Better for wide monitor
+(setq ediff-merge-split-window-function 'split-window-vertically) ;; Better for wide monitor
+
 (with-eval-after-load 'magit
   (require 'forge))
 
