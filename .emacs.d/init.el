@@ -21,6 +21,31 @@
 ;; Don't jump around on scroll
 (setq scroll-conservatively 100)
 
+;; Emacs first checks whether a window can be split horizontally when opening a new window, then checks if it can be split vertically.
+;; This function reverses the order of the checks.
+(defun reversed-split-window-sensibly (&optional window)
+  (let ((window (or window (selected-window))))
+    (or (and (window-splittable-p window t)
+             ;; Split window horizontally.
+             (with-selected-window window
+               (split-window-right)))
+        (and (window-splittable-p window)
+             ;; Split window vertically.
+             (with-selected-window window
+               (split-window-below)))
+        (and (eq window (frame-root-window (window-frame window)))
+             (not (window-minibuffer-p window))
+             ;; If WINDOW is the only window on its frame and is not the
+             ;; minibuffer window, try to split it horizontally disregarding
+             ;; the value of `split-width-threshold'.
+             (let ((split-width-threshold 0))
+               (when (window-splittable-p window t)
+                 (with-selected-window window
+                   (split-window-right))))))))
+
+(setq split-window-preferred-function 'reversed-split-window-sensibly)
+
+
 ;; macOS shell tomfoolery
 (defun set-exec-path-from-shell-PATH ()
   (let ((path-from-shell (replace-regexp-in-string
