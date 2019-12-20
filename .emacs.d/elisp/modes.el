@@ -4,7 +4,7 @@
 (add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/"))
 (package-initialize)
 
-(setq package-list '(forge magit-todos ace-window beacon browse-kill-ring company company-go company-shell
+(setq package-list '(dockerfile-mode forge magit-todos ace-window beacon browse-kill-ring company company-go company-shell
 				company-web counsel docker dumb-jump elisp-format elpy fireplace
 				flycheck-rust flyparens god-mode helm-flycheck ivy js-comint magit
 				magit-topgit markdown-mode mood-line multiple-cursors prettier-js
@@ -259,6 +259,10 @@
 (require 'yaml-mode)
 (add-to-list 'auto-mode-alist '("\\.yml\\'" . yaml-mode))
 (put 'erase-buffer 'disabled nil)
+
+
+;;;; Docker
+(add-to-list 'auto-mode-alist '("Dockerfile\\'" . dockerfile-mode))
 
 
 ;;; Lisp
