@@ -202,23 +202,6 @@
 	     (when (eq major-mode 'python-mode)
 	       (add-hook 'before-save-hook 'elpy-black-fix-code))))
 
-;;;; mypy
-(flycheck-define-checker
-    python-mypy ""
-    :command ("mypy"
-              "--ignore-missing-imports" "--fast-parser"
-              "--python-version" "3.6"
-              source-original)
-    :error-patterns
-    ((error line-start (file-name) ":" line ": error:" (message) line-end))
-    :modes python-mode)
-
-(add-to-list 'flycheck-checkers 'python-mypy t)
-(add-to-list 'flycheck-disabled-checkers 'python-flake8)
-(add-to-list 'flycheck-disabled-checkers 'python-pylint)
-(set-variable 'flycheck-python-mypy-args '("--ignore-missing-imports"))
-(flycheck-add-next-checker 'python-flake8 'python-mypy t)
-
 
 
 ;;; Web Dev
