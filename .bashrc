@@ -35,17 +35,37 @@ function gen_gif {
 }   
 # Emacs ###########################################################
 export EDITOR="/usr/local/bin/emacsclient -c -a \"\"";
-alias emi="emacs --daemon";
-alias emc="emacsclient -n -c -a \"\"";
-alias emcnw="emacsclient -n -a -nw \"\"";
-alias kille="emacsclient -e '(kill-emacs)'"
-alias remc="kille;emc;sexit"
 
-alias emid="emacs --daemon=\"detached\"";
-alias emcd="emacsclient -s detached -n -c -a \"\"";
-alias emcnwd="emacsclient -s detached -n -a -nw \"\"";
-alias killed="emacsclient -s detached -e '(kill-emacs)'"
-alias remcd="killed;emcd;sexit"
+function emi {
+    daemon_name="${1:-server}"
+    emacs --daemon="$daemon_name"
+    # Show server name in modeline
+    emacsclient -s $daemon_name --eval '(setq-default mode-line-misc-info server-name)'
+}
+
+function emc {
+    daemon_name="${1:-server}"
+    emacsclient -s $daemon_name -n -c -a \"\";
+}
+
+function emcnw {
+    daemon_name="${1:-server}"
+    emacsclient -s $daemon_name -n -c -a -nw \"\";
+}
+
+function kille {
+    daemon_name="${1:-server}"
+    emacsclient -s $daemon_name -e '(kill-emacs)'
+}
+
+function remc {
+    daemon_name="${1:-server}"
+    kille $daemon_name
+    emc $daemon_name
+    sexit
+}
+
+alias remc="kille;emc;sexit"
 
 
 # Expanding History Capabilities ##################################
