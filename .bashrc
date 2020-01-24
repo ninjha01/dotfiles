@@ -38,9 +38,10 @@ export EDITOR="/usr/local/bin/emacsclient -c -a \"\"";
 
 function emi {
     daemon_name="${1:-server}"
-    emacs --daemon="$daemon_name" &&
-	# Show server name in modeline
-	emacsclient -s $daemon_name --eval '(setq-default mode-line-misc-info server-name)'
+    emacs --daemon="$daemon_name"
+    if [ "$daemon_name" != "server" ]; then
+	emacsclient -s $daemon_name --eval '(setq-default mode-line-misc-info (concat "Ψ: " server-name ""))'
+    fi
 }
 
 function emc {
