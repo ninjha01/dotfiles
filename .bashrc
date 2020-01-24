@@ -61,6 +61,7 @@ function kille {
 function remc {
     daemon_name="${1:-server}"
     kille $daemon_name
+    emi $daemon_name
     emc $daemon_name
     sexit
 }
