@@ -11,13 +11,11 @@ jobs:
     - uses: actions/checkout@v1
     - name: Install emacs
       run: sudo apt-get install emacs
-    - name: launch emacs
-      run: |
-        # Load my config
-        source .bashrc
-        # Start daemon
-        emi
-        # Create terminal session
-        emcnw
-        # Create gui session
-        emc
+    - name: load my config
+      run: source .bashrc
+    - name: start daemon
+      run: emi
+    - name: launch terminal emacs
+      run: emc
+    - name: launch gui emacs
+      run: emcnw
