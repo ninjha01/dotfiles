@@ -15,8 +15,8 @@ jobs:
 #      run: source .bashrc
     - name: start daemon
       run:  emacs --daemon
-    - name: launch terminal emacs
-      run: emacsclient -n -c -a -nw \"\";
+#    - name: launch terminal emacs
+#      run: emacsclient -n -c -a -nw \"\";
     - name: launch gui emacs
       run: emacsclient -n -c -a \"\";
     - name: kill emacs
