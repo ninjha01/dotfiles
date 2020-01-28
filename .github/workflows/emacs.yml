@@ -11,11 +11,13 @@ jobs:
     - uses: actions/checkout@v1
     - name: Install emacs
       run: sudo apt-get install emacs
-    - name: load my config
-      run: source .bashrc
+#    - name: load my config
+#      run: source .bashrc
     - name: start daemon
-      run: emi
+      run:  emacs --daemon
     - name: launch terminal emacs
-      run: emc
+      run: emacsclient -n -c -a -nw \"\";
     - name: launch gui emacs
-      run: emcnw
+      run: emacsclient -n -c -a \"\";
+    - name: kill emacs
+      run: emacsclient -e '(kill-emacs)'
