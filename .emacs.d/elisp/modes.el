@@ -4,7 +4,7 @@
 (add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/"))
 (package-initialize)
 
-(setq package-list '(keyfreq ace-window beacon browse-kill-ring company company-go company-shell
+(setq package-list '(cargo lsp-mode lsp-ui keyfreq ace-window beacon browse-kill-ring company company-go company-shell
 				company-web counsel docker dockerfile-mode dumb-jump elisp-format
 				elpy fireplace flycheck-rust flyparens forge god-mode helm-flycheck
 				ivy js-comint magit magit-todos magit-topgit markdown-mode mood-line
@@ -274,3 +274,18 @@
 
 ;;;; Use clisp for run-lisp
 (setq inferior-lisp-program "clisp")
+
+
+;;; Rust
+(with-eval-after-load 'rust-mode
+  (add-hook 'flycheck-mode-hook #'flycheck-rust-setup))
+
+;;;; Indentation
+(add-hook 'rust-mode-hook
+          (lambda () (setq indent-tabs-mode nil)))
+
+;;;; Rustfmt
+(setq rust-format-on-save t)
+
+;;;; Cargo minor mode
+(add-hook 'rust-mode-hook 'cargo-minor-mode)
