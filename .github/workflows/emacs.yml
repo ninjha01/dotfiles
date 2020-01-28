@@ -13,6 +13,10 @@ jobs:
       run: sudo apt-get install emacs
     - name: launch emacs
       run: |
+        # Load my config
+        pwd
+        ls
+        source ~/dotfiles/.bashrc
         # Start daemon
         emi
         # Create terminal session
