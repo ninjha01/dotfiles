@@ -10,6 +10,6 @@ jobs:
     steps:
     - uses: actions/checkout@v1
     - name: Install emacs
-      run: apt-get install emacs
+      run: sudo apt-get install emacs
     - name: launch emacs
       run: emacs
