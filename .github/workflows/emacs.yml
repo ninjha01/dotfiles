@@ -12,4 +12,10 @@ jobs:
     - name: Install emacs
       run: sudo apt-get install emacs
     - name: launch emacs
-      run: emacs -nw
+      run: |
+        # Start daemon
+        emi
+        # Create terminal session
+        emcnw
+        # Create gui session
+        emc
