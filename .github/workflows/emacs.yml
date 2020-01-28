@@ -14,8 +14,12 @@ jobs:
     - name: launch emacs
       run: |
         # Load my config
+        echo "pwd"
         pwd
+        echo "ls"
         ls
+        echo "ls ./dotfiles"
+        ls ./dotfiles       
         source ./dotfiles/.bashrc
         # Start daemon
         emi
