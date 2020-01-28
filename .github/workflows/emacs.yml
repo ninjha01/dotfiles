@@ -16,7 +16,7 @@ jobs:
         # Load my config
         pwd
         ls
-        source ~/dotfiles/.bashrc
+        source ./dotfiles/.bashrc
         # Start daemon
         emi
         # Create terminal session
