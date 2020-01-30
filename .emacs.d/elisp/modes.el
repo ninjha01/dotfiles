@@ -4,7 +4,7 @@
 (add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/"))
 (package-initialize)
 
-(setq package-list '(cargo lsp-mode lsp-ui keyfreq ace-window beacon browse-kill-ring company company-go company-shell
+(setq package-list '(blacken cargo lsp-mode lsp-ui keyfreq ace-window beacon browse-kill-ring company company-go company-shell
 				company-web counsel docker dockerfile-mode dumb-jump elisp-format
 				elpy fireplace flycheck-rust flyparens forge god-mode helm-flycheck
 				ivy js-comint magit magit-todos magit-topgit markdown-mode mood-line
