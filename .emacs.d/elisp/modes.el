@@ -17,6 +17,9 @@
 
 ;; General
 
+;; subword mode
+(global-subword-mode 1)
+
 ;;; KeyFreq
 (require 'keyfreq)
 (keyfreq-mode 1)
