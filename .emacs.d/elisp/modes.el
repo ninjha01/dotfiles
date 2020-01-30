@@ -173,6 +173,8 @@
 (setq ediff-split-window-function 'split-window-horizontally) ;; Better for wide monitor
 (setq ediff-merge-split-window-function 'split-window-vertically) ;; Better for wide monitor
 
+(add-hook 'after-save-hook 'magit-after-save-refresh-status t) ;; update magit on save
+
 (with-eval-after-load 'magit
   (require 'forge))
 
@@ -199,7 +201,14 @@
 (setq python-shell-interpreter "python3"
       elpy-rpc-python-command "python3"
       python-shell-interpreter-args "-i")
+
 (setenv "WORKON_HOME" "~/miniconda3/envs/")
+
+;; flycheck instead of flymake
+(setq elpy-modules (delq 'elpy-module-flymake elpy-modules))
+(add-hook 'elpy-mode-hook 'flycheck-mode)
+
+;; Black
 (add-hook 'elpy-mode-hook
 	  '(lambda ()
 	     (when (eq major-mode 'python-mode)
