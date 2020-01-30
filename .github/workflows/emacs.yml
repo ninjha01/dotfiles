@@ -1,0 +1,19 @@
+name: CI
+
+on: [push]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v1
+    - name: Install emacs
+      run: sudo apt-get install emacs
+    - name: start daemon
+      run:  emacs --daemon
+    - name: launch gui emacs
+      run: emacsclient -n -c
+    - name: kill emacs
+      run: emacsclient -e '(kill-emacs)'
