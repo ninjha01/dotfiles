@@ -1,5 +1,10 @@
 (setq inhibit-startup-screen t)
 (set-face-attribute 'region nil :background "#666" :foreground "#ffffff")
+;;; Remove Toolbar
+(tool-bar-mode -1)
+;;; Remove scroll bar
+(scroll-bar-mode -1)
+
 
 ;;Clear Scratch
 (setq initial-scratch-message "")

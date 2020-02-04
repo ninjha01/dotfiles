@@ -156,14 +156,6 @@
 (mood-line-mode)
 
 
-;;; tool bar mode
-(tool-bar-mode -1)
-
-
-;;; scroll bar mode
-(scroll-bar-mode -1)
-
-
 ;; Dev
 
 
