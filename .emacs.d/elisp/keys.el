@@ -1,4 +1,4 @@
-;; keybindings
+
 (setq mac-command-modifier 'super)
 (setq mac-option-modifier 'meta)
 (setq ns-function-modifier 'hyper)
@@ -99,7 +99,7 @@
     (forward-line) 
     (move-to-column col)))
 
-(global-set-key (kbd "<C-S-down>") 'move-line-down)
+(global-set-key (kbd "C-S-<down>") 'move-line-down)
 
 
 (defun move-line-up () 
@@ -109,7 +109,7 @@
 		    (transpose-lines -1)) 
     (move-to-column col)))
 
-(global-set-key (kbd "<C-S-up>") 'move-line-up)
+(global-set-key (kbd "C-S-<up>") 'move-line-up)
 
 
 (defun goto-line-with-feedback () 
@@ -129,7 +129,7 @@
   (newline) 
   (indent-for-tab-command))
 
-(global-set-key (kbd "<C-return>") 'open-line-below)
+(global-set-key (kbd "C-RET") 'open-line-below)
 
 
 (defun open-line-above () 
@@ -139,4 +139,11 @@
   (forward-line -1) 
   (indent-for-tab-command))
 
-(global-set-key (kbd "<C-S-return>") 'open-line-above)
+(global-set-key (kbd "C-s-RET") 'open-line-above)
+
+;; Open Terminal to cur dir with CMD-T
+(defun open-term-here ()
+  (interactive)
+  (shell-command "open -a Terminal \"$pwd\""))
+
+(global-set-key (kbd "s-t") 'open-term-here)
