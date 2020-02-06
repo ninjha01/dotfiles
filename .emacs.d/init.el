@@ -58,10 +58,10 @@
 (put 'downcase-region 'disabled nil)
 
 ;; track commands on emacs kill
-(add-hook `kill-emacs-hook 
-	(lambda () 
+(add-hook `kill-emacs-hook
+	  (lambda ()
 	    (f-append-text (format "<START SESSION %s>\n" (current-time-string)) 'utf-8
-			   "~/.emacs.d/commands") 
-	    (f-append-text (format "%s" command-history) 'utf-8 "~/.emacs.d/commands") 
+			   "~/.emacs.d/commands")
+	    (f-append-text (format "%s" command-history) 'utf-8 "~/.emacs.d/commands")
 	    (f-append-text (format "\n<END SESSION %s>\n" (current-time-string)) 'utf-8
 			   "~/.emacs.d/commands")))

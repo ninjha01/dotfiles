@@ -4,12 +4,13 @@
 (add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/"))
 (package-initialize)
 
-(setq package-list '(blacken cargo lsp-mode lsp-ui keyfreq ace-window beacon browse-kill-ring company company-go company-shell
-				company-web counsel docker dockerfile-mode dumb-jump elisp-format
-				elpy fireplace flycheck-rust flyparens forge god-mode helm-flycheck
-				ivy js-comint magit magit-todos magit-topgit markdown-mode mood-line
-				multiple-cursors prettier-js projectile rust-mode tide todoist
-				use-package vlf web-mode which-key yaml-mode))
+(setq package-list '(blacken cargo lsp-mode lsp-ui keyfreq ace-window beacon browse-kill-ring
+			     company company-go company-shell company-web counsel docker
+			     dockerfile-mode dumb-jump elisp-format elpy fireplace flycheck-rust
+			     flyparens forge god-mode helm-flycheck ivy js-comint magit magit-todos
+			     magit-topgit markdown-mode mood-line multiple-cursors prettier-js
+			     projectile rust-mode tide todoist use-package vlf web-mode which-key
+			     yaml-mode))
 (dolist (package package-list) 
   (unless (package-installed-p package) 
     (package-install package)))
@@ -114,15 +115,14 @@
 (setq ido-everywhere t)
 (ido-mode 1)
 ;;; Go to home dir when typing ~ in file completion
-(add-hook 'ido-setup-hook
+(add-hook 'ido-setup-hook 
 	  (lambda ()
 	    ;; Go straight home
-	    (define-key ido-file-completion-map
-	      (kbd "~")
-	      (lambda ()
-		(interactive)
-		(if (looking-back "/")
-		    (insert "~/")
+	    (define-key ido-file-completion-map (kbd "~") 
+	      (lambda () 
+		(interactive) 
+		(if (looking-back "/") 
+		    (insert "~/") 
 		  (call-interactively 'self-insert-command))))))
 
 
@@ -132,9 +132,8 @@
 
 ;;; COMPANY
 (add-hook 'after-init-hook 'global-company-mode)
-(with-eval-after-load 'company
-  (define-key company-active-map (kbd "C-n") #'company-select-next)
-  (define-key company-active-map (kbd "C-p") #'company-select-previous))
+(with-eval-after-load 'company (define-key company-active-map (kbd "C-n") #'company-select-next) 
+		      (define-key company-active-map (kbd "C-p") #'company-select-previous))
 ;; aligns annotation to the right hand side
 (setq company-tooltip-align-annotations t)
 
@@ -148,7 +147,7 @@
 (global-prettify-symbols-mode t)
 
 
-;;; beacon mode 
+;;; beacon mode
 (beacon-mode t)
 
 
@@ -165,7 +164,7 @@
 (setq ediff-split-window-function 'split-window-horizontally) ;; Better for wide monitor
 (setq ediff-merge-split-window-function 'split-window-vertically) ;; Better for wide monitor
 
-(with-eval-after-load 'magit
+(with-eval-after-load 'magit 
   (require 'forge))
 
 
@@ -178,10 +177,10 @@
 (add-hook 'c-mode-hook 'flycheck-mode)
 (add-hook 'go-mode 'flycheck-mode)
 (add-hook 'python-mode 'flycheck-mode)
-(add-hook 'python-mode-hook
-          (lambda ()
-	    (elpy-mode 1)
-	    (setq flycheck-python-pylint-executable "/usr/local/bin/pylint")
+(add-hook 'python-mode-hook 
+	  (lambda () 
+	    (elpy-mode 1) 
+	    (setq flycheck-python-pylint-executable "/usr/local/bin/pylint") 
 	    (setq flycheck-pylintrc "~/.pylintrc")))
 
 
@@ -189,13 +188,12 @@
 
 
 ;;;; elpy
-(setq python-shell-interpreter "python3"
-      elpy-rpc-python-command "python3"
+(setq python-shell-interpreter "python3" elpy-rpc-python-command "python3"
       python-shell-interpreter-args "-i")
 (setenv "WORKON_HOME" "~/miniconda3/envs/")
-(add-hook 'elpy-mode-hook
-	  '(lambda ()
-	     (when (eq major-mode 'python-mode)
+(add-hook 'elpy-mode-hook 
+	  '(lambda () 
+	     (when (eq major-mode 'python-mode) 
 	       (add-hook 'before-save-hook 'elpy-black-fix-code))))
 
 
@@ -215,30 +213,29 @@
 (add-to-list 'auto-mode-alist '("\\.html\\'" . web-mode))
 (add-to-list 'auto-mode-alist '("\\.js\\'" . web-mode))
 (add-to-list 'auto-mode-alist '("\\.tsx\\'" . web-mode))
-(add-hook 'web-mode-hook
-          (lambda ()
-            (when (string-equal "tsx" (file-name-extension buffer-file-name))
-              (setup-tide-mode))))
-(setq web-mode-content-types-alist
-      '(("jsx" . "\\.js[x]?\\'")))
+(add-hook 'web-mode-hook 
+	  (lambda () 
+	    (when (string-equal "tsx" (file-name-extension buffer-file-name)) 
+	      (setup-tide-mode))))
+(setq web-mode-content-types-alist '(("jsx" . "\\.js[x]?\\'")))
 
 ;;;; Set up web mode
-(defun my-web-mode-hook ()
+(defun my-web-mode-hook () 
   "Hooks for Web mode."
-  ;;; Indentation
-  (setq web-mode-markup-indent-offset 2)
-  (setq web-mode-css-indent-offset 2)
+;;; Indentation
+  (setq web-mode-markup-indent-offset 2) 
+  (setq web-mode-css-indent-offset 2) 
   (setq web-mode-code-indent-offset 2))
 
 (add-hook 'web-mode-hook  'my-web-mode-hook)
 
 ;;;; Tide Mode
-(defun setup-tide-mode ()
-  (interactive)
-  (tide-setup)
-  (flycheck-mode +1)
-  (setq flycheck-check-syntax-automatically '(save mode-enabled))
-  (eldoc-mode +1)
+(defun setup-tide-mode () 
+  (interactive) 
+  (tide-setup) 
+  (flycheck-mode +1) 
+  (setq flycheck-check-syntax-automatically '(save mode-enabled)) 
+  (eldoc-mode +1) 
   (tide-hl-identifier-mode +1)
   ;; company is an optional dependency. You have to
   ;; install it separately via package-install
@@ -273,12 +270,12 @@
 
 
 ;;; Rust
-(with-eval-after-load 'rust-mode
-  (add-hook 'flycheck-mode-hook #'flycheck-rust-setup))
+(with-eval-after-load 'rust-mode (add-hook 'flycheck-mode-hook #'flycheck-rust-setup))
 
 ;;;; Indentation
-(add-hook 'rust-mode-hook
-          (lambda () (setq indent-tabs-mode nil)))
+(add-hook 'rust-mode-hook 
+	  (lambda () 
+	    (setq indent-tabs-mode nil)))
 
 ;;;; Rustfmt
 (setq rust-format-on-save t)
