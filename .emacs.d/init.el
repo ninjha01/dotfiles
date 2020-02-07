@@ -11,8 +11,8 @@
 (load-library "keys")
 
 ;; Write backup files to own directory
-(setq backup-directory-alist `(("." . "~/.saves")))
-(setq auto-save-file-name-transforms `((".*" "~/.emacs-saves/" t)))
+(setq backup-directory-alist `(("." . "~/.emacs.d/.saves")))
+(setq auto-save-file-name-transforms `((".*" "~/.emacs.d/emacs-saves/" t)))
 
 ;; Make backups of files, even when they're in version control
 (setq vc-make-backup-files t)

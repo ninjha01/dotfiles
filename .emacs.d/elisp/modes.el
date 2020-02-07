@@ -25,6 +25,8 @@
 (require 'keyfreq)
 (keyfreq-mode 1)
 (keyfreq-autosave-mode 1)
+(setq keyfreq-file "~/.emacs.d/.emacs.keyfreq")
+(setq keyfreq-file-lock "~/.emacs.d/.emacs.keyfreq.lock")
 
 ;;;  Projectile
 (require 'projectile)
