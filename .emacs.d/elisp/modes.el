@@ -27,6 +27,9 @@
 (keyfreq-autosave-mode 1)
 (setq keyfreq-file "~/.emacs.d/.emacs.keyfreq")
 (setq keyfreq-file-lock "~/.emacs.d/.emacs.keyfreq.lock")
+;;;; Ignore scrolling
+(setq keyfreq-excluded-commands '(mwheel-scroll))
+
 
 ;;;  Projectile
 (require 'projectile)
@@ -39,7 +42,7 @@
 (global-set-key (kbd "C-c y") 'browse-kill-ring)
 
 
-					;:; God mode
+;:; God mode
 (require 'god-mode)
 (global-set-key (kbd "<escape>") 'god-local-mode)
 
@@ -184,6 +187,13 @@
 	    (elpy-mode 1) 
 	    (setq flycheck-python-pylint-executable "/usr/local/bin/pylint") 
 	    (setq flycheck-pylintrc "~/.pylintrc")))
+
+(flycheck-define-checker proselint
+  "Flycheck checker using Proselint. See URL `http://proselint.com/'."
+  :command ("proselint" "--json" "-")
+  :standard-input t
+  :error-parser flycheck-proselint-parse-errors
+  :modes (fundamental-mode text-mode markdown-mode gfm-mode message-mode rst-mode))
 
 
 ;;; Python
