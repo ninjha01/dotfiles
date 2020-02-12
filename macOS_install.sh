@@ -45,4 +45,7 @@ brew cask install \
      microsoft-office \
      spectacle \
      transmission \
-     xquartz
+     xquartz \
+     db-browser-for-sqlite \
+     slack \
+     brightness \
