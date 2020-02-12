@@ -4,7 +4,7 @@
 (add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/"))
 (package-initialize)
 
-(setq package-list '(blacken cargo lsp-mode lsp-ui keyfreq ace-window beacon browse-kill-ring
+(setq package-list '(org-bullets blacken cargo lsp-mode lsp-ui keyfreq ace-window beacon browse-kill-ring
 			     company company-go company-shell company-web counsel docker
 			     dockerfile-mode dumb-jump elisp-format elpy fireplace flycheck-rust
 			     flyparens forge god-mode helm-flycheck ivy js-comint magit magit-todos
@@ -111,6 +111,7 @@
 (setq org-agenda-files (quote ("~/Google Drive/org/work.org")))
 (define-key global-map "\C-cl" 'org-store-link)
 (define-key global-map "\C-ca" 'org-agenda)
+(add-hook 'org-mode-hook (lambda () (org-bullets-mode 1)))
 (setq org-log-done t)
 
 
@@ -193,7 +194,7 @@
   :command ("proselint" "--json" "-")
   :standard-input t
   :error-parser flycheck-proselint-parse-errors
-  :modes (fundamental-mode text-mode markdown-mode gfm-mode message-mode rst-mode))
+  :modes (fundamental-mode text-mode markdown-mode gfm-mode message-mode rst-mode org-mode))
 
 
 ;;; Python
