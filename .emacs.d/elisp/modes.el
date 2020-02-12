@@ -196,6 +196,9 @@
   :error-parser flycheck-proselint-parse-errors
   :modes (fundamental-mode text-mode markdown-mode gfm-mode message-mode rst-mode org-mode))
 
+(global-set-key (kbd "C-c e") 'flycheck-next-error)
+(global-set-key (kbd "C-c C-e") 'flycheck-next-error)
+
 
 ;;; Python
 
