@@ -2,9 +2,10 @@
 (require 'package)
 (setq package-enable-at-startup nil)
 (add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/"))
+(add-to-list 'package-archives '("org" . "https://orgmode.org/elpa/") t)
 (package-initialize)
 
-(setq package-list '(org-bullets blacken cargo lsp-mode lsp-ui keyfreq ace-window beacon browse-kill-ring
+(setq package-list '(org-plus-contrib org-bullets blacken cargo lsp-mode lsp-ui keyfreq ace-window beacon browse-kill-ring
 			     company company-go company-shell company-web counsel docker
 			     dockerfile-mode dumb-jump elisp-format elpy fireplace flycheck-rust
 			     flyparens forge god-mode helm-flycheck ivy js-comint magit magit-todos
@@ -112,6 +113,8 @@
 (define-key global-map "\C-cl" 'org-store-link)
 (define-key global-map "\C-ca" 'org-agenda)
 (add-hook 'org-mode-hook (lambda () (org-bullets-mode 1)))
+;;; Code blocks indent
+(setq org-src-tab-acts-natively t)
 (setq org-log-done t)
 
 
@@ -194,7 +197,7 @@
   :command ("proselint" "--json" "-")
   :standard-input t
   :error-parser flycheck-proselint-parse-errors
-  :modes (fundamental-mode text-mode markdown-mode gfm-mode message-mode rst-mode org-mode))
+  :modes (fundamental-mode text-mode markdown-mode gfm-mode message-mode rst-mode))
 
 (global-set-key (kbd "C-c e") 'flycheck-next-error)
 (global-set-key (kbd "C-c C-e") 'flycheck-next-error)
