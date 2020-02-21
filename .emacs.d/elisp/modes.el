@@ -5,7 +5,8 @@
 (add-to-list 'package-archives '("org" . "https://orgmode.org/elpa/") t)
 (package-initialize)
 
-(setq package-list '(org-plus-contrib org-bullets blacken cargo lsp-mode lsp-ui keyfreq ace-window beacon browse-kill-ring
+
+(setq package-list '(pdf-tools org-plus-contrib org-bullets blacken cargo lsp-mode lsp-ui keyfreq ace-window beacon browse-kill-ring
 			     company company-go company-shell company-web counsel docker
 			     dockerfile-mode dumb-jump elisp-format elpy fireplace flycheck-rust
 			     flyparens forge god-mode helm-flycheck ivy js-comint magit magit-todos
@@ -115,6 +116,12 @@
 (add-hook 'org-mode-hook (lambda () (org-bullets-mode 1)))
 ;;; Code blocks indent
 (setq org-src-tab-acts-natively t)
+;;; Org-babel shell
+(org-babel-do-load-languages 'org-babel-load-languages
+    '(
+        (shell . t)
+    )
+)
 (setq org-log-done t)
 
 
@@ -301,3 +308,6 @@
 
 ;;;; Cargo minor mode
 (add-hook 'rust-mode-hook 'cargo-minor-mode)
+
+;;;; Pdf tools
+(pdf-tools-install)

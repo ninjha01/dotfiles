@@ -62,6 +62,8 @@
 (setq shell-command-switch "-ic")
 (put 'downcase-region 'disabled nil)
 
+;; track all history
+(setq history-length t)
 ;; track commands on emacs kill
 (add-hook `kill-emacs-hook
 	  (lambda ()
