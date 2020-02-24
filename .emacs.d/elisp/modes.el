@@ -6,7 +6,7 @@
 (package-initialize)
 
 
-(setq package-list '(pdf-tools org-plus-contrib org-bullets blacken cargo lsp-mode lsp-ui keyfreq ace-window beacon browse-kill-ring
+(setq package-list '(ledger-mode pdf-tools org-plus-contrib org-bullets blacken cargo lsp-mode lsp-ui keyfreq ace-window beacon browse-kill-ring
 			     company company-go company-shell company-web counsel docker
 			     dockerfile-mode dumb-jump elisp-format elpy fireplace flycheck-rust
 			     flyparens forge god-mode helm-flycheck ivy js-comint magit magit-todos
