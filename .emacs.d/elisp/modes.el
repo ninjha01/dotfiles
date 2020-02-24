@@ -110,6 +110,7 @@
 
 ;;; Org mode
 (require 'org)
+(require 'org-tempo)
 (setq org-agenda-files (quote ("~/Google Drive/org/work.org")))
 (define-key global-map "\C-cl" 'org-store-link)
 (define-key global-map "\C-ca" 'org-agenda)
@@ -119,7 +120,8 @@
 ;;; Org-babel shell
 (org-babel-do-load-languages 'org-babel-load-languages
     '(
-        (shell . t)
+      (shell . t)
+      (python . t)
     )
 )
 (setq org-log-done t)

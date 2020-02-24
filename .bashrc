@@ -39,7 +39,17 @@ function gen_gif {
     in_file=$1
     in_base=$(basename "$in_file" | cut -d. -f1)
     ffmpeg -i $in_file -pix_fmt rgb24 -r 10 "$in_base.gif"
-}   
+}
+
+# Convert jupyter notebook to org file
+function jup_to_org {
+    input=$1
+    jupyter nbconvert $input --to markdown
+    md_file="${input//.ipynb/.md}"
+    org_file="${input//.ipynb/.org}"
+    pandoc $md_file -o $org_file
+}
+
 ###################################################################
 ### Emacs
 ###################################################################
