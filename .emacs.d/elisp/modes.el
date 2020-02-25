@@ -114,19 +114,26 @@
 (require 'org-tempo)
 (require 'org-capture)
 
-(setq org-directory "~/Google Drive/org/")
+(setq org-directory "~/Google Drive/org")
 (global-set-key (kbd "C-c c") 'org-capture)
-(define-key global-map "\C-c l" 'org-store-link)
-(define-key global-map "\C-c a" 'org-agenda)
+(global-set-key (kbd "C-c l") 'org-store-link)
+(global-set-key (kbd "C-c a") 'org-agenda)
 
-(setq org-default-notes-file (concat org-directory "/notes.org"))
-(setq org-capture-templates '(("t" "Todo" entry (file+headline "/work.org" "Tasks")
-			       "* TODO %?\n  %i\n  %a"
-			       ("n" "Note" entry (file+datetree "/notes.org" "Notes")
-				"%U $^{Title}\n  %?\n") 
-			       ("j" "Journal" entry (file+datetree "/journal.org")
-				"* %?\nEntered on %U\n  %i\n  %a"))))
-(setq org-agenda-file-regexp (concat org-directory ".*"))
+(setq my-notes-file "~/Google Drive/org/notes.org")
+(setq my-tasks-file "~/Google Drive/org/work.org")
+(setq my-journal-file "~/Google Drive/org/journal.org")
+
+
+(setq org-default-notes-file my-notes-file)
+(setq org-capture-templates '(("t" "Todo" entry (file+headline my-tasks-file "Tasks")
+			       "* TODO %?\n  %i\n  %a")
+			       ("n" "Note" entry (file+datetree my-notes-file "Notes")
+				"** %U %^{Title} \n %? %a")
+			       ("j" "Journal" entry (file+datetree my-journal-file)
+				"* %?\nEntered on %U\n  %i\n  %a")))
+(setq org-agenda-files (list my-notes-file
+		       my-tasks-file
+		       my-journal-file))
 (add-hook 'org-mode-hook 
 	  (lambda () 
 	    (org-bullets-mode 1)))
