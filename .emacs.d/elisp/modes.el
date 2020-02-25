@@ -6,13 +6,14 @@
 (package-initialize)
 
 
-(setq package-list '(ledger-mode pdf-tools org-plus-contrib org-bullets blacken cargo lsp-mode lsp-ui keyfreq ace-window beacon browse-kill-ring
-			     company company-go company-shell company-web counsel docker
-			     dockerfile-mode dumb-jump elisp-format elpy fireplace flycheck-rust
-			     flyparens forge god-mode helm-flycheck ivy js-comint magit magit-todos
-			     magit-topgit markdown-mode mood-line multiple-cursors prettier-js
-			     projectile rust-mode tide todoist use-package vlf web-mode which-key
-			     yaml-mode))
+(setq package-list '(ledger-mode pdf-tools org-plus-contrib org-bullets blacken cargo lsp-mode
+				 lsp-ui keyfreq ace-window beacon browse-kill-ring company
+				 company-go company-shell company-web counsel docker dockerfile-mode
+				 dumb-jump elisp-format elpy fireplace flycheck-rust flyparens forge
+				 god-mode helm-flycheck ivy js-comint magit magit-todos magit-topgit
+				 markdown-mode mood-line multiple-cursors prettier-js projectile
+				 rust-mode tide todoist use-package vlf web-mode which-key
+				 yaml-mode))
 (dolist (package package-list) 
   (unless (package-installed-p package) 
     (package-install package)))
@@ -111,19 +112,29 @@
 ;;; Org mode
 (require 'org)
 (require 'org-tempo)
-(setq org-agenda-files (quote ("~/Google Drive/org/work.org")))
-(define-key global-map "\C-cl" 'org-store-link)
-(define-key global-map "\C-ca" 'org-agenda)
-(add-hook 'org-mode-hook (lambda () (org-bullets-mode 1)))
+(require 'org-capture)
+
+(setq org-directory "~/Google Drive/org/")
+(global-set-key (kbd "C-c c") 'org-capture)
+(define-key global-map "\C-c l" 'org-store-link)
+(define-key global-map "\C-c a" 'org-agenda)
+
+(setq org-default-notes-file (concat org-directory "/notes.org"))
+(setq org-capture-templates '(("t" "Todo" entry (file+headline "/work.org" "Tasks")
+			       "* TODO %?\n  %i\n  %a"
+			       ("n" "Note" entry (file+datetree "/notes.org" "Notes")
+				"%U $^{Title}\n  %?\n") 
+			       ("j" "Journal" entry (file+datetree "/journal.org")
+				"* %?\nEntered on %U\n  %i\n  %a"))))
+(setq org-agenda-file-regexp (concat org-directory ".*"))
+(add-hook 'org-mode-hook 
+	  (lambda () 
+	    (org-bullets-mode 1)))
 ;;; Code blocks indent
 (setq org-src-tab-acts-natively t)
 ;;; Org-babel shell
-(org-babel-do-load-languages 'org-babel-load-languages
-    '(
-      (shell . t)
-      (python . t)
-    )
-)
+(org-babel-do-load-languages 'org-babel-load-languages '((shell . t) 
+							 (python . t)))
 (setq org-log-done t)
 
 
@@ -202,10 +213,10 @@
 	    (setq flycheck-pylintrc "~/.pylintrc")))
 
 (flycheck-define-checker proselint
-  "Flycheck checker using Proselint. See URL `http://proselint.com/'."
-  :command ("proselint" "--json" "-")
-  :standard-input t
-  :error-parser flycheck-proselint-parse-errors
+  "Flycheck checker using Proselint. See URL `http://proselint.com/'." 
+  :command ("proselint" "--json" "-") 
+  :standard-input t 
+  :error-parser flycheck-proselint-parse-errors 
   :modes (fundamental-mode text-mode markdown-mode gfm-mode message-mode rst-mode))
 
 (global-set-key (kbd "C-c e") 'flycheck-next-error)
