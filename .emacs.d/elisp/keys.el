@@ -106,7 +106,8 @@
   (interactive) 
   (let ((col (current-column))) 
     (save-excursion (forward-line) 
-		    (transpose-lines -1)) 
+		    (transpose-lines -1))
+    (forward-line -1)
     (move-to-column col)))
 
 (global-set-key (kbd "C-S-<up>") 'move-line-up)
