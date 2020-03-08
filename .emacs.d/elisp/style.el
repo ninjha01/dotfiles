@@ -7,6 +7,9 @@
 ;;; Remove scroll bar
 (scroll-bar-mode -1)
 
+;;; Delimiters
+(show-paren-mode)
+
 
 ;;Clear Scratch
 (setq initial-scratch-message "")

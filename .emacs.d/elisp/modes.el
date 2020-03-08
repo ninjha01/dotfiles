@@ -6,7 +6,7 @@
 (package-initialize)
 
 
-(setq package-list '(ledger-mode pdf-tools org-plus-contrib org-bullets blacken cargo lsp-mode
+(setq package-list '(rainbow-delimiters ledger-mode pdf-tools org-plus-contrib org-bullets blacken cargo lsp-mode
 				 lsp-ui keyfreq ace-window beacon browse-kill-ring company
 				 company-go company-shell company-web counsel docker dockerfile-mode
 				 dumb-jump elisp-format elpy fireplace flycheck-rust flyparens forge
@@ -20,6 +20,10 @@
 
 
 ;; General
+
+;; Rainbow delimiters
+(rainbow-delimiters-mode-enable)
+
 
 ;; subword mode
 (global-subword-mode 1)

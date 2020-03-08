@@ -17,16 +17,31 @@ export LSCOLORS='GxFxCxDxBxegedabagaced'
 export PS1="[\t][\[\e[31m\]\W\[\e[m\]]: "
 
 ###################################################################
+### Misc Behavior Mod
+###################################################################
+
+# unlimited history
+export HISTSIZE=
+export HISTFILESIZE=
+
+shopt -s histappend # Append to history file
+PROMPT_COMMAND="history -a;$PROMPT_COMMAND"
+
+
+###################################################################
 ### Utils
 ###################################################################
 
-alias rm="trash";
-alias blacklist="sudo emacs /etc/hosts";
-alias la="ls -a";
+alias rm="trash"
+alias blacklist="sudo emacs /etc/hosts"
+alias la="ls -a"
 alias sexit="killall Terminal"
-alias cleanup="bash ~/scripts/cleanup.sh";
-alias activate='source venv/bin/activate';
+alias cleanup="bash ~/scripts/cleanup.sh"
+alias activate='source venv/bin/activate'
 alias venv='python3 -m venv venv; activate'
+
+alias ca="conda activate"
+alias cda="conda deactivate"
 
 function git_push {
     message=$1
@@ -54,49 +69,43 @@ function jup_to_org {
 ### Emacs
 ###################################################################
 
-export EDITOR="/usr/local/bin/emacsclient -c -a \"\"";
+export EDITOR="/usr/local/bin/emacsclient -c -a \"\""
 
 function emi {
     daemon_name="${1:-server}"
     emacs --daemon="$daemon_name"
     if [ "$daemon_name" != "server" ]; then
-	emacsclient -s $daemon_name --eval '(setq-default mode-line-misc-info (concat "Ψ: " server-name ""))'
+	emacsclient -s "$daemon_name" --eval '(setq-default mode-line-misc-info (concat "Ψ: " server-name ""))'
     fi
 }
 
 function emc {
     daemon_name="${1:-server}"
-    emacsclient -s $daemon_name -n -c -a \"\";
+    emacsclient -s "$daemon_name" -n -c -a \"\"
 }
 
 function emcnw {
     daemon_name="${1:-server}"
-    emacsclient -s $daemon_name -n -c -a -nw \"\";
+    emacsclient -s "$daemon_name" -n -c -a -nw \"\"
 }
 
 function kille {
     daemon_name="${1:-server}"
-    emacsclient -s $daemon_name -e '(kill-emacs)'
+    emacsclient -s "$daemon_name" -e '(kill-emacs)'
 }
 
 function remc {
     daemon_name="${1:-server}"
-    kille $daemon_name
-    emi $daemon_name &&
-	emc $daemon_name
-    exit;
+    kille "$daemon_name"
+    emi "$daemon_name" &&
+	emc "$daemon_name"
+    exit
 }
 
-###################################################################
-### History
-###################################################################
-
-export HISTSIZE=10000;
-shopt -s histappend;
-PROMPT_COMMAND="history -a;$PROMPT_COMMAND";
 
 ###################################################################
 ### Completion
 ###################################################################
 
 [ -f /usr/local/etc/bash_completion ] && . /usr/local/etc/bash_completion
+
