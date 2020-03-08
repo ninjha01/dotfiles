@@ -14,7 +14,6 @@
 
 ;; Window Manipulation
 
-
 ;; Expand windows
 (global-set-key (kbd "C-^") 'enlarge-window)
 ;;; (global-set-key (kbd "C-") 'shrink-window)
@@ -148,3 +147,7 @@
   (shell-command "open -a Terminal \"$pwd\""))
 
 (global-set-key (kbd "s-t") 'open-term-here)
+
+
+;; Query regexp replace
+(global-set-key (kbd "C-c r") 'query-replace-regexp)
