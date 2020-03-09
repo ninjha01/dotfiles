@@ -337,4 +337,4 @@
 (pdf-tools-install)
 
 ;;; Rainbow delimters
-(rainbow-delimiters-mode)
+(add-hook 'prog-mode-hook #'rainbow-delimiters-mode)
