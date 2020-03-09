@@ -335,3 +335,6 @@
 
 ;;;; Pdf tools
 (pdf-tools-install)
+
+;;; Rainbow delimters
+(rainbow-delimiters-mode)
