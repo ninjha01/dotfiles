@@ -334,7 +334,8 @@
 (add-hook 'rust-mode-hook 'cargo-minor-mode)
 
 ;;;; Pdf tools
-(pdf-tools-install)
+;(pdf-tools-install)
+; tricky to install on macOS, leaving commented out so I can add it a la carte.
 
 ;;; Rainbow delimters
 (add-hook 'prog-mode-hook #'rainbow-delimiters-mode)
