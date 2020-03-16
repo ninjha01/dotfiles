@@ -121,6 +121,7 @@
 (setq org-directory "~/Google Drive/org")
 (global-set-key (kbd "C-c c") 'org-capture)
 (global-set-key (kbd "C-c l") 'org-store-link)
+(global-set-key (kbd "C-c C-l") 'org-insert-last-stored-link)
 (global-set-key (kbd "C-c a") 'org-agenda)
 
 (setq my-notes-file "~/Google Drive/org/notes.org")
@@ -235,6 +236,8 @@
 
 
 ;;; Python
+
+(define-key python-mode-map (kbd "C-c C-l") nil)
 
 
 ;;;; elpy
