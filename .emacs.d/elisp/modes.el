@@ -123,6 +123,8 @@
 (global-set-key (kbd "C-c l") 'org-store-link)
 (global-set-key (kbd "C-c C-l") 'org-insert-last-stored-link)
 (global-set-key (kbd "C-c a") 'org-agenda)
+(define-key org-mode-map (kbd "C-S-<up>") nil)
+(define-key org-mode-map (kbd "C-S-<down>") nil)
 
 (setq my-notes-file "~/Google Drive/org/notes.org")
 (setq my-tasks-file "~/Google Drive/org/work.org")
@@ -204,6 +206,7 @@
 (global-set-key (kbd "C-x g") 'magit-status)
 (setq ediff-split-window-function 'split-window-horizontally) ;; Better for wide monitor
 (setq ediff-merge-split-window-function 'split-window-vertically) ;; Better for wide monitor
+(add-hook 'after-save-hook 'magit-after-save-refresh-status t)  ;; auto-refresh
 
 (with-eval-after-load 'magit 
   (require 'forge))
@@ -236,9 +239,6 @@
 
 
 ;;; Python
-
-(define-key python-mode-map (kbd "C-c C-l") nil)
-
 
 ;;;; elpy
 (setq python-shell-interpreter "python3" elpy-rpc-python-command "python3"
