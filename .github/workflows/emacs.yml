@@ -12,4 +12,4 @@ jobs:
     - name: Install emacs
       run: sudo apt-get install emacs
     - name: run emacs
-      run: emacs --debug-init --batch -u $USER
+      run: emacs --debug-init --batch -u $USER && echo "SUCCESS"
