@@ -6,7 +6,7 @@
 (package-initialize)
 
 
-(setq package-list '(company-lsp rainbow-delimiters ledger-mode pdf-tools org-plus-contrib
+(setq package-list '(meghanada company-lsp rainbow-delimiters ledger-mode pdf-tools org-plus-contrib
 				 org-bullets blacken cargo lsp-mode lsp-ui lsp-java keyfreq
 				 ace-window beacon browse-kill-ring company company-go company-shell
 				 company-web counsel docker dockerfile-mode dumb-jump elisp-format
@@ -245,6 +245,7 @@
 ;; "Increase the amount of data which Emacs reads from the process. Again the emacs default is too low 4k considering that the some of the language server responses are in 800k - 3M range."
 (setq read-process-output-max (* 1024 1024))
 
+(push 'company-lsp company-backends)
 
 
 
@@ -355,10 +356,29 @@
 
 
 ;;; Java
-(require 'lsp-mode)
-(require 'company-lsp)
-(require 'lsp-ui)
-(require 'lsp-java)
-(add-hook 'java-mode-hook #'lsp)
-(add-hook 'java-mode-hook 'flycheck-mode)
-(add-hook 'java-mode-hook 'company-mode)
+(require 'meghanada)
+(add-hook 'java-mode-hook
+          (lambda ()
+            ;; meghanada-mode on
+            (meghanada-mode t)
+            ;; enable telemetry
+            (meghanada-telemetry-enable t)
+            (flycheck-mode +1)
+            (setq c-basic-offset 2)
+            ;; use code format
+            (add-hook 'before-save-hook 'meghanada-code-beautify-before-save)))
+(cond
+   ((eq system-type 'windows-nt)
+    (setq meghanada-java-path (expand-file-name "bin/java.exe" (getenv "JAVA_HOME")))
+    (setq meghanada-maven-path "mvn.cmd"))
+   (t
+    (setq meghanada-java-path "java")
+    (setq meghanada-maven-path "mvn")))
+
+;; Fixes Lox.java:10: error: package com.sun.tools.javac.parser is not visible
+(setenv "_JAVA_OPTIONS"
+	(concat
+	 "-Dsun.reflect.debugModuleAccessChecks=true "
+	 "--add-exports=jdk.compiler/com.sun.tools.javac.parser=ALL-UNNAMED"))
+;; (setq meghanada-jvm-option (concat "-Dsun.reflect.debugModuleAccessChecks=true " 
+;; 				   "--add-exports=jdk.compiler/com.sun.tools.javac.util=ALL-UNNAMED"))
