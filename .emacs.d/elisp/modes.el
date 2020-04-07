@@ -6,14 +6,14 @@
 (package-initialize)
 
 
-(setq package-list '(rainbow-delimiters ledger-mode pdf-tools org-plus-contrib org-bullets blacken cargo lsp-mode
-				 lsp-ui keyfreq ace-window beacon browse-kill-ring company
-				 company-go company-shell company-web counsel docker dockerfile-mode
-				 dumb-jump elisp-format elpy fireplace flycheck-rust flyparens forge
-				 god-mode helm-flycheck ivy js-comint magit magit-todos magit-topgit
-				 markdown-mode mood-line multiple-cursors prettier-js projectile
-				 rust-mode tide todoist use-package vlf web-mode which-key
-				 yaml-mode))
+(setq package-list '(company-lsp rainbow-delimiters ledger-mode pdf-tools org-plus-contrib
+				 org-bullets blacken cargo lsp-mode lsp-ui lsp-java keyfreq
+				 ace-window beacon browse-kill-ring company company-go company-shell
+				 company-web counsel docker dockerfile-mode dumb-jump elisp-format
+				 elpy fireplace flycheck-rust flyparens forge god-mode helm-flycheck
+				 ivy js-comint magit magit-todos magit-topgit markdown-mode
+				 mood-line multiple-cursors prettier-js projectile rust-mode tide
+				 todoist use-package vlf web-mode which-key yaml-mode))
 (dolist (package package-list) 
   (unless (package-installed-p package) 
     (package-install package)))
@@ -133,14 +133,12 @@
 
 (setq org-default-notes-file my-notes-file)
 (setq org-capture-templates '(("t" "Todo" entry (file+headline my-tasks-file "Tasks")
-			       "* TODO %?\n  %i\n  %a")
-			       ("n" "Note" entry (file+datetree my-notes-file "Notes")
-				"** %U %^{Title} \n %? %a")
-			       ("j" "Journal" entry (file+datetree my-journal-file)
-				"* %?\nEntered on %U\n  %i\n  %a")))
-(setq org-agenda-files (list my-notes-file
-		       my-tasks-file
-		       my-journal-file))
+			       "* TODO %?\n  %i\n  %a") 
+			      ("n" "Note" entry (file+datetree my-notes-file "Notes")
+			       "** %U %^{Title} \n %? %a") 
+			      ("j" "Journal" entry (file+datetree my-journal-file)
+			       "* %?\nEntered on %U\n  %i\n  %a")))
+(setq org-agenda-files (list my-notes-file my-tasks-file my-journal-file))
 (add-hook 'org-mode-hook 
 	  (lambda () 
 	    (org-bullets-mode 1)))
@@ -180,6 +178,9 @@
 ;; aligns annotation to the right hand side
 (setq company-tooltip-align-annotations t)
 
+;; Speed up prompt
+(setq company-idle-delay 0)
+
 
 
 ;;; global hl line mode
@@ -206,7 +207,7 @@
 (global-set-key (kbd "C-x g") 'magit-status)
 (setq ediff-split-window-function 'split-window-horizontally) ;; Better for wide monitor
 (setq ediff-merge-split-window-function 'split-window-vertically) ;; Better for wide monitor
-(add-hook 'after-save-hook 'magit-after-save-refresh-status t)  ;; auto-refresh
+(add-hook 'after-save-hook 'magit-after-save-refresh-status t) ;; auto-refresh
 
 (with-eval-after-load 'magit 
   (require 'forge))
@@ -236,6 +237,15 @@
 
 (global-set-key (kbd "C-c e") 'flycheck-next-error)
 (global-set-key (kbd "C-c C-e") 'flycheck-next-error)
+
+;;; LSP mode
+;; https://github.com/emacs-lsp/lsp-mode
+;; "Adjust gc-cons-threshold. The default setting is too low for lsp-mode’s needs due to the fact that client/server communication generates a lot of memory/garbage."
+(setq gc-cons-threshold 100000000)
+;; "Increase the amount of data which Emacs reads from the process. Again the emacs default is too low 4k considering that the some of the language server responses are in 800k - 3M range."
+(setq read-process-output-max (* 1024 1024))
+
+
 
 
 ;;; Python
@@ -342,3 +352,13 @@
 
 ;;; Rainbow delimters
 (add-hook 'prog-mode-hook #'rainbow-delimiters-mode)
+
+
+;;; Java
+(require 'lsp-mode)
+(require 'company-lsp)
+(require 'lsp-ui)
+(require 'lsp-java)
+(add-hook 'java-mode-hook #'lsp)
+(add-hook 'java-mode-hook 'flycheck-mode)
+(add-hook 'java-mode-hook 'company-mode)
