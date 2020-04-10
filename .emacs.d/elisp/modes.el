@@ -144,6 +144,8 @@
 	    (org-bullets-mode 1)))
 ;;; Code blocks indent
 (setq org-src-tab-acts-natively t)
+;;; Code syntax highlight
+(setq org-src-fontify-natively t)
 ;;; Org-babel shell
 (org-babel-do-load-languages 'org-babel-load-languages '((shell . t) 
 							 (python . t)))
