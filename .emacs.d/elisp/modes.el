@@ -276,9 +276,14 @@
 
 ;;; Web Dev
 
-;;;; Use web-mode for...
 (require 'web-mode)
 (setq web-mode-enable-auto-closing t)
+(setq web-mode-markup-indent-offset 2)
+(setq web-mode-css-indent-offset 2)
+(setq web-mode-code-indent-offset 2)
+(setq web-mode-engine "django")
+;;;; Use web-mode for...
+
 (add-to-list 'auto-mode-alist '("\\.phtml\\'" . web-mode))
 (add-to-list 'auto-mode-alist '("\\.tpl\\.php\\'" . web-mode))
 (add-to-list 'auto-mode-alist '("\\.[agj]sp\\'" . web-mode))
@@ -295,16 +300,6 @@
 	      (setup-tide-mode))))
 (setq web-mode-content-types-alist '(("jsx" . "\\.js[x]?\\'")))
 
-;;;; Set up web mode
-(defun my-web-mode-hook () 
-  "Hooks for Web mode."
-;;; Indentation
-  (setq web-mode-markup-indent-offset 2) 
-  (setq web-mode-css-indent-offset 2) 
-  (setq web-mode-code-indent-offset 2)
-  (setq web-mode-engine "django"))
-
-(add-hook 'web-mode-hook  'my-web-mode-hook)
 
 ;;;; Tide Mode
 (defun setup-tide-mode () 
