@@ -6,7 +6,7 @@
 (package-initialize)
 
 
-(setq package-list '(meghanada company-lsp rainbow-delimiters ledger-mode pdf-tools org-plus-contrib
+(setq package-list '(py-isort meghanada company-lsp rainbow-delimiters ledger-mode pdf-tools org-plus-contrib
 				 org-bullets blacken cargo lsp-mode lsp-ui lsp-java keyfreq
 				 ace-window beacon browse-kill-ring company company-go company-shell
 				 company-web counsel docker dockerfile-mode dumb-jump elisp-format
@@ -236,7 +236,8 @@
 (add-hook 'python-mode 'flycheck-mode)
 (add-hook 'python-mode-hook 
 	  (lambda () 
-	    (elpy-mode 1) 
+	    (elpy-mode 1)
+	    (py-isort-enable-on-save)
 	    (setq flycheck-python-pylint-executable "/usr/local/bin/pylint") 
 	    (setq flycheck-pylintrc "~/.pylintrc")))
 
