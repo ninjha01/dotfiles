@@ -237,7 +237,6 @@
 (add-hook 'python-mode-hook 
 	  (lambda () 
 	    (elpy-mode 1)
-	    (py-isort-enable-on-save)
 	    (setq flycheck-python-pylint-executable "/usr/local/bin/pylint") 
 	    (setq flycheck-pylintrc "~/.pylintrc")))
 
