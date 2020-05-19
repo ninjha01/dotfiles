@@ -27,6 +27,8 @@ export HISTFILESIZE=
 shopt -s histappend # Append to history file
 PROMPT_COMMAND="history -a;$PROMPT_COMMAND"
 
+# Hide bash warning on macOS
+export BASH_SILENCE_DEPRECATION_WARNING=1
 
 ###################################################################
 ### Utils
