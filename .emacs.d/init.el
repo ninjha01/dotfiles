@@ -61,6 +61,7 @@
 
 (when window-system (set-exec-path-from-shell-PATH))
 (setq shell-command-switch "-ic")
+(setq-default explicit-shell-file-name "/bin/bash")
 (put 'downcase-region 'disabled nil)
 
 ;; track all history
