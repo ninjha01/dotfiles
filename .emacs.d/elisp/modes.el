@@ -6,14 +6,14 @@
 (package-initialize)
 
 
-(setq package-list '(py-isort meghanada company-lsp rainbow-delimiters ledger-mode pdf-tools org-plus-contrib
-				 org-bullets blacken cargo lsp-mode lsp-ui lsp-java keyfreq
-				 ace-window beacon browse-kill-ring company company-go company-shell
-				 company-web counsel docker dockerfile-mode dumb-jump elisp-format
-				 elpy fireplace flycheck-rust flyparens forge god-mode helm-flycheck
-				 ivy js-comint magit magit-todos magit-topgit markdown-mode
-				 mood-line multiple-cursors prettier-js projectile rust-mode tide
-				 todoist use-package vlf web-mode which-key yaml-mode))
+(setq package-list '(htmlize py-isort meghanada company-lsp rainbow-delimiters ledger-mode pdf-tools
+			     org-plus-contrib org-bullets ox-reveal blacken cargo lsp-mode lsp-ui
+			     lsp-java keyfreq ace-window beacon browse-kill-ring company company-go
+			     company-shell company-web counsel docker dockerfile-mode dumb-jump
+			     elisp-format elpy fireplace flycheck-rust flyparens forge god-mode
+			     helm-flycheck ivy js-comint magit magit-todos magit-topgit
+			     markdown-mode mood-line multiple-cursors prettier-js projectile
+			     rust-mode tide todoist use-package vlf web-mode which-key yaml-mode))
 (dolist (package package-list) 
   (unless (package-installed-p package) 
     (package-install package)))
@@ -117,6 +117,7 @@
 (require 'org)
 (require 'org-tempo)
 (require 'org-capture)
+(require 'ox-reveal)
 
 (setq org-directory "~/Google Drive/org")
 (global-set-key (kbd "C-c c") 'org-capture)
@@ -205,11 +206,11 @@
 
 ;; Shell/Term
 (require 'term)
-(defun term-toggle ()
-  "Toggles term between line mode and char mode"
-  (interactive)
-  (if (term-in-line-mode)
-      (term-char-mode)
+(defun term-toggle () 
+  "Toggles term between line mode and char mode" 
+  (interactive) 
+  (if (term-in-line-mode) 
+      (term-char-mode) 
     (term-line-mode)))
 (define-key term-mode-map (kbd "C-c C-j") 'term-toggle)
 
@@ -236,7 +237,7 @@
 (add-hook 'python-mode 'flycheck-mode)
 (add-hook 'python-mode-hook 
 	  (lambda () 
-	    (elpy-mode 1)
+	    (elpy-mode 1) 
 	    (setq flycheck-python-pylint-executable "/usr/local/bin/pylint") 
 	    (setq flycheck-pylintrc "~/.pylintrc")))
 
@@ -271,7 +272,6 @@
 	  '(lambda () 
 	     (when (eq major-mode 'python-mode) 
 	       (add-hook 'before-save-hook 'elpy-black-fix-code))))
-
 
 
 ;;; Web Dev
@@ -355,9 +355,6 @@
 ;;;; Cargo minor mode
 (add-hook 'rust-mode-hook 'cargo-minor-mode)
 
-;;;; Pdf tools
-;(pdf-tools-install)
-; tricky to install on macOS, leaving commented out so I can add it a la carte.
 
 ;;; Rainbow delimters
 (add-hook 'prog-mode-hook #'rainbow-delimiters-mode)
@@ -365,28 +362,17 @@
 
 ;;; Java
 (require 'meghanada)
-(add-hook 'java-mode-hook
-          (lambda ()
+(add-hook 'java-mode-hook 
+	  (lambda ()
             ;; meghanada-mode on
-            (meghanada-mode t)
-            ;; enable telemetry
-            (meghanada-telemetry-enable t)
-            (flycheck-mode +1)
-            (setq c-basic-offset 2)
+            (meghanada-mode t) 
+	    (flycheck-mode +1) 
+	    (setq c-basic-offset 2)
             ;; use code format
-            (add-hook 'before-save-hook 'meghanada-code-beautify-before-save)))
-(cond
-   ((eq system-type 'windows-nt)
-    (setq meghanada-java-path (expand-file-name "bin/java.exe" (getenv "JAVA_HOME")))
-    (setq meghanada-maven-path "mvn.cmd"))
-   (t
-    (setq meghanada-java-path "java")
-    (setq meghanada-maven-path "mvn")))
-
-;; Fixes Lox.java:10: error: package com.sun.tools.javac.parser is not visible
-(setenv "_JAVA_OPTIONS"
-	(concat
-	 "-Dsun.reflect.debugModuleAccessChecks=true "
-	 "--add-exports=jdk.compiler/com.sun.tools.javac.parser=ALL-UNNAMED"))
-;; (setq meghanada-jvm-option (concat "-Dsun.reflect.debugModuleAccessChecks=true " 
-;; 				   "--add-exports=jdk.compiler/com.sun.tools.javac.util=ALL-UNNAMED"))
+            (add-hook 'before-save-hook 'meghanada-code-beautify)))
+(cond ((eq system-type 'windows-nt) 
+       (setq meghanada-java-path (expand-file-name "bin/java.exe" (getenv "JAVA_HOME"))) 
+       (setq meghanada-maven-path "mvn.cmd")) 
+      (t 
+       (setq meghanada-java-path "java") 
+       (setq meghanada-maven-path "mvn")))
