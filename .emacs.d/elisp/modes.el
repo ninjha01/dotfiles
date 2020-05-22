@@ -6,14 +6,17 @@
 (package-initialize)
 
 
-(setq package-list '(htmlize py-isort meghanada company-lsp rainbow-delimiters ledger-mode pdf-tools
-			     org-plus-contrib org-bullets ox-reveal blacken cargo lsp-mode lsp-ui
-			     lsp-java keyfreq ace-window beacon browse-kill-ring company company-go
-			     company-shell company-web counsel docker dockerfile-mode dumb-jump
-			     elisp-format elpy fireplace flycheck-rust flyparens forge god-mode
-			     helm-flycheck ivy js-comint magit magit-todos magit-topgit
-			     markdown-mode mood-line multiple-cursors prettier-js projectile
-			     rust-mode tide todoist use-package vlf web-mode which-key yaml-mode))
+(setq package-list '(ace-window beacon blacken browse-kill-ring cargo
+				company company-go company-lsp company-shell
+				company-web counsel docker dockerfile-mode dumb-jump
+				elisp-format elpy fireplace flycheck-rust flyparens
+				forge god-mode helm-flycheck htmlize ivy js-comint
+				keyfreq ledger-mode lsp-java lsp-mode lsp-ui magit
+				magit-todos magit-topgit markdown-mode meghanada
+				mood-line multiple-cursors org-bullets org-plus-contrib
+				ox-reveal pdf-tools prettier-js projectile py-isort
+				rainbow-delimiters rust-mode tide todoist use-package
+				vlf web-mode which-key yaml-mode))
 (dolist (package package-list) 
   (unless (package-installed-p package) 
     (package-install package)))
