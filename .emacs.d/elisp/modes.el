@@ -379,3 +379,7 @@
       (t 
        (setq meghanada-java-path "java") 
        (setq meghanada-maven-path "mvn")))
+
+;; Conseq
+(require 'conseq-mode)
+(add-to-list 'auto-mode-alist '("\\.conseq\\'" . conseq-mode))
