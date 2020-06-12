@@ -266,7 +266,7 @@
 ;;;; elpy
 (setq python-shell-interpreter "python3" elpy-rpc-python-command "python3"
       python-shell-interpreter-args "-i")
-(setenv "WORKON_HOME" "~/miniconda3/envs/")
+(setenv "WORKON_HOME" "/usr/local/Caskroom/miniconda/base/envs/")
 (add-hook 'elpy-mode-hook 
 	  '(lambda () 
 	     (when (eq major-mode 'python-mode) 
