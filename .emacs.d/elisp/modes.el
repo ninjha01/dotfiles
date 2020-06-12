@@ -45,6 +45,10 @@
 (require 'projectile)
 (define-key projectile-mode-map (kbd "s-p") 'projectile-command-map)
 (define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map)
+;; Required for .projectile ignore files
+(setq projectile-indexing-method 'native) 
+;; For react native projects
+(add-to-list 'projectile-globally-ignored-directories "Pods")
 (projectile-mode 1)
 
 
