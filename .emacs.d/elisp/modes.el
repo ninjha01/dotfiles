@@ -45,6 +45,10 @@
 (require 'projectile)
 (define-key projectile-mode-map (kbd "s-p") 'projectile-command-map)
 (define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map)
+;; Required for .projectile ignore files
+(setq projectile-indexing-method 'native) 
+;; For react native projects
+(add-to-list 'projectile-globally-ignored-directories "Pods")
 (projectile-mode 1)
 
 
@@ -270,7 +274,7 @@
 ;;;; elpy
 (setq python-shell-interpreter "python3" elpy-rpc-python-command "python3"
       python-shell-interpreter-args "-i")
-(setenv "WORKON_HOME" "~/miniconda3/envs/")
+(setenv "WORKON_HOME" "/usr/local/Caskroom/miniconda/base/envs/")
 (add-hook 'elpy-mode-hook 
 	  '(lambda () 
 	     (when (eq major-mode 'python-mode) 
