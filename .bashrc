@@ -52,6 +52,16 @@ function git_push {
     git push
 }
 
+function sizeup {
+    dir=$1
+    if [ -z "$dir" ]
+    then
+	dir="$(pwd)"
+    fi
+    du -kx "${dir}" | sort -n | tail -200
+}
+
+
 function gen_gif {
     in_file=$1
     in_base=$(basename "$in_file" | cut -d. -f1)
