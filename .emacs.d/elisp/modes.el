@@ -6,7 +6,7 @@
 (package-initialize)
 
 
-(setq package-list '(ace-window beacon blacken browse-kill-ring cargo
+(setq package-list '(persistent-scratch ace-window beacon blacken browse-kill-ring cargo
 				company company-go company-lsp company-shell
 				company-web counsel docker dockerfile-mode dumb-jump
 				elisp-format elpy fireplace flycheck-rust flyparens
@@ -46,9 +46,14 @@
 (define-key projectile-mode-map (kbd "s-p") 'projectile-command-map)
 (define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map)
 ;; Required for .projectile ignore files
-(setq projectile-indexing-method 'native) 
+;; (setq projectile-indexing-method 'native)
+;; temp change back to alien
+(setq projectile-indexing-method 'alien)
+
 ;; For react native projects
 (add-to-list 'projectile-globally-ignored-directories "Pods")
+(add-to-list 'projectile-globally-ignored-directories "node_modules")
+(add-to-list 'projectile-globally-ignored-directories ".mypy_cache")
 (projectile-mode 1)
 
 
@@ -274,7 +279,7 @@
 ;;;; elpy
 (setq python-shell-interpreter "python3" elpy-rpc-python-command "python3"
       python-shell-interpreter-args "-i")
-(setenv "WORKON_HOME" "/usr/local/Caskroom/miniconda/base/envs/")
+(setenv "WORKON_HOME" "~/miniconda3/envs/") ;; work only
 (add-hook 'elpy-mode-hook 
 	  '(lambda () 
 	     (when (eq major-mode 'python-mode) 
@@ -387,3 +392,7 @@
 ;; Conseq
 (require 'conseq-mode)
 (add-to-list 'auto-mode-alist '("\\.conseq\\'" . conseq-mode))
+
+;; persistent scratch
+(persistent-scratch-setup-default)
+(persistent-scratch-autosave-mode 1)
