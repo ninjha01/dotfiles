@@ -20,12 +20,21 @@ export PS1="[\t][\[\e[31m\]\W\[\e[m\]]: "
 ### Misc Behavior Mod
 ###################################################################
 
+# don't put duplicate lines or lines starting with space in the history.
+# See bash(1) for more options
+HISTCONTROL=ignoreboth
+
+# append to the history file, don't overwrite it
+shopt -s histappend
+# append and reload the history after each command
+PROMPT_COMMAND="history -a; history -n"
+
+# ignore certain commands from the history
+HISTIGNORE="ls:ll:pwd:bg:fg:history"
+
 # unlimited history
 export HISTSIZE=
 export HISTFILESIZE=
-
-shopt -s histappend # Append to history file
-PROMPT_COMMAND="history -a;$PROMPT_COMMAND"
 
 # Hide bash warning on macOS
 export BASH_SILENCE_DEPRECATION_WARNING=1
