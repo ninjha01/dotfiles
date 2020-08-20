@@ -6,7 +6,7 @@
 (package-initialize)
 
 
-(setq package-list '(persistent-scratch ace-window beacon blacken browse-kill-ring cargo
+(setq package-list '(emacs-emojify persistent-scratch ace-window beacon blacken browse-kill-ring cargo
 				company company-go company-lsp company-shell
 				company-web counsel docker dockerfile-mode dumb-jump
 				elisp-format elpy fireplace flycheck-rust flyparens
