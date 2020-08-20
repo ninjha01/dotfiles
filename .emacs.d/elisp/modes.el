@@ -56,6 +56,10 @@
 (add-to-list 'projectile-globally-ignored-directories ".mypy_cache")
 (projectile-mode 1)
 
+;; for ansible submodules
+(setq projectile-git-submodule-command nil)
+
+
 
 ;;; Browse Kill ring
 (global-set-key (kbd "C-c y") 'browse-kill-ring)
