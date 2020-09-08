@@ -6,11 +6,11 @@
 (package-initialize)
 
 
-(setq package-list '(emacs-emojify persistent-scratch ace-window beacon blacken browse-kill-ring cargo
+(setq package-list '(emojify persistent-scratch ace-window beacon blacken browse-kill-ring cargo
 				company company-go company-lsp company-shell
 				company-web counsel docker dockerfile-mode dumb-jump
 				elisp-format elpy fireplace flycheck-rust flyparens
-				forge god-mode helm-flycheck htmlize ivy js-comint
+				forge god-mode helm-flycheck htmlize ivy jedi js-comint
 				keyfreq ledger-mode lsp-java lsp-mode lsp-ui magit
 				magit-todos magit-topgit markdown-mode meghanada
 				mood-line multiple-cursors org-bullets org-plus-contrib
@@ -27,6 +27,9 @@
 ;; Rainbow delimiters
 (rainbow-delimiters-mode-enable)
 
+;; emoji
+(emojify-mode)
+(emojify-set-emoji-styles '(unicode))
 
 ;; subword mode
 (global-subword-mode 1)
