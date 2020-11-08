@@ -32,9 +32,9 @@
 	 (while  (< i numWindows) 
 	   (let* ((w1 (elt (window-list) i)) 
 		  (w2 (elt (window-list) 
-			   (+ (% i numWindows) 1)))
+			   (+ (% i numWindows) 1))) 
 		  (b1 (window-buffer w1)) 
-		  (b2 (window-buffer w2))
+		  (b2 (window-buffer w2)) 
 		  (s1 (window-start w1)) 
 		  (s2 (window-start w2))) 
 	     (set-window-buffer w1  b2) 
@@ -105,8 +105,8 @@
   (interactive) 
   (let ((col (current-column))) 
     (save-excursion (forward-line) 
-		    (transpose-lines -1))
-    (forward-line -1)
+		    (transpose-lines -1)) 
+    (forward-line -1) 
     (move-to-column col)))
 
 (global-set-key (kbd "C-S-<up>") 'move-line-up)
@@ -142,8 +142,8 @@
 (global-set-key (kbd "C-s-RET") 'open-line-above)
 
 ;; Open Terminal to cur dir with CMD-T
-(defun open-term-here ()
-  (interactive)
+(defun open-term-here () 
+  (interactive) 
   (shell-command "open -a Terminal \"$pwd\""))
 
 (global-set-key (kbd "s-t") 'open-term-here)

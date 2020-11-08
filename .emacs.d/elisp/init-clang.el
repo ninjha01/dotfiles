@@ -1,0 +1,15 @@
+(setq c-package-list '(ggtags))
+(dolist (package c-package-list) 
+  (unless (package-installed-p package) 
+    (package-install package)))
+(require 'ggtags)
+(define-key ggtags-mode-map (kbd "C-c g s") 'ggtags-find-other-symbol)
+(define-key ggtags-mode-map (kbd "C-c g h") 'ggtags-view-tag-history)
+(define-key ggtags-mode-map (kbd "C-c g r") 'ggtags-find-reference)
+(define-key ggtags-mode-map (kbd "C-c g f") 'ggtags-find-file)
+(define-key ggtags-mode-map (kbd "C-c g c") 'ggtags-create-tags)
+(define-key ggtags-mode-map (kbd "C-c g u") 'ggtags-update-tags)
+
+(define-key ggtags-mode-map (kbd "M-,") 'pop-tag-mark)
+
+(provide 'init-clang)
