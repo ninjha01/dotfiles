@@ -1,4 +1,4 @@
-(setq company-package-list '(company company-go company-lsp company-shell company-web))
+(setq company-package-list '(company company-go company-lsp company-shell company-web company-c-headers))
 (dolist (package company-package-list) 
   (unless (package-installed-p package) 
     (package-install package)))
