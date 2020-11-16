@@ -3,6 +3,8 @@
   (unless (package-installed-p package) 
     (package-install package)))
 (require 'ggtags)
+(require 'cc-mode)
+
 (define-key ggtags-mode-map (kbd "C-c g s") 'ggtags-find-other-symbol)
 (define-key ggtags-mode-map (kbd "C-c g h") 'ggtags-view-tag-history)
 (define-key ggtags-mode-map (kbd "C-c g r") 'ggtags-find-reference)
@@ -30,10 +32,12 @@
 (add-hook 'c-mode-hook (lambda () (clang-format-save-hook-for-this-buffer)))
 
 ;; company
+(require 'company)
 (setq company-backends (delete 'company-semantic company-backends))
 (add-to-list 'company-backends 'company-c-headers)
 (define-key c-mode-map  [(tab)] 'company-complete)
 (define-key c++-mode-map  [(tab)] 'company-complete)
+
 
 (define-key c-mode-map (kbd "C-c C-c") 'recompile)
 (provide 'init-clang)

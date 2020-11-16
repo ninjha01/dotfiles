@@ -1,4 +1,4 @@
-;; Package system
+;; package system
 (require 'package)
 (setq package-enable-at-startup nil)
 (add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/"))
@@ -30,6 +30,7 @@
 (require 'init-rust)
 (require 'init-clang)
 (require 'init-java)
+(require 'init-ocaml)
 (require 'conseq-mode)
 
 
@@ -48,7 +49,7 @@
 (global-set-key (kbd "C-c y") 'browse-kill-ring)
 
 
-					;:; God mode
+;;; God mode
 (require 'god-mode)
 (global-set-key (kbd "<escape>") 'god-local-mode)
 
