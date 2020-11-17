@@ -30,7 +30,7 @@
 (require 'init-rust)
 (require 'init-clang)
 (require 'init-java)
-(require 'init-ocaml)
+; (require 'init-ocaml)			
 (require 'conseq-mode)
 
 
