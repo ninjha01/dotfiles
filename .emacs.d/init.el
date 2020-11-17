@@ -108,3 +108,23 @@ Version 2017-09-01"
        (progn
          (message "File path copied: 「%s」" $fpath)
          $fpath )))))
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(custom-enabled-themes '(zenburn))
+ '(custom-safe-themes
+   '("acaccddbc0ae7d5c2cdea2e64b0261ca383671205752c062c44590d944ad0842" default))
+ '(package-selected-packages
+   '(ob-ocaml tuareg tuareg-mode prettier-js tide js-comint flycheck-rust beacon ace-window magit magit-topgit yaml-mode which-key web-mode vlf use-package smooth-scroll rust-mode multiple-cursors markdown-mode helm-flycheck flyparens company-web company-shell company-go))
+ '(vlf-application 'dont-ask))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ )
+;; ## added by OPAM user-setup for emacs / base ## 56ab50dc8996d2bb95e7856a6eddb17b ## you can edit, but keep this line
+(require 'opam-user-setup "~/.emacs.d/opam-user-setup.el")
+;; ## end of OPAM user-setup addition for emacs / base ## keep this line
