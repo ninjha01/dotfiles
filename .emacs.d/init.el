@@ -26,6 +26,10 @@
 ;; Don't jump around on scroll
 (setq scroll-conservatively 100)
 
+
+;; Region highlights as white
+(set-face-attribute 'region nil :background "#666" :foreground "#ffffff")
+
 ;; Emacs first checks whether a window can be split horizontally when opening a new window, then checks if it can be split vertically.
 ;; This function reverses the order of the checks.
 (defun reversed-split-window-sensibly
