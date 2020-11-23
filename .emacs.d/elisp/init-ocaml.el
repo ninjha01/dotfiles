@@ -1,4 +1,4 @@
-(setq ocaml-package-list '(tuareg ob-ocaml))
+(setq ocaml-package-list '(tuareg))
 (dolist (package ocaml-package-list) 
   (unless (package-installed-p package) 
     (package-install package)))
