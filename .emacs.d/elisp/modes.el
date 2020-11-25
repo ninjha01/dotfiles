@@ -16,13 +16,12 @@
 
 
 ;; General
-(require 'init-magit)
-(require 'init-keyfreq)
-(require 'init-projectile)
-(require 'init-org)
+(require 'init-flycheck)
 (require 'init-company)
 (require 'init-shell)
-(require 'init-flycheck)
+(require 'init-keyfreq)
+(require 'init-magit)
+(require 'init-python)
 (require 'init-web)
 (require 'init-yaml)
 (require 'init-docker)

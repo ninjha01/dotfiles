@@ -11,11 +11,6 @@
 (add-hook 'c-mode-hook 'flycheck-mode)
 (add-hook 'go-mode 'flycheck-mode)
 (add-hook 'python-mode 'flycheck-mode)
-(add-hook 'python-mode-hook 
-	  (lambda () 
-	    (elpy-mode 1) 
-	    (setq flycheck-python-pylint-executable "/usr/local/bin/pylint") 
-	    (setq flycheck-pylintrc "~/.pylintrc")))
 
 (flycheck-define-checker proselint
   "Flycheck checker using Proselint. See URL `http://proselint.com/'." 

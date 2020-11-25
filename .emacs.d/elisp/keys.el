@@ -151,3 +151,15 @@
 
 ;; Query regexp replace
 (global-set-key (kbd "C-c r") 'query-replace-regexp)
+
+
+;; Selective view
+(defun selective-toggle () 
+  "Toggles term between line mode and char mode" 
+  (interactive)
+  (if (eq selective-display 1)
+      (set-selective-display nil)
+    (set-selective-display t)))
+
+(global-set-key (kbd "C-x C-4") 'selective-toggle)
+
