@@ -163,3 +163,5 @@
 
 (global-set-key (kbd "C-x C-4") 'selective-toggle)
 
+(global-set-key (kbd "M-SPC") 'cycle-spacing)
+
