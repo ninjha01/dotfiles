@@ -73,11 +73,12 @@
 ;; track commands on emacs kill
 (add-hook `kill-emacs-hook
 	  (lambda ()
-	    (f-append-text (format "<START SESSION %s>\n" (current-time-string)) 'utf-8
+	    (append-to-file (format "<START SESSION %s>\n" (current-time-string)) 'utf-8
 			   "~/.emacs.d/commands")
-	    (f-append-text (format "%s" command-history) 'utf-8 "~/.emacs.d/commands")
-	    (f-append-text (format "\n<END SESSION %s>\n" (current-time-string)) 'utf-8
-			   "~/.emacs.d/commands")))
+	    (append-to-file (format "%s" command-history) 'utf-8 "~/.emacs.d/commands")
+	    (append-to-file (format "\n<END SESSION %s>\n" (current-time-string)) 'utf-8
+			    "~/.emacs.d/commands")))
+
 
 ;; Add logging for when emacs hangs
 (setq-default garbage-collection-messages t)
