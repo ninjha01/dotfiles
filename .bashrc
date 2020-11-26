@@ -123,6 +123,13 @@ function remc {
     exit
 }
 
+###################################################################
+### OCaml
+###################################################################
+# go-to-definition
+# https://github.com/ocaml/merlin/wiki/Letting-merlin-locate-go-to-stuff-in-.opam
+export OPAMKEEPBUILDDIR=true
+export OCAMLPARAM="_,bin-annot=1"
 
 ###################################################################
 ### Completion
