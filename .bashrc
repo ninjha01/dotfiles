@@ -50,7 +50,7 @@ alias sexit="killall Terminal"
 alias cleanup="bash ~/scripts/cleanup.sh"
 alias activate='source venv/bin/activate'
 alias venv='python3 -m venv venv; activate'
-
+alisa sizeof="du -sh"
 alias ca="conda activate"
 alias cda="conda deactivate"
 

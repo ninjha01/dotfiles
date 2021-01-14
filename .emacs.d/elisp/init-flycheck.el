@@ -19,6 +19,24 @@
   :error-parser flycheck-proselint-parse-errors 
   :modes (fundamental-mode text-mode markdown-mode gfm-mode message-mode rst-mode))
 
+;; python
+(flycheck-define-checker python-mypy "" 
+			 :command ("mypy" "--ignore-missing-imports" 
+				    source-original) 
+			 :error-patterns ((error 
+					   line-start
+					   (file-name)
+					   ":"
+					   line
+					   ": error:"
+					   (message)
+					   line-end)) 
+			 :modes python-mode)
+
+(add-to-list 'flycheck-checkers 'python-mypy t)
+(flycheck-add-next-checker 'python-pylint 'python-mypy t)
+(setq flycheck-config-files ".flake8")
+
 (global-set-key (kbd "C-c e") 'flycheck-next-error)
 (global-set-key (kbd "C-c C-e") 'flycheck-next-error)
 
