@@ -129,8 +129,7 @@
   (newline) 
   (indent-for-tab-command))
 
-(global-set-key (kbd "C-RET") 'open-line-below)
-
+(global-set-key (kbd "<C-return>") 'open-line-below)
 
 (defun open-line-above () 
   (interactive) 
@@ -139,7 +138,7 @@
   (forward-line -1) 
   (indent-for-tab-command))
 
-(global-set-key (kbd "C-s-RET") 'open-line-above)
+(global-set-key (kbd "<s-return>") 'open-line-above)
 
 ;; Open Terminal to cur dir with CMD-T
 (defun open-term-here () 

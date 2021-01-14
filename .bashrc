@@ -50,7 +50,7 @@ alias sexit="killall Terminal"
 alias cleanup="bash ~/scripts/cleanup.sh"
 alias activate='source venv/bin/activate'
 alias venv='python3 -m venv venv; activate'
-
+alisa sizeof="du -sh"
 alias ca="conda activate"
 alias cda="conda deactivate"
 
@@ -123,13 +123,6 @@ function remc {
     exit
 }
 
-###################################################################
-### OCaml
-###################################################################
-# go-to-definition
-# https://github.com/ocaml/merlin/wiki/Letting-merlin-locate-go-to-stuff-in-.opam
-export OPAMKEEPBUILDDIR=true
-export OCAMLPARAM="_,bin-annot=1"
 
 ###################################################################
 ### Completion
