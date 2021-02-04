@@ -17,6 +17,7 @@
 
 ;; General
 (require 'init-projectile)
+(require 'init-org)
 (require 'init-flycheck)
 (require 'init-company)
 (require 'init-shell)
