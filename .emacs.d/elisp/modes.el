@@ -17,8 +17,10 @@
 
 ;; General
 (require 'init-flycheck)
+(require 'init-projectile)
 (require 'init-company)
 (require 'init-shell)
+(require 'init-org)
 (require 'init-keyfreq)
 (require 'init-magit)
 (require 'init-python)
