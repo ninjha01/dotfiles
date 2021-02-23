@@ -39,7 +39,8 @@
 ;;; Org-babel shell
 (org-babel-do-load-languages 'org-babel-load-languages '((shell . t) 
 							 (python . t)
-							 (ocaml . t)))
+							 (ocaml . t)
+							 (sql . t)))
 (setq org-log-done t)
 
 (setq org-confirm-babel-evaluate nil)
