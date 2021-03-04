@@ -11,7 +11,7 @@
 ;;;; elpy
 (setq python-shell-interpreter "python3" elpy-rpc-python-command "python3"
       python-shell-interpreter-args "-i")
-(setenv "WORKON_HOME" "/Users/njha/miniconda3/envs/")
+(setenv "WORKON_HOME" "/usr/local/Caskroom/miniconda/base/envs/")
 (require 'elpy)
 (add-hook 'elpy-mode-hook 
 	  '(lambda () 
