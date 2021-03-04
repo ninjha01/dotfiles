@@ -12,6 +12,7 @@
 (setq python-shell-interpreter "python3" elpy-rpc-python-command "python3"
       python-shell-interpreter-args "-i")
 (setenv "WORKON_HOME" "/usr/local/Caskroom/miniconda/base/envs/")
+(setq flycheck-flake8rc "~/dotfiles/python/.flake8")
 (require 'elpy)
 (add-hook 'elpy-mode-hook 
 	  '(lambda () 
