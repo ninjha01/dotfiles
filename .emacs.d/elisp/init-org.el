@@ -31,7 +31,9 @@
 (setq org-agenda-files (list my-notes-file my-tasks-file my-journal-file))
 (add-hook 'org-mode-hook 
 	  (lambda () 
-	    (org-bullets-mode 1)))
+	    (org-bullets-mode 1)
+	    (auto-revert-mode 1)
+	    ))
 ;;; Code blocks indent
 (setq org-src-tab-acts-natively t)
 ;;; Code syntax highlight
