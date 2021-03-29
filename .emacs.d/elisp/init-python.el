@@ -15,7 +15,7 @@
 (require 'elpy)
 (add-hook 'elpy-mode-hook 
 	  '(lambda () 
-	     (add-hook 'before-save-hook 'elpy-black-fix-code)))
+	     (add-hook 'before-save-hook 'elpy-black-fix-code 'make-it-local)))
 (when (require 'flycheck nil t)
   (setq elpy-modules (delq 'elpy-module-flymake elpy-modules))
   (add-hook 'elpy-mode-hook 'flycheck-mode))

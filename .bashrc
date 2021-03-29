@@ -53,6 +53,7 @@ alias venv='python3 -m venv venv; activate'
 alias sizeof="du -sh"
 alias ca="conda activate"
 alias cda="conda deactivate"
+alias vie="emacs -q -nw"
 
 function git_push {
     message=$1
