@@ -1,0 +1,9 @@
+[flake8]
+exclude = .git,*migrations*
+max-line-length = 125
+ignore =
+    W503,
+    D100,
+    E731,
+    E203,
+    F401
