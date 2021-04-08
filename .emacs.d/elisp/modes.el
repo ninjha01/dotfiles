@@ -34,6 +34,7 @@
 (require 'init-shell)
 (require 'init-web)
 (require 'init-yaml)
+(require 'init-ivy)
 
 
 ;; Rainbow delimiters
@@ -56,7 +57,6 @@
 (global-set-key (kbd "<escape>") 'god-local-mode)
 
 
-;;; Ivy
 
 
 ;;; Save Place Mode
