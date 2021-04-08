@@ -16,25 +16,24 @@
 
 
 ;; General
-(require 'init-projectile)
-(require 'init-org)
-(require 'init-flycheck)
-(require 'init-projectile)
+(require 'conseq-mode)
+(require 'init-clang)
+(require 'init-clisp)
 (require 'init-company)
-(require 'init-shell)
-(require 'init-org)
+(require 'init-docker)
+(require 'init-flycheck)
+(require 'init-java)
 (require 'init-keyfreq)
 (require 'init-magit)
+;; (require 'init-ivy)
+;; (require 'init-ocaml)
+(require 'init-org)
+(require 'init-projectile)
 (require 'init-python)
+(require 'init-rust)
+(require 'init-shell)
 (require 'init-web)
 (require 'init-yaml)
-(require 'init-docker)
-(require 'init-clisp)
-(require 'init-rust)
-(require 'init-clang)
-(require 'init-java)
-(require 'init-ocaml)
-(require 'conseq-mode)
 
 
 ;; Rainbow delimiters
@@ -58,7 +57,7 @@
 
 
 ;;; Ivy
-(require 'init-ivy)
+
 
 ;;; Save Place Mode
 (save-place-mode 1)
