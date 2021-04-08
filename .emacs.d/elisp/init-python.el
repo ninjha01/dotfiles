@@ -9,6 +9,7 @@
 
 
 ;;;; elpy
+(setq elpy-rpc-virtualenv-path 'current)
 (setq python-shell-interpreter "python3" elpy-rpc-python-command "python3"
       python-shell-interpreter-args "-i")
 (setenv "WORKON_HOME" "/Users/njha/miniconda3/envs")
