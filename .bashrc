@@ -11,7 +11,7 @@
 ###################################################################
 alias emeril="conda activate emeril; cd ~/Desktop/emeril/"
 alias depmap="conda activate depmap; cd ~/Desktop/depmap/"
-alias honk="conda activate honk; cd ~/Desktop/honk/"
+# alias honk="conda activate honk; cd ~/Desktop/honk/"
 alias loom="conda activate loom; cd ~/Desktop/loom/"
 
 ###################################################################

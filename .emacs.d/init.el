@@ -118,3 +118,5 @@ Version 2017-09-01"
 					  (file-name-directory $fpath)) 
 		(progn (message "File path copied: 「%s」" $fpath) $fpath ))))
   )
+
+(setq trash-directory "~/.Trash")
