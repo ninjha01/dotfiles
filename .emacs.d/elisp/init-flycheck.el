@@ -35,7 +35,6 @@
 
 (add-to-list 'flycheck-checkers 'python-mypy t)
 (add-to-list 'flycheck-disabled-checkers 'python-pylint)
-(flycheck-add-next-checker 'python-pylint 'python-mypy t)
 (setq flycheck-config-files ".flake8")
 
 (global-set-key (kbd "C-c e") 'flycheck-next-error)

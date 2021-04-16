@@ -62,6 +62,12 @@ alias ca="conda activate"
 alias cda="conda deactivate"
 alias vie="emacs -q -nw"
 
+function notify {
+    title=$1
+    body=$2
+    osascript -e "display notification \"${body}\" with title \"${title}\""
+}
+
 function git_push {
     message=$1
     git add .
@@ -137,4 +143,3 @@ function remc {
 ###################################################################
 
 [ -f /usr/local/etc/bash_completion ] && . /usr/local/etc/bash_completion
-
