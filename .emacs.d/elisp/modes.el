@@ -22,11 +22,11 @@
 (require 'init-company)
 (require 'init-docker)
 (require 'init-flycheck)
+(require 'init-graphviz)
+(require 'init-ivy)
 (require 'init-java)
 (require 'init-keyfreq)
 (require 'init-magit)
-;; (require 'init-ivy)
-;; (require 'init-ocaml)
 (require 'init-org)
 (require 'init-projectile)
 (require 'init-python)
@@ -34,7 +34,7 @@
 (require 'init-shell)
 (require 'init-web)
 (require 'init-yaml)
-(require 'init-ivy)
+;; (require 'init-ocaml)
 
 
 ;; Rainbow delimiters

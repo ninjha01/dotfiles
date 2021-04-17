@@ -42,8 +42,17 @@
 (org-babel-do-load-languages 'org-babel-load-languages '((shell . t) 
 							 (python . t)
 							 (ocaml . t)
-							 (sql . t)))
+							 (sql . t)
+							 (dot . t)))
 (setq org-log-done t)
+
+;; org live refresh inline images
+(defun org-fix-inline-images ()
+  (when org-inline-image-overlays
+    (org-redisplay-inline-images)))
+
+(with-eval-after-load 'org
+  (add-hook 'org-babel-after-execute-hook 'org-fix-inline-images))
 
 (setq org-confirm-babel-evaluate nil)
 (provide 'init-org)
