@@ -1,7 +1,54 @@
+(setq style-package-list '(emojify rainbow-delimiters doom-modeline doom-themes fira-code-mode))
+(dolist (package style-package-list) 
+  (unless (package-installed-p package) 
+    (package-install package)))
+
+
+
+;; Rainbow delimiters
+(rainbow-delimiters-mode-enable)
+
+;; emoji
+(global-emojify-mode)
+(emojify-set-emoji-styles '(unicode))
+
+;; remove fringe color
+;; https://emacs.stackexchange.com/questions/5342/how-do-i-set-the-fringe-colors-to-whatever-is-the-background-color
+(set-face-attribute 'fringe nil :background nil)
+
+(setq default-frame-alist '((font . "Fira Code 12")))
+
+(doom-modeline-mode t)
+(set-face-attribute 'mode-line nil :font "Fira Code 12")
+(setq doom-modeline-height 22)
+(setq doom-modeline-icon nil)
+(setq doom-modeline-major-mode-color-icon t)
+(setq doom-modeline-env-version nil)
+(setq doom-modeline-bar-width 1)
+(setq doom-modeline-buffer-encoding nil)
+(setq doom-modeline-buffer-file-name-style 'auto)
+(setq doom-modeline-buffer-modification-icon nil)
+(setq doom-modeline-checker-simple-format t)
+(setq doom-modeline-indent-info nil)
+(setq doom-modeline-minor-modes nil)
+(setq doom-modeline-project-detection 'projectile)
+(setq doom-modeline-vcs-max-length 12)
+
 (setq inhibit-startup-screen t)
+
+;; Highlighted regions are grey with white text
 (set-face-attribute 'region nil 
 		    :background "#666" 
 		    :foreground "#ffffff")
+
+
+
+
+(load-theme 'zenburn t)
+
+
+;;; Remove menubar
+(menu-bar-mode -1)
 ;;; Remove Toolbar
 (tool-bar-mode -1)
 ;;; Remove scroll bar
@@ -9,7 +56,6 @@
 
 ;;; Delimiters
 (show-paren-mode)
-
 
 ;;Clear Scratch
 (setq initial-scratch-message "")

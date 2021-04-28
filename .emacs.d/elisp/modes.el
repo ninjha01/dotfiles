@@ -6,10 +6,10 @@
 (package-initialize)
 
 
-(setq package-list '(emojify persistent-scratch ace-window beacon  browse-kill-ring dumb-jump
-			     elisp-format  fireplace  flyparens god-mode helm-flycheck htmlize
-			     ledger-mode markdown-mode mood-line multiple-cursors  pdf-tools
-			     rainbow-delimiters  todoist use-package vlf  which-key))
+(setq package-list '(persistent-scratch ace-window beacon  browse-kill-ring dumb-jump elisp-format
+					fireplace  flyparens god-mode helm-flycheck htmlize
+					ledger-mode markdown-mode mood-line multiple-cursors
+					pdf-tools which-key))
 (dolist (package package-list) 
   (unless (package-installed-p package) 
     (package-install package)))
@@ -37,12 +37,6 @@
 ;; (require 'init-ocaml)
 
 
-;; Rainbow delimiters
-(rainbow-delimiters-mode-enable)
-
-;; emoji
-(emojify-mode)
-(emojify-set-emoji-styles '(unicode))
 
 ;; subword mode
 (global-subword-mode 1)
