@@ -3,5 +3,6 @@
   (unless (package-installed-p package) 
     (package-install package)))
 
+(require 'graphviz-dot-mode)
 (define-key graphviz-dot-mode-map (kbd "C-c C-c") 'graphviz-dot-preview)
 (provide 'init-graphviz)

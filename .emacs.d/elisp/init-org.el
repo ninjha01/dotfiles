@@ -38,12 +38,20 @@
 (setq org-src-tab-acts-natively t)
 ;;; Code syntax highlight
 (setq org-src-fontify-natively t)
-;;; Org-babel shell
+
+
+;; plantuml
+(setq org-plantuml-exec-mode 'plantuml)
+(setq org-plantuml-executable-path (expand-file-name "/usr/local/bin/plantuml"))
+(add-to-list 'org-src-lang-modes '("plantuml" . plantuml))
+
+;;; Org-babel languages
 (org-babel-do-load-languages 'org-babel-load-languages '((shell . t) 
 							 (python . t)
 							 (ocaml . t)
 							 (sql . t)
-							 (dot . t)))
+							 (dot . t)
+							 (plantuml . t)))
 (setq org-log-done t)
 
 ;; org live refresh inline images

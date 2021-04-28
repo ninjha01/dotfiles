@@ -1,4 +1,4 @@
-(setq ivy-package-list '(ivy counsel ivy-hydra))
+(setq ivy-package-list '(ivy counsel ivy-hydra wgrep wgrep-ag ag))
 (dolist (package ivy-package-list) 
   (unless (package-installed-p package) 
     (package-install package)))
@@ -15,4 +15,6 @@
 (global-set-key (kbd "C-c k") 'counsel-ag)
 (global-set-key (kbd "C-x b") 'ivy-switch-buffer)
 (define-key minibuffer-local-map (kbd "C-r") 'counsel-minibuffer-history)
+(autoload 'wgrep-ag-setup "wgrep-ag")
+(add-hook 'ag-mode-hook 'wgrep-ag-setup)
 (provide 'init-ivy)
