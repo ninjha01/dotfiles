@@ -6,8 +6,5 @@
 (global-set-key (kbd "C-x C-r") 'crux-rename-file-and-buffer)
 (global-set-key (kbd "C-c o") 'crux-open-with)
 
-(setq crux-term-func 'shell)
-(global-set-key (kbd "C-c t") 'crux-visit-term-buffer)
-
 (global-set-key (kbd "C-c ,") 'crux-find-user-custom-file)
 (provide 'init-crux)

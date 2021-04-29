@@ -35,6 +35,7 @@
 (require 'init-web)
 (require 'init-yaml)
 (require 'init-crux)
+(require 'init-avy)
 ;; (require 'init-ocaml)
 
 

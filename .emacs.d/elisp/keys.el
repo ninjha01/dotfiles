@@ -162,5 +162,13 @@
 
 (global-set-key (kbd "C-x C-4") 'selective-toggle)
 
+
 (global-set-key (kbd "M-SPC") 'cycle-spacing)
 
+
+(defun open-work-org-file ()
+  "Opens ~/Google Drive/org/work.org"
+  (interactive)
+  (find-file-other-window "~/Google Drive/org/work.org"))
+
+(global-set-key (kbd "C-x C-o") 'open-work-org-file)

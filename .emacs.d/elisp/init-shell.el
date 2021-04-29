@@ -12,5 +12,12 @@
     (term-line-mode)))
 (define-key term-mode-map (kbd "C-c C-j") 'term-toggle)
 
+;; Open and name shell
+(global-set-key (kbd "C-c t") 
+		(lambda () 
+		  (interactive) 
+		  (shell) 
+		  (rename-uniquely)))
+
 
 (provide 'init-shell)
