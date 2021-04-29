@@ -4,14 +4,6 @@
 (setq ns-function-modifier 'hyper)
 
 
-;; Open and name shell
-(global-set-key (kbd "M-s M-s") 
-		(lambda () 
-		  (interactive) 
-		  (shell) 
-		  (rename-uniquely)))
-
-
 ;; Window Manipulation
 
 ;; Expand windows
