@@ -134,5 +134,9 @@ https://stackoverflow.com/questions/1085170/how-to-achieve-code-folding-effects-
 (global-set-key (kbd "C-x C-4") 'set-selective-display-dlw)
 
 
-(setq split-height-threshold 260
-      split-width-threshold 260)
+(setq split-height-threshold 50 	; lines to place window below
+      split-width-threshold 200) 	; cols to place window to the right
+
+(setq custom-file "~/.emacs.d/elisp/custom.el")
+(load custom-file)
+

@@ -20,5 +20,7 @@
 ;; for ansible submodules
 (setq projectile-git-submodule-command nil)
 
+(require 'magit)
+(setq projectile-switch-project-action 'magit-status)
 
 (provide 'init-projectile)

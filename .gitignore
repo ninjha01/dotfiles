@@ -3,7 +3,7 @@
 
 # Except the dotfiles I explicitely want to share
 !.bashrc
-!.emacs.d/
+!.emacs.d/*
 !.vim/
 !symlink.sh
 !macOS_install.sh

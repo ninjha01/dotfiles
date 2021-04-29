@@ -4,6 +4,7 @@
     (package-install package)))
 
 (global-set-key (kbd "C-x g") 'magit-status)
+(global-set-key (kbd "C-c g") 'magit-file-dispatch)
 (with-eval-after-load 'magit-mode
   (add-hook 'after-save-hook 'magit-after-save-refresh-status t)) ;; auto-refresh
 

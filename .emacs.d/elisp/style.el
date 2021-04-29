@@ -1,4 +1,4 @@
-(setq style-package-list '(emojify rainbow-delimiters doom-modeline doom-themes fira-code-mode))
+(setq style-package-list '(rainbow-delimiters doom-modeline doom-themes fira-code-mode))
 (dolist (package style-package-list) 
   (unless (package-installed-p package) 
     (package-install package)))
@@ -9,8 +9,20 @@
 (rainbow-delimiters-mode-enable)
 
 ;; emoji
-(global-emojify-mode)
-(emojify-set-emoji-styles '(unicode))
+(defun --set-emoji-font (frame)
+  "Adjust the font settings of FRAME so Emacs can display emoji properly."
+  (if (eq system-type 'darwin)
+      ;; For NS/Cocoa
+      (set-fontset-font t 'symbol (font-spec :family "Apple Color Emoji") frame 'prepend)
+    ;; For Linux
+    (set-fontset-font t 'symbol (font-spec :family "Symbola") frame 'prepend)))
+
+
+;; For when Emacs is started in GUI mode:
+(--set-emoji-font nil)
+;; Hook for when a frame is created with emacsclient
+;; see https://www.gnu.org/software/emacs/manual/html_node/elisp/Creating-Frames.html
+(add-hook 'after-make-frame-functions '--set-emoji-font)
 
 ;; remove fringe color
 ;; https://emacs.stackexchange.com/questions/5342/how-do-i-set-the-fringe-colors-to-whatever-is-the-background-color
