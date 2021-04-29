@@ -11,5 +11,5 @@
 (with-eval-after-load 'magit 
   (require 'forge))
 (require 'git-link)
-(global-set-key (kbd "C-c g l") 'git-link)
+(global-set-key (kbd "C-c C-g l") 'git-link)
 (provide 'init-magit)
