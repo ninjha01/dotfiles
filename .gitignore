@@ -29,3 +29,4 @@
 .vim/.vim
 .vim/viminfo'
 /commands
+/.emacs.d/eln-cache/
