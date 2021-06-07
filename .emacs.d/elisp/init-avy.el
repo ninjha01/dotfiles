@@ -5,5 +5,5 @@
 
 
 ;; Open and name shell
-(global-set-key (kbd "M-s") 'avy-goto-char-2)
+(global-set-key (kbd "M-s") 'avy-goto-char-timer)
 (provide 'init-avy)

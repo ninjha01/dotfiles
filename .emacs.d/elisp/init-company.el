@@ -1,4 +1,4 @@
-(setq company-package-list '(company company-go company-shell company-web company-c-headers company-emoji))
+(setq company-package-list '(company company-go company-web company-c-headers company-emoji))
 (dolist (package company-package-list) 
   (unless (package-installed-p package) 
     (package-install package)))
@@ -10,7 +10,7 @@
 (setq company-tooltip-align-annotations t)
 
 ;; Speed up prompt
-(setq company-idle-delay 0)
+(setq company-idle-delay 0.1)
 
 
 ;; start after 2 char
