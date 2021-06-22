@@ -1,11 +1,3 @@
-;; package system
-(require 'package)
-(setq package-enable-at-startup nil)
-(add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/"))
-(add-to-list 'package-archives '("org" . "https://orgmode.org/elpa/") t)
-(package-initialize)
-
-
 (setq package-list '(persistent-scratch ace-window beacon  browse-kill-ring dumb-jump elisp-format
 					fireplace  flyparens god-mode helm-flycheck htmlize
 					ledger-mode markdown-mode mood-line multiple-cursors
