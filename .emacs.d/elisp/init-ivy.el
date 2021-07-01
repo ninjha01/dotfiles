@@ -12,7 +12,7 @@
 (global-set-key (kbd "M-x") 'counsel-M-x)
 (global-set-key (kbd "C-x C-f") 'counsel-find-file)
 (global-set-key (kbd "C-c j") 'counsel-git-grep)
-(global-set-key (kbd "C-c k") 'counsel-ag)
+(global-set-key (kbd "C-c k") 'counsel-rg)
 (global-set-key (kbd "C-x b") 'ivy-switch-buffer)
 (define-key minibuffer-local-map (kbd "C-r") 'counsel-minibuffer-history)
 (autoload 'wgrep-ag-setup "wgrep-ag")
