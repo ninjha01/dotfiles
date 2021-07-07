@@ -28,6 +28,7 @@
 (require 'init-yaml)
 (require 'init-crux)
 (require 'init-avy)
+(require 'init-sql)
 ;; (require 'init-ocaml)
 
 
