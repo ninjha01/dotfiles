@@ -18,7 +18,7 @@
 (require 'init-ivy)
 (require 'init-java)
 (require 'init-keyfreq)
-(require 'init-magit)
+(require 'init-git)
 (require 'init-org)
 (require 'init-projectile)
 (require 'init-python)
