@@ -84,6 +84,11 @@ function sizeup {
     du -kx "${dir}" | sort -n | tail -200
 }
 
+function port_hog {
+    PORT=$1
+    sudo lsof -i -P | grep "$PORT"
+}
+
 
 function gen_gif {
     in_file=$1
@@ -91,14 +96,6 @@ function gen_gif {
     ffmpeg -i $in_file -pix_fmt rgb24 -r 10 "$in_base.gif"
 }
 
-# Convert jupyter notebook to org file
-function jup_to_org {
-    input=$1
-    jupyter nbconvert $input --to markdown
-    md_file="${input//.ipynb/.md}"
-    org_file="${input//.ipynb/.org}"
-    pandoc $md_file -o $org_file
-}
 
 ###################################################################
 ### Emacs
