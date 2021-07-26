@@ -83,7 +83,6 @@
 (which-key-mode 1)
 
 
-(require 'vlf-setup)
 
 
 ;; persistent scratch
