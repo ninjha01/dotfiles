@@ -3,7 +3,8 @@
   (unless (package-installed-p package) 
     (package-install package)))
 
-
+;; Don't show gaps on macOS with no titlebar
+(setq frame-resize-pixelwise t)
 
 ;; Rainbow delimiters
 (rainbow-delimiters-mode-enable)
