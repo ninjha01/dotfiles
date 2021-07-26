@@ -33,4 +33,8 @@
 (define-key elpy-mode-map (kbd "M-.") 'jedi-goto-definition-or-rgrep)
 
 
+;; Suppress readline incompatibility error
+;; , yet ‘python-shell-completion-native-enable’ was t and "python3" is not part of the ‘python-shell-completion-native-disabled-interpreters’ list.  Native completions have been disabled locally. 
+(setq python-shell-completion-native-disabled-interpreters '("python3"))
+
 (provide 'init-python)
