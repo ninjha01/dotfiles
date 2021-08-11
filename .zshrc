@@ -7,44 +7,76 @@
 ###################################################################
 
 ###################################################################
-### Work Aliases
-###################################################################
-alias emeril="conda activate emeril; cd ~/Desktop/emeril/"
-alias depmap="conda activate depmap; cd ~/Desktop/depmap/"
-# alias honk="conda activate honk; cd ~/Desktop/honk/"
-alias loom="conda activate loom; cd ~/Desktop/loom/"
-
-###################################################################
 ### Aesthetics
 ###################################################################
 
-export TERM=xterm-256color;
-export CLICOLOR=1
-export LSCOLORS='GxFxCxDxBxegedabagaced'
-export PS1="[\t][\[\e[31m\]\W\[\e[m\]]: "
+# https://stackoverflow.com/questions/689765/how-can-i-change-the-color-of-my-prompt-in-zsh-different-from-normal-text
+PS1=$'[%*][\e[0;31m%1d\e[0m]: '
+
+# ls colors
+CLICOLOR=1
+LSCOLORS=gafacadabaegedabagacad
 
 ###################################################################
 ### Misc Behavior Mod
 ###################################################################
 
+# Auto CD
+setopt AUTO_CD
+
+# Case insensitive globbing
+setopt NO_CASE_GLOB
+
+# append and reload the history after each command
+PROMPT_COMMAND="history -a; history -n"
+
+
+# Autocorrect
+setopt CORRECT
+setopt CORRECT_ALL
+
+###################################################################
+### History
+###################################################################
+
+# append and reload the history after each command
+PROMPT_COMMAND="history -a; history -n"
+
+# Store History
+HISTFILE=${ZDOTDIR:-$HOME}/.zsh_history
+
+# Add metadata
+setopt EXTENDED_HISTORY
+
 # don't put duplicate lines or lines starting with space in the history.
 # See bash(1) for more options
 HISTCONTROL=ignoreboth
 
+# share history across multiple zsh sessions
+setopt SHARE_HISTORYs
+
+# adds commands as they are typed, not at shell exit
+setopt INC_APPEND_HISTORY
+
+
 # append to the history file, don't overwrite it
-shopt -s histappend
-# append and reload the history after each command
-PROMPT_COMMAND="history -a; history -n"
+setopt APPEND_HISTORY
+
+# expire duplicates first
+setopt HIST_EXPIRE_DUPS_FIRST 
+# do not store duplications
+setopt HIST_IGNORE_DUPS
+#ignore duplicates when searching
+setopt HIST_FIND_NO_DUPS
+# removes blank lines from history
+setopt HIST_REDUCE_BLANKS
 
 # ignore certain commands from the history
 HISTIGNORE="ls:ll:pwd:bg:fg:history"
 
-# unlimited history
-export HISTSIZE=
-export HISTFILESIZE=
+HISTSIZE=20000
+SAVEHIST=$HISTSIZE
 
-# Hide bash warning on macOS
-export BASH_SILENCE_DEPRECATION_WARNING=1
 
 ###################################################################
 ### Utils
@@ -101,7 +133,7 @@ function gen_gif {
 ### Emacs
 ###################################################################
 
-export EDITOR="/usr/local/bin/emacsclient -c -a \"\""
+EDITOR="/usr/local/bin/emacsclient -c -a \"\""
 
 function emi {
     daemon_name="${1:-server}"
@@ -134,9 +166,3 @@ function remc {
     exit
 }
 
-
-###################################################################
-### Completion
-###################################################################
-
-[ -f /usr/local/etc/bash_completion ] && . /usr/local/etc/bash_completion

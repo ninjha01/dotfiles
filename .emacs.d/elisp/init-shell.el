@@ -12,6 +12,10 @@
     (term-line-mode)))
 (define-key term-mode-map (kbd "C-c C-j") 'term-toggle)
 
+;; Set zsh as shell
+(setq explicit-shell-file-name "/bin/zsh")
+(setq shell-file-name "zsh")
+
 ;; Open and name shell
 (global-set-key (kbd "C-c t") 
 		(lambda () 
@@ -19,5 +23,7 @@
 		  (shell) 
 		  (rename-uniquely)))
 
+(add-hook 'shell-mode-hook (lambda ()
+			     (company-mode -1)))
 
 (provide 'init-shell)
