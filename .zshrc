@@ -11,7 +11,10 @@
 ###################################################################
 
 # https://stackoverflow.com/questions/689765/how-can-i-change-the-color-of-my-prompt-in-zsh-different-from-normal-text
-PS1=$'[%*][\e[0;31m%1d\e[0m]: '
+PS1=$'[%(?.%F{green}√.%F{red}X)%f][%*][%F{red}%1d%f]: '
+
+# Silence login message
+touch ~/.hushlogin
 
 # ls colors
 CLICOLOR=1
@@ -53,7 +56,7 @@ setopt EXTENDED_HISTORY
 HISTCONTROL=ignoreboth
 
 # share history across multiple zsh sessions
-setopt SHARE_HISTORYs
+setopt SHARE_HISTORY
 
 # adds commands as they are typed, not at shell exit
 setopt INC_APPEND_HISTORY
@@ -73,6 +76,10 @@ setopt HIST_REDUCE_BLANKS
 
 # ignore certain commands from the history
 HISTIGNORE="ls:ll:pwd:bg:fg:history"
+
+# search history with current text or go up
+bindkey '^P' history-beginning-search-backward
+bindkey '^N' history-beginning-search-forward
 
 HISTSIZE=20000
 SAVEHIST=$HISTSIZE
