@@ -8,7 +8,6 @@
 
 
 ;; General
-(require 'conseq-mode)
 (require 'init-clang)
 (require 'init-clisp)
 (require 'init-company)
