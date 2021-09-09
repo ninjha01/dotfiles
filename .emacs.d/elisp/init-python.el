@@ -32,6 +32,10 @@
                 (concat "\\(def\\|class\\)\s" (thing-at-point 'symbol) "(")))))
 (define-key elpy-mode-map (kbd "M-.") 'elpy-goto-definition-or-rgrep)
 
+;; Suppress error in process sentinel: elpy-rpc--default-error-callback: peculiar error: "exited abnormally with code 1"
+;; https://github.com/jorgenschaefer/elpy/issues/1749
+(add-to-list 'process-coding-system-alist '("python" . (utf-8 . utf-8)))
+
 
 ;; Suppress readline incompatibility error
 ;; , yet ‘python-shell-completion-native-enable’ was t and "python3" is not part of the ‘python-shell-completion-native-disabled-interpreters’ list.  Native completions have been disabled locally. 

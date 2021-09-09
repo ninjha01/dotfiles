@@ -42,12 +42,12 @@
   (company-mode +1))
 (add-hook 'typescript-mode-hook #'setup-tide-mode)
 
-
-;;;;; formats the buffer before saving
-(add-hook 'before-save-hook 'tide-format-before-save)
-
-
 ;;;;; enable typescript-tslint checker
 (flycheck-add-mode 'typescript-tslint 'web-mode)
+
+(require 'prettier-js)
+(add-hook 'js2-mode-hook 'prettier-js-mode)
+(add-hook 'web-mode-hook 'prettier-js-mode)
+(add-hook 'tide-mode-hook 'prettier-js-mode)
 
 (provide 'init-web)
