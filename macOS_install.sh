@@ -7,3 +7,5 @@ if ! type -P brew; then
 fi
 
 brew bundle
+
+./symlink.sh
