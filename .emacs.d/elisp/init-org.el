@@ -8,7 +8,7 @@
 (require 'org-capture)
 (require 'ox-reveal)
 
-(setq org-directory "~/Google Drive/org")
+(setq org-directory "~/google_drive/org")
 (global-set-key (kbd "C-c c") 'org-capture)
 (global-set-key (kbd "C-c l") 'org-store-link)
 (global-set-key (kbd "C-c C-l") 'org-insert-last-stored-link)
@@ -16,9 +16,18 @@
 (define-key org-mode-map (kbd "C-S-<up>") nil)
 (define-key org-mode-map (kbd "C-S-<down>") nil)
 
-(setq my-notes-file "~/Google Drive/org/notes.org")
-(setq my-tasks-file "~/Google Drive/org/work.org")
-(setq my-journal-file "~/Google Drive/org/journal.org")
+
+
+(setq my-notes-file "~/google_drive/org/notes.org")
+(setq my-tasks-file "~/google_drive/org/work.org")
+(setq my-journal-file "~/google_drive/org/journal.org")
+
+(defun open-work-org-file ()
+  "Opens ~/Google Drive/org/work.org"
+  (interactive)
+  (find-file-other-window my-tasks-file))
+
+(global-set-key (kbd "C-x C-o") 'open-work-org-file)
 
 
 (setq org-default-notes-file my-notes-file)
@@ -63,4 +72,5 @@
   (add-hook 'org-babel-after-execute-hook 'org-fix-inline-images))
 
 (setq org-confirm-babel-evaluate nil)
+
 (provide 'init-org)
