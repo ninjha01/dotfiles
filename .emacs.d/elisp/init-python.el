@@ -14,10 +14,18 @@
       python-shell-interpreter-args "-i")
 (setenv "WORKON_HOME" "/usr/local/Caskroom/miniconda/base/envs/")
 (setq flycheck-flake8rc "~/dotfiles/python/.flake8")
+
 (require 'elpy)
+(defun my-elpy-mode-before-save-hook ()
+  (when (eq major-mode 'elpy-mode)
+    (elpy-black-fix-code)
+    ))
+
 (add-hook 'elpy-mode-hook 
 	  '(lambda () 
-	     (add-hook 'before-save-hook 'elpy-black-fix-code 'make-it-local)))
+	     (add-hook 'before-save-hook 'my-elpy-mode-before-save-hook 'make-it-local)))
+
+
 (when (require 'flycheck nil t)
   (setq elpy-modules (delq 'elpy-module-flymake elpy-modules))
   (add-hook 'elpy-mode-hook 'flycheck-mode))
@@ -40,5 +48,6 @@
 ;; Suppress readline incompatibility error
 ;; , yet ‘python-shell-completion-native-enable’ was t and "python3" is not part of the ‘python-shell-completion-native-disabled-interpreters’ list.  Native completions have been disabled locally. 
 (setq python-shell-completion-native-disabled-interpreters '("python3"))
+
 
 (provide 'init-python)

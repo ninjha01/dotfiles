@@ -120,7 +120,7 @@ function sizeup {
     then
 	dir="$(pwd)"
     fi
-    du -kx "${dir}" | sort -n | tail -200
+    du -hx "${dir}" | sort -n | tail -200
 }
 
 function port_hog {

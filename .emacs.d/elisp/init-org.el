@@ -57,10 +57,11 @@
 ;;; Org-babel languages
 (org-babel-do-load-languages 'org-babel-load-languages '((shell . t) 
 							 (python . t)
+							 (js . t)
 							 (ocaml . t)
 							 (sql . t)
 							 (dot . t)
-							 (plantuml . t)))
+							 (plantuml . t))) 
 (setq org-log-done t)
 
 ;; org live refresh inline images
