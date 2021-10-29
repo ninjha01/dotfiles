@@ -3,6 +3,9 @@
   (unless (package-installed-p package) 
     (package-install package)))
 
+;; Smooth scrolling
+(pixel-scroll-mode -1)
+
 ;; Don't show gaps on macOS with no titlebar
 (setq frame-resize-pixelwise t)
 
