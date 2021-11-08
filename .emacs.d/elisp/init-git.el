@@ -13,6 +13,8 @@
 (with-eval-after-load 'magit 
   (require 'forge))
 
+(setq magit-save-repository-buffers 'dontask)
+
 (require 'git-link)
 (global-set-key (kbd "C-c C-g l") 'git-link)
 (eval-after-load 'git-link

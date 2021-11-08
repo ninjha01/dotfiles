@@ -1,6 +1,7 @@
+#!/bin/bash -i
 ###################################################################
 ##                                                               ##
-##                Nishant's Bash Configuration                   ##
+##                Nishant's Zsh Configuration                    ##
 ##	              There are many like it                     ##
 ##	               But this one is mine                      ##
 ##                                                               ##
@@ -135,6 +136,11 @@ function gen_gif {
     ffmpeg -i $in_file -pix_fmt rgb24 -r 10 "$in_base.gif"
 }
 
+function repeat_with_x86 {
+    repeate_cmd="arch -x86_64 !!"
+    echo "eval $prev"
+}
+alias rx="repeat_with_x86"
 
 ###################################################################
 ### Emacs
@@ -172,20 +178,3 @@ function remc {
 	emc "$daemon_name"
     exit
 }
-
-
-# >>> conda initialize >>>
-# !! Contents within this block are managed by 'conda init' !!
-__conda_setup="$('/opt/homebrew/Caskroom/miniforge/base/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
-if [ $? -eq 0 ]; then
-    eval "$__conda_setup"
-else
-    if [ -f "/opt/homebrew/Caskroom/miniforge/base/etc/profile.d/conda.sh" ]; then
-        . "/opt/homebrew/Caskroom/miniforge/base/etc/profile.d/conda.sh"
-    else
-        export PATH="/opt/homebrew/Caskroom/miniforge/base/bin:$PATH"
-    fi
-fi
-unset __conda_setup
-# <<< conda initialize <<<
-
