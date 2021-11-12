@@ -100,7 +100,7 @@ alias venv='python3 -m venv venv; activate'
 alias sizeof="du -sh"
 alias ca="conda activate"
 alias cda="conda deactivate"
-alias vie="emacs -Q -nw"
+alias vi="emacs -Q -nw"
 
 function notify {
     title=$1

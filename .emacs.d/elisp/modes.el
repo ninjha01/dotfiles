@@ -15,12 +15,11 @@
 (require 'init-flycheck)
 (require 'init-graphviz)
 (require 'init-ivy)
-(require 'init-java)
 (require 'init-keyfreq)
 (require 'init-git)
 (require 'init-org)
 (require 'init-projectile)
-(require 'init-python)
+
 (require 'init-rust)
 (require 'init-shell)
 (require 'init-web)
@@ -28,7 +27,9 @@
 (require 'init-crux)
 (require 'init-avy)
 (require 'init-sql)
+(require 'init-lsp)
 ;; (require 'init-ocaml)
+;; (require 'init-python)
 
 
 

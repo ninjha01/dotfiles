@@ -30,3 +30,10 @@
 .vim/viminfo'
 /commands
 /.emacs.d/eln-cache/
+/.emacs.d/workspace/
+/.emacs.d/.cache/
+/.emacs.d/.dap-breakpoints
+/.emacs.d/.lsp-session-v1
+/.emacs.d/eclipse.jdt.ls/
+/.emacs.d/meghanada/
+/Brewfile.lock.json
