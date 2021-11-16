@@ -1,7 +1,7 @@
 (setq package-list '(persistent-scratch ace-window beacon  browse-kill-ring dumb-jump elisp-format
 					fireplace  flyparens god-mode helm-flycheck htmlize
 					ledger-mode markdown-mode mood-line multiple-cursors
-					pdf-tools which-key))
+					pdf-tools which-key atomic-chrome))
 (dolist (package package-list) 
   (unless (package-installed-p package) 
     (package-install package)))
@@ -32,6 +32,8 @@
 ;; (require 'init-python)
 
 
+;; Use emacs to edit text in chrome
+(atomic-chrome-start-server)
 
 ;; subword mode
 (global-subword-mode 1)

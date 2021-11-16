@@ -1,4 +1,4 @@
-(setq lsp-package-list '(lsp-java lsp-mode lsp-ui lsp-python-ms))
+(setq lsp-package-list '(lsp-java lsp-mode lsp-ui lsp-python-ms use-package))
 (dolist (package lsp-package-list) 
   (unless (package-installed-p package) 
     (package-install package)))
