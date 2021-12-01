@@ -101,6 +101,7 @@ alias sizeof="du -sh"
 alias ca="conda activate"
 alias cda="conda deactivate"
 alias vi="emacs -Q -nw"
+alias vim="vi"
 
 function notify {
     title=$1
@@ -146,35 +147,8 @@ alias rx="repeat_with_x86"
 ### Emacs
 ###################################################################
 
-EDITOR="/usr/local/bin/emacsclient -c -a \"\""
-
-function emi {
-    daemon_name="${1:-server}"
-    emacs --daemon="$daemon_name"
-    if [ "$daemon_name" != "server" ]; then
-	emacsclient -s "$daemon_name" --eval '(setq-default mode-line-misc-info (concat "Ψ: " server-name ""))'
-    fi
-}
-
-function emc {
-    daemon_name="${1:-server}"
-    emacsclient -s "$daemon_name" -n -c -a \"\"
-}
-
-function emcnw {
-    daemon_name="${1:-server}"
-    emacsclient -s "$daemon_name" -n -c -a -nw \"\"
-}
-
-function kille {
-    daemon_name="${1:-server}"
-    emacsclient -s "$daemon_name" -e '(kill-emacs)'
-}
-
-function remc {
-    daemon_name="${1:-server}"
-    kille "$daemon_name"
-    emi "$daemon_name" &&
-	emc "$daemon_name"
-    exit
-}
+EDITOR='emacsclient --create-frame --alternate-editor=""'
+alias emc='emacsclient --no-wait --create-frame --alternate-editor="" '
+alias emcnw='emacsclient -tty --create-frame --alternate-editor=""'
+alias kille="emacsclient -e '(kill-emacs)'"
+alias remc="kille && emc"
