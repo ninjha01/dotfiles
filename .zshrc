@@ -148,7 +148,7 @@ alias rx="repeat_with_x86"
 ###################################################################
 
 EDITOR='emacsclient --create-frame --alternate-editor=""'
-alias emc='emacsclient --no-wait --create-frame --alternate-editor="" '
+alias emc='emacsclient --no-wait --create-frame --alternate-editor=""'
 alias emcnw='emacsclient -tty --create-frame --alternate-editor=""'
 alias kille="emacsclient -e '(kill-emacs)'"
-alias remc="kille && emc"
+alias remc="kille;emc && exit"
