@@ -8,28 +8,32 @@
 
 
 ;; General
-(require 'init-clang)
-(require 'init-clisp)
-(require 'init-company)
-(require 'init-docker)
-(require 'init-flycheck)
-(require 'init-graphviz)
-(require 'init-ivy)
-(require 'init-keyfreq)
-(require 'init-git)
-(require 'init-org)
 (require 'init-projectile)
-
-(require 'init-rust)
-(require 'init-shell)
-(require 'init-web)
-(require 'init-yaml)
+(require 'init-keyfreq)
+(require 'init-company)
+(require 'init-ivy)
 (require 'init-crux)
 (require 'init-avy)
-(require 'init-sql)
+
+;; Tools
+(require 'init-git)
+(require 'init-docker)
+(require 'init-org)
+(require 'init-shell)
+
+;; Languages
 (require 'init-lsp)
+(require 'init-flycheck)
+(require 'init-python)
+(require 'init-clang)
+(require 'init-clisp)
+(require 'init-graphviz)
+(require 'init-rust)
+(require 'init-web)
+(require 'init-yaml)
+(require 'init-sql)
 ;; (require 'init-ocaml)
-;; (require 'init-python)
+
 
 
 ;; Use emacs to edit text in chrome

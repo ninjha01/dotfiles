@@ -29,25 +29,24 @@
 
 
 ;;;; Tide Mode
-(defun setup-tide-mode () 
-  (interactive) 
-  (tide-setup) 
-  (flycheck-mode +1) 
-  (setq flycheck-check-syntax-automatically '(save mode-enabled)) 
-  (eldoc-mode +1) 
-  (tide-hl-identifier-mode +1)
-  ;; company is an optional dependency. You have to
-  ;; install it separately via package-install
-  ;; `M-x package-install [ret] company`
-  (company-mode +1))
-(add-hook 'typescript-mode-hook #'setup-tide-mode)
+(use-package tide
+  :config
+  (defun setup-tide-mode () 
+    (interactive) 
+    (tide-setup) 
+    (flycheck-mode +1) 
+    (setq flycheck-check-syntax-automatically '(save mode-enabled)) 
+    (eldoc-mode +1) 
+    (tide-hl-identifier-mode +1)
+    (company-mode +1))
+  (flycheck-add-mode 'typescript-tslint 'web-mode)
+  :hook
+  ((web-mode . setup-tide-mode)))
 
-;;;;; enable typescript-tslint checker
-(flycheck-add-mode 'typescript-tslint 'web-mode)
-
-(require 'prettier-js)
-(add-hook 'js2-mode-hook 'prettier-js-mode)
-(add-hook 'web-mode-hook 'prettier-js-mode)
-(add-hook 'tide-mode-hook 'prettier-js-mode)
+(use-package prettier-js
+  :hook
+  ((web-mode . prettier-js-mode)
+   (js2-mode . prettier-js-mode)
+   (tide-mode . prettier-js-mode)))
 
 (provide 'init-web)
