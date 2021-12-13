@@ -9,7 +9,13 @@
 
 ;; package system
 (require 'package)
+(add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/"))
+(add-to-list 'package-archives '("org" . "https://orgmode.org/elpa/") t)
+(package-initialize)
+(package-refresh-contents)
+
 ;; Install straight.el
+
 (defvar bootstrap-version)
 (let ((bootstrap-file
        (expand-file-name "straight/repos/straight.el/bootstrap.el" user-emacs-directory))
@@ -27,10 +33,6 @@
 ;; use-package
 (straight-use-package 'use-package)
 
-;; (add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/"))
-;; (add-to-list 'package-archives '("org" . "https://orgmode.org/elpa/") t)
-;; (package-initialize)
-;; (package-refresh-contents)
 
 (load-library "style")
 (load-library "modes")

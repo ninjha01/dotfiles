@@ -34,6 +34,16 @@
 
 (setq default-frame-alist '((font . "Fira Code 12")))
 
+;; (straight-use-package
+;;  '(nano-emacs :type git :host github :repo "rougier/nano-emacs"))
+;; (require 'nano-base-colors)
+;; (require 'nano-faces)
+;; (require 'nano-layout)
+;; (require 'nano-theme-dark)
+;; (require 'nano-theme)
+
+(load-theme 'doom-zenburn t)
+
 (doom-modeline-mode t)
 (set-face-attribute 'mode-line nil :font "Fira Code 12")
 (setq doom-modeline-height 22)
@@ -59,8 +69,6 @@
 
 
 
-
-(load-theme 'zenburn t)
 
 
 ;;; Remove menubar
