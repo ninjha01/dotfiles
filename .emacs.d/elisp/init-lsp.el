@@ -1,9 +1,3 @@
-(setq lsp-package-list '(lsp-java lsp-mode lsp-ui use-package))
-(dolist (package lsp-package-list) 
-  (unless (package-installed-p package) 
-    (package-install package)))
-
-
 (use-package 
   lsp-mode 
   :config

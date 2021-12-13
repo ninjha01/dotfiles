@@ -1,9 +1,6 @@
-(setq avy-package-list '(avy))
-(dolist (package avy-package-list) 
-  (unless (package-installed-p package) 
-    (package-install package)))
+(use-package avy
+  :bind
+  (:map global-map
+	("M-s" . 'avy-goto-char-timer)))
 
-
-;; Open and name shell
-(global-set-key (kbd "M-s") 'avy-goto-char-timer)
 (provide 'init-avy)

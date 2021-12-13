@@ -1,13 +1,3 @@
-# Ignore everything
-
-# Except the dotfiles I explicitely want to share
-!.bashrc
-!.emacs.d/*
-!.vim/
-!symlink.sh
-!macOS_install.sh
-
-
 .emacs.d/.emacs.d
 .emacs.d/.emacs.keyfreq
 .emacs.d/.mc-lists.el
@@ -37,3 +27,5 @@
 /.emacs.d/eclipse.jdt.ls/
 /.emacs.d/meghanada/
 /Brewfile.lock.json
+/.emacs.d/straight/
+/.emacs.d/elisp/custom.el
