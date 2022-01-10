@@ -42,7 +42,7 @@
 ;; (require 'nano-theme-dark)
 ;; (require 'nano-theme)
 
-(load-theme 'doom-zenburn t)
+(load-theme 'zenburn t)
 
 (doom-modeline-mode t)
 (set-face-attribute 'mode-line nil :font "Fira Code 12")
