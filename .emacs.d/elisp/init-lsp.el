@@ -1,22 +1,40 @@
-(use-package 
+(use-package
   lsp-mode 
   :config
   (setq read-process-output-max (* 1024 1024)
 	lsp-idle-delay 0.5 ;; "Increase the amount of data which Emacs reads from the process. Again the emacs default is too low 4k considering that the some of the language server responses are in 800k - 3M range."
 	lsp-enable-symbol-highlighting t
 	lsp-enable-snippet nil	;; Not supported by company capf, which is the recommended company backend
-	 gc-cons-threshold 100000000 ;; "Adjust gc-cons-threshold. The default setting is too low for lsp-mode’s needs due to the fact that client/server communication generates a lot of memory/garbage."
+	gc-cons-threshold 100000000 ;; "Adjust gc-cons-threshold. The default setting is too low for lsp-mode’s needs due to the fact that client/server communication generates a lot of memory/garbage."
 	lsp-headerline-breadcrumb-enable nil ;; Don't show headerline
 	lsp-completion-show-kind nil ;; Don't show completion kind
 	lsp-completion-show-detail nil
 	lsp-disabled-clients '(pylsp pyls)
 	lsp-diagnostics-flycheck-enable t
 	) ;; Don't show Completion item detail
-  
+  (add-hook 'before-save-hook 'lsp-organize-imports)
   :hook
   ((java-mode . lsp) 
    (lsp-mode . lsp-enable-which-key-integration)))
 
+
+;; web-dev
+(use-package web-mode
+  :ensure t
+  :mode (("\\.js$" .  web-mode)
+         ("\\.jsx$" .  web-mode)
+	 ("\\.ts$" .  web-mode)
+	 ("\\.tsx$" .  web-mode)
+	 ("\\.html$" .  web-mode)
+	 ("\\.css$" .  web-mode)
+	 ("\\.$" .  web-mode))
+  :hook (web-mode . (lambda ()
+		      (require 'flycheck)
+		      (require 'prettier-js)
+		      (require 'lsp)
+		      (prettier-js-mode)
+		      (lsp)
+		      )))
 
 ;; Lsp UI
 (use-package 

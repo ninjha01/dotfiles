@@ -29,7 +29,6 @@
 (require 'init-clisp)
 (require 'init-graphviz)
 (require 'init-rust)
-(require 'init-web)
 (require 'init-yaml)
 (require 'init-sql)
 ;; (require 'init-ocaml)
