@@ -13,6 +13,9 @@
 	lsp-diagnostics-flycheck-enable t
 	) ;; Don't show Completion item detail
   (add-hook 'before-save-hook 'lsp-organize-imports)
+  :bind
+  (:map lsp-mode-map
+	("C-<return>" . lsp-execute-code-action))
   :hook
   ((java-mode . lsp) 
    (lsp-mode . lsp-enable-which-key-integration)))

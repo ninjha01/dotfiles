@@ -6,6 +6,11 @@
   (unless (package-installed-p package) 
     (package-install package)))
 
+;; Tools
+(require 'init-git)
+(require 'init-docker)
+(require 'init-org)
+(require 'init-shell)
 
 ;; General
 (require 'init-projectile)
@@ -14,12 +19,7 @@
 (require 'init-ivy)
 (require 'init-crux)
 (require 'init-avy)
-
-;; Tools
-(require 'init-git)
-(require 'init-docker)
-(require 'init-org)
-(require 'init-shell)
+(require 'init-quickrun)
 
 ;; Languages
 (require 'init-lsp)

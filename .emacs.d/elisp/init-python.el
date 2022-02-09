@@ -1,5 +1,4 @@
 ;; python
-(require 'lsp)
 (use-package lsp-pyright
   :ensure t
   :hook
@@ -11,10 +10,12 @@
 (use-package
   blacken
   :demand t
+  :ensure t
   :hook ((python-mode . blacken-mode)))
 (use-package 
   pyvenv 
-  :demand t 
+  :demand t
+  :ensure t  
   :config (setq pyvenv-workon "emacs")  ; Default venv
   (setenv "WORKON_HOME" "/opt/homebrew/Caskroom/miniforge/base/envs/") 
   (defalias 'workon 'pyvenv-workon) 
