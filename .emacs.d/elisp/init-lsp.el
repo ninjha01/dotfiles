@@ -22,6 +22,8 @@
 
 
 ;; web-dev
+(use-package prettier-js
+  :ensure t)
 (use-package web-mode
   :ensure t
   :mode (("\\.js$" .  web-mode)

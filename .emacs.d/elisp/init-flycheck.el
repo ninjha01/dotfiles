@@ -7,12 +7,6 @@
   (setq flycheck-disabled-checkers '(emacs-lisp-checkdoc python/python-pylint))
   ;; Doesn't seem to work
   ;; (setq flycheck-navigation-minimum-level 'error)
-  (flycheck-define-checker proselint
-    "Flycheck checker using Proselint. See URL `http://proselint.com/'." 
-    :command ("proselint" "--json" "-") 
-    :standard-input t 
-    :error-parser flycheck-proselint-parse-errors 
-    :modes (fundamental-mode text-mode markdown-mode gfm-mode message-mode rst-mode))
   :init (global-flycheck-mode)
   :bind
   (:map flycheck-mode-map
