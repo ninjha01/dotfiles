@@ -36,8 +36,9 @@ PROMPT_COMMAND="history -a; history -n"
 
 
 # Autocorrect
-setopt CORRECT
-setopt CORRECT_ALL
+unsetopt correct
+# setopt CORRECT
+# setopt CORRECT_ALL
 
 ###################################################################
 ### History
