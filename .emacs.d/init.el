@@ -411,27 +411,31 @@
 
 
 ;; Shell
+
+(use-package shell
+  :init
+  (defun open-shell-buffer-other-window ()
+    (interactive)
+    (let ((buf (shell)))
+    (switch-to-buffer (other-buffer buf))
+    (switch-to-buffer-other-window buf)))
+  :bind
+  (:map global-map
+	("C-c t" . open-shell-buffer-other-window)))
 ;; Open Terminal to cur dir with CMD-T
-(defun open-term-here () 
-  (interactive) 
-  (shell-command "open -a Terminal \"$pwd\""))
-
-(global-set-key (kbd "s-t") 'open-term-here)
-
-;; Selective view
-(defun selective-toggle () 
-  "Toggles term between line mode and char mode" 
-  (interactive) 
-  (if (eq selective-display 1) 
-      (set-selective-display nil) 
-    (set-selective-display t)))
-
-(global-set-key (kbd "C-x C-4") 'selective-toggle)
+(use-package term
+  :init
+  (defun open-term-here () 
+    (interactive) 
+    (shell-command "open -a Terminal \"$pwd\""))
+  :config
+  :bind
+  (:map global-map
+	("s-t" . open-term-here)))
 
 ;; TODO Graphviz
 
+;; Elisp
 (use-package elisp-format 
   :ensure t)
-
-(use-package 
   
