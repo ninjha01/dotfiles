@@ -1,11 +1,7 @@
-(use-package 
-  docker 
-  :ensure t)
+(setq dockerfile-package-list '(docker dockerfile-mode))
+(dolist (package dockerfile-package-list) 
+  (unless (package-installed-p package) 
+    (package-install package)))
 
-(use-package   
-  dockerfile-mode
-  :after (docker)
-  :ensure t 
-  :mode (("Dockerfile\\'" . dockerfile-mode)))
-
+(add-to-list 'auto-mode-alist '("Dockerfile\\'" . dockerfile-mode))
 (provide 'init-docker)

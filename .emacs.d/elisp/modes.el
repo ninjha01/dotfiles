@@ -1,81 +1,25 @@
-(use-package 
-  persistent-scratch 
-  :ensure t)
-
-(use-package 
-  ace-window 
-  :ensure t)
-
-(use-package 
-  beacon 
-  :ensure t)
-
-(use-package 
-  browse-kill-ring 
-  :ensure t)
-
-(use-package 
-  dumb-jump 
-  :ensure t)
-
-(use-package 
-  elisp-format 
-  :ensure t)
-
-(use-package 
-  fireplace 
-  :ensure t)
-
-
-(use-package 
-  god-mode 
-  :ensure t)
-
-(use-package 
-  helm-flycheck 
-  :ensure t)
-
-(use-package 
-  htmlize 
-  :ensure t)
-
-(use-package 
-  markdown-mode 
-  :ensure t)
-
-(use-package 
-  mood-line 
-  :ensure t)
-
-(use-package 
-  multiple-cursors 
-  :ensure t)
-
-(use-package 
-  pdf-tools 
-  :ensure t)
-
-(use-package 
-  which-key 
-  :ensure t)
-
-(use-package 
-  atomic-chrome 
-  :ensure t)
+(setq package-list '(persistent-scratch ace-window beacon  browse-kill-ring dumb-jump elisp-format
+					fireplace  flyparens god-mode helm-flycheck htmlize
+					ledger-mode markdown-mode mood-line multiple-cursors
+					pdf-tools which-key atomic-chrome))
+(dolist (package package-list) 
+  (unless (package-installed-p package) 
+    (package-install package)))
 
 ;; Tools
-(require 'init-git) 			; use-packaged
-(require 'init-docker)			; use-packaged
-(require 'init-org)			; use-packaged
-(require 'init-shell)			; use-packaged
+(require 'init-git)
+(require 'init-docker)
+(require 'init-org)
+(require 'init-shell)
 
 ;; General
-(require 'init-projectile)		; use-packaged
-(require 'init-keyfreq)			; use-packaged
+(require 'init-projectile)
+(require 'init-keyfreq)
 (require 'init-company)
 (require 'init-ivy)
 (require 'init-crux)
 (require 'init-avy)
+(require 'init-quickrun)
 
 ;; Languages
 (require 'init-lsp)
@@ -169,11 +113,12 @@
 (setq ido-everywhere t)
 (ido-mode 1)
 ;;; Go to home dir when typing ~ in file completion
-(add-hook 'ido-setup-hook (lambda ()
-			    ;; Go straight home
-			    (define-key ido-file-completion-map (kbd "~") 
-			      (lambda () 
-				(interactive) 
-				(if (looking-back "/") 
-				    (insert "~/") 
-				  (call-interactively 'self-insert-command))))))
+(add-hook 'ido-setup-hook 
+	  (lambda ()
+	    ;; Go straight home
+	    (define-key ido-file-completion-map (kbd "~") 
+	      (lambda () 
+		(interactive) 
+		(if (looking-back "/") 
+		    (insert "~/") 
+		  (call-interactively 'self-insert-command))))))
