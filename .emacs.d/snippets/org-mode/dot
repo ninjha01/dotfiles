@@ -1,9 +1,0 @@
-# -*- mode: snippet -*-
-# name: graphviz src block
-# key: dot_
-# --
-#+begin_src dot :file ./graphviz_export/out.png :cmdline -Kdot -Tpng :exports results
-digraph {
-	$0
-}
-#+end_src

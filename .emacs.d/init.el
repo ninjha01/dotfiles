@@ -1,42 +1,237 @@
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;                                                               ;;
-;;                Nishant's Emacs Configuration                  ;;
-;;                    There are many like it                     ;;
-;;                     But this one is mine                      ;;
-;;                                                               ;;
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-(add-to-list 'load-path "~/.emacs.d/elisp/")
+(require 'package) ;; Emacs builtin
+(setq package-archives '(("org" . "https://orgmode.org/elpa/") 
+			 ("gnu" . "https://elpa.gnu.org/packages/") 
+			 ("melpa" . "https://melpa.org/packages/")))
 
-;; package system
-(require 'package)
-(add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/"))
-(add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/"))
+;; Suprres native comp warnings buffer
+(setq warning-minimum-level :error)
 (package-initialize)
-(package-refresh-contents)
+;; Use Package init
+(unless (package-installed-p 'use-package) 
+  (package-install package))
 
-;; Install straight.el
+;; UI
 
-(defvar bootstrap-version)
-(let ((bootstrap-file
-       (expand-file-name "straight/repos/straight.el/bootstrap.el" user-emacs-directory))
-      (bootstrap-version 5))
-  (unless (file-exists-p bootstrap-file)
-    (with-current-buffer
-        (url-retrieve-synchronously
-         "https://raw.githubusercontent.com/raxod502/straight.el/develop/install.el"
-         'silent 'inhibit-cookies)
-      (goto-char (point-max))
-      (eval-print-last-sexp)))
-  (load bootstrap-file nil 'nomessage))
-;; use straight instead
-(setq package-enable-at-startup nil)
-;; use-package
-(straight-use-package 'use-package)
+;; Theme
+(use-package 
+  doom-themes 
+  :ensure t
+  :init
+  (load-theme 'doom-zenburn t))
+(use-package 
+  zenburn-theme 
+  :ensure t
+  :init
+  (load-theme 'zenburn t))
+(use-package 
+  doom-themes 
+  :ensure t
+  :init
+  (load-theme 'doom-laserwave t))
+
+;; Modeline
+
+(use-package 
+  doom-modeline 
+  :ensure t
+  :init
+  (doom-modeline-mode t)
+  :config (setq doom-modeline-height 22) 
+  (setq doom-modeline-icon nil) 
+  (setq doom-modeline-major-mode-color-icon t) 
+  (setq doom-modeline-env-version nil) 
+  (setq doom-modeline-bar-width 1) 
+  (setq doom-modeline-buffer-encoding nil) 
+  (setq doom-modeline-buffer-file-name-style 'auto) 
+  (setq doom-modeline-buffer-modification-icon nil) 
+  (setq doom-modeline-checker-simple-format t) 
+  (setq doom-modeline-indent-info nil) 
+  (setq doom-modeline-minor-modes nil) 
+  (setq doom-modeline-project-detection 'projectile) 
+  (setq doom-modeline-vcs-max-length 12) 
+  (set-face-attribute 'mode-line nil :font "Fira Code 12"))
+
+;; Font
+
+(use-package 
+  fira-code-mode 
+  :ensure t
+  :init
+  (fira-code-mode)
+  :config
+  ;; (fira-code-mode-install-fonts t) ;; Instal if you haven't already
+  (setq default-frame-alist '((font . "Fira Code 12"))))
 
 
-(load-library "style")
-(load-library "modes")
-(load-library "keys")
+;; Chrome
+;;; Remove menubar
+(menu-bar-mode -1)
+;;; Remove Toolbar
+(tool-bar-mode -1)
+;;; Remove scroll bar
+(scroll-bar-mode -1)
+
+;; Highlighted regions are grey with white text
+(set-face-attribute 'region nil 
+		    :background "#666" 
+		    :foreground "#ffffff")
+
+;; remove fringe color
+;; https://emacs.stackexchange.com/questions/5342/how-do-i-set-the-fringe-colors-to-whatever-is-the-background-color
+(set-face-attribute 'fringe nil 
+		    :background nil)
+
+;; Don't show gaps on resize
+(setq frame-resize-pixelwise t)
+
+
+;;; Delimiters
+(show-paren-mode)
+(use-package 
+  rainbow-delimiters 
+  :ensure t 
+  :hook (prog-mode-hook . rainbow-identifiers-mode))
+
+
+(setq inhibit-startup-screen t)
+
+
+;; UX
+
+;;Clear Scratch
+(setq initial-scratch-message "")
+
+
+;; Movement
+(use-package 
+  ace-window 
+  :ensure t 
+  :bind (:map global-map
+	      ("C-x o" . ace-window)))
+
+(save-place-mode 1)
+
+(use-package 
+  persistent-scratch 
+  :ensure t)
+(persistent-scratch-setup-default)
+(persistent-scratch-autosave-mode 1)
+
+(use-package 
+  multiple-cursors 
+  :ensure t 
+  :bind (:map global-map
+	      ("C->" . mc/mark-next-like-this) 
+	      ("C-<" . mc/mark-previous-like-this)))
+
+(use-package 
+  subword)
+(subword-mode)
+
+(use-package 
+  which-key 
+  :ensure t)
+(which-key-mode 1)
+
+(global-hl-line-mode t)
+(global-prettify-symbols-mode t)
+
+(use-package 
+  beacon 
+  :ensure t)
+(beacon-mode t)
+
+;; Rebinds
+(setq mac-command-modifier 'super)
+(setq mac-option-modifier 'meta)
+(setq ns-function-modifier 'hyper)
+
+;; Rotate Windows
+(defun rotate-windows () 
+  "Rotate your windows" 
+  (interactive) 
+  (cond ((not (> (count-windows) 1)) 
+	 (message "You can't rotate a single window!")) 
+	(t 
+	 (setq i 1) 
+	 (setq numWindows (count-windows)) 
+	 (while  (< i numWindows) 
+	   (let* ((w1 (elt (window-list) i)) 
+		  (w2 (elt (window-list) 
+			   (+ (% i numWindows) 1))) 
+		  (b1 (window-buffer w1)) 
+		  (b2 (window-buffer w2)) 
+		  (s1 (window-start w1)) 
+		  (s2 (window-start w2))) 
+	     (set-window-buffer w1  b2) 
+	     (set-window-buffer w2 b1) 
+	     (set-window-start w1 s2) 
+	     (set-window-start w2 s1) 
+	     (setq i (1+ i)))))))
+(global-set-key (kbd "C-S-r") 'rotate-windows)
+
+(defun goto-line-with-feedback () 
+  "Show line numbers temporarily, while prompting for the line number input" 
+  (interactive) 
+  (unwind-protect (progn (linum-mode 1) 
+			 (goto-line (read-number "Goto line: "))) 
+    (linum-mode -1)))
+
+(global-set-key (kbd "M-l") 'goto-line-with-feedback)
+
+;; Query regexp replace
+(global-set-key (kbd "C-c r") 'query-replace-regexp)
+
+;; Cycle space
+(global-set-key (kbd "M-SPC") 'cycle-spacing)
+
+(use-package 
+  avy 
+  :bind (:map global-map
+	      ("M-s" . 'avy-goto-char-timer)))
+
+(use-package 
+  crux 
+  :ensure t 
+  :bind (:map global-map
+	      ("C-x C-r" . crux-rename-file-and-buffer) 
+	      ("C-x C-k" . crux-delete-buffer-and-file)))
+
+(use-package 
+  ivy 
+  :ensure t 
+  :config (setq ivy-use-virtual-buffers t) 
+  (setq enable-recursive-minibuffers t) 
+  :bind (:map global-map
+	      ("C-s" . swiper) 
+	      ("C-c C-r" . ivy-resume) 
+	      ("C-x b" . ivy-switch-buffer)))
+(ivy-mode)
+
+(use-package 
+  counsel 
+  :ensure t 
+  :config 
+  :bind (:map global-map
+	      ("M-x" . counsel-M-x) 
+	      ("C-x C-f" . counsel-find-file) 
+	      ("C-c k" . counsel-git-grep) 
+	      ("C-r" . counsel-minibuffer-history)))
+
+(use-package 
+  projectile 
+  :ensure t 
+  :after (magit) 
+  :bind (:map projectile-mode-map
+	      ("C-c p" . projectile-command-map)) 
+  :config (setq projectile-indexing-method 'native) 
+  (add-to-list 'projectile-globally-ignored-directories "Pods") 
+  (add-to-list 'projectile-globally-ignored-directories "node_modules") 
+  (add-to-list 'projectile-globally-ignored-directories ".mypy_cache") 
+  (setq projectile-git-submodule-command nil) 
+  (require 'magit) 
+  (setq projectile-switch-project-action 'magit-status))
+(projectile-mode 1)
 
 ;; Write backup files to own directory
 (unless (file-exists-p "~/.emacs.d/.saves/") 
@@ -53,85 +248,19 @@
 ;; Don't jump around on scroll
 (setq scroll-conservatively 100)
 
-
-;; Region highlights as white
-(set-face-attribute 'region nil 
-		    :background "#666" 
-		    :foreground "#ffffff")
-
-;; Emacs first checks whether a window can be split horizontally when opening a new window, then checks if it can be split vertically.
-;; This function reverses the order of the checks.
-(defun reversed-split-window-sensibly 
-    (&optional 
-     window
-     ) 
-  (let ((window (or window 
-		    (selected-window)
-		    ))) 
-    (or (and (window-splittable-p window t)
-             ;; Split window horizontally.
-             (with-selected-window window (split-window-right))
-	     ) 
-	(and (window-splittable-p window)
-             ;; Split window vertically.
-             (with-selected-window window (split-window-below))
-	     ) 
-	(and (eq window (frame-root-window (window-frame window))) 
-	     (not (window-minibuffer-p window))
-             ;; If WINDOW is the only window on its frame and is not the
-             ;; minibuffer window, try to split it horizontally disregarding
-             ;; the value of `split-width-threshold'.
-             (let ((split-width-threshold 0)) 
-	       (when (window-splittable-p window t) 
-		 (with-selected-window window (split-window-right))))
-	     )
-	))
-  )
-
-(setq split-window-preferred-function 'reversed-split-window-sensibly)
-
-
-;; macOS shell tomfoolery
-(defun set-exec-path-from-shell-PATH () 
-  (let ((path-from-shell (replace-regexp-in-string "[ \t\n]*$" "" (shell-command-to-string
-								   "$SHELL --login -i -c 'echo $PATH'")))) 
-    (setenv "PATH" path-from-shell) 
-    (setq eshell-path-env path-from-shell) ; for eshell users
-    (setq exec-path (split-string path-from-shell path-separator)))
-  )
-
-(when window-system (set-exec-path-from-shell-PATH))
-(setq shell-command-switch "-ic")
-(setq-default explicit-shell-file-name "/bin/bash")
-(put 'downcase-region 'disabled nil)
-
-;; track all history
-(setq history-length t)
-;; track commands on emacs kill
-(add-hook `kill-emacs-hook 
-	  (lambda () 
-	    (append-to-file (format "<START SESSION %s>\n" (current-time-string)) 'utf-8 "~/.emacs.d/commands") 
-	    (append-to-file (format "%s" command-history) 'utf-8 "~/.emacs.d/commands") 
-	    (append-to-file (format "\n<END SESSION %s>\n" (current-time-string)) 'utf-8 "~/.emacs.d/commands")
-	    ))
-
 ;; Add logging for when emacs hangs
 (setq-default garbage-collection-messages t)
 ;; Copy current filename
 (defun copy-file-path 
     (&optional 
-     @dir-path-only-p
-     )
+     @dir-path-only-p)
   "Copy the current buffer's file path or dired path to `kill-ring'.
-Result is full path.
-If `universal-argument' is called first, copy only the dir path.
-
-If in dired, copy the file/dir cursor is on, or marked files.
-
-If a buffer is not file and not dired, copy value of `default-directory' (which is usually the “current” dir when that buffer was created)
-
-URL `http://ergoemacs.org/emacs/emacs_copy_file_path.html'
-Version 2017-09-01" 
+   Result is full path.
+   If `universal-argument' is called first, copy only the dir path.
+   If in dired, copy the file/dir cursor is on, or marked files.
+   If a buffer is not file and not dired, copy value of `default-directory' (which is usually the “current” dir when that buffer was created)
+   URL `http://ergoemacs.org/emacs/emacs_copy_file_path.html'
+   Version 2017-09-01" 
   (interactive "P") 
   (let (($fpath (if (string-equal major-mode 'dired-mode) 
 		    (progn (let (($result (mapconcat 'identity (dired-get-marked-files) "\n"))) 
@@ -141,29 +270,168 @@ Version 2017-09-01"
 		  (if (buffer-file-name) 
 		      (buffer-file-name) 
 		    (expand-file-name default-directory))))) 
-    (kill-new (if @dir-path-only-p (progn (message "Directory path copied: 「%s」" (file-name-directory $fpath)) 
+    (kill-new (if @dir-path-only-p (progn (message "Directory path copied: 「%s」"
+						   (file-name-directory $fpath)) 
 					  (file-name-directory $fpath)) 
-		(progn (message "File path copied: 「%s」" $fpath) $fpath ))))
-  )
+		(progn (message "File path copied: 「%s」" $fpath) $fpath )))))
 
 (setq trash-directory "~/.Trash")
-
-(defun set-selective-display-dlw (&optional level)
-"Fold text indented same of more than the cursor.
-If level is set, set the indent level to LEVEL.
-If 'selective-display' is already set to LEVEL, clicking
-F5 again will unset 'selective-display' by setting it to 0.
-https://stackoverflow.com/questions/1085170/how-to-achieve-code-folding-effects-in-emacs"
-  (interactive "P")
-  (if (eq selective-display (1+ (current-column)))
-      (set-selective-display 0)
-    (set-selective-display (or level (1+ (current-column))))))
-(global-set-key (kbd "C-x C-4") 'set-selective-display-dlw)
-
-
-(setq split-height-threshold 50 	; lines to place window below
-      split-width-threshold 200) 	; cols to place window to the right
+(setq split-height-threshold 50	   ; lines to place window below
+      split-width-threshold 200)   ; cols to place window to the right
 
 (setq custom-file "~/.emacs.d/elisp/custom.el")
 (load custom-file)
 
+
+;; Programming
+(use-package 
+  magit 
+  :ensure t 
+  :bind (:map global-map
+	      ("C-x g" . magit-status) 
+	      ("C-c g" . magit-file-dispatch) 
+	      ("C-c b" . magit-blame)) 
+  :config (setq magit-save-repository-buffers 'dontask) 
+  :hook (after-save-hook . 
+			 (lambda () 
+			   (setq magit-after-save-refresh-status t))))
+
+(use-package 
+  company 
+  :ensure t 
+  :after lsp-mode 
+  :hook (prog-mode . company-mode) 
+  :bind (:map company-active-map
+	      ("<tab>" . company-complete-selection) 
+	      ("C-n" . company-select-next) 
+	      ("C-p" . company-select-next)) 
+  (:map lsp-mode-map 
+	("<tab>" . company-indent-or-complete-common)) 
+  :config (setq company-tooltip-align-annotations t) 
+  :custom (company-minimum-prefix-length 1) 
+  (company-idle-delay 0.1))
+
+
+(use-package 
+  flycheck 
+  :ensure t 
+  :init (global-flycheck-mode) 
+  :bind (:map flycheck-mode-map
+	      ("C-c e" . flycheck-next-error) 
+	      ("C-c C-e" . 'flycheck-list-errors)))
+
+
+;; LSP
+;; TODO: tweak UI - i.e. hiding breadcrumb
+(use-package 
+  lsp-mode 
+  :init (setq lsp-keymap-prefix "C-c l") 
+  :config (add-hook 'before-save-hook 'lsp-organize-imports) 
+  (lsp-enable-which-key-integration t) 
+  :bind (:map lsp-mode-map
+	      ("C-<return>" . lsp-execute-code-action)) 
+  :hook ((java-mode . lsp) 
+	 (python-mode . lsp) 
+	 (web-mode . lsp) 
+	 (lsp-mode . lsp-enable-which-key-integration)))
+
+;; Python
+(use-package 
+  lsp-pyright 
+  :ensure t)
+
+(use-package 
+  blacken 
+  :demand t 
+  :ensure t 
+  :hook ((python-mode . blacken-mode)))
+(use-package 
+  pyvenv 
+  :demand t 
+  :ensure t 
+  :config (setq pyvenv-workon "emacs")  ; Default venv
+  (setenv "WORKON_HOME" "/opt/homebrew/Caskroom/miniforge/base/envs/") 
+  (defalias 'workon 'pyvenv-workon) 
+  (pyvenv-tracking-mode 1)) ; Automatically use pyvenv-workon via dir-locals
+
+(use-package 
+  python-mode 
+  :bind (:map python-mode
+	      ("M-S-<right>" . python-indent-shift-right) 
+	      ("M-S-<left>" . python-indent-shift-left)))
+
+;; Web Dev
+(use-package 
+  prettier-js 
+  :ensure t)
+
+(use-package 
+  web-mode 
+  :ensure t 
+  :after (flycheck prettier-js lsp) 
+  :mode (("\\.js$" .  web-mode) 
+	 ("\\.jsx$" .  web-mode) 
+	 ("\\.ts$" .  web-mode) 
+	 ("\\.tsx$" .  web-mode) 
+	 ("\\.html$" .  web-mode) 
+	 ("\\.css$" .  web-mode) 
+	 ("\\.$" .  web-mode)) 
+  :hook (web-mode . 
+		  (lambda () 
+		    (prettier-js-mode) 
+		    (lsp))))
+
+;; Orgmode
+(use-package 
+  org 
+  :mode (("\\.org$" . org-mode)) 
+  :ensure org-contrib 
+  :init (defun open-work-org-file () 
+	  "Opens ~/Google Drive/org/work.org" 
+	  (interactive) 
+	  (find-file-other-window my-tasks-file)) 
+  :config (setq org-directory "~/google_drive/org") 
+  (setq org-bullets-mode 1) 
+  (setq auto-revert-mode 1)
+  ;; Code blocks indent
+  (setq org-src-tab-acts-natively t)
+  ;; Code syntax highlight
+  (setq org-src-fontify-natively t) 
+  (org-babel-do-load-languages 'org-babel-load-languages '((shell . t) 
+							   (python . t) 
+							   (js . t) 
+							   (ocaml . t) 
+							   (sql . t) 
+							   (dot . t) 
+							   (plantuml . t))) 
+  (setq org-log-done t) 
+  (setq org-confirm-babel-evaluate nil) 
+  :bind (:map global-map ("C-x C-o" . open-work-org-file)))
+	      
+
+
+;; Shell
+;; Open Terminal to cur dir with CMD-T
+(defun open-term-here () 
+  (interactive) 
+  (shell-command "open -a Terminal \"$pwd\""))
+
+(global-set-key (kbd "s-t") 'open-term-here)
+
+;; Selective view
+(defun selective-toggle () 
+  "Toggles term between line mode and char mode" 
+  (interactive) 
+  (if (eq selective-display 1) 
+      (set-selective-display nil) 
+    (set-selective-display t)))
+
+(global-set-key (kbd "C-x C-4") 'selective-toggle)
+
+;; TODO Graphviz
+
+(use-package elisp-format 
+  :ensure t)
+
+(use-package 
+  
