@@ -4,7 +4,8 @@
 			 ("melpa" . "https://melpa.org/packages/")))
 
 ;; Suprres native comp warnings buffer
-(setq warning-minimum-level :error)
+(setq warning-minimum-level 
+      :error)
 (package-initialize)
 ;; Use Package init
 (unless (package-installed-p 'use-package) 
@@ -15,27 +16,26 @@
 ;; Theme
 (use-package 
   doom-themes 
-  :ensure t
-  :init
-  (load-theme 'doom-zenburn t))
+  :ensure t)
 (use-package 
   zenburn-theme 
-  :ensure t
-  :init
-  (load-theme 'zenburn t))
+  :ensure t)
+
 (use-package 
   doom-themes 
-  :ensure t
-  :init
-  (load-theme 'doom-laserwave t))
+  :ensure t)
+
+(load-theme 'zenburn t)
+(load-theme 'doom-laserwave t)
+;; (load-theme 'doom-laserwave t)
+  
 
 ;; Modeline
 
 (use-package 
   doom-modeline 
-  :ensure t
-  :init
-  (doom-modeline-mode t)
+  :ensure t 
+  :init (doom-modeline-mode t) 
   :config (setq doom-modeline-height 22) 
   (setq doom-modeline-icon nil) 
   (setq doom-modeline-major-mode-color-icon t) 
@@ -49,15 +49,15 @@
   (setq doom-modeline-minor-modes nil) 
   (setq doom-modeline-project-detection 'projectile) 
   (setq doom-modeline-vcs-max-length 12) 
-  (set-face-attribute 'mode-line nil :font "Fira Code 12"))
+  (set-face-attribute 'mode-line nil 
+		      :font "Fira Code 12"))
 
 ;; Font
 
 (use-package 
   fira-code-mode 
-  :ensure t
-  :init
-  (fira-code-mode)
+  :ensure t 
+  :init (fira-code-mode) 
   :config
   ;; (fira-code-mode-install-fonts t) ;; Instal if you haven't already
   (setq default-frame-alist '((font . "Fira Code 12"))))
@@ -89,8 +89,8 @@
 (show-paren-mode)
 (use-package 
   rainbow-delimiters 
-  :ensure t 
-  :hook (prog-mode-hook . rainbow-identifiers-mode))
+  :ensure t)
+(rainbow-delimiters-mode)
 
 
 (setq inhibit-startup-screen t)
@@ -406,36 +406,52 @@
 							   (plantuml . t))) 
   (setq org-log-done t) 
   (setq org-confirm-babel-evaluate nil) 
-  :bind (:map global-map ("C-x C-o" . open-work-org-file)))
-	      
+  :bind (:map global-map
+	      ("C-x C-o" . open-work-org-file)))
+
 
 
 ;; Shell
 
-(use-package shell
+;; (use-package shell
+;;   :init
+;;   (defun open-shell-buffer-other-window ()
+;;     (interactive)
+;;     (let ((buf (shell)))
+;;     (switch-to-buffer (other-buffer buf))
+;;     (switch-to-buffer-other-window buf)))
+;;   :bind
+;;   (:map global-map
+;; 	("C-c t" . open-shell-buffer-other-window)))
+
+(use-package 
+  term 
   :init
-  (defun open-shell-buffer-other-window ()
-    (interactive)
-    (let ((buf (shell)))
-    (switch-to-buffer (other-buffer buf))
-    (switch-to-buffer-other-window buf)))
-  :bind
-  (:map global-map
-	("C-c t" . open-shell-buffer-other-window)))
-;; Open Terminal to cur dir with CMD-T
-(use-package term
-  :init
+  ;; http://joelmccracken.github.io/entries/switching-between-term-mode-and-line-mode-in-emacs-term/"
+  (defun jnm/term-toggle-mode () 
+    "Toggles term between line mode and char mode" 
+    (interactive) 
+    (if (term-in-line-mode) 
+	(term-char-mode) 
+      (term-line-mode))) 
+  (defun open-terminal-dot-app-here () 
+    (interactive) 
+    (shell-command "open -a Terminal \"$pwd\"")) 
   (defun open-term-here () 
     (interactive) 
-    (shell-command "open -a Terminal \"$pwd\""))
-  :config
-  :bind
+    (let ((buf (term "/bin/zsh"))) 
+      (switch-to-buffer (other-buffer buf)) 
+      (switch-to-buffer-other-window buf))) 
+  :bind (:map term-mode-map
+	      ("C-c C-j" . jnm/term-toggle-mode)) 
   (:map global-map
-	("s-t" . open-term-here)))
+	("s-t" . open-terminal-dot-app-here) 
+	("C-c t" . open-term-here)))
+
 
 ;; TODO Graphviz
 
 ;; Elisp
-(use-package elisp-format 
+(use-package 
+  elisp-format 
   :ensure t)
-  
