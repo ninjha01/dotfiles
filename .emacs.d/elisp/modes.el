@@ -19,7 +19,6 @@
 (require 'init-ivy)
 (require 'init-crux)
 (require 'init-avy)
-(require 'init-quickrun)
 
 ;; Languages
 (require 'init-lsp)
