@@ -1,4 +1,5 @@
 (require 'package) ;; Emacs builtin
+
 (setq package-archives '(("org" . "https://orgmode.org/elpa/") 
 			 ("gnu" . "https://elpa.gnu.org/packages/") 
 			 ("melpa" . "https://melpa.org/packages/")))
@@ -8,8 +9,8 @@
       :error)
 (package-initialize)
 ;; Use Package init
-(unless (package-installed-p 'use-package) 
-  (package-install package))
+(unless (package-installed-p 'use-package)
+  (package-install 'use-package))
 
 ;; UI
 
@@ -26,9 +27,7 @@
   :ensure t)
 
 (load-theme 'zenburn t)
-(load-theme 'doom-laserwave t)
 ;; (load-theme 'doom-laserwave t)
-  
 
 ;; Modeline
 
@@ -62,7 +61,6 @@
   ;; (fira-code-mode-install-fonts t) ;; Instal if you haven't already
   (setq default-frame-alist '((font . "Fira Code 12"))))
 
-
 ;; Chrome
 ;;; Remove menubar
 (menu-bar-mode -1)
@@ -84,23 +82,26 @@
 ;; Don't show gaps on resize
 (setq frame-resize-pixelwise t)
 
-
 ;;; Delimiters
 (show-paren-mode)
 (use-package 
   rainbow-delimiters 
   :ensure t)
 (rainbow-delimiters-mode)
-
+(show-paren-mode)
 
 (setq inhibit-startup-screen t)
 
-
 ;; UX
+
+(setq gc-cons-threshold 100000000)
+(setq read-process-output-max (* 1024 1024)) ;; 1mb
+(setq auto-save-default nil)
+(setq make-backup-files nil)
+(setq create-lockfiles nil)
 
 ;;Clear Scratch
 (setq initial-scratch-message "")
-
 
 ;; Movement
 (use-package 
@@ -198,6 +199,10 @@
 	      ("C-x C-k" . crux-delete-buffer-and-file)))
 
 (use-package 
+  wgrep 
+  :ensure t)
+
+(use-package 
   ivy 
   :ensure t 
   :config (setq ivy-use-virtual-buffers t) 
@@ -221,7 +226,6 @@
 (use-package 
   projectile 
   :ensure t 
-  :after (magit) 
   :bind (:map projectile-mode-map
 	      ("C-c p" . projectile-command-map)) 
   :config (setq projectile-indexing-method 'native) 
@@ -282,7 +286,6 @@
 (setq custom-file "~/.emacs.d/elisp/custom.el")
 (load custom-file)
 
-
 ;; Programming
 (use-package 
   magit 
@@ -299,7 +302,6 @@
 (use-package 
   company 
   :ensure t 
-  :after lsp-mode 
   :hook (prog-mode . company-mode) 
   :bind (:map company-active-map
 	      ("<tab>" . company-complete-selection) 
@@ -311,7 +313,6 @@
   :custom (company-minimum-prefix-length 1) 
   (company-idle-delay 0.1))
 
-
 (use-package 
   flycheck 
   :ensure t 
@@ -320,20 +321,27 @@
 	      ("C-c e" . flycheck-next-error) 
 	      ("C-c C-e" . 'flycheck-list-errors)))
 
-
 ;; LSP
-;; TODO: tweak UI - i.e. hiding breadcrumb
 (use-package 
   lsp-mode 
   :init (setq lsp-keymap-prefix "C-c l") 
   :config (add-hook 'before-save-hook 'lsp-organize-imports) 
   (lsp-enable-which-key-integration t) 
+  (setq lsp-auto-guess-root t) 
+  (setq lsp-restart 'auto-restart) 
+  (setq lsp-enable-symbol-highlighting nil) 
+  (setq lsp-enable-on-type-formatting nil) 
+  (setq lsp-idle-delay 0.5)
+  (setq lsp-headerline-breadcrumb-enable nil)
   :bind (:map lsp-mode-map
 	      ("C-<return>" . lsp-execute-code-action)) 
-  :hook ((java-mode . lsp) 
-	 (python-mode . lsp) 
-	 (web-mode . lsp) 
+  :hook ((java-mode . lsp-deferred) 
+	 (python-mode . lsp-deferred) 
+	 (web-mode . lsp-deferred)
+	 (typescript-mode . lsp-deferred)
+	 (tide-mode . lsp-deferred) 
 	 (lsp-mode . lsp-enable-which-key-integration)))
+
 
 ;; Python
 (use-package 
@@ -342,12 +350,10 @@
 
 (use-package 
   blacken 
-  :demand t 
   :ensure t 
   :hook ((python-mode . blacken-mode)))
 (use-package 
   pyvenv 
-  :demand t 
   :ensure t 
   :config (setq pyvenv-workon "emacs")  ; Default venv
   (setenv "WORKON_HOME" "/opt/homebrew/Caskroom/miniforge/base/envs/") 
@@ -360,7 +366,7 @@
 	      ("M-S-<right>" . python-indent-shift-right) 
 	      ("M-S-<left>" . python-indent-shift-left)))
 
-;; Web Dev
+;; ;; Web Dev
 (use-package 
   prettier-js 
   :ensure t)
@@ -368,18 +374,42 @@
 (use-package 
   web-mode 
   :ensure t 
-  :after (flycheck prettier-js lsp) 
-  :mode (("\\.js$" .  web-mode) 
-	 ("\\.jsx$" .  web-mode) 
-	 ("\\.ts$" .  web-mode) 
-	 ("\\.tsx$" .  web-mode) 
-	 ("\\.html$" .  web-mode) 
-	 ("\\.css$" .  web-mode) 
-	 ("\\.$" .  web-mode)) 
+  :mode (("\\.html?\\'" . web-mode) 
+	 ("\\.tsx\\'" . web-mode) 
+	 ("\\.jsx\\'" . web-mode)) 
+  :config (setq web-mode-markup-indent-offset 2 web-mode-code-indent-offset 2
+		web-mode-css-indent-offset 2 web-mode-enable-css-colorization t
+		web-mode-enable-auto-pairing t web-mode-enable-comment-keywords t
+		web-mode-enable-current-element-highlight t) 
   :hook (web-mode . 
 		  (lambda () 
 		    (prettier-js-mode) 
-		    (lsp))))
+		    (lsp) 
+		    (when (string-equal "tsx" (file-name-extension buffer-file-name)) 
+		      (setup-tide-mode)))))
+
+
+(use-package 
+  typescript-mode 
+  :ensure t 
+  :config (setq typescript-indent-level 2) 
+  (add-hook 'typescript-mode #'subword-mode))
+
+(use-package 
+  tide
+  :ensure t
+  :init (defun setup-tide-mode () 
+	  (interactive) 
+	  (tide-setup) 
+	  (flycheck-mode +1) 
+	  (setq flycheck-check-syntax-automatically '(save mode-enabled)) 
+	  (eldoc-mode +1) 
+	  (tide-hl-identifier-mode +1) 
+	  (company-mode +1)) 
+  :bind (:map tide-mode-map
+	      ("C-<return>" . tide-fix))
+  :hook ((typescript-mode . tide-setup)
+	 (typescript-mode . tide-hl-identifier-mode)))
 
 ;; Orgmode
 (use-package 
@@ -408,7 +438,6 @@
   (setq org-confirm-babel-evaluate nil) 
   :bind (:map global-map
 	      ("C-x C-o" . open-work-org-file)))
-
 
 
 ;; Shell
@@ -448,10 +477,13 @@
 	("s-t" . open-terminal-dot-app-here) 
 	("C-c t" . open-term-here)))
 
-
 ;; TODO Graphviz
 
 ;; Elisp
 (use-package 
   elisp-format 
+  :ensure t)
+
+(use-package 
+  yaml-mode 
   :ensure t)
