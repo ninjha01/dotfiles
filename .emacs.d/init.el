@@ -9,7 +9,7 @@
       :error)
 (package-initialize)
 ;; Use Package init
-(unless (package-installed-p 'use-package)
+(unless (package-installed-p 'use-package) 
   (package-install 'use-package))
 
 ;; UI
@@ -18,16 +18,32 @@
 (use-package 
   doom-themes 
   :ensure t)
+
 (use-package 
   zenburn-theme 
   :ensure t)
+
+(use-package 
+  display-line-numbers
+  :commands (display-line-numbers-mode)
+  :config
+  (set-face-foreground 'line-number "#7F9F7F")
+  :init
+  (defun goto-line-with-feedback () 
+    "Show line numbers temporarily, while prompting for the line number input" 
+    (interactive) 
+    (unwind-protect
+	(progn (display-line-numbers-mode 1)
+	       (goto-line (read-number "Goto line: "))) 
+      (display-line-numbers-mode -1))) 
+  (global-set-key (kbd "M-l") 'goto-line-with-feedback))
+
 
 (use-package 
   doom-themes 
   :ensure t)
 
 (load-theme 'zenburn t)
-;; (load-theme 'doom-laserwave t)
 
 ;; Modeline
 
@@ -112,6 +128,12 @@
 
 (save-place-mode 1)
 
+;; show commands
+(use-package 
+  command-log-mode 
+  :ensure t)
+
+
 (use-package 
   persistent-scratch 
   :ensure t)
@@ -171,14 +193,6 @@
 	     (setq i (1+ i)))))))
 (global-set-key (kbd "C-S-r") 'rotate-windows)
 
-(defun goto-line-with-feedback () 
-  "Show line numbers temporarily, while prompting for the line number input" 
-  (interactive) 
-  (unwind-protect (progn (linum-mode 1) 
-			 (goto-line (read-number "Goto line: "))) 
-    (linum-mode -1)))
-
-(global-set-key (kbd "M-l") 'goto-line-with-feedback)
 
 ;; Query regexp replace
 (global-set-key (kbd "C-c r") 'query-replace-regexp)
@@ -331,14 +345,14 @@
   (setq lsp-restart 'auto-restart) 
   (setq lsp-enable-symbol-highlighting nil) 
   (setq lsp-enable-on-type-formatting nil) 
-  (setq lsp-idle-delay 0.5)
-  (setq lsp-headerline-breadcrumb-enable nil)
+  (setq lsp-idle-delay 0.5) 
+  (setq lsp-headerline-breadcrumb-enable nil) 
   :bind (:map lsp-mode-map
 	      ("C-<return>" . lsp-execute-code-action)) 
   :hook ((java-mode . lsp-deferred) 
 	 (python-mode . lsp-deferred) 
-	 (web-mode . lsp-deferred)
-	 (typescript-mode . lsp-deferred)
+	 (web-mode . lsp-deferred) 
+	 (typescript-mode . lsp-deferred) 
 	 (tide-mode . lsp-deferred) 
 	 (lsp-mode . lsp-enable-which-key-integration)))
 
@@ -396,8 +410,8 @@
   (add-hook 'typescript-mode #'subword-mode))
 
 (use-package 
-  tide
-  :ensure t
+  tide 
+  :ensure t 
   :init (defun setup-tide-mode () 
 	  (interactive) 
 	  (tide-setup) 
@@ -407,8 +421,8 @@
 	  (tide-hl-identifier-mode +1) 
 	  (company-mode +1)) 
   :bind (:map tide-mode-map
-	      ("C-<return>" . tide-fix))
-  :hook ((typescript-mode . tide-setup)
+	      ("C-<return>" . tide-fix)) 
+  :hook ((typescript-mode . tide-setup) 
 	 (typescript-mode . tide-hl-identifier-mode)))
 
 ;; Orgmode
@@ -479,7 +493,12 @@
 
 ;; TODO Graphviz
 
-;; Elisp
+(use-package 
+  emacs-lisp-mode 
+  :bind (:map emacs-lisp-mode-map
+	      ("C-c C-c" . eval-buffer)) 
+  :hook (before-save-hook . elisp-format-buffer))
+
 (use-package 
   elisp-format 
   :ensure t)
