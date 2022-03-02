@@ -391,9 +391,13 @@
   :mode (("\\.html?\\'" . web-mode) 
 	 ("\\.tsx\\'" . web-mode) 
 	 ("\\.jsx\\'" . web-mode)) 
-  :config (setq web-mode-markup-indent-offset 2 web-mode-code-indent-offset 2
-		web-mode-css-indent-offset 2 web-mode-enable-css-colorization t
-		web-mode-enable-auto-pairing t web-mode-enable-comment-keywords t
+  :config (setq web-mode-markup-indent-offset 2 
+		web-mode-code-indent-offset 2
+		web-mode-css-indent-offset 2 
+		web-mode-enable-css-colorization t
+		web-mode-enable-auto-pairing t 
+		web-mode-enable-comment-keywords t
+		web-mode-enable-auto-quoting nil
 		web-mode-enable-current-element-highlight t) 
   :hook (web-mode . 
 		  (lambda () 
@@ -506,3 +510,21 @@
 (use-package 
   yaml-mode 
   :ensure t)
+
+(use-package
+  lua-mode
+  :ensure t
+  :config
+  (defun build-pongdate ()
+    (interactive)
+    (shell-command "/Users/nishantjha/Desktop/pongdate/build.sh")
+    (x-focus-frame nil))
+  :hook (after-save-hook . 'build-pongdate))  
+
+(use-package
+  quickrun
+  :ensure t
+  :bind
+  (:map lua-mode-map ("C-c C-c" . quickrun))
+  (:map shell-mode-map ("C-c C-c" . quickrun))
+  )
