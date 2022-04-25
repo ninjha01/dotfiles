@@ -3,11 +3,25 @@ name: CI
 on: [push]
 
 jobs:
-  build:
+  elispcheck:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v1
-    - name: Install emacs
-      run: sudo apt-get install emacs
-    - name: run emacs
-      run: emacs --debug-init --batch -u $USER && echo "SUCCESS"
+      - uses: actions/checkout@v2      
+      - uses: purcell/setup-emacs@master
+        with:
+          version: 28.1
+      - uses: leotaku/elisp-check@master
+        with:
+          check: melpa
+          file: './.emacs.d/init.el'
+          ignore_warnings: false
+          warnings_as_errors: false
+  shellcheck:
+    name: Shellcheck
+    runs-on: ubuntu-latest
+    env:
+      SHELLCHECK_OPTS: -e SC2034
+    steps:
+      - uses: actions/checkout@v2
+      - name: Run ShellCheck
+        uses: ludeeus/action-shellcheck@master

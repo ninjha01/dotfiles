@@ -135,14 +135,9 @@ function port_hog {
 function gen_gif {
     in_file=$1
     in_base=$(basename "$in_file" | cut -d. -f1)
-    ffmpeg -i $in_file -pix_fmt rgb24 -r 10 "$in_base.gif"
+    ffmpeg -i "$in_file" -pix_fmt rgb24 -r 10 "$in_base.gif"
 }
 
-function repeat_with_x86 {
-    repeate_cmd="arch -x86_64 !!"
-    echo "eval $prev"
-}
-alias rx="repeat_with_x86"
 
 ###################################################################
 ### Emacs
@@ -161,9 +156,9 @@ function em {
 	emacs & disown
     elif emacsclient -n "$@" 2> /dev/null
     then
-	echo "Opened $@ in Emacs server" >&2
+	echo "Opened $* in Emacs server" >&2
     else
-	echo "Opening $@ in a new Emacs process ..." >&2
+	echo "Opening $* in a new Emacs process ..." >&2
 	emacs "$@" & disown
     fi
 }

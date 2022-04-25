@@ -79,11 +79,11 @@
 
 ;; Chrome
 ;;; Remove menubar
-(menu-bar-mode -1)
-;;; Remove Toolbar
-(tool-bar-mode -1)
-;;; Remove scroll bar
-(scroll-bar-mode -1)
+(if (display-graphic-p)
+    (progn
+      (menu-bar-mode -1) ;;; Remove Toolbar
+      (tool-bar-mode -1) ;;; Remove scroll bar
+      (scroll-bar-mode -1)))
 
 ;; Highlighted regions are grey with white text
 (set-face-attribute 'region nil 
@@ -149,7 +149,7 @@
 
 (use-package 
   subword)
-(subword-mode)
+(global-subword-mode)
 
 (use-package 
   which-key 
@@ -237,20 +237,6 @@
 	      ("C-c k" . counsel-git-grep) 
 	      ("C-r" . counsel-minibuffer-history)))
 
-(use-package 
-  projectile 
-  :ensure t 
-  :bind (:map projectile-mode-map
-	      ("C-c p" . projectile-command-map)) 
-  :config (setq projectile-indexing-method 'native) 
-  (add-to-list 'projectile-globally-ignored-directories "Pods") 
-  (add-to-list 'projectile-globally-ignored-directories "node_modules") 
-  (add-to-list 'projectile-globally-ignored-directories ".mypy_cache") 
-  (setq projectile-git-submodule-command nil) 
-  (require 'magit) 
-  (setq projectile-switch-project-action 'magit-status))
-(projectile-mode 1)
-
 ;; Write backup files to own directory
 (unless (file-exists-p "~/.emacs.d/.saves/") 
   (make-directory "~/.emacs.d/.saves/"))
@@ -297,7 +283,7 @@
 (setq split-height-threshold 50	   ; lines to place window below
       split-width-threshold 200)   ; cols to place window to the right
 
-(setq custom-file "~/.emacs.d/elisp/custom.el")
+(setq custom-file "custom.el")
 (load custom-file)
 
 ;; Programming
@@ -312,28 +298,6 @@
   :hook (after-save-hook . 
 			 (lambda () 
 			   (setq magit-after-save-refresh-status t))))
-
-(use-package 
-  company 
-  :ensure t 
-  :hook (prog-mode . company-mode) 
-  :bind (:map company-active-map
-	      ("<tab>" . company-complete-selection) 
-	      ("C-n" . company-select-next) 
-	      ("C-p" . company-select-next)) 
-  (:map lsp-mode-map 
-	("<tab>" . company-indent-or-complete-common)) 
-  :config (setq company-tooltip-align-annotations t) 
-  :custom (company-minimum-prefix-length 1) 
-  (company-idle-delay 0.1))
-
-(use-package 
-  flycheck 
-  :ensure t 
-  :init (global-flycheck-mode) 
-  :bind (:map flycheck-mode-map
-	      ("C-c e" . flycheck-next-error) 
-	      ("C-c C-e" . 'flycheck-list-errors)))
 
 ;; LSP
 (use-package 
@@ -350,17 +314,43 @@
   :bind (:map lsp-mode-map
 	      ("C-<return>" . lsp-execute-code-action)) 
   :hook ((java-mode . lsp-deferred) 
-	 (python-mode . lsp-deferred) 
 	 (web-mode . lsp-deferred) 
 	 (typescript-mode . lsp-deferred) 
 	 (tide-mode . lsp-deferred) 
 	 (lsp-mode . lsp-enable-which-key-integration)))
 
 
-;; Python
 (use-package 
-  lsp-pyright 
-  :ensure t)
+  company 
+  :ensure t 
+  :hook (prog-mode . company-mode) 
+  :bind (:map company-active-map
+	      ("<tab>" . company-complete-selection) 
+	      ("C-n" . company-select-next) 
+	      ("C-p" . company-select-next)) 
+  ;; (:map lsp-mode-map 
+  ;; 	("<tab>" . company-indent-or-complete-common)) 
+  :config (setq company-tooltip-align-annotations t) 
+  :custom (company-minimum-prefix-length 1) 
+  (company-idle-delay 0.1))
+
+(use-package 
+  flycheck 
+  :ensure t 
+  :init (global-flycheck-mode) 
+  :bind (:map flycheck-mode-map
+	      ("C-c e" . flycheck-next-error) 
+	      ("C-c C-e" . 'flycheck-list-errors)))
+
+
+
+;; Python
+(use-package lsp-pyright
+  :ensure t
+  :hook
+  (python-mode . (lambda ()
+                   (require 'lsp-pyright)
+                   (lsp-deferred))))  
 
 (use-package 
   blacken 
@@ -430,6 +420,7 @@
 	 (typescript-mode . tide-hl-identifier-mode)))
 
 ;; Orgmode
+(use-package org-contrib)
 (use-package 
   org 
   :mode (("\\.org$" . org-mode)) 
@@ -437,7 +428,7 @@
   :init (defun open-work-org-file () 
 	  "Opens ~/Google Drive/org/work.org" 
 	  (interactive) 
-	  (find-file-other-window my-tasks-file)) 
+	  (find-file-other-window "~/google_drive/org/work.org")) 
   :config (setq org-directory "~/google_drive/org") 
   (setq org-bullets-mode 1) 
   (setq auto-revert-mode 1)
@@ -455,7 +446,10 @@
   (setq org-log-done t) 
   (setq org-confirm-babel-evaluate nil) 
   :bind (:map global-map
-	      ("C-x C-o" . open-work-org-file)))
+	      ("C-x C-o" . open-work-org-file))
+  (:map org-mode-map
+	("C-S-<up>" . org-move-subtree-up)
+	("C-S-<down>" . org-move-subtree-down)))
 
 
 ;; Shell
@@ -528,3 +522,18 @@
   (:map lua-mode-map ("C-c C-c" . quickrun))
   (:map shell-mode-map ("C-c C-c" . quickrun))
   )
+
+
+(use-package 
+  projectile 
+  :ensure t 
+  :bind (:map projectile-mode-map
+	      ("C-c p" . projectile-command-map)) 
+  :config (setq projectile-indexing-method 'native) 
+  (add-to-list 'projectile-globally-ignored-directories "Pods") 
+  (add-to-list 'projectile-globally-ignored-directories "node_modules") 
+  (add-to-list 'projectile-globally-ignored-directories ".mypy_cache") 
+  (setq projectile-git-submodule-command nil) 
+  (require 'magit) 
+  (setq projectile-switch-project-action 'magit-status))
+(projectile-mode 1)
