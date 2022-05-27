@@ -102,7 +102,9 @@ alias sizeof="du -sh"
 alias ca="conda activate"
 alias cda="conda deactivate"
 alias vi="emacs -Q -nw"
+alias vie="emacs -Q -nw"
 alias vim="vi"
+alias lc="fc -ln -1 | awk '{$1=$1}1' | pbcopy " # copy last command to clipboard
 
 function notify {
     title=$1
@@ -137,6 +139,7 @@ function gen_gif {
     in_base=$(basename "$in_file" | cut -d. -f1)
     ffmpeg -i "$in_file" -pix_fmt rgb24 -r 10 "$in_base.gif"
 }
+
 
 
 ###################################################################

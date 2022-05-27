@@ -71,19 +71,18 @@
 
 (use-package 
   fira-code-mode 
-  :ensure t 
-  :init (fira-code-mode) 
+  :ensure t
+  :init
+  (fira-code-mode)
   :config
   ;; (fira-code-mode-install-fonts t) ;; Instal if you haven't already
   (setq default-frame-alist '((font . "Fira Code 12"))))
 
 ;; Chrome
 ;;; Remove menubar
-(if (display-graphic-p)
-    (progn
-      (menu-bar-mode -1) ;;; Remove Toolbar
-      (tool-bar-mode -1) ;;; Remove scroll bar
-      (scroll-bar-mode -1)))
+(menu-bar-mode -1) ;;; Remove Toolbar
+(tool-bar-mode -1) ;;; Remove scroll bar
+(scroll-bar-mode -1)
 
 ;; Highlighted regions are grey with white text
 (set-face-attribute 'region nil 
@@ -420,7 +419,6 @@
 	 (typescript-mode . tide-hl-identifier-mode)))
 
 ;; Orgmode
-(use-package org-contrib)
 (use-package 
   org 
   :mode (("\\.org$" . org-mode)) 
