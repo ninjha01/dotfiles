@@ -29,11 +29,10 @@
 ;; UI
 
 ;; Theme
-(use-package doom-themes 
-  :ensure t)
-
 (use-package zenburn-theme 
-  :ensure t)
+  :ensure t
+  :config
+  (load-theme 'zenburn t))
 
 (use-package display-line-numbers
   :commands (display-line-numbers-mode)
@@ -48,11 +47,6 @@
 	       (goto-line (read-number "Goto line: "))) 
       (display-line-numbers-mode -1))) 
   (global-set-key (kbd "M-l") 'goto-line-with-feedback))
-
-(use-package doom-themes 
-  :ensure t)
-
-(load-theme 'zenburn t)
 
 ;; Modeline
 
@@ -76,7 +70,6 @@
 		      :font "Fira Code 12"))
 
 ;; Font
-
 (use-package 
     fira-code-mode :ensure t
     :init
@@ -90,11 +83,6 @@
 (menu-bar-mode -1) ;;; Remove Toolbar
 (tool-bar-mode -1) ;;; Remove scroll bar
 (scroll-bar-mode -1)
-
-;; Highlighted regions are grey with white text
-(set-face-attribute 'region nil 
-		    :background "#666" 
-		    :foreground "#ffffff")
 
 ;; remove fringe color
 ;; https://emacs.stackexchange.com/questions/5342/how-do-i-set-the-fringe-colors-to-whatever-is-the-background-color
@@ -115,7 +103,6 @@
 (setq inhibit-startup-screen t)
 
 ;; UX
-
 (setq gc-cons-threshold 100000000)
 (setq read-process-output-max (* 1024 1024)) ;; 1mb
 (setq auto-save-default nil)
@@ -253,6 +240,8 @@
 
 ;; Add logging for when emacs hangs
 (setq-default garbage-collection-messages t)
+
+;; 
 ;; Copy current filename
 (defun copy-file-path 
     (&optional 
@@ -282,8 +271,11 @@
 (setq split-height-threshold 50	   ; lines to place window below
       split-width-threshold 200)   ; cols to place window to the right
 
-(setq custom-file "custom.el")
-(load custom-file)
+
+;; Highlighted regions are grey with white text
+(set-face-attribute 'region nil 
+		    :background "#666" 
+		    :foreground "#ffffff")
 
 ;; Programming
 (use-package magit 
