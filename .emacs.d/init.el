@@ -374,6 +374,13 @@
   prettier-js 
   :ensure t)
 
+(defun enable-minor-mode (my-pair)
+  "Enable minor mode if filename match the regexp.  MY-PAIR is a cons cell (regexp . minor-mode)."
+  (if (buffer-file-name)
+      (if (string-match (car my-pair) buffer-file-name)
+      (funcall (cdr my-pair)))))
+
+
 (use-package 
   web-mode 
   :ensure t 
@@ -390,10 +397,12 @@
 		web-mode-enable-current-element-highlight t) 
   :hook (web-mode . 
 		  (lambda () 
-		    (prettier-js-mode) 
+		    
 		    (lsp) 
 		    (when (string-equal "tsx" (file-name-extension buffer-file-name)) 
-		      (setup-tide-mode)))))
+		      (setup-tide-mode))
+		    (enable-minor-mode
+                             '("\\.jsx?\\'" . prettier-js-mode))))
 
 
 (use-package 
