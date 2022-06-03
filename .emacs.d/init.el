@@ -186,6 +186,15 @@
 ;; Query regexp replace
 (global-set-key (kbd "C-c r") 'query-replace-regexp)
 
+;; move text up and down
+
+(use-package move-text
+  :ensure t
+  :bind
+  (:map global-map
+	("M-S-<up>" . move-text-up)
+	("M-S-<down>" . move-text-down)))
+
 ;; Cycle space
 (global-set-key (kbd "M-SPC") 'cycle-spacing)
 
@@ -347,15 +356,37 @@
   (defalias 'workon 'pyvenv-workon) 
   (pyvenv-tracking-mode 1)) ; Automatically use pyvenv-workon via dir-locals
 
-(use-package python-mode :bind (:map python-mode
-				     ("M-S-<right>" . python-indent-shift-right) 
-				     ("M-S-<left>" . python-indent-shift-left)))
+(use-package python-mode
+  :bind
+  (:map python-mode-map
+	("M-S-<right>" . python-indent-shift-right) 
+	("M-S-<left>" . python-indent-shift-left)))
 
 ;; ;; Web Dev
 (use-package prettier-js 
   :ensure t
   :hook (web-mode . prettier-js-mode))
 
+(use-package smartparens
+  :diminish smartparens-mode ;; Do not show in modeline
+  :init
+  (require 'smartparens-config)
+  :config
+  (smartparens-global-mode t) ;; These options can be t or nil.
+  (show-smartparens-global-mode t)
+  (setq sp-show-pair-from-inside t)
+  :custom-face
+  (sp-show-pair-match-face ((t (:foreground "White")))) ;; Could also have :background "Grey" for example.
+  :bind (:map smartparens-mode-map
+	      ("C-S-<left>" . sp-backward-slurp-sexp)
+	      ("C-S-<right>" . sp-backward-barf-sexp)
+	      ("C-M-t" . sp-transpose-sexp)
+	      ("C-S-k" . sp-kill-hybrid-sexp)
+	      ("C-c C-<right>" . sp-slurp-hybrid-sexp)
+	      ("C-(" . sp-rewrap-sexp)
+	      ("C-M-<backspace>" . sp-splice-sexp-killing-around)
+	      ("C-S-<backspace>" . nil)))
+  
 (use-package web-mode 
   :ensure t 
   :mode (("\\.html?\\'" . web-mode) 
@@ -366,7 +397,8 @@
 		web-mode-code-indent-offset 2
 		web-mode-css-indent-offset 2 
 		web-mode-enable-css-colorization t
-		web-mode-enable-auto-pairing t 
+		web-mode-enable-auto-pairing t
+		web-mode-enable-auto-indentation nil
 		web-mode-enable-comment-keywords t
 		web-mode-enable-auto-quoting nil
 		web-mode-enable-current-element-highlight t) 
