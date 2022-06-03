@@ -372,27 +372,21 @@
   :init
   (require 'smartparens-config)
   :config
-  (smartparens-global-mode t) ;; These options can be t or nil.
+  (smartparens-global-mode t)
   (show-smartparens-global-mode t)
+  (setq sp-insert-pair nil)
   (setq sp-show-pair-from-inside t)
   :custom-face
-  (sp-show-pair-match-face ((t (:foreground "White")))) ;; Could also have :background "Grey" for example.
+  (sp-show-pair-match-face ((t (:foreground "Gray")))) ;; Could also have :background "Grey" for example.
   :bind (:map smartparens-mode-map
-	      ("C-S-<left>" . sp-backward-slurp-sexp)
-	      ("C-S-<right>" . sp-backward-barf-sexp)
-	      ("C-M-t" . sp-transpose-sexp)
-	      ("C-S-k" . sp-kill-hybrid-sexp)
-	      ("C-c C-<right>" . sp-slurp-hybrid-sexp)
-	      ("C-(" . sp-rewrap-sexp)
-	      ("C-M-<backspace>" . sp-splice-sexp-killing-around)
-	      ("C-S-<backspace>" . nil)))
+	      ("C-S-k" . sp-kill-hybrid-sexp)))
   
 (use-package web-mode 
   :ensure t 
-  :mode (("\\.html?\\'" . web-mode) 
-	 ("\\.tsx\\'" . web-mode) 
-	 ("\\.jsx\\'" . web-mode)
-	 ("\\.json\\'" . web-mode)) 
+  :mode (".html$"
+	 ".tsx$"
+	 ".jsx$"
+	 ".json$")
   :config (setq web-mode-markup-indent-offset 2 
 		web-mode-code-indent-offset 2
 		web-mode-css-indent-offset 2 
