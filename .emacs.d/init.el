@@ -1,30 +1,41 @@
-(require 'package) ;; Emacs builtin
 
-(setq package-archives '(("org" . "https://orgmode.org/elpa/") 
-			 ("gnu" . "https://elpa.gnu.org/packages/") 
-			 ("melpa" . "https://melpa.org/packages/")))
+;; Install straight.el
+(defvar bootstrap-version)
+(let ((bootstrap-file
+       (expand-file-name "straight/repos/straight.el/bootstrap.el" user-emacs-directory))
+      (bootstrap-version 5))
+  (unless (file-exists-p bootstrap-file)
+    (with-current-buffer
+        (url-retrieve-synchronously
+         "https://raw.githubusercontent.com/raxod502/straight.el/develop/install.el"
+         'silent 'inhibit-cookies)
+      (goto-char (point-max))
+      (eval-print-last-sexp)))
+  (load bootstrap-file nil 'nomessage))
+
+;; Install use-package
+(straight-use-package 'use-package)
+
+;; Configure use-package to use straight.el by default
+(use-package straight
+  :custom (straight-use-package-by-default t))
 
 ;; Suprres native comp warnings buffer
 (setq warning-minimum-level 
       :error)
+
 (package-initialize)
-;; Use Package init
-(unless (package-installed-p 'use-package) 
-  (package-install 'use-package))
 
 ;; UI
 
 ;; Theme
-(use-package 
-  doom-themes 
+(use-package doom-themes 
   :ensure t)
 
-(use-package 
-  zenburn-theme 
+(use-package zenburn-theme 
   :ensure t)
 
-(use-package 
-  display-line-numbers
+(use-package display-line-numbers
   :commands (display-line-numbers-mode)
   :config
   (set-face-foreground 'line-number "#7F9F7F")
@@ -38,17 +49,14 @@
       (display-line-numbers-mode -1))) 
   (global-set-key (kbd "M-l") 'goto-line-with-feedback))
 
-
-(use-package 
-  doom-themes 
+(use-package doom-themes 
   :ensure t)
 
 (load-theme 'zenburn t)
 
 ;; Modeline
 
-(use-package 
-  doom-modeline 
+(use-package doom-modeline 
   :ensure t 
   :init (doom-modeline-mode t) 
   :config (setq doom-modeline-height 22) 
@@ -70,13 +78,12 @@
 ;; Font
 
 (use-package 
-  fira-code-mode 
-  :ensure t
-  :init
-  (fira-code-mode)
-  :config
-  ;; (fira-code-mode-install-fonts t) ;; Instal if you haven't already
-  (setq default-frame-alist '((font . "Fira Code 12"))))
+    fira-code-mode :ensure t
+    :init
+    (fira-code-mode)
+    :config
+    ;; (fira-code-mode-install-fonts t) ;; Instal if you haven't already
+    (setq default-frame-alist '((font . "Fira Code 12"))))
 
 ;; Chrome
 ;;; Remove menubar
@@ -100,8 +107,8 @@
 ;;; Delimiters
 (show-paren-mode)
 (use-package 
-  rainbow-delimiters 
-  :ensure t)
+    rainbow-delimiters :ensure t)
+
 (rainbow-delimiters-mode)
 (show-paren-mode)
 
@@ -119,48 +126,44 @@
 (setq initial-scratch-message "")
 
 ;; Movement
-(use-package 
-  ace-window 
-  :ensure t 
+(use-package ace-window 
+  :ensure t
   :bind (:map global-map
 	      ("C-x o" . ace-window)))
 
 (save-place-mode 1)
 
 ;; show commands
-(use-package 
-  command-log-mode 
+(use-package command-log-mode 
   :ensure t)
 
-
-(use-package 
-  persistent-scratch 
+(use-package persistent-scratch 
   :ensure t)
+
 (persistent-scratch-setup-default)
 (persistent-scratch-autosave-mode 1)
 
-(use-package 
-  multiple-cursors 
+(use-package multiple-cursors 
   :ensure t 
   :bind (:map global-map
 	      ("C->" . mc/mark-next-like-this) 
 	      ("C-<" . mc/mark-previous-like-this)))
 
-(use-package 
-  subword)
+(use-package subword)
+
 (global-subword-mode)
 
-(use-package 
-  which-key 
+(use-package which-key 
   :ensure t)
+
 (which-key-mode 1)
 
 (global-hl-line-mode t)
 (global-prettify-symbols-mode t)
 
-(use-package 
-  beacon 
+(use-package beacon 
   :ensure t)
+
 (beacon-mode t)
 
 ;; Rebinds
@@ -190,8 +193,8 @@
 	     (set-window-start w1 s2) 
 	     (set-window-start w2 s1) 
 	     (setq i (1+ i)))))))
-(global-set-key (kbd "C-S-r") 'rotate-windows)
 
+(global-set-key (kbd "C-S-r") 'rotate-windows)
 
 ;; Query regexp replace
 (global-set-key (kbd "C-c r") 'query-replace-regexp)
@@ -199,24 +202,19 @@
 ;; Cycle space
 (global-set-key (kbd "M-SPC") 'cycle-spacing)
 
-(use-package 
-  avy 
-  :bind (:map global-map
-	      ("M-s" . 'avy-goto-char-timer)))
+(use-package avy :bind (:map global-map
+			     ("M-s" . 'avy-goto-char-timer)))
 
-(use-package 
-  crux 
+(use-package crux 
   :ensure t 
   :bind (:map global-map
 	      ("C-x C-r" . crux-rename-file-and-buffer) 
 	      ("C-x C-k" . crux-delete-buffer-and-file)))
 
-(use-package 
-  wgrep 
+(use-package wgrep 
   :ensure t)
 
-(use-package 
-  ivy 
+(use-package ivy 
   :ensure t 
   :config (setq ivy-use-virtual-buffers t) 
   (setq enable-recursive-minibuffers t) 
@@ -224,10 +222,10 @@
 	      ("C-s" . swiper) 
 	      ("C-c C-r" . ivy-resume) 
 	      ("C-x b" . ivy-switch-buffer)))
+
 (ivy-mode)
 
-(use-package 
-  counsel 
+(use-package counsel 
   :ensure t 
   :config 
   :bind (:map global-map
@@ -239,10 +237,12 @@
 ;; Write backup files to own directory
 (unless (file-exists-p "~/.emacs.d/.saves/") 
   (make-directory "~/.emacs.d/.saves/"))
+
 (setq backup-directory-alist `(("." . "~/.emacs.d/.saves")))
 
 (unless (file-exists-p "~/.emacs.d/emacs-saves/") 
   (make-directory "~/.emacs.d/emacs-saves/"))
+
 (setq auto-save-file-name-transforms `((".*" "~/.emacs.d/emacs-saves/" t)))
 
 ;; Make backups of files, even when they're in version control
@@ -286,8 +286,7 @@
 (load custom-file)
 
 ;; Programming
-(use-package 
-  magit 
+(use-package magit 
   :ensure t 
   :bind (:map global-map
 	      ("C-x g" . magit-status) 
@@ -299,8 +298,7 @@
 			   (setq magit-after-save-refresh-status t))))
 
 ;; LSP
-(use-package 
-  lsp-mode 
+(use-package lsp-mode
   :init (setq lsp-keymap-prefix "C-c l") 
   :config (add-hook 'before-save-hook 'lsp-organize-imports) 
   (lsp-enable-which-key-integration t) 
@@ -318,9 +316,7 @@
 	 (tide-mode . lsp-deferred) 
 	 (lsp-mode . lsp-enable-which-key-integration)))
 
-
-(use-package 
-  company 
+(use-package company 
   :ensure t 
   :hook (prog-mode . company-mode) 
   :bind (:map company-active-map
@@ -333,15 +329,12 @@
   :custom (company-minimum-prefix-length 1) 
   (company-idle-delay 0.1))
 
-(use-package 
-  flycheck 
+(use-package flycheck 
   :ensure t 
   :init (global-flycheck-mode) 
   :bind (:map flycheck-mode-map
 	      ("C-c e" . flycheck-next-error) 
 	      ("C-c C-e" . 'flycheck-list-errors)))
-
-
 
 ;; Python
 (use-package lsp-pyright
@@ -351,38 +344,32 @@
                    (require 'lsp-pyright)
                    (lsp-deferred))))  
 
-(use-package 
-  blacken 
+(use-package blacken 
   :ensure t 
   :hook ((python-mode . blacken-mode)))
-(use-package 
-  pyvenv 
+
+(use-package pyvenv 
   :ensure t 
   :config (setq pyvenv-workon "emacs")  ; Default venv
   (setenv "WORKON_HOME" "/opt/homebrew/Caskroom/miniforge/base/envs/") 
   (defalias 'workon 'pyvenv-workon) 
   (pyvenv-tracking-mode 1)) ; Automatically use pyvenv-workon via dir-locals
 
-(use-package 
-  python-mode 
-  :bind (:map python-mode
-	      ("M-S-<right>" . python-indent-shift-right) 
-	      ("M-S-<left>" . python-indent-shift-left)))
+(use-package python-mode :bind (:map python-mode
+				     ("M-S-<right>" . python-indent-shift-right) 
+				     ("M-S-<left>" . python-indent-shift-left)))
 
 ;; ;; Web Dev
-(use-package 
-  prettier-js 
+(use-package prettier-js 
   :ensure t)
 
 (defun enable-minor-mode (my-pair)
   "Enable minor mode if filename match the regexp.  MY-PAIR is a cons cell (regexp . minor-mode)."
   (if (buffer-file-name)
       (if (string-match (car my-pair) buffer-file-name)
-      (funcall (cdr my-pair)))))
+	  (funcall (cdr my-pair)))))
 
-
-(use-package 
-  web-mode 
+(use-package web-mode 
   :ensure t 
   :mode (("\\.html?\\'" . web-mode) 
 	 ("\\.tsx\\'" . web-mode) 
@@ -397,22 +384,18 @@
 		web-mode-enable-current-element-highlight t) 
   :hook (web-mode . 
 		  (lambda () 
-		    
 		    (lsp) 
 		    (when (string-equal "tsx" (file-name-extension buffer-file-name)) 
 		      (setup-tide-mode))
 		    (enable-minor-mode
-                             '("\\.jsx?\\'" . prettier-js-mode))))
+                     '("\\.jsx?\\'" . prettier-js-mode)))))
 
-
-(use-package 
-  typescript-mode 
+(use-package typescript-mode 
   :ensure t 
   :config (setq typescript-indent-level 2) 
   (add-hook 'typescript-mode #'subword-mode))
 
-(use-package 
-  tide 
+(use-package tide 
   :ensure t 
   :init (defun setup-tide-mode () 
 	  (interactive) 
@@ -428,8 +411,7 @@
 	 (typescript-mode . tide-hl-identifier-mode)))
 
 ;; Orgmode
-(use-package 
-  org 
+(use-package org
   :mode (("\\.org$" . org-mode)) 
   :ensure org-contrib 
   :init (defun open-work-org-file () 
@@ -458,7 +440,6 @@
 	("C-S-<up>" . org-move-subtree-up)
 	("C-S-<down>" . org-move-subtree-down)))
 
-
 ;; Shell
 
 ;; (use-package shell
@@ -472,8 +453,7 @@
 ;;   (:map global-map
 ;; 	("C-c t" . open-shell-buffer-other-window)))
 
-(use-package 
-  term 
+(use-package term
   :init
   ;; http://joelmccracken.github.io/entries/switching-between-term-mode-and-line-mode-in-emacs-term/"
   (defun jnm/term-toggle-mode () 
@@ -498,22 +478,19 @@
 
 ;; TODO Graphviz
 
-(use-package 
-  emacs-lisp-mode 
+(use-package emacs-lisp-mode
+  :straight nil
   :bind (:map emacs-lisp-mode-map
 	      ("C-c C-c" . eval-buffer)) 
   :hook (before-save-hook . elisp-format-buffer))
 
-(use-package 
-  elisp-format 
+(use-package elisp-format 
   :ensure t)
 
-(use-package 
-  yaml-mode 
+(use-package yaml-mode 
   :ensure t)
 
-(use-package
-  lua-mode
+(use-package lua-mode
   :ensure t
   :config
   (defun build-pongdate ()
@@ -522,17 +499,14 @@
     (x-focus-frame nil))
   :hook (after-save-hook . 'build-pongdate))  
 
-(use-package
-  quickrun
+(use-package quickrun
   :ensure t
   :bind
   (:map lua-mode-map ("C-c C-c" . quickrun))
   (:map shell-mode-map ("C-c C-c" . quickrun))
   )
 
-
-(use-package 
-  projectile 
+(use-package projectile 
   :ensure t 
   :bind (:map projectile-mode-map
 	      ("C-c p" . projectile-command-map)) 
@@ -543,4 +517,6 @@
   (setq projectile-git-submodule-command nil) 
   (require 'magit) 
   (setq projectile-switch-project-action 'magit-status))
+
 (projectile-mode 1)
+(message "reached end of init.el")
