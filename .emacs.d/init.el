@@ -353,19 +353,15 @@
 
 ;; ;; Web Dev
 (use-package prettier-js 
-  :ensure t)
-
-(defun enable-minor-mode (my-pair)
-  "Enable minor mode if filename match the regexp.  MY-PAIR is a cons cell (regexp . minor-mode)."
-  (if (buffer-file-name)
-      (if (string-match (car my-pair) buffer-file-name)
-	  (funcall (cdr my-pair)))))
+  :ensure t
+  :hook (web-mode . prettier-js-mode))
 
 (use-package web-mode 
   :ensure t 
   :mode (("\\.html?\\'" . web-mode) 
 	 ("\\.tsx\\'" . web-mode) 
-	 ("\\.jsx\\'" . web-mode)) 
+	 ("\\.jsx\\'" . web-mode)
+	 ("\\.json\\'" . web-mode)) 
   :config (setq web-mode-markup-indent-offset 2 
 		web-mode-code-indent-offset 2
 		web-mode-css-indent-offset 2 
@@ -378,9 +374,7 @@
 		  (lambda () 
 		    (lsp) 
 		    (when (string-equal "tsx" (file-name-extension buffer-file-name)) 
-		      (setup-tide-mode))
-		    (enable-minor-mode
-                     '("\\.jsx?\\'" . prettier-js-mode)))))
+		      (setup-tide-mode)))))
 
 (use-package typescript-mode 
   :ensure t 
