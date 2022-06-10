@@ -345,9 +345,9 @@
                    (require 'lsp-pyright)
                    (lsp-deferred))))  
 
-(use-package blacken 
-  :ensure t 
-  :hook ((python-mode . blacken-mode)))
+;; (use-package blacken 
+;;   :ensure t 
+;;   :hook ((python-mode . blacken-mode)))
 
 (use-package pyvenv 
   :ensure t 
@@ -355,6 +355,9 @@
   (setenv "WORKON_HOME" "/opt/homebrew/Caskroom/miniforge/base/envs/") 
   (defalias 'workon 'pyvenv-workon) 
   (pyvenv-tracking-mode 1)) ; Automatically use pyvenv-workon via dir-locals
+
+(use-package poetry
+  :ensure t )
 
 (use-package python-mode
   :bind
@@ -365,7 +368,8 @@
 ;; ;; Web Dev
 (use-package prettier-js 
   :ensure t
-  :hook (web-mode . prettier-js-mode))
+  :hook ((web-mode . prettier-js-mode)
+	 (tide-mode . prettier-js-mode)))
 
 (use-package smartparens
   :diminish smartparens-mode ;; Do not show in modeline
@@ -398,7 +402,7 @@
 		web-mode-enable-current-element-highlight t) 
   :hook (web-mode . 
 		  (lambda () 
-		    (lsp) 
+		    (lsp-deferred) 
 		    (when (string-equal "tsx" (file-name-extension buffer-file-name)) 
 		      (setup-tide-mode)))))
 
