@@ -314,13 +314,15 @@
   (setq lsp-enable-symbol-highlighting nil) 
   (setq lsp-enable-on-type-formatting nil) 
   (setq lsp-idle-delay 0.5) 
-  (setq lsp-headerline-breadcrumb-enable nil) 
+  (setq lsp-headerline-breadcrumb-enable nil)
+  (setq lsp-enable-file-watchers nil)
   :bind (:map lsp-mode-map
 	      ("C-<return>" . lsp-execute-code-action)) 
   :hook ((java-mode . lsp-deferred) 
 	 (web-mode . lsp-deferred) 
 	 (typescript-mode . lsp-deferred) 
-	 (tide-mode . lsp-deferred) 
+	 (tide-mode . lsp-deferred)
+	 (python-mode . lsp-deferred)
 	 (lsp-mode . lsp-enable-which-key-integration)))
 
 (use-package company 
@@ -344,32 +346,18 @@
 	      ("C-c C-e" . 'flycheck-list-errors)))
 
 ;; Python
-(use-package lsp-pyright
-  :ensure t
-  :hook
-  (python-mode . (lambda ()
-                   (require 'lsp-pyright)
-                   (lsp-deferred))))  
+;; (use-package lsp-pyright
+;;   :ensure t
+;;   :hook
+;;   (python-mode . (lambda ()
+;;                    (require 'lsp-pyright)
+;;                    (lsp-deferred))))  
 
-;; (use-package blacken 
-;;   :ensure t 
-;;   :hook ((python-mode . blacken-mode)))
-
-(use-package pyvenv 
-  :ensure t 
-  :config (setq pyvenv-workon "emacs")  ; Default venv
-  (setenv "WORKON_HOME" "/opt/homebrew/Caskroom/miniforge/base/envs/") 
-  (defalias 'workon 'pyvenv-workon) 
-  (pyvenv-tracking-mode 1)) ; Automatically use pyvenv-workon via dir-locals
-
-(use-package poetry
-  :ensure t )
-
-(use-package python-mode
-  :bind
-  (:map python-mode-map
-	("M-S-<right>" . python-indent-shift-right) 
-	("M-S-<left>" . python-indent-shift-left)))
+;; (use-package python-mode
+;;   :bind
+;;   (:map python-mode-map
+;; 	("M-S-<right>" . python-indent-shift-right) 
+;; 	("M-S-<left>" . python-indent-shift-left)))
 
 ;; ;; Web Dev
 (use-package prettier-js 
@@ -533,7 +521,9 @@
   :bind (:map projectile-mode-map
 	      ("C-c p" . projectile-command-map)) 
   :config (setq projectile-indexing-method 'native) 
-  (add-to-list 'projectile-globally-ignored-directories "Pods") 
+  (add-to-list 'projectile-globally-ignored-directories "Pods")
+  (add-to-list 'projectile-globally-ignored-directories ".next")
+  (add-to-list 'projectile-globally-ignored-directories "build") 
   (add-to-list 'projectile-globally-ignored-directories "node_modules") 
   (add-to-list 'projectile-globally-ignored-directories ".mypy_cache") 
   (setq projectile-git-submodule-command nil) 
