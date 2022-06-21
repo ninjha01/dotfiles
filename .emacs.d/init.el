@@ -109,6 +109,7 @@
 (setq inhibit-startup-screen t)
 
 ;; UX
+(setq electric-indent-mode nil)
 (setq gc-cons-threshold 100000000)
 (setq read-process-output-max (* 1024 1024)) ;; 1mb
 (setq auto-save-default nil)
@@ -304,12 +305,16 @@
 			 (lambda () 
 			   (setq magit-after-save-refresh-status t))))
 
+
+
+
 ;; LSP
 (use-package lsp-mode
   :init (setq lsp-keymap-prefix "C-c l") 
-  :config (add-hook 'before-save-hook 'lsp-organize-imports) 
+  :config
+  (remove-hook 'before-save-hook 'lsp-format-buffer)
   (lsp-enable-which-key-integration t) 
-  (setq lsp-auto-guess-root t) 
+  (setq lsp-auto-guess-root t)
   (setq lsp-restart 'auto-restart) 
   (setq lsp-enable-symbol-highlighting nil) 
   (setq lsp-enable-on-type-formatting nil) 
