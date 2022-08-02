@@ -432,14 +432,15 @@
   :init (defun open-work-org-file () 
 	  "Opens ~/Google Drive/org/work.org" 
 	  (interactive) 
-	  (find-file-other-window "~/google_drive/org/work.org")) 
+	  (find-file-other-window "~/google_drive/org/personal.org")) 
   :config (setq org-directory "~/google_drive/org") 
   (setq org-bullets-mode 1) 
   (setq auto-revert-mode 1)
+  (setq org-indent-mode 1)
   ;; Code blocks indent
   (setq org-src-tab-acts-natively t)
   ;; Code syntax highlight
-  (setq org-src-fontify-natively t) 
+  (setq org-src-fontify-natively t)
   (org-babel-do-load-languages 'org-babel-load-languages '((shell . t) 
 							   (python . t) 
 							   (js . t) 
@@ -528,7 +529,8 @@
   :config (setq projectile-indexing-method 'native) 
   (add-to-list 'projectile-globally-ignored-directories "Pods")
   (add-to-list 'projectile-globally-ignored-directories ".next")
-  (add-to-list 'projectile-globally-ignored-directories "build") 
+  (add-to-list 'projectile-globally-ignored-directories "build")
+  (add-to-list 'projectile-globally-ignored-directories "straight")
   (add-to-list 'projectile-globally-ignored-directories "node_modules") 
   (add-to-list 'projectile-globally-ignored-directories ".mypy_cache") 
   (setq projectile-git-submodule-command nil) 

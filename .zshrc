@@ -105,6 +105,7 @@ alias vi="emacs -Q -nw"
 alias vie="emacs -Q -nw"
 alias vim="vi"
 alias lc="fc -ln -1 | awk '{$1=$1}1' | pbcopy " # copy last command to clipboard
+alias hgrep="history 0 | grep "
 
 function notify {
     title=$1

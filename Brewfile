@@ -16,6 +16,7 @@ brew "mas"
 
 # Password manager
 mas "Strongbox", id: 1270075435
+mas "timery", id: 1270075435
 
 ## Web browser
 cask "google-chrome"
