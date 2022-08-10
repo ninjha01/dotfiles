@@ -351,18 +351,24 @@
 	      ("C-c C-e" . 'flycheck-list-errors)))
 
 ;; Python
-;; (use-package lsp-pyright
-;;   :ensure t
-;;   :hook
-;;   (python-mode . (lambda ()
-;;                    (require 'lsp-pyright)
-;;                    (lsp-deferred))))  
+(use-package lsp-pyright
+  :ensure t
+  :hook
+  (python-mode . (lambda ()
+                   (require 'lsp-pyright)
+                   (lsp-deferred))))  
 
-;; (use-package python-mode
-;;   :bind
-;;   (:map python-mode-map
-;; 	("M-S-<right>" . python-indent-shift-right) 
-;; 	("M-S-<left>" . python-indent-shift-left)))
+(use-package python-mode
+  :bind
+  (:map python-mode-map
+	("M-S-<right>" . python-indent-shift-right) 
+	("M-S-<left>" . python-indent-shift-left)))
+
+(use-package conda
+  :ensure t)
+
+(use-package dockerfile-mode
+  :ensure t)
 
 ;; ;; Web Dev
 (use-package prettier-js 
