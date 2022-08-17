@@ -376,19 +376,19 @@
   :hook ((web-mode . prettier-js-mode)
 	 (tide-mode . prettier-js-mode)))
 
-(use-package smartparens
-  :diminish smartparens-mode ;; Do not show in modeline
-  :init
-  (require 'smartparens-config)
-  :config
-  (smartparens-global-mode t)
-  (show-smartparens-global-mode t)
-  (setq sp-insert-pair nil)
-  (setq sp-show-pair-from-inside t)
-  :custom-face
-  (sp-show-pair-match-face ((t (:foreground "Gray")))) ;; Could also have :background "Grey" for example.
-  :bind (:map smartparens-mode-map
-	      ("C-S-k" . sp-kill-hybrid-sexp)))
+;; (use-package smartparens
+;;   :diminish smartparens-mode ;; Do not show in modeline
+;;   :init
+;;   (require 'smartparens-config)
+;;   :config
+;;   (smartparens-global-mode t)
+;;   (show-smartparens-global-mode t)
+;;   (setq sp-insert-pair nil)
+;;   (setq sp-show-pair-from-inside t)
+;;   :custom-face
+;;   (sp-show-pair-match-face ((t (:foreground "Gray")))) ;; Could also have :background "Grey" for example.
+;;   :bind (:map smartparens-mode-map
+;; 	      ("C-S-k" . sp-kill-hybrid-sexp)))
   
 (use-package web-mode 
   :ensure t 
