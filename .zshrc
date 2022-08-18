@@ -90,7 +90,7 @@ SAVEHIST=$HISTSIZE
 ###################################################################
 ### Utils
 ###################################################################
-
+alias sudo='sudo ' # so that we can use aliases with sudo
 alias rm="trash"
 alias blacklist="sudo emacs /etc/hosts"
 alias la="ls -a"

@@ -370,6 +370,9 @@
 (use-package dockerfile-mode
   :ensure t)
 
+(use-package terraform-mode
+  :ensure t)
+
 ;; ;; Web Dev
 (use-package prettier-js 
   :ensure t
