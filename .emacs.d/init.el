@@ -358,6 +358,7 @@
                    (require 'lsp-pyright)
                    (lsp-deferred))))  
 
+
 (use-package python-mode
   :bind
   (:map python-mode-map
@@ -365,6 +366,9 @@
 	("M-S-<left>" . python-indent-shift-left)))
 
 (use-package conda
+  :ensure t)
+
+(use-package poetry
   :ensure t)
 
 (use-package dockerfile-mode
@@ -379,20 +383,6 @@
   :hook ((web-mode . prettier-js-mode)
 	 (tide-mode . prettier-js-mode)))
 
-;; (use-package smartparens
-;;   :diminish smartparens-mode ;; Do not show in modeline
-;;   :init
-;;   (require 'smartparens-config)
-;;   :config
-;;   (smartparens-global-mode t)
-;;   (show-smartparens-global-mode t)
-;;   (setq sp-insert-pair nil)
-;;   (setq sp-show-pair-from-inside t)
-;;   :custom-face
-;;   (sp-show-pair-match-face ((t (:foreground "Gray")))) ;; Could also have :background "Grey" for example.
-;;   :bind (:map smartparens-mode-map
-;; 	      ("C-S-k" . sp-kill-hybrid-sexp)))
-  
 (use-package web-mode 
   :ensure t 
   :mode (".html$"
@@ -502,6 +492,8 @@
 	("C-c t" . open-term-here)))
 
 ;; TODO Graphviz
+(use-package graphviz-dot-mode
+  :ensure t)
 
 (use-package emacs-lisp-mode
   :straight nil
@@ -543,6 +535,8 @@
   (add-to-list 'projectile-globally-ignored-directories "node_modules") 
   (add-to-list 'projectile-globally-ignored-directories ".mypy_cache") 
   (setq projectile-git-submodule-command nil) 
+  (setq projectile-require-project-root t)
+  (setq projectile-ignored-projects '("~/" "/opt/homebrew"))
   (require 'magit) 
   (setq projectile-switch-project-action 'magit-status))
 

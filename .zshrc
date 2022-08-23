@@ -25,6 +25,10 @@ LSCOLORS=gafacadabaegedabagacad
 ### Misc Behavior Mod
 ###################################################################
 
+# bash style words
+autoload -U select-word-style
+select-word-style bash
+
 # Auto CD
 setopt AUTO_CD
 
