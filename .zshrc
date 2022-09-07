@@ -18,8 +18,8 @@ PS1=$'[%(?.%F{green}√.%F{red}X)%f][%*][%F{red}%1d%f]: '
 touch ~/.hushlogin
 
 # ls colors
-CLICOLOR=1
-LSCOLORS=gafacadabaegedabagacad
+export CLICOLOR=1
+export LSCOLORS=gafacadabaegedabagacad
 
 ###################################################################
 ### Misc Behavior Mod
@@ -88,7 +88,7 @@ bindkey '^P' history-beginning-search-backward
 bindkey '^N' history-beginning-search-forward
 
 HISTSIZE=20000
-SAVEHIST=$HISTSIZE
+export SAVEHIST=$HISTSIZE
 
 
 ###################################################################
@@ -108,8 +108,17 @@ alias cda="conda deactivate"
 alias vi="emacs -Q -nw"
 alias vie="emacs -Q -nw"
 alias vim="vi"
-alias lc="fc -ln -1 | awk '{$1=$1}1' | pbcopy " # copy last command to clipboard
-alias hgrep="history 0 | grep "
+alias hgrep="history 0 | grep"
+
+# copy last command to clipboard
+function lc {
+    fc -ln -1 | awk '{$1=$1}1' | pbcopy
+}
+
+# Use `jq` with both JSON and non-JSON lines.
+function jjq {
+    jq -R -r "${1:-.} as \$line | try fromjson catch \$line"
+}
 
 function notify {
     title=$1
@@ -149,7 +158,7 @@ function gen_gif {
 ### Emacs
 ###################################################################
 
-EDITOR='emacsclient --create-frame --alternate-editor=""'
+export EDITOR='emacsclient --create-frame --alternate-editor=""'
 alias emc='emacsclient --no-wait --create-frame --alternate-editor=""'
 alias emcnw='emacsclient -tty --create-frame --alternate-editor=""'
 alias kille="emacsclient -e '(kill-emacs)'"

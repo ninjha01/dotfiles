@@ -305,7 +305,23 @@
 			 (lambda () 
 			   (setq magit-after-save-refresh-status t))))
 
+(use-package git-link 
+  :ensure t 
+  :bind (:map global-map
+	      ("C-c l" . git-link)))
 
+
+(use-package copilot
+  :straight (:host github :repo "zerolfx/copilot.el" :files ("dist" "*.el"))
+  :ensure t
+  :config
+  (with-eval-after-load 'company
+    ;; disable inline previews
+    (delq 'company-preview-if-just-one-frontend company-frontends))
+  (define-key copilot-completion-map (kbd "<tab>") 'copilot-accept-completion)
+  (define-key copilot-completion-map (kbd "TAB") 'copilot-accept-completion)
+  :hook 
+  ((prog-mode . copilot-mode)))
 
 
 ;; LSP
@@ -343,6 +359,9 @@
   :custom (company-minimum-prefix-length 1) 
   (company-idle-delay 0.1))
 
+(use-package company-box
+  :hook (company-mode . company-box-mode))
+
 (use-package flycheck 
   :ensure t 
   :init (global-flycheck-mode) 
@@ -369,6 +388,9 @@
   :ensure t)
 
 (use-package poetry
+  :ensure t)
+
+(use-package blacken
   :ensure t)
 
 (use-package dockerfile-mode
@@ -542,16 +564,3 @@
 
 (projectile-mode 1)
 (message "reached end of init.el")
-(custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(custom-safe-themes
-   '("dad40020beea412623b04507a4c185079bff4dcea20a93d8f8451acb6afc8358" default)))
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(sp-show-pair-match-face ((t (:foreground "Gray")))))
