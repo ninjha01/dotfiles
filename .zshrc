@@ -154,6 +154,18 @@ function gen_gif {
     ffmpeg -i "$in_file" -pix_fmt rgb24 -r 10 "$in_base.gif"
 }
 
+function asksd {
+    eval "$(conda shell.bash hook)"
+    conda activate askai
+    cd ~/Desktop/stable-diffusion/ || exit
+    python ~/Desktop/stable-diffusion/scripts/txt2img.py \
+	   --prompt "$*" \
+	   --outdir ~/Desktop/ \
+	   --n_samples 1 --n_iter 1 --plms \
+	   -H 512 -W 512
+    echo "$*" >> ~/Desktop/prompts.txt 
+}    
+
 ###################################################################
 ### Emacs
 ###################################################################
