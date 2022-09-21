@@ -162,8 +162,8 @@ function asksd {
 	   --prompt "$*" \
 	   --outdir ~/Desktop/ \
 	   --n_samples 1 --n_iter 1 --plms \
-	   -H 512 -W 512
-    echo "$*" >> ~/Desktop/prompts.txt 
+	   --ddim_steps 50
+    echo "[stablediffusion] $*" >> ~/Desktop/prompts.txt 
 }    
 
 ###################################################################
