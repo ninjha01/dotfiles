@@ -160,7 +160,7 @@ function asksd {
     cd ~/Desktop/stable-diffusion/ || exit
     python ~/Desktop/stable-diffusion/scripts/txt2img.py \
 	   --prompt "$*" \
-	   --outdir ~/Desktop/ \
+	   --outdir ~/Desktop/personal-site/public/assets/images/stablediffusion/ \
 	   --n_samples 1 --n_iter 1 --plms \
 	   --ddim_steps 50
     echo "[stablediffusion] $*" >> ~/Desktop/prompts.txt 
