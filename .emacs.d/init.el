@@ -453,8 +453,8 @@
   :init (defun open-work-org-file () 
 	  "Opens ~/Google Drive/org/work.org" 
 	  (interactive) 
-	  (find-file-other-window "~/google_drive/org/personal.org")) 
-  :config (setq org-directory "~/google_drive/org") 
+	  (find-file-other-window "/Users/nishantjha/Google Drive/My Drive/org/personal.org")) 
+  :config (setq org-directory "~/Google Drive/My Drive/org") 
   (setq org-bullets-mode 1) 
   (setq auto-revert-mode 1)
   (setq org-indent-mode 1)
