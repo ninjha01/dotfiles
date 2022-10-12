@@ -1,5 +1,4 @@
 tap "d12frosted/emacs-plus"
-tap "dart-lang/dart"
 tap "daviderestivo/emacs-head"
 tap "homebrew/bundle"
 tap "homebrew/cask"
@@ -9,7 +8,6 @@ tap "homebrew/core"
 tap "homebrew/services"
 tap "mongodb/brew"
 brew "gdbm"
-brew "ansible"
 brew "automake"
 brew "awscli"
 brew "boost"
@@ -21,7 +19,6 @@ brew "cmake"
 brew "coreutils"
 brew "openldap"
 brew "curl"
-brew "docker", link: false
 brew "node"
 brew "eslint"
 brew "expat"
@@ -101,49 +98,27 @@ brew "wget"
 brew "yarn"
 brew "z"
 brew "d12frosted/emacs-plus/emacs-plus@28", args: ["with-modern-purple-flat-icon", "with-native-comp"]
-brew "dart-lang/dart/dart"
 brew "mongodb/brew/mongodb-community"
 cask "aerial"
-cask "airbuddy"
 cask "alfred"
-cask "android-platform-tools"
-cask "android-studio"
 cask "bartender"
 cask "chromium"
 cask "dash"
 cask "db-browser-for-sqlite"
-cask "discord"
 cask "docker"
 cask "firefox"
 cask "flotato"
 cask "font-fira-code"
-cask "google-chrome"
-cask "google-cloud-sdk"
-cask "hazel"
 cask "itsycal"
-cask "kindle"
 cask "lunar"
 cask "miniforge"
 cask "mongodb-compass"
 cask "rectangle"
-cask "signal"
 cask "sketch"
-cask "slack"
 cask "stand"
-cask "steam"
 cask "toggl-track"
 cask "visual-studio-code"
-cask "zoom"
-mas "Dark Noise", id: 1465439395
-mas "Flighty", id: 1358823008
-mas "GarageBand", id: 682658836
-mas "iMovie", id: 408981434
-mas "Keynote", id: 409183694
-mas "Mini Metro", id: 1047760200
-mas "Mini Motorways", id: 1456188526
-mas "Numbers", id: 409203825
-mas "Pages", id: 409201541
-mas "Parcel", id: 639968404
-mas "Strongbox", id: 1270075435
-mas "Timery", id: 1425368544
-mas "Xcode", id: 497799835
+# mas "Dark Noise", id: 1465439395
+# mas "Strongbox", id: 1270075435
+# mas "Timery", id: 1425368544
+# mas "Xcode", id: 497799835
