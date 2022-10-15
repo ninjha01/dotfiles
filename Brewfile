@@ -119,6 +119,7 @@ cask "flotato"
 cask "font-fira-code"
 cask "google-chrome"
 cask "google-cloud-sdk"
+cask "google-drive"
 cask "hazel"
 cask "itsycal"
 cask "kindle"
@@ -137,6 +138,7 @@ cask "zoom"
 mas "Dark Noise", id: 1465439395
 mas "Flighty", id: 1358823008
 mas "GarageBand", id: 682658836
+mas "Hue Menu Bar", id: 1500678169
 mas "iMovie", id: 408981434
 mas "Keynote", id: 409183694
 mas "Mini Metro", id: 1047760200
