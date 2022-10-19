@@ -451,10 +451,10 @@
   :mode (("\\.org$" . org-mode)) 
   :ensure org-contrib 
   :init (defun open-work-org-file () 
-	  "Opens ~/Google Drive/org/work.org" 
+	  "Opens work org file" 
 	  (interactive) 
-	  (find-file-other-window "/Users/nishantjha/Google Drive/My Drive/org/personal.org")) 
-  :config (setq org-directory "~/Google Drive/My Drive/org") 
+	  (find-file-other-window "/Users/njha/Google Drive/My Drive/org/czi.org")) 
+  :config (setq org-directory "/Users/njha/Google Drive/My Drive/org") 
   (setq org-bullets-mode 1) 
   (setq auto-revert-mode 1)
   (setq org-indent-mode 1)
@@ -564,3 +564,4 @@
 
 (projectile-mode 1)
 (message "reached end of init.el")
+
