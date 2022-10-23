@@ -142,9 +142,9 @@ function sizeup {
     du -hx "${dir}" | sort -n | tail -200
 }
 
-function port_hog {
+function porthog {
     PORT=$1
-    sudo lsof -i -P | grep "$PORT"
+    lsof -iTCP -sTCP:LISTEN -P | grep "$PORT"
 }
 
 
