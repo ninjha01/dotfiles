@@ -369,6 +369,11 @@
 	      ("C-c e" . flycheck-next-error) 
 	      ("C-c C-e" . 'flycheck-list-errors)))
 
+;; Ruby
+(use-package rspec-mode
+  :ensure t)
+
+
 ;; Python
 (use-package lsp-pyright
   :ensure t
