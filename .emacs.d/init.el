@@ -293,7 +293,14 @@
 		    :background "#666" 
 		    :foreground "#ffffff")
 
+(use-package centered-cursor-mode
+  :ensure t)
+
+
 ;; Programming
+(use-package emacs-everywhere
+  :ensure t)
+
 (use-package magit 
   :ensure t 
   :bind (:map global-map
@@ -304,6 +311,19 @@
   :hook (after-save-hook . 
 			 (lambda () 
 			   (setq magit-after-save-refresh-status t))))
+
+(use-package markdown-mode
+  :ensure t
+  :config
+  (flycheck-mode 1)
+  :mode (("\\.md$" . markdown-mode)
+	 ("\\.markdown$" . markdown-mode)))
+
+
+(use-package flycheck-aspell
+  :ensure t)
+
+
 
 (use-package git-link 
   :ensure t 
@@ -399,6 +419,10 @@
 (use-package terraform-mode
   :ensure t)
 
+;; (use-package emacs-prisma-mode
+;;   :ensure t
+;;   :straight (:host github :repo "pimeys/emacs-prisma-mode"))
+
 ;; ;; Web Dev
 (use-package prettier-js 
   :ensure t
@@ -410,6 +434,10 @@
   :mode (".html$"
 	 ".tsx$"
 	 ".jsx$"
+	 ".js"
+	 ".ts"
+	 ".cjs"
+	 ".mjs"
 	 ".json$")
   :config (setq web-mode-markup-indent-offset 2 
 		web-mode-code-indent-offset 2
@@ -445,6 +473,21 @@
 	      ("C-<return>" . tide-fix)) 
   :hook ((typescript-mode . tide-setup) 
 	 (typescript-mode . tide-hl-identifier-mode)))
+
+;; astro
+(define-derived-mode astro-mode web-mode "astro")
+(setq auto-mode-alist
+      (append '((".*\\.astro\\'" . astro-mode))
+              auto-mode-alist))
+
+(with-eval-after-load 'lsp-mode
+  (add-to-list 'lsp-language-id-configuration
+               '(astro-mode . "astro"))
+
+  (lsp-register-client
+   (make-lsp-client :new-connection (lsp-stdio-connection '("astro-ls" "--stdio"))
+                    :activation-fn (lsp-activate-on "astro")
+                    :server-id 'astro-ls)))
 
 ;; Orgmode
 (use-package org
