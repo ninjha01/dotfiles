@@ -296,6 +296,10 @@
 (use-package centered-cursor-mode
   :ensure t)
 
+(use-package olivetti
+  :ensure t)
+
+
 
 ;; Programming
 (use-package emacs-everywhere
