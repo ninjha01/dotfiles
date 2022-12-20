@@ -107,7 +107,7 @@ brew "watchman"
 brew "wget"
 brew "yarn"
 brew "z"
-brew "d12frosted/emacs-plus/emacs-plus@28", args: ["with-modern-purple-flat-icon", "with-native-comp"]
+brew "d12frosted/emacs-plus/emacs-plus@29", args: ["with-modern-purple-flat-icon", "with-native-comp"]
 brew "dart-lang/dart/dart"
 brew "mongodb/brew/mongodb-community"
 brew "supabase/tap/supabase"
