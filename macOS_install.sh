@@ -14,3 +14,15 @@ brew bundle
 # Disable font smoothing (might?) require reboot
 # from https://tonsky.me/blog/monitors/
 defaults -currentHost write -g AppleFontSmoothing -int 0
+
+# Sort folders first in Finder
+defaults write com.apple.finder FXSort Folders First -bool true;
+
+# Only show open applications in the Dock
+defaults write com.apple.dock static-only -bool true; 
+
+# relaunch Finder
+killall Finder
+
+# relaunch Dock
+killall Dock
