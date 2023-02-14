@@ -592,6 +592,9 @@
   (:map shell-mode-map ("C-c C-c" . quickrun))
   )
 
+(use-package csv-mode
+  :ensure t)
+
 (use-package projectile 
   :ensure t 
   :bind (:map projectile-mode-map
