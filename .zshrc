@@ -24,6 +24,8 @@ export LSCOLORS=gafacadabaegedabagacad
 ###################################################################
 ### Misc Behavior Mod
 ###################################################################
+# Disable Homebrew Analytics
+export HOMEBREW_NO_ANALYTICS=1
 
 # bash style words
 autoload -U select-word-style
