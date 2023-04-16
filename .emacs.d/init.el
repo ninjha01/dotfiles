@@ -18,7 +18,9 @@
 
 ;; Configure use-package to use straight.el by default
 (use-package straight
-  :custom (straight-use-package-by-default t))
+  :custom (straight-use-package-by-default t)
+  :config
+  (setq straight-vc-git-default-protocol 'ssh))
 
 ;; Suprres native comp warnings buffer
 (setq warning-minimum-level 
@@ -35,10 +37,6 @@
   (load-theme 'zenburn t)
   )
 
-;; (use-package modus-themes
-;;   :ensure t
-;;   :config
-;;   (load-theme 'modus-vivendi t))
 
 (use-package display-line-numbers
   :commands (display-line-numbers-mode)
@@ -77,12 +75,12 @@
 
 ;; Font
 (use-package 
-    fira-code-mode :ensure t
-    :init
-    (fira-code-mode)
-    :config
-    ;; (fira-code-mode-install-fonts t) ;; Instal if you haven't already
-    (setq default-frame-alist '((font . "Fira Code 12"))))
+  fira-code-mode :ensure t
+  :init
+  (fira-code-mode)
+  :config
+  ;; (fira-code-mode-install-fonts t) ;; Instal if you haven't already
+  (setq default-frame-alist '((font . "Fira Code 12"))))
 
 ;; Chrome
 ;;; Remove menubar
@@ -101,7 +99,7 @@
 ;;; Delimiters
 (show-paren-mode)
 (use-package 
-    rainbow-delimiters :ensure t)
+  rainbow-delimiters :ensure t)
 
 (rainbow-delimiters-mode)
 (show-paren-mode)
@@ -247,7 +245,7 @@
   (make-directory "~/.emacs.d/emacs-saves/"))
 
 (setq auto-save-file-name-transforms `((".*" "~/.emacs.d/emacs-saves/" t)))
-
+(setq auto-save-default t)
 ;; Make backups of files, even when they're in version control
 (setq vc-make-backup-files t)
 
@@ -346,6 +344,15 @@
   (define-key copilot-completion-map (kbd "TAB") 'copilot-accept-completion)
   :hook 
   ((prog-mode . copilot-mode)))
+
+(use-package gptel
+  :straight (:host github :repo "karthink/gptel" :files ("*.el"))
+  :ensure t
+  :config
+  (setq gptel-api-key (getenv "OPENAI_API_KEY"))
+  (setq gptel-default-mode 'org-mode)
+  (define-key org-mode-map (kbd "C-<return>") 'gptel-send))
+
 
 
 ;; LSP
@@ -523,19 +530,6 @@
   (:map org-mode-map
 	("C-S-<up>" . org-move-subtree-up)
 	("C-S-<down>" . org-move-subtree-down)))
-
-;; Shell
-
-;; (use-package shell
-;;   :init
-;;   (defun open-shell-buffer-other-window ()
-;;     (interactive)
-;;     (let ((buf (shell)))
-;;     (switch-to-buffer (other-buffer buf))
-;;     (switch-to-buffer-other-window buf)))
-;;   :bind
-;;   (:map global-map
-;; 	("C-c t" . open-shell-buffer-other-window)))
 
 (use-package term
   :init
