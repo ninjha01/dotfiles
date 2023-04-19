@@ -52,26 +52,33 @@
       (display-line-numbers-mode -1))) 
   (global-set-key (kbd "M-l") 'goto-line-with-feedback))
 
-;; Modeline
 
-;; (use-package doom-modeline 
-;;   :ensure t 
-;;   :init (doom-modeline-mode t) 
-;;   :config (setq doom-modeline-height 22) 
-;;   (setq doom-modeline-icon nil) 
-;;   (setq doom-modeline-major-mode-color-icon t) 
-;;   (setq doom-modeline-env-version nil) 
-;;   (setq doom-modeline-bar-width 1) 
-;;   (setq doom-modeline-buffer-encoding nil) 
-;;   (setq doom-modeline-buffer-file-name-style 'auto) 
-;;   (setq doom-modeline-buffer-modification-icon nil) 
-;;   (setq doom-modeline-checker-simple-format t) 
-;;   (setq doom-modeline-indent-info nil) 
-;;   (setq doom-modeline-minor-modes nil) 
-;;   (setq doom-modeline-project-detection 'projectile) 
-;;   (setq doom-modeline-vcs-max-length 12) 
-;;   (set-face-attribute 'mode-line nil 
-;; 		      :font "Fira Code 12"))
+;; Modeline
+(use-package 
+  shrink-path :ensure t
+  :straight (:host github :repo "zbelial/shrink-path.el" :files ("dist" "*.el")))
+
+(use-package 
+  all-the-icons :ensure t)
+
+
+(use-package doom-modeline 
+  :ensure t 
+  :init (doom-modeline-mode t) 
+  :config (setq dnoom-modeline-height 22) 
+  (setq doom-modeline-major-mode-color-icon t) 
+  (setq doom-modeline-env-version nil) 
+  (setq doom-modeline-bar-width 1) 
+  (setq doom-modeline-buffer-encoding nil) 
+  (setq doom-modeline-buffer-file-name-style 'auto) 
+  (setq doom-modeline-buffer-modification-icon nil) 
+  (setq doom-modeline-checker-simple-format t) 
+  (setq doom-modeline-indent-info nil) 
+  (setq doom-modeline-minor-modes nil) 
+  (setq doom-modeline-project-detection 'projectile) 
+  (setq doom-modeline-vcs-max-length 12) 
+  (set-face-attribute 'mode-line nil 
+		      :font "Fira Code 12")) 
 
 ;; Font
 (use-package 
@@ -325,6 +332,38 @@
 (use-package flycheck-aspell
   :ensure t)
 
+;; Orgmode
+(use-package org
+  :mode (("\\.org$" . org-mode)) 
+  :ensure org-contrib 
+  :init (defun open-work-org-file () 
+	  "Opens ~/Google Drive/org/work.org" 
+	  (interactive) 
+	  (find-file-other-window "/Users/nishantjha/Google Drive/My Drive/org/personal.org")) 
+  :config (setq org-directory "~/Google Drive/My Drive/org") 
+  (setq org-bullets-mode 1) 
+  (setq auto-revert-mode 1)
+  (setq org-indent-mode 1)
+  ;; Code blocks indent
+  (setq org-src-tab-acts-natively t)
+  ;; Code syntax highlight
+  (setq org-src-fontify-natively t)
+  (org-babel-do-load-languages 'org-babel-load-languages '((shell . t) 
+							   (python . t) 
+							   (js . t) 
+							   (ocaml . t) 
+							   (sql . t) 
+							   (dot . t) 
+							   (plantuml . t))) 
+  (setq org-log-done t) 
+  (setq org-confirm-babel-evaluate nil) 
+  :bind (:map global-map
+	      ("C-x C-o" . open-work-org-file))
+  (:map org-mode-map
+	("C-S-<up>" . org-move-subtree-up)
+	("C-S-<down>" . org-move-subtree-down)))
+
+
 
 
 (use-package git-link 
@@ -349,6 +388,7 @@
   :straight (:host github :repo "karthink/gptel" :files ("*.el"))
   :ensure t
   :config
+  (require 'org)
   (setq gptel-api-key (getenv "OPENAI_API_KEY"))
   (setq gptel-default-mode 'org-mode)
   (define-key org-mode-map (kbd "C-<return>") 'gptel-send))
@@ -410,6 +450,7 @@
 
 
 (use-package python-mode
+  :straight nil
   :bind
   (:map python-mode-map
 	("M-S-<right>" . python-indent-shift-right) 
@@ -499,37 +540,6 @@
    (make-lsp-client :new-connection (lsp-stdio-connection '("astro-ls" "--stdio"))
                     :activation-fn (lsp-activate-on "astro")
                     :server-id 'astro-ls)))
-
-;; Orgmode
-(use-package org
-  :mode (("\\.org$" . org-mode)) 
-  :ensure org-contrib 
-  :init (defun open-work-org-file () 
-	  "Opens ~/Google Drive/org/work.org" 
-	  (interactive) 
-	  (find-file-other-window "/Users/nishantjha/Google Drive/My Drive/org/personal.org")) 
-  :config (setq org-directory "~/Google Drive/My Drive/org") 
-  (setq org-bullets-mode 1) 
-  (setq auto-revert-mode 1)
-  (setq org-indent-mode 1)
-  ;; Code blocks indent
-  (setq org-src-tab-acts-natively t)
-  ;; Code syntax highlight
-  (setq org-src-fontify-natively t)
-  (org-babel-do-load-languages 'org-babel-load-languages '((shell . t) 
-							   (python . t) 
-							   (js . t) 
-							   (ocaml . t) 
-							   (sql . t) 
-							   (dot . t) 
-							   (plantuml . t))) 
-  (setq org-log-done t) 
-  (setq org-confirm-babel-evaluate nil) 
-  :bind (:map global-map
-	      ("C-x C-o" . open-work-org-file))
-  (:map org-mode-map
-	("C-S-<up>" . org-move-subtree-up)
-	("C-S-<down>" . org-move-subtree-down)))
 
 (use-package term
   :init
