@@ -54,24 +54,24 @@
 
 ;; Modeline
 
-(use-package doom-modeline 
-  :ensure t 
-  :init (doom-modeline-mode t) 
-  :config (setq doom-modeline-height 22) 
-  (setq doom-modeline-icon nil) 
-  (setq doom-modeline-major-mode-color-icon t) 
-  (setq doom-modeline-env-version nil) 
-  (setq doom-modeline-bar-width 1) 
-  (setq doom-modeline-buffer-encoding nil) 
-  (setq doom-modeline-buffer-file-name-style 'auto) 
-  (setq doom-modeline-buffer-modification-icon nil) 
-  (setq doom-modeline-checker-simple-format t) 
-  (setq doom-modeline-indent-info nil) 
-  (setq doom-modeline-minor-modes nil) 
-  (setq doom-modeline-project-detection 'projectile) 
-  (setq doom-modeline-vcs-max-length 12) 
-  (set-face-attribute 'mode-line nil 
-		      :font "Fira Code 12"))
+;; (use-package doom-modeline 
+;;   :ensure t 
+;;   :init (doom-modeline-mode t) 
+;;   :config (setq doom-modeline-height 22) 
+;;   (setq doom-modeline-icon nil) 
+;;   (setq doom-modeline-major-mode-color-icon t) 
+;;   (setq doom-modeline-env-version nil) 
+;;   (setq doom-modeline-bar-width 1) 
+;;   (setq doom-modeline-buffer-encoding nil) 
+;;   (setq doom-modeline-buffer-file-name-style 'auto) 
+;;   (setq doom-modeline-buffer-modification-icon nil) 
+;;   (setq doom-modeline-checker-simple-format t) 
+;;   (setq doom-modeline-indent-info nil) 
+;;   (setq doom-modeline-minor-modes nil) 
+;;   (setq doom-modeline-project-detection 'projectile) 
+;;   (setq doom-modeline-vcs-max-length 12) 
+;;   (set-face-attribute 'mode-line nil 
+;; 		      :font "Fira Code 12"))
 
 ;; Font
 (use-package 
