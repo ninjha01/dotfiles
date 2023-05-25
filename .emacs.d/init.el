@@ -626,5 +626,17 @@
   (require 'magit) 
   (setq projectile-switch-project-action 'magit-status))
 
+
+;; convenience functions
+(defun connect-to-primo-server ()
+  "Connect to Nishant's server via TRAMP."
+  (interactive)
+  (let ((server-ip (getenv "PRIMO_SERVER_IP"))
+        (tramp-default-method "ssh")
+        (keyfile (expand-file-name "~/My Drive/Nitro/Clients/Primordium/nishant_keypair.pem")))
+    (if server-ip
+        (find-file (format "/ssh:nishant@%s#22:/home/nishant" server-ip))
+      (message "PRIMO_SERVER_IP environment variable is not set."))))
+
 (projectile-mode 1)
 (message "reached end of init.el")
