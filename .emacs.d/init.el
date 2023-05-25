@@ -1,4 +1,3 @@
-
 ;; Install straight.el
 (defvar bootstrap-version)
 (let ((bootstrap-file
@@ -29,7 +28,6 @@
 (package-initialize)
 
 ;; UI
-
 ;; Theme
 (use-package zenburn-theme 
   :ensure t
@@ -441,29 +439,50 @@
 	      ("C-c C-e" . 'flycheck-list-errors)))
 
 ;; Python
-(use-package lsp-pyright
-  :ensure t
-  :hook
-  (python-mode . (lambda ()
-                   (require 'lsp-pyright)
-                   (lsp-deferred))))  
-
-
+;; I don't want to download this mode, it's already installed.
 (use-package python-mode
   :straight nil
-  :bind
-  (:map python-mode-map
-	("M-S-<right>" . python-indent-shift-right) 
-	("M-S-<left>" . python-indent-shift-left)))
+  :hook (python-mode . lsp-deferred))
+(use-package lsp-mode
+  :ensure t
+  :commands lsp lsp-deferred
+  :config
+  (setq lsp-enable-on-type-formatting t))
 
-(use-package conda
-  :ensure t)
-
-(use-package poetry
-  :ensure t)
+(use-package lsp-pyright
+  :ensure t
+  :hook (python-mode . (lambda ()
+                         (require 'lsp-pyright)
+                         (lsp-deferred)))
+  :init
+  (when (executable-find "python3")
+    (setq lsp-pyright-python-executable-cmd "python3")))
 
 (use-package blacken
-  :ensure t)
+  :ensure t
+  :hook (python-mode . blacken-mode)
+  :config
+  (setq blacken-line-length 88))
+
+(use-package py-isort
+  :ensure t
+  :after python
+  :config
+  (add-hook 'before-save-hook 'py-isort-before-save))
+
+(use-package conda
+  :ensure t
+  :init
+  (setq conda-anaconda-home (expand-file-name "/opt/homebrew/Caskroom/miniforge/base/envs/"))
+  (setq conda-env-home-directory (expand-file-name "/opt/homebrew/Caskroom/miniforge/base/envs/"))
+  :config
+  (conda-env-initialize-interactive-shells)
+  (conda-env-initialize-eshell)
+  (conda-env-autoactivate-mode t))
+
+(use-package poetry
+  :ensure t
+  :hook (python-mode . poetry-tracking-mode))
 
 (use-package dockerfile-mode
   :ensure t)
@@ -563,6 +582,10 @@
   (:map global-map
 	("s-t" . open-terminal-dot-app-here) 
 	("C-c t" . open-term-here)))
+
+(use-package yafolding
+  :ensure t
+  :hook (prog-mode . yafolding-mode))
 
 ;; TODO Graphviz
 (use-package graphviz-dot-mode
