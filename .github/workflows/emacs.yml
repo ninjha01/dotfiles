@@ -3,19 +3,18 @@ name: CI
 on: [push]
 
 jobs:
-  elispcheck:
+  test-emacs:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2      
-      - uses: purcell/setup-emacs@master
-        with:
-          version: 28.1
-      - uses: leotaku/elisp-check@master
-        with:
-          check: melpa
-          file: './.emacs.d/init.el'
-          ignore_warnings: false
-          warnings_as_errors: false
+      - name: Set up Emacs
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y emacs
+      - name: Check out repository
+        uses: actions/checkout@v2
+      - name: Verify Emacs Config
+        run: |
+          emacs -nw -batch -l init.el --eval "(message \"Emacs config loaded successfully\")"elispcheck:
   shellcheck:
     name: Shellcheck
     runs-on: ubuntu-latest
