@@ -6,15 +6,20 @@ jobs:
   test-emacs:
     runs-on: ubuntu-latest
     steps:
-      - name: Set up Emacs
+      - uses: actions/checkout@v2
+      - name: Setup Emacs
+        uses: purcell/setup-emacs@master
+        with:
+          version: 29.0
+      - name: Copy Emacs config
         run: |
-          sudo apt-get update
-          sudo apt-get install -y emacs
-      - name: Check out repository
-        uses: actions/checkout@v2
+          mkdir -p ~/.emacs.d
+          cp .emacs.d/init.el ~/.emacs.d/init.el
+          cp .emacs.d/early-init.el ~/.emacs.d/early-init.el
       - name: Verify Emacs Config
         run: |
-          emacs -nw -batch -l init.el --eval "(message \"Emacs config loaded successfully\")"elispcheck:
+          echo '(setq debug-on-error t)' > ~/.emacs.d/debug-init.el
+          emacs --batch --eval '(load "~/.emacs.d/early-init.el")' -l ~/.emacs.d/debug-init.el -l ~/.emacs.d/init.el --eval "(message \"Emacs config loaded successfully\")"
   shellcheck:
     name: Shellcheck
     runs-on: ubuntu-latest

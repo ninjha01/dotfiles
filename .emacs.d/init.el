@@ -12,6 +12,9 @@
       (eval-print-last-sexp)))
   (load bootstrap-file nil 'nomessage))
 
+(when (string-equal (getenv "SKIP_REPOS_DOWNLOAD") "true")
+  (setq straight-check-for-modifications nil))
+
 ;; Install use-package
 (straight-use-package 'use-package)
 
@@ -20,6 +23,17 @@
   :custom (straight-use-package-by-default t)
   :config
   (setq straight-vc-git-default-protocol 'ssh))
+
+(defun my-straight-process-run-error-handler (func &rest args)
+  "Catch error from `straight--process-run', print process buffer, and re-signal error."
+  (condition-case err
+      (apply func args)
+    (error (progn
+             (switch-to-buffer straight-process-buffer)
+             (error "Caught error: %s" err)))))
+
+(advice-add 'straight--process-run :around #'my-straight-process-run-error-handler)
+
 
 ;; Suprres native comp warnings buffer
 (setq warning-minimum-level 
