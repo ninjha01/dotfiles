@@ -439,6 +439,52 @@
               ("C-c e" . flycheck-next-error) 
               ("C-c C-e" . 'flycheck-list-errors)))
 
+
+;; Go
+(use-package go-mode
+  :ensure t
+  :hook ((before-save . gofmt-before-save)  ;; Format before saving
+         (go-mode . lsp-deferred))           ;; Enable LSP for go-mode
+  :config
+  (setq gofmt-command "goimports")           ;; Use goimports instead of go-fmt
+  )
+
+(use-package lsp-mode
+  :ensure t
+  :commands (lsp lsp-deferred)
+  :config
+  ;; Reduce the amount of clutter and verbosity
+  (setq lsp-modeline-code-actions-enable nil
+        lsp-eldoc-enable-hover nil
+        lsp-signature-auto-activate nil)
+  
+  ;; Use debounce for better performance
+  (setq lsp-idle-delay 0.500)
+  )
+
+(use-package lsp-ui
+  :ensure t
+  :commands lsp-ui-mode
+  :config
+  ;; Enable some lsp-ui features
+  (setq lsp-ui-sideline-enable t
+        lsp-ui-doc-enable t)
+  )
+
+(use-package company
+  :ensure t
+  :config
+  ;; Use company for completion
+  (global-company-mode)
+  )
+
+(use-package yasnippet
+  :ensure t
+  :config
+  ;; Use yasnippet for code templates
+  (yas-global-mode)
+  )
+
 ;; Python
 ;; I don't want to download this mode, it's already installed.
 (use-package python-mode
