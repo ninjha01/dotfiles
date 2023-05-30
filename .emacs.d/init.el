@@ -445,9 +445,7 @@
   :ensure t
   :hook ((before-save . gofmt-before-save)  ;; Format before saving
          (go-mode . lsp-deferred))           ;; Enable LSP for go-mode
-  :config
-  (setq gofmt-command "goimports")           ;; Use goimports instead of go-fmt
-  )
+  :config)
 
 (use-package lsp-mode
   :ensure t
@@ -459,17 +457,18 @@
         lsp-signature-auto-activate nil)
   
   ;; Use debounce for better performance
-  (setq lsp-idle-delay 0.500)
-  )
+  (setq lsp-idle-delay 0.500))
 
 (use-package lsp-ui
   :ensure t
   :commands lsp-ui-mode
   :config
-  ;; Enable some lsp-ui features
-  (setq lsp-ui-sideline-enable t
-        lsp-ui-doc-enable t)
-  )
+  ;; Disable automatic popups
+  (setq lsp-ui-sideline-enable nil
+        lsp-ui-doc-enable nil)
+  
+  ;; Add a keybinding for showing documentation
+  (define-key lsp-ui-mode-map (kbd "C-c C-d") 'lsp-ui-doc-show))
 
 (use-package company
   :ensure t
@@ -587,8 +586,11 @@
           (eldoc-mode +1) 
           (tide-hl-identifier-mode +1) 
           (company-mode +1)) 
-  :bind (:map tide-mode-map
-              ("C-<return>" . tide-fix)) 
+  :config
+  (setq tide-always-show-documentation t)
+  :bind (:map 1tide-mode-map
+              ("C-<return>" . tide-fix)
+	      ("C-c d" . tide-documentation-at-point)) 
   :hook ((typescript-mode . tide-setup) 
          (typescript-mode . tide-hl-identifier-mode)))
 
