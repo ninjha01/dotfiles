@@ -578,6 +578,8 @@
 
 (use-package tide 
   :ensure t 
+  :hook
+  (typescript-mode . tide-setup)
   :init (defun setup-tide-mode () 
           (interactive) 
           (tide-setup) 
@@ -588,7 +590,7 @@
           (company-mode +1)) 
   :config
   (setq tide-always-show-documentation t)
-  :bind (:map 1tide-mode-map
+  :bind (:map tide-mode-map
               ("C-<return>" . tide-fix)
 	      ("C-c d" . tide-documentation-at-point)) 
   :hook ((typescript-mode . tide-setup) 
@@ -631,6 +633,21 @@
   (:map global-map
         ("s-t" . open-terminal-dot-app-here) 
         ("C-c t" . open-term-here)))
+
+
+(use-package shell
+  :ensure nil
+  :hook
+  (shell-mode . (lambda ()
+                  ;; Disable font-lock mode
+                  (font-lock-mode -1)
+                  ;; Add hook to truncate buffer
+                  (add-hook 'comint-output-filter-functions
+                            'comint-truncate-buffer t t)))
+  :config
+  ;; Set maximum buffer size
+  (setq comint-buffer-maximum-size 5000))
+
 
 (use-package yafolding
   :ensure t
