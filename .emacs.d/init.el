@@ -574,7 +574,8 @@
 (use-package typescript-mode 
   :ensure t 
   :config (setq typescript-indent-level 2) 
-  (add-hook 'typescript-mode #'subword-mode))
+  (add-hook 'typescript-mode #'subword-mode)
+  (add-hook 'typescript-mode-hook #'setup-tide-mode))
 
 (use-package tide 
   :ensure t 
@@ -584,7 +585,8 @@
           (interactive) 
           (tide-setup) 
           (flycheck-mode +1) 
-          (setq flycheck-check-syntax-automatically '(save mode-enabled)) 
+          (setq flycheck-check-syntax-automatically '(save mode-enabled))
+	  (flycheck-select-checker 'typescript-tide)
           (eldoc-mode +1) 
           (tide-hl-identifier-mode +1) 
           (company-mode +1)) 
@@ -707,14 +709,32 @@
 
 
 ;; convenience functions
-(defun connect-to-primo-server ()
+(defun connect-to-r104 ()
   "Connect to Nishant's server via TRAMP."
   (interactive)
-  (let ((server-ip (getenv "PRIMO_SERVER_IP"))
+  (let ((server-ip (getenv "R104_IP"))
         (tramp-default-method "ssh")
         (keyfile (expand-file-name "~/My Drive/Nitro/Clients/Primordium/nishant_keypair.pem")))
     (if server-ip
         (find-file (format "/ssh:nishant@%s#22:/home/nishant" server-ip))
+      (message "PRIMO_SERVER_IP environment variable is not set."))))
+(defun connect-to-gupper-dev ()
+  "Connect to Nishant's server via TRAMP."
+  (interactive)
+  (let ((server-ip (getenv "GUPPER_DEV_IP"))
+        (tramp-default-method "ssh")
+        (keyfile (expand-file-name "~/My Drive/Nitro/Clients/Primordium/nishant_keypair.pem")))
+    (if server-ip
+        (find-file (format "/ssh:nishant@%s#22:/home/nishant" server-ip))
+      (message "PRIMO_SERVER_IP environment variable is not set."))))
+(defun connect-to-primo-staging ()
+  "Connect to Nishant's server via TRAMP."
+  (interactive)
+  (let ((server-ip (getenv "PRIMO_STAGING_IP"))
+        (tramp-default-method "ssh")
+        (keyfile (expand-file-name "~/My Drive/Nitro/Clients/Primordium/nishant_keypair.pem")))
+    (if server-ip
+        (find-file (format "/ssh:ubuntu@%s#22:/home/ubuntu/dev" server-ip))
       (message "PRIMO_SERVER_IP environment variable is not set."))))
 
 (projectile-mode 1)
