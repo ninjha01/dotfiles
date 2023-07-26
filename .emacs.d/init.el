@@ -541,10 +541,20 @@
 ;;   :straight (:host github :repo "pimeys/emacs-prisma-mode"))
 
 ;; ;; Web Dev
-(use-package prettier-js 
+(defun my/prettier-js-mode-hook ()
+  (when (and (buffer-file-name)
+             (projectile-project-p)
+             (file-executable-p (expand-file-name "node_modules/.bin/prettier"
+                                                  (projectile-project-root))))
+    (setq-local prettier-js-command
+                (expand-file-name "node_modules/.bin/prettier"
+                                  (projectile-project-root)))))
+
+(use-package prettier-js
   :ensure t
   :hook ((web-mode . prettier-js-mode)
-         (tide-mode . prettier-js-mode)))
+         (tide-mode . prettier-js-mode)
+         (prettier-js-mode . my/prettier-js-mode-hook)))
 
 (use-package web-mode 
   :ensure t 
