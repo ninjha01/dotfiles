@@ -191,3 +191,7 @@ function em {
 	emacs "$@" & disown
     fi
 }
+
+function lgpt {
+    ollama run codellama:34b-instruct "$@"
+}
