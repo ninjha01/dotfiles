@@ -1,3 +1,4 @@
+(add-to-list 'load-path "~/.emacs.d/elisp")
 ;; Install straight.el
 (defvar bootstrap-version)
 (let ((bootstrap-file
@@ -280,7 +281,7 @@
    Result is full path.
    If `universal-argument' is called first, copy only the dir path.
    If in dired, copy the file/dir cursor is on, or marked files.
-   If a buffer is not file and not dired, copy value of `default-directory' (which is usually the “current” dir when that buffer was created)
+   If a buffer is not file and not dired, copy value of `default-directory' (which is usually  dir when that buffer was created)
    URL `http://ergoemacs.org/emacs/emacs_copy_file_path.html'
    Version 2017-09-01" 
   (interactive "P") 
@@ -292,10 +293,10 @@
                 (if (buffer-file-name) 
                     (buffer-file-name) 
                   (expand-file-name default-directory))))) 
-    (kill-new (if @dir-path-only-p (progn (message "Directory path copied: 「%s」"
+    (kill-new (if @dir-path-only-p (progn (message "Directory path copied: Currentthe%s "
                                                    (file-name-directory $fpath)) 
                                           (file-name-directory $fpath)) 
-                (progn (message "File path copied: 「%s」" $fpath) $fpath )))))
+                (progn (message "File path copied: %s" $fpath) $fpath )))))
 
 (setq trash-directory "~/.Trash")
 (setq split-height-threshold 50           ; lines to place window below
@@ -396,25 +397,33 @@
 
 ;; LSP
 (use-package lsp-mode
-  :init (setq lsp-keymap-prefix "C-c l") 
+  :ensure t
+  :init (setq lsp-keymap-prefix "C-c l")
+  :commands (lsp lsp-deferred)
   :config
   (remove-hook 'before-save-hook 'lsp-format-buffer)
-  (lsp-enable-which-key-integration t) 
+  (lsp-enable-which-key-integration t)
   (setq lsp-auto-guess-root t)
-  (setq lsp-restart 'auto-restart) 
-  (setq lsp-enable-symbol-highlighting nil) 
-  (setq lsp-enable-on-type-formatting nil) 
-  (setq lsp-idle-delay 0.5) 
+  (setq lsp-restart 'auto-restart)
+  (setq lsp-enable-symbol-highlighting nil)
+  (setq lsp-enable-on-type-formatting nil)
+  (setq lsp-idle-delay 0.5)
   (setq lsp-headerline-breadcrumb-enable nil)
   (setq lsp-enable-file-watchers nil)
+  ;; Reduce the amount of clutter and verbosity
+  (setq lsp-modeline-code-actions-enable nil
+        lsp-eldoc-enable-hover nil
+        lsp-signature-auto-activate nil)
+  
   :bind (:map lsp-mode-map
-              ("C-<return>" . lsp-execute-code-action)) 
-  :hook ((java-mode . lsp-deferred) 
-         (web-mode . lsp-deferred) 
-         (typescript-mode . lsp-deferred) 
+              ("C-<return>" . lsp-execute-code-action))
+  :hook ((java-mode . lsp-deferred)
+         (web-mode . lsp-deferred)
+         (typescript-mode . lsp-deferred)
          (tide-mode . lsp-deferred)
          (python-mode . lsp-deferred)
          (lsp-mode . lsp-enable-which-key-integration)))
+
 
 (use-package company 
   :ensure t 
@@ -447,17 +456,6 @@
          (go-mode . lsp-deferred))           ;; Enable LSP for go-mode
   :config)
 
-(use-package lsp-mode
-  :ensure t
-  :commands (lsp lsp-deferred)
-  :config
-  ;; Reduce the amount of clutter and verbosity
-  (setq lsp-modeline-code-actions-enable nil
-        lsp-eldoc-enable-hover nil
-        lsp-signature-auto-activate nil)
-  
-  ;; Use debounce for better performance
-  (setq lsp-idle-delay 0.500))
 
 (use-package lsp-ui
   :ensure t
@@ -485,15 +483,23 @@
   )
 
 ;; Python
-;; I don't want to download this mode, it's already installed.
-(use-package python-mode
-  :straight nil
-  :hook (python-mode . lsp-deferred))
-(use-package lsp-mode
-  :ensure t
-  :commands lsp lsp-deferred
-  :config
-  (setq lsp-enable-on-type-formatting t))
+(add-hook 'python-mode-hook (lambda ()
+                              (lsp-deferred)
+                              (unless (getenv "CONDA_DEFAULT_ENV")
+                                (conda-env-activate-for-buffer))
+                              (local-set-key (kbd "C-c p i") 'my-pip-install)))
+
+(defun my-pip-install ()
+  "Install a Python package in the current Conda environment using pip."
+  (interactive)
+  (let ((package-name (read-string "Enter package name: "))
+        (pip-executable (conda-env-executable-find "pip")))
+    (if pip-executable
+        (progn
+          (shell-command (format "%s install %s" pip-executable package-name))
+          (message "Installation complete."))
+      (message "pip executable not found in the current Conda environment."))))
+
 
 (use-package lsp-pyright
   :ensure t
@@ -503,6 +509,10 @@
   :init
   (when (executable-find "python3")
     (setq lsp-pyright-python-executable-cmd "python3")))
+
+(require 'flycheck-ruff)
+
+
 
 (use-package blacken
   :ensure t
@@ -719,15 +729,6 @@
 
 
 ;; convenience functions
-(defun connect-to-r104 ()
-  "Connect to Nishant's server via TRAMP."
-  (interactive)
-  (let ((server-ip (getenv "R104_IP"))
-        (tramp-default-method "ssh")
-        (keyfile (expand-file-name "~/My Drive/Nitro/Clients/Primordium/nishant_keypair.pem")))
-    (if server-ip
-        (find-file (format "/ssh:nishant@%s#22:/home/nishant" server-ip))
-      (message "PRIMO_SERVER_IP environment variable is not set."))))
 (defun connect-to-gupper-dev ()
   "Connect to Nishant's server via TRAMP."
   (interactive)
@@ -736,7 +737,7 @@
         (keyfile (expand-file-name "~/My Drive/Nitro/Clients/Primordium/nishant_keypair.pem")))
     (if server-ip
         (find-file (format "/ssh:nishant@%s#22:/home/nishant" server-ip))
-      (message "PRIMO_SERVER_IP environment variable is not set."))))
+      (message "GUPPER_DEV_IP environment variable is not set."))))
 (defun connect-to-primo-staging ()
   "Connect to Nishant's server via TRAMP."
   (interactive)
@@ -745,7 +746,16 @@
         (keyfile (expand-file-name "~/My Drive/Nitro/Clients/Primordium/nishant_keypair.pem")))
     (if server-ip
         (find-file (format "/ssh:ubuntu@%s#22:/home/ubuntu/dev" server-ip))
-      (message "PRIMO_SERVER_IP environment variable is not set."))))
+      (message "PRIMO_STAGING_IP environment variable is not set."))))
+
+(defun connect-to-alignment-server ()
+  "Connect to Nishant's server via TRAMP."
+  (interactive)
+  (let ((server-ip (getenv "NITRO_ALIGNMENT_IP"))
+        (tramp-default-method "ssh"))
+    (if server-ip
+        (find-file (format "/ssh:root@%s#22:/root" server-ip))
+      (message "NITRO_ALIGNMENT_IP environment variable is not set."))))
 
 (projectile-mode 1)
 (message "reached end of init.el")

@@ -135,6 +135,20 @@ function git_push {
     git push
 }
 
+function p() {
+    if [[ -f "package-lock.json" ]]; then
+        npm "$@"
+    elif [[ -f "yarn.lock" ]]; then
+        yarn "$@"
+    elif [[ -f "pnpm-lock.yaml" ]]; then
+        pnpm "$@"
+    elif [[ -f "bun.lock" ]]; then
+        bun "$@"
+    else
+        echo "No recognized lock file found."
+    fi
+}
+
 function sizeup {
     dir=$1
     if [ -z "$dir" ]
