@@ -6,11 +6,16 @@ tap "homebrew/cask-fonts"
 tap "homebrew/cask-versions"
 tap "homebrew/services"
 tap "mongodb/brew"
+tap "render-oss/render"
 tap "supabase/tap"
+brew "python@3.11"
 brew "awscli"
+brew "black", link: false
+brew "blast"
 brew "coreutils"
 brew "curl"
 brew "datasette"
+brew "doctl"
 brew "eslint"
 brew "exiftool"
 brew "fastlane"
@@ -29,6 +34,7 @@ brew "ispell"
 brew "jq"
 brew "krb5"
 brew "mas"
+brew "minimap2"
 brew "nvm"
 brew "ollama"
 brew "pandoc"
@@ -37,12 +43,14 @@ brew "virtualenv"
 brew "poetry"
 brew "postgresql@14", restart_service: true
 brew "pre-commit"
+brew "prettier"
 brew "prettyping"
 brew "redis"
 brew "ripgrep"
 brew "ruby"
 brew "rust"
 brew "rustup-init"
+brew "samtools"
 brew "shellcheck"
 brew "the_silver_searcher"
 brew "trash"
@@ -51,12 +59,17 @@ brew "vercel-cli"
 brew "watchman"
 brew "wget"
 brew "yarn"
+brew "yt-dlp"
 brew "z"
 brew "d12frosted/emacs-plus/emacs-plus@29", args: ["with-modern-purple-flat-icon", "with-native-comp"]
+brew "render-oss/render/render"
+cask "affinity-designer"
 cask "alfred"
 cask "bartender"
 cask "chromium"
+cask "cursor"
 cask "daisydisk"
+cask "dash"
 cask "db-browser-for-sqlite"
 cask "diffusionbee"
 cask "discord"
@@ -68,20 +81,30 @@ cask "google-chrome"
 cask "google-cloud-sdk"
 cask "google-drive"
 cask "itsycal"
+cask "ivpn"
 cask "kindle"
 cask "little-snitch"
 cask "lunar"
 cask "micro-snitch"
 cask "miniconda"
+cask "playdate-simulator"
 cask "rectangle"
 cask "signal"
 cask "slack"
 cask "steam"
+cask "warp"
 cask "zoom"
+mas "Amphetamine", id: 937984704
 mas "Dark Noise", id: 1465439395
 mas "Final Cut Pro", id: 424389933
 mas "Flighty", id: 1358823008
+mas "Hue in the Menu", id: 1534707384
+mas "Hue Menu Bar", id: 1500678169
+mas "iMovie", id: 408981434
 mas "Keynote", id: 409183694
+mas "Logic Pro", id: 634148309
+mas "Mini Metro", id: 1047760200
+mas "Mini Motorways", id: 1456188526
 mas "Numbers", id: 409203825
 mas "Pages", id: 409201541
 mas "Parcel", id: 639968404
