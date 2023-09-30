@@ -317,17 +317,24 @@
 (use-package emacs-everywhere
   :ensure t)
 
-(use-package magit 
-  :ensure t 
-  :bind (:map global-map
-              ("C-x g" . magit-status) 
-              ("C-c g" . magit-file-dispatch) 
-              ("C-c b" . magit-blame)) 
-  :config (setq magit-save-repository-buffers 'dontask) 
-  :hook (after-save-hook . 
-             (lambda () 
-               (setq magit-after-save-refresh-status t))))
+; TODO Fix this
+(use-package magit-todos
+  :ensure t
+  :config
+  (setq magit-todos-keyword-suffix "\\(?:([^)]+)\\)?:"))
 
+(use-package magit
+  :ensure t
+  :bind (:map global-map
+              ("C-x g" . magit-status)
+              ("C-c g" . magit-file-dispatch)
+              ("C-c b" . magit-blame))
+  :config
+  (require 'magit-todos)
+  (setq magit-save-repository-buffers 'dontask)
+  :hook (after-save-hook . 
+         (lambda () 
+           (setq magit-after-save-refresh-status t))))
 (use-package markdown-mode
   :ensure t
   :config
