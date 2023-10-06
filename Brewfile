@@ -1,6 +1,4 @@
 tap "d12frosted/emacs-plus"
-tap "dart-lang/dart"
-tap "daviderestivo/emacs-head"
 tap "homebrew/bundle"
 tap "homebrew/cask-fonts"
 tap "homebrew/cask-versions"
@@ -14,7 +12,6 @@ brew "black", link: false
 brew "blast"
 brew "coreutils"
 brew "curl"
-brew "datasette"
 brew "doctl"
 brew "eslint"
 brew "exiftool"
@@ -45,7 +42,6 @@ brew "postgresql@14", restart_service: true
 brew "pre-commit"
 brew "prettier"
 brew "prettyping"
-brew "redis"
 brew "ripgrep"
 brew "ruby"
 brew "rust"
@@ -64,17 +60,14 @@ brew "z"
 brew "d12frosted/emacs-plus/emacs-plus@29", args: ["with-modern-purple-flat-icon", "with-native-comp"]
 brew "render-oss/render/render"
 cask "affinity-designer"
-cask "alfred"
 cask "bartender"
 cask "chromium"
-cask "cursor"
 cask "daisydisk"
 cask "dash"
 cask "db-browser-for-sqlite"
 cask "diffusionbee"
 cask "discord"
 cask "docker"
-cask "fantastical"
 cask "firefox"
 cask "font-fira-code"
 cask "google-chrome"
@@ -85,14 +78,13 @@ cask "ivpn"
 cask "kindle"
 cask "little-snitch"
 cask "lunar"
-cask "micro-snitch"
 cask "miniconda"
 cask "playdate-simulator"
+cask "raycast"
 cask "rectangle"
 cask "signal"
 cask "slack"
 cask "steam"
-cask "warp"
 cask "zoom"
 mas "Amphetamine", id: 937984704
 mas "Dark Noise", id: 1465439395
@@ -102,7 +94,6 @@ mas "Hue in the Menu", id: 1534707384
 mas "Hue Menu Bar", id: 1500678169
 mas "iMovie", id: 408981434
 mas "Keynote", id: 409183694
-mas "Logic Pro", id: 634148309
 mas "Mini Metro", id: 1047760200
 mas "Mini Motorways", id: 1456188526
 mas "Numbers", id: 409203825
