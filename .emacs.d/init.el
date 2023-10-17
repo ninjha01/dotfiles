@@ -337,10 +337,13 @@
            (setq magit-after-save-refresh-status t))))
 (use-package markdown-mode
   :ensure t
-  :config
-  (flycheck-mode 1)
-  :mode (("\\.md$" . markdown-mode)
-         ("\\.markdown$" . markdown-mode)))
+  :mode ("\\.md\\'" . markdown-mode)  ;; Enable only for .md files
+  :hook ((markdown-mode . (lambda ()
+                            (flycheck-mode 1)
+                            (company-mode -1) ; Disable company-mode
+                            (copilot-mode -1) ; Disable copilot-mode
+                            (olivetti-mode 1) ; Enable olivetti-mode
+                            ))))
 
 (use-package flycheck-aspell
   :ensure t)
