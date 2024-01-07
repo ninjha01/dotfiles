@@ -142,6 +142,9 @@
   :bind (:map global-map
               ("C-x o" . ace-window)))
 
+;; 
+(global-set-key (kbd "C-3") 'split-window-right)
+(global-set-key (kbd "C-2") 'split-window-below)
 (save-place-mode 1)
 
 ;; show commands
@@ -654,7 +657,7 @@
       (term-line-mode))) 
   (defun open-terminal-dot-app-here () 
     (interactive) 
-    (shell-command "open -a Terminal \"$pwd\"")) 
+    (shell-command "open -a Warp \"$pwd\"")) 
   (defun open-term-here () 
     (interactive) 
     (let ((buf (term "/bin/zsh"))) 
@@ -769,3 +772,17 @@
 
 (projectile-mode 1)
 (message "reached end of init.el")
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(custom-safe-themes
+   '("f366d4bc6d14dcac2963d45df51956b2409a15b770ec2f6d730e73ce0ca5c8a7" default))
+ '(magit-todos-insert-after '(bottom) nil nil "Changed by setter of obsolete option `magit-todos-insert-at'"))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ )
