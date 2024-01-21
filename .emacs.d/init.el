@@ -340,7 +340,7 @@
 			   (setq magit-after-save-refresh-status t))))
 (use-package markdown-mode
   :ensure t
-  :mode ("\\.md\\'" . markdown-mode)  ;; Enable only for .md files
+  :mode (".md")
   :hook ((markdown-mode . (lambda ()
                             (flycheck-mode 1)
                             (company-mode -1) ; Disable company-mode
@@ -353,7 +353,7 @@
 
 ;; Orgmode
 (use-package org
-  :mode (("\\.org$" . org-mode))
+  :mode (".org")
   :ensure org-contrib
   :init (defun open-work-org-file ()
           "Opens ~/Google Drive/org/work.org"
@@ -480,7 +480,8 @@
 ;; Swift
 (use-package swift-mode
   :ensure t
-  :mode ("\\.swift\\'" . swift-mode)
+  :mode
+  (".swift")
   :hook (swift-mode . (lambda () (lsp)))
   :config
   (defun xcode-open-current-file()

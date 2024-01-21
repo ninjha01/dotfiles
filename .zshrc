@@ -34,6 +34,7 @@ HISTSIZE=20000
 export SAVEHIST=$HISTSIZE
 
 ### Utils
+alias cat="bat"
 alias sudo='sudo '
 alias rm="trash"
 alias blacklist="sudo emacs /etc/hosts"
