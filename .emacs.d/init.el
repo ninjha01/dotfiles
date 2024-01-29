@@ -387,6 +387,12 @@
   :bind (:map global-map
               ("C-c l" . git-link)))
 
+(use-package ollama
+  :ensure t
+  :repo
+  "https://github.com/zweifisch/ollama"
+  )
+
 (use-package copilot
   :straight (:host github :repo "zerolfx/copilot.el" :files ("dist" "*.el"))
   :ensure t

@@ -1,5 +1,4 @@
 #!/bin/zsh
-
 ### Aesthetics
 PS1=$'[%(?.%F{green}√.%F{red}X)%f][%*][%F{red}%1d%f]: '
 touch ~/.hushlogin
@@ -32,6 +31,7 @@ bindkey '^P' history-beginning-search-backward
 bindkey '^N' history-beginning-search-forward
 HISTSIZE=20000
 export SAVEHIST=$HISTSIZE
+echo "setup settings"
 
 ### Utils
 alias cat="bat"
@@ -103,18 +103,6 @@ function gen_gif {
     ffmpeg -i "$in_file" -pix_fmt rgb24 -r 10 "$in_base.gif"
 }
 
-function asksd {
-    eval "$(conda shell.bash hook)"
-    conda activate askai
-    cd ~/Desktop/stable-diffusion/ || exit
-    python ~/Desktop/stable-diffusion/scripts/txt2img.py \
-	   --prompt "$*" \
-	   --outdir ~/Desktop/personal-site/public/assets/images/stablediffusion/ \
-	   --n_samples 1 --n_iter 1 --plms \
-	   --ddim_steps 50
-    echo "[stablediffusion] $*" >> ~/Desktop/prompts.txt 
-}
-
 ### Emacs
 export EDITOR='emacsclient --create-frame --alternate-editor=""'
 alias emc='emacsclient --no-wait --create-frame --alternate-editor=""'
@@ -133,9 +121,7 @@ function em {
         emacs "$@" & disown
     fi
 }
+echo "setup utils"
 
-function lgpt {
-    ollama run codellama:34b-instruct "$@"
-}
 
-source ~/.zprofile 
+echo "Loaded .zshrc"
