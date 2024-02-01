@@ -387,11 +387,6 @@
   :bind (:map global-map
               ("C-c l" . git-link)))
 
-(use-package ollama
-  :ensure t
-  :repo
-  "https://github.com/zweifisch/ollama"
-  )
 
 (use-package copilot
   :straight (:host github :repo "zerolfx/copilot.el" :files ("dist" "*.el"))
@@ -438,6 +433,7 @@
               ("C-<return>" . lsp-execute-code-action))
   :hook ((java-mode . lsp-deferred)
          (web-mode . lsp-deferred)
+	 (swift-mode . lsp-deferred)
          (typescript-mode . lsp-deferred)
          (tide-mode . lsp-deferred)
          (python-mode . lsp-deferred)
@@ -487,28 +483,8 @@
 (use-package swift-mode
   :ensure t
   :mode
-  ("\\.swift?\\'" . swift-mode)
-  :hook (swift-mode . (lambda () (lsp)))
-  :config
-  (defun xcode-open-current-file()
-    (interactive)
-    (shell-command-to-string
-     (concat "open -a \"/Applications/Xcode.app\" " (buffer-file-name))))
-
-  (defun xcode-build() 
-    (interactive) 
-    (shell-command-to-string "osascript -e 'tell application \"Xcode\"' -e 'set targetProject to active workspace document' -e 'build targetProject' -e 'end tell'"))
-
-
-  (defun xcode-run() 
-    (interactive) 
-    (shell-command-to-string "osascript -e 'tell application \"Xcode\"' -e 'set targetProject to active workspace document' -e 'stop targetProject' -e 'run targetProject' -e 'end tell'"))
-  ;; Key bindings
-  :bind 
-  (:map swift-mode-map 
-	("C-c C-c" . xcode-run) 
-	("C-c C-b" . xcode-build) 
-	("C-c C-o" . xcode-open-current-file)))
+  ("\\.swift\\'" . swift-mode)
+  :hook (swift-mode . (lambda () (lsp))))
 
 (use-package flycheck-swift
   :ensure t
@@ -614,30 +590,28 @@
 (use-package terraform-mode
   :ensure t)
 
-;; (use-package emacs-prisma-mode
-;;   :ensure t
-;;   :straight (:host github :repo "pimeys/emacs-prisma-mode"))
 
 ;; ;; Web Dev
 (use-package web-mode
   :ensure t
-  :mode (".html$"
-         ".tsx$"
-         ".jsx$"
-         ".js"
-         ".ts"
-         ".cjs"
-         ".mjs"
-         ".json$")
+  :mode 
+  ("\\.html\\'" . web-mode)
+  ("\\.tsx\\'" . web-mode)
+  ("\\.jsx\\'" . web-mode)
+  ("\\.js\\'" . web-mode)
+  ("\\.ts\\'" . web-mode)
+  ("\\.cjs\\'" . web-mode)
+  ("\\.mjs\\'" . web-mode)
+  ("\\.json\\'" . web-mode)
   :config (setq web-mode-markup-indent-offset 2
-                web-mode-code-indent-offset 2
-                web-mode-css-indent-offset 2
-                web-mode-enable-css-colorization t
-                web-mode-enable-auto-pairing t
-                web-mode-enable-auto-indentation nil
-                web-mode-enable-comment-keywords t
-                web-mode-enable-auto-quoting nil
-                web-mode-enable-current-element-highlight t)
+		web-mode-code-indent-offset 2
+		web-mode-css-indent-offset 2
+		web-mode-enable-css-colorization t
+		web-mode-enable-auto-pairing t
+		web-mode-enable-auto-indentation nil
+		web-mode-enable-comment-keywords t
+		web-mode-enable-auto-quoting nil
+		web-mode-enable-current-element-highlight t)
   :hook (web-mode .
                   (lambda ()
                     (lsp-deferred)
@@ -671,20 +645,7 @@
   :hook ((typescript-mode . tide-setup)
          (typescript-mode . tide-hl-identifier-mode)))
 
-;; astro
-(define-derived-mode astro-mode web-mode "astro")
-(setq auto-mode-alist
-      (append '((".*\\.astro\\'" . astro-mode))
-              auto-mode-alist))
 
-(with-eval-after-load 'lsp-mode
-  (add-to-list 'lsp-language-id-configuration
-               '(astro-mode . "astro"))
-
-  (lsp-register-client
-   (make-lsp-client :new-connection (lsp-stdio-connection '("astro-ls" "--stdio"))
-                    :activation-fn (lsp-activate-on "astro")
-                    :server-id 'astro-ls)))
 
 (use-package term
   :init
