@@ -261,11 +261,24 @@
   (make-directory "~/.emacs.d/.saves/"))
 
 (setq backup-directory-alist `(("." . "~/.emacs.d/.saves")))
-
 (unless (file-exists-p "~/.emacs.d/emacs-saves/")
   (make-directory "~/.emacs.d/emacs-saves/"))
 
-(setq auto-save-file-name-transforms `((".*" "~/.emacs.d/emacs-saves/" t)))
+(defun hash-file-name (file-path)
+  (let ((hashed-name (sha1 file-path)))
+    ;; Ensure the mapping directory exists
+    (unless (file-exists-p "~/.emacs.d/emacs-saves/")
+      (make-directory "~/.emacs.d/emacs-saves/" t))
+
+    (with-temp-file "~/.emacs.d/emacs-saves/file_to_hash_map.txt"
+      (insert-file-contents "~/.emacs.d/emacs-saves/file_to_hash_map.txt")
+      (goto-char (point-max))
+      (insert (format "%s -> %s\n" file-path hashed-name)))
+    hashed-name))
+
+;; sometimes the filename is too long, so we hash the filename and store a record to lookup the filename later
+(setq auto-save-file-name-transforms
+      `((".*" ,(concat "~/.emacs.d/emacs-saves/" (hash-file-name "\\1")) t)))
 (setq auto-save-default t)
 ;; Make backups of files, even when they're in version control
 (setq vc-make-backup-files t)
@@ -292,9 +305,9 @@
                     (progn (let (($result (mapconcat 'identity (dired-get-marked-files) "\n")))
                              (if (equal (length $result) 0)
                                  (progn default-directory )
-                               (progn $result))))
+			       (progn $result))))
                   (if (buffer-file-name)
-                      (buffer-file-name)
+		      (buffer-file-name)
                     (expand-file-name default-directory)))))
     (kill-new (if @dir-path-only-p (progn (message "Directory path copied: Currentthe%s "
                                                    (file-name-directory $fpath))
@@ -329,9 +342,9 @@
 (use-package magit
   :ensure t
   :bind (:map global-map
-              ("C-x g" . magit-status)
-              ("C-c g" . magit-file-dispatch)
-              ("C-c b" . magit-blame))
+	      ("C-x g" . magit-status)
+	      ("C-c g" . magit-file-dispatch)
+	      ("C-c b" . magit-blame))
   :config
   (require 'magit-todos)
   (setq magit-save-repository-buffers 'dontask)
@@ -355,10 +368,6 @@
 (use-package org
   :mode (".org")
   :ensure org-contrib
-  :init (defun open-work-org-file ()
-          "Opens ~/Google Drive/org/work.org"
-          (interactive)
-          (find-file-other-window "/Users/nishantjha/Google Drive/My Drive/org/personal.org"))
   :config (setq org-directory "~/Google Drive/My Drive/org")
   (setq org-bullets-mode 1)
   (setq auto-revert-mode 1)
@@ -377,7 +386,7 @@
   (setq org-log-done t)
   (setq org-confirm-babel-evaluate nil)
   :bind (:map global-map
-              ("C-x C-o" . open-work-org-file))
+	      ("C-x C-o" . open-work-org-file))
   (:map org-mode-map
         ("C-S-<up>" . org-move-subtree-up)
         ("C-S-<down>" . org-move-subtree-down)))
@@ -385,7 +394,7 @@
 (use-package git-link
   :ensure t
   :bind (:map global-map
-              ("C-c l" . git-link)))
+	      ("C-c l" . git-link)))
 
 
 (use-package copilot
@@ -403,11 +412,16 @@
 (use-package gptel
   :straight (:host github :repo "karthink/gptel" :files ("*.el"))
   :ensure t
-  :config
-  (require 'org)
+  :bind
+  (:map global-map
+	("C-c C-g" . gptel))
+  :init
   (setq gptel-api-key (getenv "OPENAI_API_KEY"))
-  (setq gptel-default-mode 'org-mode)
-  (define-key org-mode-map (kbd "C-<return>") 'gptel-send))
+  (setq gptel-default-mode 'markdown-mode)
+  (setq gptel-model "gpt-4-1106-preview")
+  (add-hook 'gptel-post-response-functions 'gptel-end-of-response)
+  (define-key markdown-mode-map (kbd "C-<return>") 'gptel-send)
+  (define-key markdown-mode-map (kbd "C-c C-c") 'gptel-send))
 
 ;; LSP
 (use-package lsp-mode
@@ -430,7 +444,7 @@
         lsp-signature-auto-activate nil)
 
   :bind (:map lsp-mode-map
-              ("C-<return>" . lsp-execute-code-action))
+	      ("C-<return>" . lsp-execute-code-action))
   :hook ((java-mode . lsp-deferred)
          (web-mode . lsp-deferred)
 	 (swift-mode . lsp-deferred)
@@ -444,9 +458,9 @@
   :ensure t
   :hook (prog-mode . company-mode)
   :bind (:map company-active-map
-              ("<tab>" . company-complete-selection)
-              ("C-n" . company-select-next)
-              ("C-p" . company-select-next))
+	      ("<tab>" . company-complete-selection)
+	      ("C-n" . company-select-next)
+	      ("C-p" . company-select-next))
   ;; (:map lsp-mode-map
   ;;  ("C-c <tab>" . company-indent-or-complete-common))
   :config (setq company-tooltip-align-annotations t)
@@ -460,17 +474,17 @@
   :ensure t
   :init (global-flycheck-mode)
   :bind (:map flycheck-mode-map
-              ("C-c e" . flycheck-next-error)
-              ("C-c C-e" . 'flycheck-list-errors)))
+	      ("C-c e" . flycheck-next-error)
+	      ("C-c C-e" . 'flycheck-list-errors)))
 
 (use-package apheleia
   :ensure t
   :config
   (add-to-list 'apheleia-mode-alist
-               '(swift-mode . swift-format))
+	       '(swift-mode . swift-format))
 
   (add-to-list 'apheleia-formatters
-               '(swift-format "swift-format" (buffer-file-name)))
+	       '(swift-format "swift-format" (buffer-file-name)))
   (setf (alist-get 'prettier apheleia-formatters)
         '(npx "prettier"
 	      "--config" (concat (projectile-project-root) "package.json") "--stdin-filepath" filepath))
@@ -484,12 +498,38 @@
   :ensure t
   :mode
   ("\\.swift\\'" . swift-mode)
-  :hook (swift-mode . (lambda () (lsp))))
+  :hook 
+  (swift-mode . (lambda () 
+		  (lsp)))
+  :config
+  (defun xcode-open-current-file()
+    (interactive)
+    (shell-command-to-string
+     (concat "open -a \"/Applications/Xcode.app\" " (buffer-file-name))))
+
+  (defun xcode-build() 
+    (interactive) 
+    (shell-command-to-string "osascript -e 'tell application \"Xcode\"' -e 'set targetProject to active workspace document' -e 'build targetProject' -e 'end tell'"))
+
+
+  (defun xcode-run() 
+    (interactive) 
+    (shell-command-to-string "osascript -e 'tell application \"Xcode\"' -e 'set targetProject to active workspace document' -e 'stop targetProject' -e 'run targetProject' -e 'end tell'"))
+  ;; Key bindings
+  :bind 
+  (:map swift-mode-map 
+	("C-c C-c" . xcode-run) 
+	("C-c C-b" . xcode-build) 
+	("C-c C-o" . xcode-open-current-file)))
+
+
 
 (use-package flycheck-swift
   :ensure t
   :after flycheck
-  :hook (flycheck-mode . flycheck-swift-setup)
+  :hook 
+  (flycheck-mode . flycheck-swift-setup)
+  (swift-mode . flycheck-mode)
   :config
   (setq flycheck-swift-sdk-path "/Users/nishantjha/Desktop/Xcode-beta.app/Contents/Developer/Platforms/XROS.platform/Developer/SDKs/XROS1.0.sdk")
   ;;   Select the appropriate SDK version you use
@@ -500,10 +540,8 @@
   :ensure t
   :after lsp-mode
   :config
-  (setq lsp-sourcekit-executable (string-trim (shell-command-to-string "xcrun --find sourcekit-lsp")))
-  :bind
-  (:map lsp-mode-map
-	("C-c d" . lsp-describe-thing-at-point)))
+  (setq lsp-sourcekit-executable (string-trim (shell-command-to-string "xcrun --find sourcekit-lsp"))))
+
 
 
 ;; Go
@@ -548,7 +586,7 @@
     (if response
         (let ((contents-hash (gethash "contents" response)))
           (if (and contents-hash (hash-table-p contents-hash))
-              (let ((doc-string (gethash "value" contents-hash)))
+	      (let ((doc-string (gethash "value" contents-hash)))
                 ;; Remove Markdown formatting and replace HTML entities
 		(setq doc-string (replace-regexp-in-string "```python" "" doc-string)) ; remove code block beginnning
 		(setq doc-string (replace-regexp-in-string "```" "" doc-string)) ; remove code block ending
@@ -558,6 +596,10 @@
                 (message "%s" (or doc-string "Documentation not available.")))
             (message "Documentation not available.")))
       (message "No response from LSP server."))))
+
+
+(use-package pyenv
+  :ensure t)
 
 (use-package lsp-pyright
   :ensure t
@@ -616,7 +658,7 @@
                   (lambda ()
                     (lsp-deferred)
                     (when (string-equal "tsx" (file-name-extension buffer-file-name))
-                      (setup-tide-mode)))))
+		      (setup-tide-mode)))))
 
 (use-package typescript-mode
   :ensure t
@@ -640,7 +682,7 @@
   :config
   (setq tide-always-show-documentation t)
   :bind (:map tide-mode-map
-              ("C-<return>" . tide-fix)
+	      ("C-<return>" . tide-fix)
 	      ("C-c d" . tide-documentation-at-point))
   :hook ((typescript-mode . tide-setup)
          (typescript-mode . tide-hl-identifier-mode)))
@@ -665,7 +707,7 @@
       (switch-to-buffer (other-buffer buf))
       (switch-to-buffer-other-window buf)))
   :bind (:map term-mode-map
-              ("C-c C-j" . jnm/term-toggle-mode))
+	      ("C-c C-j" . jnm/term-toggle-mode))
   (:map global-map
         ("s-t" . open-terminal-dot-app-here)
         ("C-c t" . open-term-here)))
@@ -696,7 +738,7 @@
 (use-package emacs-lisp-mode
   :straight nil
   :bind (:map emacs-lisp-mode-map
-              ("C-c C-c" . eval-buffer))
+	      ("C-c C-c" . eval-buffer))
   :hook (before-save-hook . elisp-format-buffer))
 
 (use-package elisp-format
@@ -727,7 +769,7 @@
 (use-package projectile
   :ensure t
   :bind (:map projectile-mode-map
-              ("C-c p" . projectile-command-map))
+	      ("C-c p" . projectile-command-map))
   :config (setq projectile-indexing-method 'native)
   (add-to-list 'projectile-globally-ignored-directories "Pods")
   (add-to-list 'projectile-globally-ignored-directories ".next")
