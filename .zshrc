@@ -74,7 +74,7 @@ function git_push {
 
 function p() {
     if [[ -f "package-lock.json" ]]; then
-        npm "$@"
+        npm run "$@"
     elif [[ -f "yarn.lock" ]]; then
         yarn "$@"
     elif [[ -f "pnpm-lock.yaml" ]]; then

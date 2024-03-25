@@ -418,7 +418,13 @@
   :init
   (setq gptel-api-key (getenv "OPENAI_API_KEY"))
   (setq gptel-default-mode 'markdown-mode)
-  (setq gptel-model "gpt-4-1106-preview")
+  ;; (setq-default
+  ;;  gptel-model "claude-3-opus-20240229"
+  ;;  gptel-backend (gptel-make-anthropic 
+  ;; 		     "Claude"
+  ;; 		   :stream t 
+  ;; 		   :key (getenv "CLAUDE_API_KEY")))
+  (setq-default gptel-model "gpt-4-1106-preview")
   (add-hook 'gptel-post-response-functions 'gptel-end-of-response)
   (define-key markdown-mode-map (kbd "C-<return>") 'gptel-send)
   (define-key markdown-mode-map (kbd "C-c C-c") 'gptel-send))
@@ -442,9 +448,6 @@
   (setq lsp-modeline-code-actions-enable nil
         lsp-eldoc-enable-hover nil
         lsp-signature-auto-activate nil)
-
-  :bind (:map lsp-mode-map
-	      ("C-<return>" . lsp-execute-code-action))
   :hook ((java-mode . lsp-deferred)
          (web-mode . lsp-deferred)
 	 (swift-mode . lsp-deferred)
