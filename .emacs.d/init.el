@@ -426,6 +426,7 @@
   ;; 		   :key (getenv "CLAUDE_API_KEY")))
   (setq-default gptel-model "gpt-4-1106-preview")
   (add-hook 'gptel-post-response-functions 'gptel-end-of-response)
+  (require 'markdown-mode)
   (define-key markdown-mode-map (kbd "C-<return>") 'gptel-send)
   (define-key markdown-mode-map (kbd "C-c C-c") 'gptel-send))
 
