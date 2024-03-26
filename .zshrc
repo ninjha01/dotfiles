@@ -74,9 +74,19 @@ function git_push {
 
 function p() {
     if [[ -f "package-lock.json" ]]; then
-        npm run "$@"
+	# if command is "i" or "install"
+	# we want to run npm install, not npm run install
+	if [[ "$1" == "i" || "$1" == "install" ]]; then
+	    npm install
+	else
+	    npm run "$@"
+	fi
     elif [[ -f "yarn.lock" ]]; then
-        yarn "$@"
+	if [[ "$1" == "i" || "$1" == "install" ]]; then
+	    yarn
+	else
+            yarn "$@"
+	fi
     elif [[ -f "pnpm-lock.yaml" ]]; then
         pnpm "$@"
     elif [[ -f "bun.lock" ]]; then
