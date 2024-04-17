@@ -35,6 +35,7 @@ echo "setup settings"
 
 ### Utils
 alias cat="bat"
+alias ls="eza"
 alias sudo='sudo '
 alias rm="trash"
 alias blacklist="sudo emacs /etc/hosts"

@@ -164,8 +164,19 @@
               ("C-<" . mc/mark-previous-like-this)))
 
 (use-package subword)
-
 (global-subword-mode)
+
+;; Enable hs-minor-mode for programming modes as an example
+(add-hook 'prog-mode-hook #'hs-minor-mode)
+;; Globally bind the key for toggling code folding
+(defun toggle-fold ()
+  (interactive)
+  (save-excursion
+    (end-of-line)
+    (hs-toggle-hiding)))
+(global-set-key (kbd "<backtab>") 'toggle-fold)
+(global-set-key (kbd "C-c <tab>") 'hs-show-all)
+(global-set-key (kbd "C-c <backtab>") 'hs-hide-all)
 
 (use-package which-key
   :ensure t)
@@ -424,7 +435,7 @@
   ;; 		     "Claude"
   ;; 		   :stream t 
   ;; 		   :key (getenv "CLAUDE_API_KEY")))
-  (setq-default gptel-model "gpt-4-1106-preview")
+  (setq-default gptel-model "gpt-4-turbo-preview")
   (add-hook 'gptel-post-response-functions 'gptel-end-of-response)
   (require 'markdown-mode)
   (define-key markdown-mode-map (kbd "C-<return>") 'gptel-send)
@@ -494,7 +505,8 @@
 	      "--config" (concat (projectile-project-root) "package.json") "--stdin-filepath" filepath))
   (add-to-list 'apheleia-mode-alist
 	       '(typescript-mode . prettier))
-
+  (add-to-list 'apheleia-mode-alist
+	       '(markdown-mode . prettier))
   (apheleia-global-mode t))
 
 ;; Swift
