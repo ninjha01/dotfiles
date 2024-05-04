@@ -341,10 +341,7 @@
   :ensure t)
 
 ;; Programming
-(use-package emacs-everywhere
-  :ensure t)
 
-					; TODO Fix this
 (use-package magit-todos
   :ensure t
   :config
@@ -801,33 +798,14 @@
 
 
 ;; convenience functions
-(defun connect-to-gupper-dev ()
+(defun connect-to-tatta-gpu ()
   "Connect to Nishant's server via TRAMP."
   (interactive)
-  (let ((server-ip (getenv "GUPPER_DEV_IP"))
-        (tramp-default-method "ssh")
-        (keyfile (expand-file-name "~/My Drive/Nitro/Clients/Primordium/nishant_keypair.pem")))
-    (if server-ip
-        (find-file (format "/ssh:nishant@%s#22:/home/nishant" server-ip))
-      (message "GUPPER_DEV_IP environment variable is not set."))))
-(defun connect-to-primo-staging ()
-  "Connect to Nishant's server via TRAMP."
-  (interactive)
-  (let ((server-ip (getenv "PRIMO_STAGING_IP"))
-        (tramp-default-method "ssh")
-        (keyfile (expand-file-name "~/My Drive/Nitro/Clients/Primordium/nishant_keypair.pem")))
-    (if server-ip
-        (find-file (format "/ssh:ubuntu@%s#22:/home/ubuntu/dev" server-ip))
-      (message "PRIMO_STAGING_IP environment variable is not set."))))
-
-(defun connect-to-alignment-server ()
-  "Connect to Nishant's server via TRAMP."
-  (interactive)
-  (let ((server-ip (getenv "NITRO_ALIGNMENT_IP"))
+  (let ((server-ip (getenv "TATTA_GPU_IP"))
         (tramp-default-method "ssh"))
     (if server-ip
-        (find-file (format "/ssh:root@%s#22:/root" server-ip))
-      (message "NITRO_ALIGNMENT_IP environment variable is not set."))))
+	(find-file (format "/ssh:nishant@%s#22:/home/nishant/tatta-preview" server-ip))
+      (message "TATTA_GPU_IP environment variable is not set."))))
 
 (projectile-mode 1)
 (message "reached end of init.el")
