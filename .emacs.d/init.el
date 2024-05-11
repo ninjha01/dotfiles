@@ -432,6 +432,11 @@
   ;; 		     "Claude"
   ;; 		   :stream t 
   ;; 		   :key (getenv "CLAUDE_API_KEY")))
+  (gptel-make-ollama "Ollama"             
+    :host "localhost:11434"               
+    :stream t                             
+    :models 
+    '("llama3:latest" "codellama:34b-instruct"))
   (setq-default gptel-model "gpt-4-turbo-preview")
   (add-hook 'gptel-post-response-functions 'gptel-end-of-response)
   (require 'markdown-mode)
