@@ -280,6 +280,9 @@
     ;; Ensure the mapping directory exists
     (unless (file-exists-p "~/.emacs.d/emacs-saves/")
       (make-directory "~/.emacs.d/emacs-saves/" t))
+    ;; Ensure the hash file exists
+    (unless (file-exists-p "~/.emacs.d/emacs-saves/file_to_hash_map.txt")
+      (with-temp-buffer (write-file "~/.emacs.d/emacs-saves/file_to_hash_map.txt" t)))
 
     (with-temp-file "~/.emacs.d/emacs-saves/file_to_hash_map.txt"
       (insert-file-contents "~/.emacs.d/emacs-saves/file_to_hash_map.txt")
@@ -444,6 +447,16 @@
   (define-key markdown-mode-map (kbd "C-c C-c") 'gptel-send))
 
 ;; LSP
+(defun my/lsp-mode-should-not-activate ()
+  "Return non-nil if the current buffer should not activate lsp-mode."
+  (and (boundp 'tramp-file-name-regexp)
+       buffer-file-name
+       (string-match-p tramp-file-name-regexp buffer-file-name)))
+(defun my/lsp-deferred ()
+  "Call `lsp-deferred` if the current buffer is not a TRAMP buffer."
+  (unless (my/lsp-mode-should-not-activate)
+    (lsp-deferred)))
+
 (use-package lsp-mode
   :ensure t
   :init (setq lsp-keymap-prefix "C-c l")
@@ -462,12 +475,12 @@
   (setq lsp-modeline-code-actions-enable nil
         lsp-eldoc-enable-hover nil
         lsp-signature-auto-activate nil)
-  :hook ((java-mode . lsp-deferred)
-         (web-mode . lsp-deferred)
-	 (swift-mode . lsp-deferred)
-         (typescript-mode . lsp-deferred)
-         (tide-mode . lsp-deferred)
-         (python-mode . lsp-deferred)
+  :hook ((java-mode . my/lsp-deferred)
+         (web-mode . my/lsp-deferred)
+         (swift-mode . my/lsp-deferred)
+         (typescript-mode . my/lsp-deferred)
+         (tide-mode . my/lsp-deferred)
+         (python-mode . my/lsp-deferred)
          (lsp-mode . lsp-enable-which-key-integration)))
 
 
@@ -540,8 +553,6 @@
 	("C-c C-b" . xcode-build) 
 	("C-c C-o" . xcode-open-current-file)))
 
-
-
 (use-package flycheck-swift
   :ensure t
   :after flycheck
@@ -553,14 +564,11 @@
   ;;   Select the appropriate SDK version you use
   (setq flycheck-swift-target "arm64-apple-xros"))
 
-
 (use-package lsp-sourcekit
   :ensure t
   :after lsp-mode
   :config
   (setq lsp-sourcekit-executable (string-trim (shell-command-to-string "xcrun --find sourcekit-lsp"))))
-
-
 
 ;; Go
 (use-package go-mode
