@@ -427,14 +427,14 @@
   (:map global-map
 	("C-c C-g" . gptel))
   :init
-  (setq gptel-api-key (getenv "OPENAI_API_KEY"))
+  ;; (setq gptel-api-key (getenv "OPENAI_API_KEY"))
   (setq gptel-default-mode 'markdown-mode)
-  ;; (setq-default
-  ;;  gptel-model "claude-3-opus-20240229"
-  ;;  gptel-backend (gptel-make-anthropic 
-  ;; 		     "Claude"
-  ;; 		   :stream t 
-  ;; 		   :key (getenv "CLAUDE_API_KEY")))
+  (setq-default
+   gptel-model "claude-3-opus-20240229"
+   gptel-backend (gptel-make-anthropic 
+		     "Claude"
+		   :stream t 
+		   :key (getenv "CLAUDE_API_KEY")))
   (gptel-make-ollama "Ollama"             
     :host "localhost:11434"               
     :stream t                             
