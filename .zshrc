@@ -114,6 +114,20 @@ function gen_gif {
     ffmpeg -i "$in_file" -pix_fmt rgb24 -r 10 "$in_base.gif"
 }
 
+function git_branch_cleanup_dangerous {
+    echo "This will delete all branches that are no longer on the remote."
+    read -q "REPLY?Are you sure you want to continue? (y/n) "
+    echo ""
+    if [[ $REPLY =~ ^[Yy]$ ]]; then
+	git fetch --prune
+	git branch -vv | grep ': gone]' | awk '{print $1}' | xargs git branch -D
+    else
+	echo "Aborting."
+    fi
+    git branch -vv | grep ': gone]' | awk '{print $1}' | xargs git branch -D
+    echo "Cleanup complete."
+}
+
 ### Emacs
 export EDITOR='emacsclient --create-frame --alternate-editor=""'
 alias emc='emacsclient --no-wait --create-frame --alternate-editor=""'
