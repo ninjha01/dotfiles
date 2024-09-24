@@ -517,7 +517,7 @@
 	       '(swift-format "swift-format" (buffer-file-name)))
   (setf (alist-get 'prettier apheleia-formatters)
         '(npx "prettier"
-	      "--config" (concat (projectile-project-root) "package.json") "--stdin-filepath" filepath))
+	      "--config" (concat (projectile-project-root) "frontend/package.json") "--stdin-filepath" filepath))
   (add-to-list 'apheleia-mode-alist
 	       '(typescript-mode . prettier))
   (add-to-list 'apheleia-mode-alist
