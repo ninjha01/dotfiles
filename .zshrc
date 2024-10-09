@@ -51,7 +51,16 @@ alias vi="emacs -Q -nw"
 alias vie="emacs -Q -nw"
 alias vim="vi"
 alias hgrep="history 0 | grep"
-alias spruce_up="rm ~/.Trash/*; brew cleanup; brew update; brew upgrade; brew cleanup; sudo shutdown -r now"
+
+function spruce_up {
+    \rm ~/.Trash/* &&
+    brew cleanup &&
+    brew update &&
+    brew upgrade &&
+    brew cleanup &&
+    sudo shutdown -r now
+}
+
 function lc {
     fc -ln -1 | awk '{$1=$1}1' | pbcopy
 }
