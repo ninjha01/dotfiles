@@ -53,7 +53,8 @@ alias vim="vi"
 alias hgrep="history 0 | grep"
 
 function spruce_up {
-    \rm ~/.Trash/* &&
+    /bin/rm -rf ~/.Trash/*;
+    rm ~/Desktop/Screen\ Shots/*;
     brew cleanup &&
     brew update &&
     brew upgrade &&

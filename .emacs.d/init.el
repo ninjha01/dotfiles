@@ -705,14 +705,28 @@
           (eldoc-mode +1)
           (tide-hl-identifier-mode +1)
           (company-mode +1))
-  :config
-  (setq tide-always-show-documentation t)
-  :bind (:map tide-mode-map
-	      ("C-<return>" . tide-fix)
-	      ("C-c d" . tide-documentation-at-point))
-  :hook ((typescript-mode . tide-setup)
-         (typescript-mode . tide-hl-identifier-mode)))
 
+  (use-package lsp-tailwindcss
+    :straight '(lsp-tailwindcss :type git :host github :repo "merrickluo/lsp-tailwindcss")
+    :init (setq lsp-tailwindcss-add-on-mode t)
+    :config
+    (setq tide-always-show-documentation t)
+    :bind (:map tide-mode-map
+		("C-<return>" . tide-fix)
+		("C-c d" . tide-documentation-at-point))
+    :hook ((typescript-mode . tide-setup)
+           (typescript-mode . tide-hl-identifier-mode)))
+
+  (dolist (tw-major-mode
+           '(css-mode
+             css-ts-mode
+             typescript-mode
+             typescript-ts-mode
+             tsx-ts-mode
+             js2-mode
+             js-ts-mode
+             ))
+    (add-to-list 'lsp-tailwindcss-major-modes tw-major-mode)))
 
 
 (use-package term
