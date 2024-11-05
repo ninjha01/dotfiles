@@ -84,6 +84,7 @@ function git_push {
 }
 
 function p() {
+    # if we're in a python project use uv run
     if [[ -f "package-lock.json" ]]; then
 	# if command is "i" or "install"
 	# we want to run npm install, not npm run install
@@ -102,6 +103,8 @@ function p() {
         pnpm "$@"
     elif [[ -f "bun.lock" ]]; then
         bun "$@"
+    elif [[ -f "requirements.txt" ]]; then
+	uv run "$@"
     else
         echo "No recognized lock file found."
     fi

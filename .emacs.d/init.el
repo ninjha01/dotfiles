@@ -430,7 +430,7 @@
   ;; (setq gptel-api-key (getenv "OPENAI_API_KEY"))
   (setq gptel-default-mode 'markdown-mode)
   (setq-default
-   gptel-model "claude-3-opus-20240229"
+   gptel-model "claude-3-5-sonnet-20240620"
    gptel-backend (gptel-make-anthropic 
 		     "Claude"
 		   :stream t 
@@ -439,8 +439,7 @@
     :host "localhost:11434"               
     :stream t                             
     :models 
-    '("llama3:latest" "codellama:34b-instruct"))
-  (setq-default gptel-model "gpt-4-turbo-preview")
+    '("codellama:34b"))
   (add-hook 'gptel-post-response-functions 'gptel-end-of-response)
   (require 'markdown-mode)
   (define-key markdown-mode-map (kbd "C-<return>") 'gptel-send)
@@ -461,6 +460,10 @@
   :ensure t
   :init (setq lsp-keymap-prefix "C-c l")
   :commands (lsp lsp-deferred)
+  :bind 
+
+  (:map lsp-mode-map)
+  ("C-<return>" . lsp-execute-code-action)
   :config
   (remove-hook 'before-save-hook 'lsp-format-buffer)
   (lsp-enable-which-key-integration t)
@@ -589,6 +592,10 @@
   ;; Add a keybinding for showing documentation
   (define-key lsp-ui-mode-map (kbd "C-c C-d") 'lsp-ui-doc-show))
 
+
+
+
+
 (use-package company
   :ensure t
   :config
@@ -696,6 +703,10 @@
   :ensure t
   :hook
   (typescript-mode . tide-setup)
+  :bind
+  (:map tide-mode-map)
+  ;; bind C-<return> to tide fix
+  ("C-<return>" . tide-fix)
   :init (defun setup-tide-mode ()
           (interactive)
           (tide-setup)
@@ -704,29 +715,8 @@
 	  (flycheck-select-checker 'typescript-tide)
           (eldoc-mode +1)
           (tide-hl-identifier-mode +1)
-          (company-mode +1))
+          (company-mode +1)))
 
-  (use-package lsp-tailwindcss
-    :straight '(lsp-tailwindcss :type git :host github :repo "merrickluo/lsp-tailwindcss")
-    :init (setq lsp-tailwindcss-add-on-mode t)
-    :config
-    (setq tide-always-show-documentation t)
-    :bind (:map tide-mode-map
-		("C-<return>" . tide-fix)
-		("C-c d" . tide-documentation-at-point))
-    :hook ((typescript-mode . tide-setup)
-           (typescript-mode . tide-hl-identifier-mode)))
-
-  (dolist (tw-major-mode
-           '(css-mode
-             css-ts-mode
-             typescript-mode
-             typescript-ts-mode
-             tsx-ts-mode
-             js2-mode
-             js-ts-mode
-             ))
-    (add-to-list 'lsp-tailwindcss-major-modes tw-major-mode)))
 
 
 (use-package term
@@ -767,9 +757,9 @@
   (setq comint-buffer-maximum-size 5000))
 
 
-(use-package yafolding
-  :ensure t
-  :hook (prog-mode . yafolding-mode))
+;; (use-package yafolding
+;;   :ensure t
+;;   :hook (prog-mode . yafolding-mode))
 
 ;; TODO Graphviz
 (use-package graphviz-dot-mode
