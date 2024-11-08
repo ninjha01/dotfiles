@@ -514,17 +514,35 @@
   :ensure t
   :config
   (add-to-list 'apheleia-mode-alist
-	       '(swift-mode . swift-format))
+               '(swift-mode . swift-format))
 
   (add-to-list 'apheleia-formatters
-	       '(swift-format "swift-format" (buffer-file-name)))
+               '(swift-format "swift-format" (buffer-file-name)))
+  
+  (defvar prettier-config-frontend t
+    "Toggle between frontend and root package.json for prettier config.")
+
+  (defun toggle-prettier-config-path ()
+    "Toggle prettier config path between frontend and root package.json."
+    (interactive)
+    (setq prettier-config-frontend (not prettier-config-frontend))
+    (setf (alist-get 'prettier apheleia-formatters)
+          `(npx "prettier"
+                "--config" ,(if prettier-config-frontend
+                                (concat (projectile-project-root) "frontend/package.json")
+                              (concat (projectile-project-root) "package.json"))
+                "--stdin-filepath" filepath))
+    (message "Prettier config path set to %s"
+             (if prettier-config-frontend "frontend/package.json" "package.json")))
+
   (setf (alist-get 'prettier apheleia-formatters)
         '(npx "prettier"
-	      "--config" (concat (projectile-project-root) "frontend/package.json") "--stdin-filepath" filepath))
+              "--config" (concat (projectile-project-root) "frontend/package.json") "--stdin-filepath" filepath))
+  
   (add-to-list 'apheleia-mode-alist
-	       '(typescript-mode . prettier))
+               '(typescript-mode . prettier))
   (add-to-list 'apheleia-mode-alist
-	       '(markdown-mode . prettier))
+               '(markdown-mode . prettier))
   (apheleia-global-mode t))
 
 ;; Swift
