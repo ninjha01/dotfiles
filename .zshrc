@@ -148,7 +148,7 @@ alias emcnw='emacsclient -tty --create-frame --alternate-editor=""'
 alias kille="emacsclient -e '(kill-emacs)'"
 alias remc="kille;emc && exit"
 
-function em {
+function e {
     if [ "$#" -eq 0 ]; then
         echo "Starting new Emacs process ..." >&2
         emacs & disown
@@ -171,3 +171,4 @@ case ":$PATH:" in
   *) export PATH="$PNPM_HOME:$PATH" ;;
 esac
 # pnpm end
+export PATH="/opt/homebrew/opt/postgresql@16/bin:$PATH"

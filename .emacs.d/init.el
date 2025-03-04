@@ -375,32 +375,6 @@
 (use-package flycheck-aspell
   :ensure t)
 
-;; Orgmode
-(use-package org
-  :mode (".org")
-  :ensure org-contrib
-  :config (setq org-directory "~/Google Drive/My Drive/org")
-  (setq org-bullets-mode 1)
-  (setq auto-revert-mode 1)
-  (setq org-indent-mode 1)
-  ;; Code blocks indent
-  (setq org-src-tab-acts-natively t)
-  ;; Code syntax highlight
-  (setq org-src-fontify-natively t)
-  (org-babel-do-load-languages 'org-babel-load-languages '((shell . t)
-                                                           (python . t)
-                                                           (js . t)
-                                                           (ocaml . t)
-                                                           (sql . t)
-                                                           (dot . t)
-                                                           (plantuml . t)))
-  (setq org-log-done t)
-  (setq org-confirm-babel-evaluate nil)
-  :bind (:map global-map
-	      ("C-x C-o" . open-work-org-file))
-  (:map org-mode-map
-        ("C-S-<up>" . org-move-subtree-up)
-        ("C-S-<down>" . org-move-subtree-down)))
 
 (use-package git-link
   :ensure t
@@ -430,11 +404,11 @@
   ;; (setq gptel-api-key (getenv "OPENAI_API_KEY"))
   (setq gptel-default-mode 'markdown-mode)
   (setq-default
-   gptel-model "claude-3-5-sonnet-20240620"
+   gptel-model "claude-3-7-sonnet-20250219"
    gptel-backend (gptel-make-anthropic 
 		     "Claude"
 		   :stream t 
-		   :key (getenv "CLAUDE_API_KEY")))
+		   :key (getenv "ANTHROPIC_API_KEY")))
   (gptel-make-ollama "Ollama"             
     :host "localhost:11434"               
     :stream t                             
@@ -461,7 +435,6 @@
   :init (setq lsp-keymap-prefix "C-c l")
   :commands (lsp lsp-deferred)
   :bind 
-
   (:map lsp-mode-map)
   ("C-<return>" . lsp-execute-code-action)
   :config
@@ -833,14 +806,14 @@
 
 
 ;; convenience functions
-(defun connect-to-tatta-gpu ()
-  "Connect to Nishant's server via TRAMP."
+(defun connect-to-evo-scale-gpu ()
+  "Connect to Evo Scales's server via TRAMP."
   (interactive)
-  (let ((server-ip (getenv "TATTA_GPU_IP"))
+  (let ((server-ip (getenv "EVOSCALE_VM_ADDR"))
         (tramp-default-method "ssh"))
     (if server-ip
-	(find-file (format "/ssh:nishant@%s#22:/home/nishant/tatta-preview" server-ip))
-      (message "TATTA_GPU_IP environment variable is not set."))))
+	(find-file (format "/ssh:njha@%s#22:/home/njha/evolutionaryscale" server-ip))
+      (message "EVOSCALE_VM_ADDR environment variable is not set."))))
 
 (projectile-mode 1)
 (message "reached end of init.el")

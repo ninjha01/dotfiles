@@ -18,8 +18,15 @@ defaults -currentHost write -g AppleFontSmoothing -int 0
 # Sort folders first in Finder
 defaults write com.apple.finder FXSort Folders First -bool true;
 
+# Show hidden files in Finder
+defaults write com.apple.finder AppleShowAllFiles YES;
+
+# show list view by default
+defaults write com.apple.finder FXPreferredViewStyle Nlsv;
+
 # Only show open applications in the Dock
 defaults write com.apple.dock static-only -bool true; 
+
 
 # relaunch Finder
 killall Finder
