@@ -13,6 +13,8 @@ setopt AUTO_CD
 setopt NO_CASE_GLOB
 PROMPT_COMMAND="history -a; history -n"
 unsetopt correct
+# sort by chronology, not alphabet
+git config --global branch.sort -committerdate
 
 ### History
 PROMPT_COMMAND="history -a; history -n"
