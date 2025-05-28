@@ -158,10 +158,10 @@
   :init
   ;; (setq gptel-api-key (getenv "OPENAI_API_KEY"))
   (setq gptel-default-mode 'markdown-mode) 
-  (setq-default gptel-model "claude-3-7-sonnet-20250219" 
+  (setq-default gptel-model "claude-opus-4-20250514" 
                 gptel-backend (gptel-make-anthropic "Claude" 
-                                                 :stream t 
-                                                 :key (getenv "ANTHROPIC_API_KEY"))) 
+                                :stream t 
+                                :key (getenv "ANTHROPIC_API_KEY"))) 
   (gptel-make-ollama "Ollama" 
     :host "localhost:11434" 
     :stream t 
