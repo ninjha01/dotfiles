@@ -11,19 +11,15 @@ autoload -U select-word-style
 select-word-style bash
 setopt AUTO_CD
 setopt NO_CASE_GLOB
-PROMPT_COMMAND="history -a; history -n"
 unsetopt correct
 # sort by chronology, not alphabet
 git config --global branch.sort -committerdate
 
 ### History
-PROMPT_COMMAND="history -a; history -n"
 HISTFILE=${ZDOTDIR:-$HOME}/.zsh_history
 setopt EXTENDED_HISTORY
 HISTCONTROL=ignoreboth
 setopt SHARE_HISTORY
-setopt INC_APPEND_HISTORY
-setopt APPEND_HISTORY
 setopt HIST_EXPIRE_DUPS_FIRST
 setopt HIST_IGNORE_DUPS
 setopt HIST_FIND_NO_DUPS
@@ -136,11 +132,10 @@ function git_branch_cleanup_dangerous {
     if [[ $REPLY =~ ^[Yy]$ ]]; then
 	git fetch --prune
 	git branch -vv | grep ': gone]' | awk '{print $1}' | xargs git branch -D
+	echo "Cleanup complete."
     else
 	echo "Aborting."
     fi
-    git branch -vv | grep ': gone]' | awk '{print $1}' | xargs git branch -D
-    echo "Cleanup complete."
 }
 
 ### Emacs
