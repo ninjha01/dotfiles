@@ -161,6 +161,14 @@ echo "setup utils"
 
 echo "Loaded .zshrc"
 
+### Autosuggestions
+source /opt/homebrew/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+ZSH_AUTOSUGGEST_STRATEGY=(history completion)
+ZSH_AUTOSUGGEST_USE_ASYNC=1
+ZSH_AUTOSUGGEST_BUFFER_MAX_SIZE=20
+ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=242'
+bindkey '^I' autosuggest-accept
+
 # pnpm
 export PNPM_HOME="/Users/nishantjha/Library/pnpm"
 case ":$PATH:" in

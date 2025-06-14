@@ -55,7 +55,7 @@ Version 2017-09-01"
 
 (defun open-terminal-dot-app-here () 
   (interactive) 
-  (shell-command "open -a Warp \"$pwd\"")) 
+  (shell-command "open -a Ghostty \"$pwd\"")) 
 
 (defun open-term-here () 
   (interactive) 
