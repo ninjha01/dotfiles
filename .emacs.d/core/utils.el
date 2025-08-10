@@ -70,4 +70,12 @@ Version 2017-09-01"
     (end-of-line) 
     (hs-toggle-hiding)))
 
+(defun connect-to-vanheron-vm ()
+  "Connect to Nishant's server via TRAMP."
+  (interactive)
+  (find-file "/ssh:ec2-user@vanheron-vm#22:/home/ec2-user/nishant/vhl"))
+
+
+
 (provide 'utils)
+

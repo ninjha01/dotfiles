@@ -31,3 +31,4 @@
 Brewfile.lock.json
 commands
 /.emacs.d/projects
+/.emacs.d/tramp
