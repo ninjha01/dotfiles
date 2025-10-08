@@ -43,3 +43,35 @@ Common commands:
 If asked to teach me something, you should take the following approach.
 
 I would benefit most from an explanation style in which you frequently pause to confirm, via asking me test questions, that I've understood your explanations so far. Particularly helpful are test questions related to simple, explicit examples. When you pause and ask me a test question, do not continue the explanation until I have answered the questions to your satisfaction. I.e. do not keep generating the explanation, actually wait for me to respond first.
+
+## Shell Functions
+
+### collate
+A utility function to concatenate multiple files with filename headers, outputting to stdout.
+
+**Usage:** `collate FILE...`
+
+**Description:**
+Combines multiple files into a single output stream, with each file preceded by a header showing its basename. Useful for creating documentation, combining source files for review, or preparing files for LLM context.
+
+**Examples:**
+```bash
+# View multiple files with headers
+collate *.txt
+
+# Save combined output to a file
+collate src/*.js > combined.js
+
+# Pipe to clipboard for pasting
+collate *.md | pbcopy
+
+# Combine specific files
+collate README.md main.py utils.py
+```
+
+**Features:**
+- Outputs to stdout (redirect with > or pipe as needed)
+- Uses basename in headers for clarity
+- Header format: `===== filename =====`
+- Skips directories and non-existent files
+- Safe null_glob handling

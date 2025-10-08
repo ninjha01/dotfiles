@@ -51,7 +51,7 @@ alias vim="vi"
 alias hgrep="history 0 | grep"
 
 function spruce_up {
-    /bin/rm -rf ~/.Trash/*;
+    osascript -e 'tell application "Finder" to empty trash';
     rm ~/Desktop/Screen\ Shots/*;
     brew cleanup &&
     brew update &&
@@ -138,6 +138,34 @@ function git_branch_cleanup_dangerous {
     fi
 }
 
+
+function collate {
+  emulate -L zsh
+  setopt null_glob
+
+  if (( $# == 0 )); then
+    print -u2 "Usage: collate FILE..."
+    return 1
+  fi
+
+  local -a ok=()
+  local f
+  for f in "$@"; do
+    if [[ -e $f && ! -d $f ]]; then
+      ok+=("$f")
+    else
+      print -u2 "Skipping: $f"
+    fi
+  done
+
+  (( ${#ok} )) || { print -u2 "No valid input files."; return 1 }
+
+  for f in "${ok[@]}"; do
+    printf '===== %s =====\n' "${f:t}"   # basename header
+    cat -- "$f"
+    printf '\n'
+  done
+}
 ### Emacs
 export EDITOR='emacsclient --create-frame --alternate-editor=""'
 alias emc='emacsclient --no-wait --create-frame --alternate-editor=""'
