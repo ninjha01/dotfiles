@@ -37,6 +37,8 @@
 ;; Supress native comp warnings buffer
 (setq warning-minimum-level :error)
 
-(package-initialize)
+;; Add pnpm global bin to exec-path so copilot can find the language server
+(add-to-list 'exec-path (expand-file-name "~/Library/pnpm"))
+(setenv "PATH" (concat (getenv "PATH") ":" (expand-file-name "~/Library/pnpm")))
 
 (provide 'package-setup)

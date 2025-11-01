@@ -1,37 +1,37 @@
 ;; Shared programming configuration used across multiple languages
 
+;; Git integration (load before projectile)
+(use-package magit
+  :ensure t
+  :bind (:map global-map
+              ("C-x g" . magit-status)
+              ("C-c g" . magit-file-dispatch)
+              ("C-c b" . magit-blame))
+  :config
+  (setq magit-save-repository-buffers 'dontask)
+  :hook (after-save-hook . (lambda ()
+                             (setq magit-after-save-refresh-status t))))
+
 ;; Projectile for project management
-(use-package projectile 
-  :ensure t 
-  :bind (:map projectile-mode-map 
-              ("C-c p" . projectile-command-map)) 
-  :config 
-  (setq projectile-indexing-method 'native) 
-  (add-to-list 'projectile-globally-ignored-directories "Pods") 
-  (add-to-list 'projectile-globally-ignored-directories ".next") 
-  (add-to-list 'projectile-globally-ignored-directories "build") 
-  (add-to-list 'projectile-globally-ignored-directories "straight") 
-  (add-to-list 'projectile-globally-ignored-directories "node_modules") 
-  (add-to-list 'projectile-globally-ignored-directories ".mypy_cache") 
-  (setq projectile-git-submodule-command nil) 
-  (setq projectile-require-project-root t) 
-  (setq projectile-ignored-projects '("~/" "/opt/homebrew")) 
-  (require 'magit) 
+(use-package projectile
+  :ensure t
+  :after magit
+  :bind (:map projectile-mode-map
+              ("C-c p" . projectile-command-map))
+  :config
+  (setq projectile-indexing-method 'native)
+  (add-to-list 'projectile-globally-ignored-directories "Pods")
+  (add-to-list 'projectile-globally-ignored-directories ".next")
+  (add-to-list 'projectile-globally-ignored-directories "build")
+  (add-to-list 'projectile-globally-ignored-directories "straight")
+  (add-to-list 'projectile-globally-ignored-directories "node_modules")
+  (add-to-list 'projectile-globally-ignored-directories ".mypy_cache")
+  (setq projectile-git-submodule-command nil)
+  (setq projectile-require-project-root t)
+  (setq projectile-ignored-projects '("~/" "/opt/homebrew"))
   (setq projectile-switch-project-action 'magit-status))
 
 (projectile-mode 1)
-
-;; Git integration
-(use-package magit 
-  :ensure t 
-  :bind (:map global-map 
-              ("C-x g" . magit-status) 
-              ("C-c g" . magit-file-dispatch) 
-              ("C-c b" . magit-blame)) 
-  :config 
-  (setq magit-save-repository-buffers 'dontask) 
-  :hook (after-save-hook . (lambda () 
-                             (setq magit-after-save-refresh-status t))))
 
 (use-package magit-todos 
   :ensure t 
@@ -134,17 +134,20 @@
   :ensure t)
 
 ;; GitHub Copilot
-(use-package copilot 
-  :straight (:host github 
-                   :repo "zerolfx/copilot.el" 
-                   :files ("dist" "*.el")) 
-  :ensure t 
-  :config 
+(use-package copilot
+  :straight (:host github
+                   :repo "zerolfx/copilot.el"
+                   :files ("dist" "*.el"))
+  :ensure t
+  :init
+  ;; Set the path to the copilot language server
+  (setq copilot-node-executable "node")
+  :config
   (with-eval-after-load 'company
     ;; disable inline previews
-    (delq 'company-preview-if-just-one-frontend company-frontends)) 
-  (define-key copilot-completion-map (kbd "<tab>") 'copilot-accept-completion) 
-  (define-key copilot-completion-map (kbd "TAB") 'copilot-accept-completion) 
+    (delq 'company-preview-if-just-one-frontend company-frontends))
+  (define-key copilot-completion-map (kbd "<tab>") 'copilot-accept-completion)
+  (define-key copilot-completion-map (kbd "TAB") 'copilot-accept-completion)
   :hook ((prog-mode . copilot-mode)))
 
 ;; AI integration
