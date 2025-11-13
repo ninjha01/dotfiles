@@ -9,6 +9,7 @@
               ("C-c b" . magit-blame))
   :config
   (setq magit-save-repository-buffers 'dontask)
+  (setq magit-diff-visit-prefer-worktree t)
   :hook (after-save-hook . (lambda ()
                              (setq magit-after-save-refresh-status t))))
 

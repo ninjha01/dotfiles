@@ -119,6 +119,31 @@ function porthog {
     lsof -iTCP -sTCP:LISTEN -P | grep "$PORT"
 }
 
+function portkill {
+    PORT=$1
+    if [[ -z "$PORT" ]]; then
+        echo "Usage: portkill <port>"
+        return 1
+    fi
+
+    # Use porthog to find processes and extract PIDs
+    PIDS=$(porthog "$PORT" | awk '{print $2}')
+
+    if [[ -z "$PIDS" ]]; then
+        echo "No processes found listening on port $PORT"
+        return 0
+    fi
+
+    echo "Killing processes on port $PORT:"
+    echo "$PIDS" | while read pid; do
+        if [[ -n "$pid" ]]; then
+            echo "  Killing PID $pid"
+            kill -9 $pid
+        fi
+    done
+    echo "Done."
+}
+
 function gen_gif {
     in_file=$1
     in_base=$(basename "$in_file" | cut -d. -f1)
