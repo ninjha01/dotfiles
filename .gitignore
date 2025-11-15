@@ -32,3 +32,8 @@ Brewfile.lock.json
 commands
 /.emacs.d/projects
 /.emacs.d/tramp
+/EmacsclientWrapper.app/Contents/_CodeSignature/
+/EmacsclientWrapper.app/Contents/PkgInfo
+/EmacsclientWrapper.app/Contents/Resources/
+/EmacsclientWrapper.app/Contents/MacOS/
+/.DS_Store

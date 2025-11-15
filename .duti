@@ -1,0 +1,134 @@
+# Set Emacs as default application for code and text files
+# Format: bundle_id extension|UTI role
+
+# Text files
+com.local.EmacsclientWrapper public.plain-text all
+com.local.EmacsclientWrapper .txt all
+com.local.EmacsclientWrapper .text all
+com.local.EmacsclientWrapper .md all
+com.local.EmacsclientWrapper .markdown all
+com.local.EmacsclientWrapper .rst all
+com.local.EmacsclientWrapper .org all
+
+# Configuration files
+com.local.EmacsclientWrapper .conf all
+com.local.EmacsclientWrapper .config all
+com.local.EmacsclientWrapper .ini all
+com.local.EmacsclientWrapper .cfg all
+com.local.EmacsclientWrapper .toml all
+com.local.EmacsclientWrapper .yaml all
+com.local.EmacsclientWrapper .yml all
+com.local.EmacsclientWrapper .json all
+com.local.EmacsclientWrapper .jsonc all
+com.local.EmacsclientWrapper .xml all
+
+# Shell scripts
+com.local.EmacsclientWrapper .sh all
+com.local.EmacsclientWrapper .bash all
+com.local.EmacsclientWrapper .zsh all
+com.local.EmacsclientWrapper .fish all
+com.local.EmacsclientWrapper public.shell-script all
+
+# Python
+com.local.EmacsclientWrapper .py all
+com.local.EmacsclientWrapper .pyw all
+com.local.EmacsclientWrapper .pyx all
+com.local.EmacsclientWrapper .pyi all
+
+# JavaScript/TypeScript
+com.local.EmacsclientWrapper .js all
+com.local.EmacsclientWrapper .jsx all
+com.local.EmacsclientWrapper .ts all
+com.local.EmacsclientWrapper .tsx all
+com.local.EmacsclientWrapper .mjs all
+com.local.EmacsclientWrapper .cjs all
+
+# Web
+com.local.EmacsclientWrapper .html all
+com.local.EmacsclientWrapper .htm all
+com.local.EmacsclientWrapper .css all
+com.local.EmacsclientWrapper .scss all
+com.local.EmacsclientWrapper .sass all
+com.local.EmacsclientWrapper .less all
+
+# C/C++
+com.local.EmacsclientWrapper .c all
+com.local.EmacsclientWrapper .h all
+com.local.EmacsclientWrapper .cpp all
+com.local.EmacsclientWrapper .cc all
+com.local.EmacsclientWrapper .cxx all
+com.local.EmacsclientWrapper .hpp all
+com.local.EmacsclientWrapper .hh all
+com.local.EmacsclientWrapper .hxx all
+
+# Java/Kotlin
+com.local.EmacsclientWrapper .java all
+com.local.EmacsclientWrapper .kt all
+com.local.EmacsclientWrapper .kts all
+
+# Go
+com.local.EmacsclientWrapper .go all
+
+# Rust
+com.local.EmacsclientWrapper .rs all
+
+# Ruby
+com.local.EmacsclientWrapper .rb all
+com.local.EmacsclientWrapper .rake all
+com.local.EmacsclientWrapper Gemfile all
+com.local.EmacsclientWrapper Rakefile all
+
+# PHP
+com.local.EmacsclientWrapper .php all
+
+# Perl
+com.local.EmacsclientWrapper .pl all
+com.local.EmacsclientWrapper .pm all
+
+# R
+com.local.EmacsclientWrapper .r all
+com.local.EmacsclientWrapper .R all
+
+# Swift
+com.local.EmacsclientWrapper .swift all
+
+# Objective-C
+com.local.EmacsclientWrapper .m all
+com.local.EmacsclientWrapper .mm all
+
+# SQL
+com.local.EmacsclientWrapper .sql all
+
+# Docker
+com.local.EmacsclientWrapper Dockerfile all
+com.local.EmacsclientWrapper .dockerfile all
+
+# Git
+com.local.EmacsclientWrapper .gitignore all
+com.local.EmacsclientWrapper .gitattributes all
+com.local.EmacsclientWrapper .gitmodules all
+
+# Makefiles
+com.local.EmacsclientWrapper Makefile all
+com.local.EmacsclientWrapper .make all
+com.local.EmacsclientWrapper .mk all
+
+# Lisp/Scheme
+com.local.EmacsclientWrapper .el all
+com.local.EmacsclientWrapper .lisp all
+com.local.EmacsclientWrapper .scm all
+com.local.EmacsclientWrapper .clj all
+com.local.EmacsclientWrapper .cljs all
+
+# Other common files
+com.local.EmacsclientWrapper .log all
+com.local.EmacsclientWrapper .csv all
+com.local.EmacsclientWrapper .env all
+com.local.EmacsclientWrapper .vim all
+com.local.EmacsclientWrapper .vimrc all
+com.local.EmacsclientWrapper .zshrc all
+com.local.EmacsclientWrapper .bashrc all
+com.local.EmacsclientWrapper .profile all
+com.local.EmacsclientWrapper LICENSE all
+com.local.EmacsclientWrapper README all
+com.local.EmacsclientWrapper .editorconfig all
