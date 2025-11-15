@@ -1,0 +1,134 @@
+# Set Emacs as default application for code and text files
+# Format: bundle_id extension|UTI role
+
+# Text files
+org.gnu.Emacs public.plain-text all
+org.gnu.Emacs .txt all
+org.gnu.Emacs .text all
+org.gnu.Emacs .md all
+org.gnu.Emacs .markdown all
+org.gnu.Emacs .rst all
+org.gnu.Emacs .org all
+
+# Configuration files
+org.gnu.Emacs .conf all
+org.gnu.Emacs .config all
+org.gnu.Emacs .ini all
+org.gnu.Emacs .cfg all
+org.gnu.Emacs .toml all
+org.gnu.Emacs .yaml all
+org.gnu.Emacs .yml all
+org.gnu.Emacs .json all
+org.gnu.Emacs .jsonc all
+org.gnu.Emacs .xml all
+
+# Shell scripts
+org.gnu.Emacs .sh all
+org.gnu.Emacs .bash all
+org.gnu.Emacs .zsh all
+org.gnu.Emacs .fish all
+org.gnu.Emacs public.shell-script all
+
+# Python
+org.gnu.Emacs .py all
+org.gnu.Emacs .pyw all
+org.gnu.Emacs .pyx all
+org.gnu.Emacs .pyi all
+
+# JavaScript/TypeScript
+org.gnu.Emacs .js all
+org.gnu.Emacs .jsx all
+org.gnu.Emacs .ts all
+org.gnu.Emacs .tsx all
+org.gnu.Emacs .mjs all
+org.gnu.Emacs .cjs all
+
+# Web
+org.gnu.Emacs .html all
+org.gnu.Emacs .htm all
+org.gnu.Emacs .css all
+org.gnu.Emacs .scss all
+org.gnu.Emacs .sass all
+org.gnu.Emacs .less all
+
+# C/C++
+org.gnu.Emacs .c all
+org.gnu.Emacs .h all
+org.gnu.Emacs .cpp all
+org.gnu.Emacs .cc all
+org.gnu.Emacs .cxx all
+org.gnu.Emacs .hpp all
+org.gnu.Emacs .hh all
+org.gnu.Emacs .hxx all
+
+# Java/Kotlin
+org.gnu.Emacs .java all
+org.gnu.Emacs .kt all
+org.gnu.Emacs .kts all
+
+# Go
+org.gnu.Emacs .go all
+
+# Rust
+org.gnu.Emacs .rs all
+
+# Ruby
+org.gnu.Emacs .rb all
+org.gnu.Emacs .rake all
+org.gnu.Emacs Gemfile all
+org.gnu.Emacs Rakefile all
+
+# PHP
+org.gnu.Emacs .php all
+
+# Perl
+org.gnu.Emacs .pl all
+org.gnu.Emacs .pm all
+
+# R
+org.gnu.Emacs .r all
+org.gnu.Emacs .R all
+
+# Swift
+org.gnu.Emacs .swift all
+
+# Objective-C
+org.gnu.Emacs .m all
+org.gnu.Emacs .mm all
+
+# SQL
+org.gnu.Emacs .sql all
+
+# Docker
+org.gnu.Emacs Dockerfile all
+org.gnu.Emacs .dockerfile all
+
+# Git
+org.gnu.Emacs .gitignore all
+org.gnu.Emacs .gitattributes all
+org.gnu.Emacs .gitmodules all
+
+# Makefiles
+org.gnu.Emacs Makefile all
+org.gnu.Emacs .make all
+org.gnu.Emacs .mk all
+
+# Lisp/Scheme
+org.gnu.Emacs .el all
+org.gnu.Emacs .lisp all
+org.gnu.Emacs .scm all
+org.gnu.Emacs .clj all
+org.gnu.Emacs .cljs all
+
+# Other common files
+org.gnu.Emacs .log all
+org.gnu.Emacs .csv all
+org.gnu.Emacs .env all
+org.gnu.Emacs .vim all
+org.gnu.Emacs .vimrc all
+org.gnu.Emacs .zshrc all
+org.gnu.Emacs .bashrc all
+org.gnu.Emacs .profile all
+org.gnu.Emacs LICENSE all
+org.gnu.Emacs README all
+org.gnu.Emacs .editorconfig all

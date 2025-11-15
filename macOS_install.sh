@@ -11,6 +11,9 @@ brew bundle
 
 ./symlink.sh
 
+# Apply file associations (set Emacs as default for code/text files)
+duti ~/.duti
+
 # Disable font smoothing (might?) require reboot
 # from https://tonsky.me/blog/monitors/
 defaults -currentHost write -g AppleFontSmoothing -int 0

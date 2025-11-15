@@ -9,10 +9,13 @@ brew "bat"
 brew "black"
 brew "blast"
 brew "cmake"
+brew "ruby"
+brew "cocoapods"
 brew "coreutils"
 brew "cruft"
 brew "curl"
 brew "doctl"
+brew "duti"
 brew "eslint"
 brew "exiftool"
 brew "eza"
@@ -37,6 +40,7 @@ brew "krb5"
 brew "libagg"
 brew "mas"
 brew "minimap2"
+brew "mkcert"
 brew "neofetch"
 brew "nvm"
 brew "pandoc"
@@ -51,7 +55,6 @@ brew "prettier"
 brew "prettyping"
 brew "python@3.11"
 brew "ripgrep"
-brew "ruby"
 brew "rust"
 brew "rustup"
 brew "shellcheck"
@@ -66,19 +69,25 @@ brew "wget"
 brew "z"
 brew "zlib", link: true
 brew "zsh-autosuggestions"
-brew "d12frosted/emacs-plus/emacs-plus@30", args: ["with-modern-purple-flat-icon", "with-native-comp"]
+brew "d12frosted/emacs-plus/emacs-plus@29", args: ["with-modern-purple-flat-icon", "with-native-comp"], link: false
+brew "d12frosted/emacs-plus/emacs-plus@30", args: ["with-modern-purple-flat-icon"]
 brew "stripe/stripe-cli/stripe"
 cask "bartender"
+cask "beekeeper-studio"
 cask "chatgpt"
 cask "cleanshot"
 cask "daisydisk"
 cask "db-browser-for-sqlite"
+cask "diffusionbee"
 cask "discord"
+cask "firefox"
 cask "font-fira-code"
 cask "gcloud-cli"
 cask "ghostty"
 cask "google-chrome"
 cask "google-drive"
+cask "granola"
+cask "inkscape"
 cask "itsycal"
 cask "linear-linear"
 cask "orbstack"
@@ -86,15 +95,19 @@ cask "raycast"
 cask "rectangle"
 cask "slack"
 cask "steam"
+cask "swiftformat-for-xcode"
 cask "visual-studio-code"
+cask "vivaldi"
 cask "xquartz"
 cask "zoom"
 mas "Dark Noise", id: 1465439395
 mas "Flighty", id: 1358823008
 mas "Hue in the Menu", id: 1534707384
 mas "Keynote", id: 409183694
+mas "Mini Motorways", id: 1456188526
 mas "Numbers", id: 409203825
 mas "Pages", id: 409201541
 mas "Strongbox", id: 1270075435
 mas "Timery", id: 1425368544
 mas "Toggl Track", id: 1291898086
+mas "Xcode", id: 497799835
