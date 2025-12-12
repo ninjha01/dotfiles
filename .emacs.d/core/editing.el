@@ -34,29 +34,42 @@
   (setq comint-buffer-maximum-size 5000))
 
 ;; General formatting
-(use-package apheleia 
-  :ensure t 
+(use-package apheleia
+  :ensure t
   :config
-  (defvar prettier-config-frontend t "Toggle between frontend and root package.json for prettier config.") 
-  
-  (defun toggle-prettier-config-path () 
-    "Toggle prettier config path between frontend and root package.json." 
-    (interactive) 
-    (setq prettier-config-frontend (not prettier-config-frontend)) 
-    (setf (alist-get 'prettier apheleia-formatters) 
-          `(npx "prettier" "--config" ,(if prettier-config-frontend 
-                                           (concat (projectile-project-root) "frontend/package.json") 
-                                         (concat (projectile-project-root) "package.json")) 
-                "--stdin-filepath" filepath)) 
-    (message "Prettier config path set to %s" 
-             (if prettier-config-frontend "frontend/package.json" "package.json"))) 
-  
-  (setf (alist-get 'prettier apheleia-formatters) 
-        '(npx "prettier" "--config" (concat (projectile-project-root) "frontend/package.json") 
-              "--stdin-filepath" filepath)) 
-  
-  (add-to-list 'apheleia-mode-alist '(typescript-mode . prettier)) 
-  (add-to-list 'apheleia-mode-alist '(markdown-mode . prettier)) 
+  (defun find-prettier-config ()
+    "Find nearest Prettier config file from current buffer."
+    (when buffer-file-name
+      (let ((dir (file-name-directory buffer-file-name)))
+        (or (locate-dominating-file dir ".prettierrc")
+            (locate-dominating-file dir ".prettierrc.json")
+            (locate-dominating-file dir ".prettierrc.js")
+            (locate-dominating-file dir "prettier.config.js")
+            (locate-dominating-file dir "package.json")))))
+
+  (defun set-js-formatter ()
+    "Set apheleia-formatter to biome if biome.json exists, otherwise prettier."
+    (setq-local apheleia-formatter
+                (if (and buffer-file-name
+                         (or (locate-dominating-file (file-name-directory buffer-file-name) "biome.json")
+                             (locate-dominating-file (file-name-directory buffer-file-name) "biome.jsonc")))
+                    'biome
+                  'prettier)))
+
+  ;; Prettier formatter with auto-detected config
+  (setf (alist-get 'prettier apheleia-formatters)
+        '(npx "prettier"
+              "--config" (or (find-prettier-config) (projectile-project-root))
+              "--stdin-filepath" filepath))
+
+  ;; Biome formatter (via pnpm dlx for local installs)
+  (setf (alist-get 'biome apheleia-formatters)
+        '("pnpm" "dlx" "@biomejs/biome" "format" "--stdin-file-path" filepath))
+
+  ;; Auto-detect formatter for JS/TS modes via hook
+  (add-hook 'web-mode-hook #'set-js-formatter)
+  (add-hook 'typescript-mode-hook #'set-js-formatter)
+  (add-to-list 'apheleia-mode-alist '(markdown-mode . prettier))
   (apheleia-global-mode t))
 
 ;; Emacs Lisp formatting
