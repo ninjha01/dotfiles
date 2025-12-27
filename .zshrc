@@ -57,6 +57,7 @@ function spruce_up {
     brew update &&
     brew upgrade &&
     brew cleanup &&
+    mo clean &&
     sudo shutdown -r now
 }
 
