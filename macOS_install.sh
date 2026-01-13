@@ -11,6 +11,9 @@ brew bundle
 
 ./symlink.sh
 
+# Git config
+git config --global rerere.enabled true
+
 # Compile EmacsclientWrapper AppleScript to app bundle
 osacompile -o ~/dotfiles/EmacsclientWrapper.app ~/dotfiles/emacsclient-wrapper.applescript
 

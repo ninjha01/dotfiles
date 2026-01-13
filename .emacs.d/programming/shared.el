@@ -162,7 +162,7 @@
   :init
   ;; (setq gptel-api-key (getenv "OPENAI_API_KEY"))
   (setq gptel-default-mode 'markdown-mode) 
-  (setq-default gptel-model "claude-opus-4-20250514" 
+  (setq-default gptel-model "claude-opus-4-5" 
                 gptel-backend (gptel-make-anthropic "Claude" 
                                 :stream t 
                                 :key (getenv "ANTHROPIC_API_KEY"))) 
