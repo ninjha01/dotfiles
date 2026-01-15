@@ -29,7 +29,6 @@
 .vim/.vim
 .vim/viminfo'
 Brewfile.lock.json
-commands
 /.emacs.d/projects
 /.emacs.d/tramp
 /EmacsclientWrapper.app/Contents/_CodeSignature/
