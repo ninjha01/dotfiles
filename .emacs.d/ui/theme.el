@@ -44,17 +44,7 @@
   (setq doom-modeline-indent-info nil) 
   (setq doom-modeline-minor-modes nil) 
   (setq doom-modeline-project-detection 'projectile) 
-  (setq doom-modeline-vcs-max-length 12) 
-  (set-face-attribute 'mode-line nil 
-                      :font "Fira Code 12"))
-
-;; Font
-(use-package fira-code-mode 
-  :ensure t 
-  :init (fira-code-mode) 
-  :config
-  (fira-code-mode-install-fonts t)
-  (setq default-frame-alist '((font . "Fira Code 12"))))
+  (setq doom-modeline-vcs-max-length 12))
 
 ;; Chrome
 ;;; Remove menubar
