@@ -53,7 +53,7 @@
   :ensure t 
   :init (fira-code-mode) 
   :config
-  ;; (fira-code-mode-install-fonts t) ;; Install if you haven't already
+  (fira-code-mode-install-fonts t)
   (setq default-frame-alist '((font . "Fira Code 12"))))
 
 ;; Chrome
