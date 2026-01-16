@@ -50,9 +50,18 @@ alias vie="emacs -Q -nw"
 alias vim="vi"
 alias hgrep="history 0 | grep"
 
+function claude_cleanup {
+    local days=${1:-3}
+    local before=$(du -sh ~/.claude/projects/ 2>/dev/null | cut -f1)
+    find ~/.claude/projects -name "*.jsonl" -mtime +$days -delete 2>/dev/null
+    local after=$(du -sh ~/.claude/projects/ 2>/dev/null | cut -f1)
+    echo "Claude cleanup: $before → $after (deleted sessions older than $days days)"
+}
+
 function spruce_up {
     osascript -e 'tell application "Finder" to empty trash';
     rm ~/Desktop/Screen\ Shots/*;
+    claude_cleanup 3;
     brew cleanup &&
     brew update &&
     brew upgrade &&
