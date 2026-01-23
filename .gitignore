@@ -37,3 +37,4 @@ Brewfile.lock.json
 /EmacsclientWrapper.app/Contents/MacOS/
 /.DS_Store
 /.emacs.d/history
+*.elc

@@ -1,93 +1,91 @@
-;; Theme and UI Setup
+;;; theme.el --- Theme and UI setup -*- lexical-binding: t -*-
+
+;;; Commentary:
+;; Visual appearance configuration including theme, modeline, and chrome.
+
+;;; Code:
 
 ;; Theme
-(use-package zenburn-theme 
-  :ensure t 
-  :config (load-theme 'zenburn t))
+(use-package zenburn-theme
+  :ensure t
+  :config
+  (load-theme 'zenburn t))
 
-;; Line numbers
-(use-package display-line-numbers 
-  :commands (display-line-numbers-mode) 
-  :config (set-face-foreground 'line-number "#7F9F7F") 
-  :init (defun goto-line-with-feedback () 
-          "Show line numbers temporarily, while prompting for the line number input" 
-          (interactive) 
-          (unwind-protect 
-              (progn 
-                (display-line-numbers-mode 1) 
-                (goto-line (read-number "Goto line: "))) 
-            (display-line-numbers-mode -1))) 
-  )
+;; Line numbers (displayed temporarily for goto-line)
+(use-package display-line-numbers
+  :commands display-line-numbers-mode
+  :config
+  (set-face-foreground 'line-number "#7F9F7F")
+  :init
+  (defun goto-line-with-feedback ()
+    "Show line numbers temporarily while prompting for line number."
+    (interactive)
+    (unwind-protect
+        (progn
+          (display-line-numbers-mode 1)
+          (goto-line (read-number "Goto line: ")))
+      (display-line-numbers-mode -1))))
 
 ;; Modeline
-(use-package shrink-path 
-  :ensure t 
-  :straight (:host github 
-                   :repo "zbelial/shrink-path.el" 
+(use-package shrink-path
+  :ensure t
+  :straight (:host github
+                   :repo "zbelial/shrink-path.el"
                    :files ("dist" "*.el")))
 
-(use-package all-the-icons 
+(use-package all-the-icons
   :ensure t)
 
-(use-package doom-modeline 
-  :ensure t 
-  :init (doom-modeline-mode t) 
-  :config 
-  (setq dnoom-modeline-height 22) 
-  (setq doom-modeline-major-mode-color-icon t) 
-  (setq doom-modeline-env-version nil) 
-  (setq doom-modeline-bar-width 1) 
-  (setq doom-modeline-buffer-encoding nil) 
-  (setq doom-modeline-buffer-file-name-style 'auto) 
-  (setq doom-modeline-buffer-modification-icon nil) 
-  (setq doom-modeline-checker-simple-format t) 
-  (setq doom-modeline-indent-info nil) 
-  (setq doom-modeline-minor-modes nil) 
-  (setq doom-modeline-project-detection 'projectile) 
-  (setq doom-modeline-vcs-max-length 12))
+(use-package doom-modeline
+  :ensure t
+  :init
+  (doom-modeline-mode 1)
+  :config
+  (setq doom-modeline-height 22
+        doom-modeline-bar-width 1
+        doom-modeline-major-mode-color-icon t
+        doom-modeline-env-version nil
+        doom-modeline-buffer-encoding nil
+        doom-modeline-buffer-file-name-style 'auto
+        doom-modeline-buffer-modification-icon nil
+        doom-modeline-checker-simple-format t
+        doom-modeline-indent-info nil
+        doom-modeline-minor-modes nil
+        doom-modeline-project-detection 'projectile
+        doom-modeline-vcs-max-length 12))
 
-;; Chrome
-;;; Remove menubar
+;; Chrome - remove UI clutter
 (menu-bar-mode -1)
-;;; Remove Toolbar
 (tool-bar-mode -1)
-;;; Remove scroll bar
 (scroll-bar-mode -1)
-
-;; remove fringe color
-;; https://emacs.stackexchange.com/questions/5342/how-do-i-set-the-fringe-colors-to-whatever-is-the-background-color
-(set-face-attribute 'fringe nil 
-                    :background nil)
-
-;; Don't show gaps on resize
+(set-face-attribute 'fringe nil :background nil)
 (setq frame-resize-pixelwise t)
 
 ;; Delimiters
-(show-paren-mode)
-(use-package rainbow-delimiters 
-  :ensure t)
+(use-package rainbow-delimiters
+  :ensure t
+  :hook (prog-mode . rainbow-delimiters-mode))
 
-(rainbow-delimiters-mode)
-(show-paren-mode)
+(show-paren-mode 1)
 
-;; Disable startup screen
-(setq inhibit-startup-screen t)
+;; Startup behavior
+(setq inhibit-startup-screen t
+      initial-scratch-message "")
 
-;; Clear Scratch
-(setq initial-scratch-message "")
-
-;; Highlighted regions are grey with white text
-(set-face-attribute 'region nil 
-                    :background "#666" 
+;; Selection highlighting
+(set-face-attribute 'region nil
+                    :background "#666"
                     :foreground "#ffffff")
 
 ;; Highlight current line
-(global-hl-line-mode t)
+(global-hl-line-mode 1)
 
 ;; Improved cursor location visibility
-(use-package beacon 
-  :ensure t)
-
-(beacon-mode t)
+(use-package beacon
+  :ensure t
+  :config
+  (beacon-mode 1))
 
 (provide 'theme)
+
+;;; theme.el ends here
