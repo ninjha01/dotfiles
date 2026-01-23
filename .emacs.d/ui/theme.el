@@ -17,7 +17,7 @@
                 (display-line-numbers-mode 1) 
                 (goto-line (read-number "Goto line: "))) 
             (display-line-numbers-mode -1))) 
-  (global-set-key (kbd "M-l") 'goto-line-with-feedback))
+  )
 
 ;; Modeline
 (use-package shrink-path 

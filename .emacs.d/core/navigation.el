@@ -70,26 +70,80 @@
               ("C-x C-r" . crux-rename-file-and-buffer) 
               ("C-x C-k" . crux-delete-buffer-and-file)))
 
-;; Ivy, Counsel, Swiper for completion
-(use-package ivy 
-  :ensure t 
-  :config 
-  (setq ivy-use-virtual-buffers t) 
-  (setq enable-recursive-minibuffers t) 
-  :bind (:map global-map 
-              ("C-s" . swiper) 
-              ("C-c C-r" . ivy-resume) 
-              ("C-x b" . ivy-switch-buffer)))
+;; Modern completion stack: Vertico + Consult + Marginalia + Orderless
 
-(ivy-mode)
+;; Vertico - vertical completion UI
+(use-package vertico
+  :ensure t
+  :init
+  (vertico-mode)
+  :config
+  (setq vertico-cycle t)
+  (setq vertico-resize nil))
 
-(use-package counsel 
-  :ensure t 
-  :bind (:map global-map 
-              ("M-x" . counsel-M-x) 
-              ("C-x C-f" . counsel-find-file) 
-              ("C-c k" . counsel-git-grep) 
-              ("C-r" . counsel-minibuffer-history)))
+;; Savehist - persist minibuffer history (enables recency sorting)
+(use-package savehist
+  :init
+  (savehist-mode)
+  :config
+  (setq savehist-additional-variables
+        '(search-ring regexp-search-ring project-prefix-history-list))
+  (setq history-length 1000))
+
+;; Recentf - track recent files
+(use-package recentf
+  :init
+  (recentf-mode)
+  :config
+  (setq recentf-max-saved-items 200)
+  (setq recentf-max-menu-items 15))
+
+;; Orderless - flexible matching (space-separated terms)
+(use-package orderless
+  :ensure t
+  :config
+  (setq completion-styles '(orderless basic))
+  (setq completion-category-overrides '((file (styles basic partial-completion)))))
+
+;; Marginalia - rich annotations in minibuffer (disabled)
+;; (use-package marginalia
+;;   :ensure t
+;;   :init
+;;   (marginalia-mode))
+
+;; Consult - search and navigation commands
+(use-package consult
+  :ensure t
+  :bind (:map global-map
+              ("C-s" . consult-line)           ; was swiper
+              ("C-x b" . consult-buffer)       ; was ivy-switch-buffer
+              ("C-c k" . consult-ripgrep)      ; was counsel-git-grep
+              ("C-c f" . consult-find)         ; find files
+              ("M-l" . consult-goto-line)      ; goto line with preview
+              ("M-g o" . consult-outline)      ; document outline
+              ("M-y" . consult-yank-pop)       ; browse kill ring
+              ("C-c C-r" . consult-recent-file))
+  :config
+  (setq consult-narrow-key "<")  ; press < to narrow by type
+  (setq consult-preview-key "M-.")) ; preview with M-.
+
+;; Embark - actions on completion candidates
+(use-package embark
+  :ensure t
+  :bind (:map global-map
+              ("C-." . embark-act)         ; context actions
+              ("C-;" . embark-dwim))       ; default action
+  :config
+  (setq prefix-help-command #'embark-prefix-help-command))
+
+;; Embark-Consult integration
+(use-package embark-consult
+  :ensure t
+  :after (embark consult)
+  :hook (embark-collect-mode . consult-preview-at-point-mode))
+
+;; Enable recursive minibuffers
+(setq enable-recursive-minibuffers t)
 
 ;; Don't jump around on scroll
 (setq scroll-conservatively 100)

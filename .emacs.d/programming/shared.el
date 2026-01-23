@@ -18,9 +18,12 @@
   :ensure t
   :after magit
   :bind (:map projectile-mode-map
-              ("C-c p" . projectile-command-map))
+              ("C-c p" . projectile-command-map)
+         :map projectile-command-map
+              ("f" . consult-find))  ; use consult-find instead of projectile-find-file
   :config
   (setq projectile-indexing-method 'native)
+  (setq projectile-sort-order 'recently-active)  ; sort by recency
   (add-to-list 'projectile-globally-ignored-directories "Pods")
   (add-to-list 'projectile-globally-ignored-directories ".next")
   (add-to-list 'projectile-globally-ignored-directories "build")
