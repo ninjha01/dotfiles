@@ -1,85 +1,87 @@
-;; Editing Configuration
+;;; editing.el --- Editing configuration -*- lexical-binding: t -*-
 
-;; Performance settings
-(setq electric-indent-mode nil)
-(setq gc-cons-threshold 100000000)
-(setq read-process-output-max (* 1024 1024)) ;; 1mb
+;;; Commentary:
+;; Settings for editing behavior, terminals, and code formatting.
 
-;; Disable default auto-save & backup
-(setq auto-save-default nil)
-(setq make-backup-files nil)
-(setq create-lockfiles nil)
+;;; Code:
 
-;; Add logging for when emacs hangs
+;;; Performance settings
+(setq gc-cons-threshold (* 100 1024 1024)  ; 100MB
+      read-process-output-max (* 1024 1024))
+(electric-indent-mode -1)
+
+;; Disable auto-save and backups
+(setq auto-save-default nil
+      make-backup-files nil
+      create-lockfiles nil)
+
+;; Log garbage collection for debugging hangs
 (setq-default garbage-collection-messages t)
 
-;; Terminal configuration
+;;; Terminal
 (use-package term
-  :bind (:map term-mode-map 
-              ("C-c C-j" . jnm/term-toggle-mode))
-  (:map global-map 
-        ("s-t" . open-terminal-dot-app-here)
-        ("C-c t" . open-term-here)))
+  :bind (("s-t" . nj/open-terminal-app)
+         ("C-c t" . nj/open-term-here)
+         :map term-mode-map
+         ("C-c C-j" . nj/term-toggle-mode)))
 
-;; Shell mode configuration
-(use-package shell 
-  :ensure nil 
-  :hook (shell-mode . (lambda ()
-                        ;; Disable font-lock mode
-                        (font-lock-mode -1)
-                        ;; Add hook to truncate buffer
-                        (add-hook 'comint-output-filter-functions 'comint-truncate-buffer t t))) 
+;;; Shell mode
+(defun editing--shell-mode-setup ()
+  "Configure shell mode with minimal font-lock and buffer truncation."
+  (font-lock-mode -1)
+  (add-hook 'comint-output-filter-functions #'comint-truncate-buffer nil t))
+
+(use-package shell
+  :ensure nil
+  :hook (shell-mode . editing--shell-mode-setup)
   :config
-  ;; Set maximum buffer size
   (setq comint-buffer-maximum-size 5000))
 
-;; General formatting
-(use-package apheleia
-  :ensure t
-  :config
-  (defun find-prettier-config ()
-    "Find nearest Prettier config file from current buffer."
-    (when buffer-file-name
-      (let ((dir (file-name-directory buffer-file-name)))
-        (or (locate-dominating-file dir ".prettierrc")
-            (locate-dominating-file dir ".prettierrc.json")
-            (locate-dominating-file dir ".prettierrc.js")
-            (locate-dominating-file dir "prettier.config.js")
-            (locate-dominating-file dir "package.json")))))
+;;; Formatting
 
-  (defun set-js-formatter ()
-    "Set apheleia-formatter to biome if biome.json exists, otherwise prettier."
+(defconst editing--prettier-config-files
+  '(".prettierrc" ".prettierrc.json" ".prettierrc.js"
+    "prettier.config.js" "package.json")
+  "List of Prettier configuration file names.")
+
+(defun editing--find-prettier-config ()
+  "Find nearest Prettier config file from current buffer's directory."
+  (when-let ((dir (and buffer-file-name
+                       (file-name-directory buffer-file-name))))
+    (seq-some (lambda (file) (locate-dominating-file dir file))
+              editing--prettier-config-files)))
+
+(defun editing--biome-config-p (dir)
+  "Return non-nil if DIR has a Biome configuration file."
+  (or (locate-dominating-file dir "biome.json")
+      (locate-dominating-file dir "biome.jsonc")))
+
+(defun editing--set-js-formatter ()
+  "Set formatter to Biome if config exists, otherwise Prettier."
+  (when-let ((dir (and buffer-file-name
+                       (file-name-directory buffer-file-name))))
     (setq-local apheleia-formatter
-                (if (and buffer-file-name
-                         (or (locate-dominating-file (file-name-directory buffer-file-name) "biome.json")
-                             (locate-dominating-file (file-name-directory buffer-file-name) "biome.jsonc")))
-                    'biome
-                  'prettier)))
+                (if (editing--biome-config-p dir) 'biome 'prettier))))
 
-  ;; Prettier formatter with auto-detected config
+(use-package apheleia
+  :config
   (setf (alist-get 'prettier apheleia-formatters)
         '(npx "prettier"
-              "--config" (or (find-prettier-config) (projectile-project-root))
+              "--config" (or (editing--find-prettier-config) (projectile-project-root))
               "--stdin-filepath" filepath))
 
-  ;; Biome formatter (via pnpm dlx for local installs)
   (setf (alist-get 'biome apheleia-formatters)
         '("pnpm" "dlx" "@biomejs/biome" "format" "--stdin-file-path" filepath))
 
-  ;; Auto-detect formatter for JS/TS modes via hook
-  (add-hook 'web-mode-hook #'set-js-formatter)
-  (add-hook 'typescript-mode-hook #'set-js-formatter)
+  (add-hook 'web-mode-hook #'editing--set-js-formatter)
+  (add-hook 'typescript-mode-hook #'editing--set-js-formatter)
   (add-to-list 'apheleia-mode-alist '(markdown-mode . prettier))
   (apheleia-global-mode t))
 
-;; Emacs Lisp formatting
-(use-package elisp-format 
-  :ensure t)
+(use-package elisp-format)
 
-;; Emacs Lisp mode configuration
-(use-package emacs-lisp-mode 
-  :straight nil 
-  :bind (:map emacs-lisp-mode-map 
-              ("C-c C-c" . eval-buffer)))
+(with-eval-after-load 'elisp-mode
+  (define-key emacs-lisp-mode-map (kbd "C-c C-c") #'eval-buffer))
 
 (provide 'editing)
+;;; editing.el ends here

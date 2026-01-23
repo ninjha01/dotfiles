@@ -7,7 +7,7 @@
 
 ;; Theme
 (use-package zenburn-theme
-  :ensure t
+
   :config
   (load-theme 'zenburn t))
 
@@ -28,16 +28,16 @@
 
 ;; Modeline
 (use-package shrink-path
-  :ensure t
+
   :straight (:host github
                    :repo "zbelial/shrink-path.el"
                    :files ("dist" "*.el")))
 
 (use-package all-the-icons
-  :ensure t)
+  )
 
 (use-package doom-modeline
-  :ensure t
+
   :init
   (doom-modeline-mode 1)
   :config
@@ -63,8 +63,9 @@
 
 ;; Delimiters
 (use-package rainbow-delimiters
-  :ensure t
-  :hook (prog-mode . rainbow-delimiters-mode))
+  :defer t
+  :config
+  (add-hook 'prog-mode-hook 'rainbow-delimiters-mode))
 
 (show-paren-mode 1)
 
@@ -82,10 +83,8 @@
 
 ;; Improved cursor location visibility
 (use-package beacon
-  :ensure t
+
   :config
   (beacon-mode 1))
 
 (provide 'theme)
-
-;;; theme.el ends here

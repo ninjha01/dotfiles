@@ -7,7 +7,7 @@
 
 ;; Git integration (load before projectile)
 (use-package magit
-  :ensure t
+
   :bind (("C-x g" . magit-status)
          ("C-c g" . magit-file-dispatch)
          ("C-c b" . magit-blame))
@@ -18,7 +18,7 @@
 
 ;; Projectile for project management
 (use-package projectile
-  :ensure t
+
   :after magit
   :bind (:map projectile-mode-map
               ("C-c p" . projectile-command-map)
@@ -37,12 +37,12 @@
     (add-to-list 'projectile-globally-ignored-directories dir)))
 
 (use-package magit-todos
-  :ensure t
+
   :config
   (setq magit-todos-keyword-suffix "\\(?:([^)]+)\\)?:"))
 
 (use-package git-link
-  :ensure t
+
   :bind ("C-c l" . git-link))
 
 ;; LSP Mode configuration
@@ -58,7 +58,7 @@
     (lsp-deferred)))
 
 (use-package lsp-mode
-  :ensure t
+
   :init
   (setq lsp-keymap-prefix "C-c l")
   :commands (lsp lsp-deferred)
@@ -79,7 +79,7 @@
 
 ;; LSP UI
 (use-package lsp-ui
-  :ensure t
+
   :commands lsp-ui-mode
   :bind (:map lsp-ui-mode-map
               ("C-c C-d" . lsp-ui-doc-show))
@@ -89,8 +89,7 @@
 
 ;; Company mode for completions
 (use-package company
-  :ensure t
-  :hook (prog-mode . company-mode)
+  :defer t
   :bind (:map company-active-map
               ("<tab>" . company-complete-selection)
               ("C-n" . company-select-next)
@@ -99,15 +98,16 @@
   (company-minimum-prefix-length 1)
   (company-idle-delay 0.1)
   :config
-  (setq company-tooltip-align-annotations t))
+  (setq company-tooltip-align-annotations t)
+  (add-hook 'prog-mode-hook 'company-mode))
 
 (use-package company-box
-  :ensure t
+
   :hook (company-mode . company-box-mode))
 
 ;; Syntax checking
 (use-package flycheck
-  :ensure t
+
   :init
   (global-flycheck-mode)
   :bind (:map flycheck-mode-map
@@ -116,13 +116,13 @@
 
 ;; Code snippets
 (use-package yasnippet
-  :ensure t
+
   :config
   (yas-global-mode 1))
 
 ;; Markdown support
 (use-package markdown-mode
-  :ensure t
+
   :mode "\\.md\\'"
   :hook (markdown-mode . (lambda ()
                            (flycheck-mode 1)
@@ -132,18 +132,18 @@
 
 ;; Spelling
 (use-package flycheck-aspell
-  :ensure t)
+  )
 
 ;; GitHub Copilot
 (use-package copilot
   :straight (:host github
                    :repo "zerolfx/copilot.el"
                    :files ("dist" "*.el"))
-  :ensure t
+  :defer t
   :init
   (setq copilot-node-executable "node")
-  :hook (prog-mode . copilot-mode)
   :config
+  (add-hook 'prog-mode-hook 'copilot-mode)
   (with-eval-after-load 'company
     (delq 'company-preview-if-just-one-frontend company-frontends))
   (define-key copilot-completion-map (kbd "<tab>") 'copilot-accept-completion)
@@ -154,7 +154,7 @@
   :straight (:host github
                    :repo "karthink/gptel"
                    :files ("*.el"))
-  :ensure t
+
   :bind ("C-c C-g" . gptel)
   :init
   (setq gptel-default-mode 'markdown-mode)
@@ -174,20 +174,18 @@
 
 ;; Other file formats
 (use-package graphviz-dot-mode
-  :ensure t)
+  )
 
 (use-package yaml-mode
-  :ensure t)
+  )
 
 (use-package csv-mode
-  :ensure t)
+  )
 
 (use-package dockerfile-mode
-  :ensure t)
+  )
 
 (use-package terraform-mode
-  :ensure t)
+  )
 
 (provide 'shared)
-
-;;; shared.el ends here

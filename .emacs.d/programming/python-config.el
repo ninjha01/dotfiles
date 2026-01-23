@@ -24,11 +24,11 @@
 
 ;; Python environment management
 (use-package pyenv 
-  :ensure t)
+  )
 
 ;; Python LSP
 (use-package lsp-pyright 
-  :ensure t 
+
   :hook (python-mode . (lambda () 
                          (require 'lsp-pyright) 
                          (lsp-deferred))) 
@@ -41,7 +41,7 @@
 
 ;; Python dependency management
 (use-package poetry 
-  :ensure t 
+
   :hook (python-mode . poetry-tracking-mode))
 
 

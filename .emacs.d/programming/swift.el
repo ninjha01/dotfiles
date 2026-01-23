@@ -1,7 +1,7 @@
 ;; Swift Mode Configuration
 
 (use-package swift-mode 
-  :ensure t 
+
   :mode ("\\.swift\\'" . swift-mode) 
   :hook (swift-mode . (lambda () 
                         (lsp))) 
@@ -30,7 +30,7 @@
 
 ;; Swift linting and type checking
 (use-package flycheck-swift 
-  :ensure t 
+
   :after flycheck 
   :hook (flycheck-mode . flycheck-swift-setup) 
         (swift-mode . flycheck-mode) 
@@ -41,7 +41,7 @@
 
 ;; LSP for Swift
 (use-package lsp-sourcekit 
-  :ensure t 
+
   :after lsp-mode 
   :config 
   (setq lsp-sourcekit-executable (string-trim (shell-command-to-string "xcrun --find sourcekit-lsp"))))

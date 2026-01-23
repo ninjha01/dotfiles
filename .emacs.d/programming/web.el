@@ -2,7 +2,7 @@
 
 ;; Web mode for HTML, JS, TS, JSX, TSX
 (use-package web-mode 
-  :ensure t 
+
   :mode (("\\.html\\'" . web-mode) 
          ("\\.tsx\\'" . web-mode) 
          ("\\.jsx\\'" . web-mode) 
@@ -28,7 +28,7 @@
 
 ;; TypeScript mode
 (use-package typescript-mode 
-  :ensure t 
+
   :config 
   (setq typescript-indent-level 2) 
   (add-hook 'typescript-mode #'subword-mode) 
@@ -36,7 +36,7 @@
 
 ;; TypeScript Interactive Development Environment
 (use-package tide 
-  :ensure t 
+
   :hook (typescript-mode . tide-setup) 
   :bind (:map tide-mode-map
               ;; bind C-<return> to tide fix
