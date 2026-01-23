@@ -124,7 +124,8 @@
   (persistent-scratch-setup-default)
   (persistent-scratch-autosave-mode 1))
 
-(use-package centered-cursor-mode)
+(use-package centered-cursor-mode
+  :if (display-graphic-p))
 (use-package olivetti)
 
 (provide 'navigation)

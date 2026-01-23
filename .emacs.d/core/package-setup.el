@@ -27,7 +27,7 @@
 
 ;; Configure straight.el (must be set before loading use-package)
 (setq straight-use-package-by-default t
-      straight-vc-git-default-protocol 'ssh)
+      straight-vc-git-default-protocol (if (getenv "CI") 'https 'ssh))
 
 ;; Install use-package
 (straight-use-package 'use-package)
