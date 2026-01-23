@@ -15,13 +15,13 @@
 (when (string-equal (getenv "SKIP_REPOS_DOWNLOAD") "true") 
   (setq straight-check-for-modifications nil))
 
+;; Configure straight.el before loading use-package
+;; Must be set BEFORE use-package is loaded
+(setq straight-use-package-by-default t)
+(setq straight-vc-git-default-protocol 'ssh)
+
 ;; Install use-package
 (straight-use-package 'use-package)
-
-;; Configure use-package to use straight.el by default
-(use-package straight 
-  :custom (straight-use-package-by-default t) 
-  :config (setq straight-vc-git-default-protocol 'ssh))
 
 (defun my-straight-process-run-error-handler (func &rest args) 
   "Catch error from `straight--process-run', print process buffer, and re-signal error." 
