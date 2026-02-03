@@ -18,12 +18,9 @@
 
 ;; Projectile for project management
 (use-package projectile
-
   :after magit
   :bind (:map projectile-mode-map
-              ("C-c p" . projectile-command-map)
-         :map projectile-command-map
-              ("f" . consult-find))
+              ("C-c p" . projectile-command-map))
   :init
   (projectile-mode 1)
   :config
@@ -33,8 +30,10 @@
         projectile-require-project-root t
         projectile-ignored-projects '("~/" "/opt/homebrew")
         projectile-switch-project-action 'magit-status)
-  (dolist (dir '("Pods" ".next" "build" "straight" "node_modules" ".mypy_cache"))
-    (add-to-list 'projectile-globally-ignored-directories dir)))
+  (dolist (dir '("Pods" ".next" "build" "straight" "node_modules" ".mypy_cache" ".venv" "__pycache__" ".ruff_cache" ".git"))
+    (add-to-list 'projectile-globally-ignored-directories dir))
+  (dolist (ext '(".pyc" ".DS_Store"))
+    (add-to-list 'projectile-globally-ignored-file-suffixes ext)))
 
 (use-package magit-todos
 

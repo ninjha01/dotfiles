@@ -1,29 +1,32 @@
 ;; Web Development Configuration
 
-;; Web mode for HTML, JS, TS, JSX, TSX
-(use-package web-mode 
+;; Web mode for HTML, JS, TS, JSX, TSX, Svelte
+(use-package web-mode
 
-  :mode (("\\.html\\'" . web-mode) 
-         ("\\.tsx\\'" . web-mode) 
-         ("\\.jsx\\'" . web-mode) 
-         ("\\.js\\'" . web-mode) 
-         ("\\.ts\\'" . web-mode) 
-         ("\\.cjs\\'" . web-mode) 
-         ("\\.mjs\\'" . web-mode) 
-         ("\\.json\\'" . web-mode)) 
-  :config 
-  (setq web-mode-markup-indent-offset 2 
-        web-mode-code-indent-offset 2 
-        web-mode-css-indent-offset 2 
-        web-mode-enable-css-colorization t 
-        web-mode-enable-auto-pairing t 
-        web-mode-enable-auto-indentation nil 
-        web-mode-enable-comment-keywords t 
-        web-mode-enable-auto-quoting nil 
-        web-mode-enable-current-element-highlight t) 
-  :hook (web-mode . (lambda () 
-                      (lsp-deferred) 
-                      (when (string-equal "tsx" (file-name-extension buffer-file-name)) 
+  :mode (("\\.html\\'" . web-mode)
+         ("\\.tsx\\'" . web-mode)
+         ("\\.jsx\\'" . web-mode)
+         ("\\.js\\'" . web-mode)
+         ("\\.ts\\'" . web-mode)
+         ("\\.cjs\\'" . web-mode)
+         ("\\.mjs\\'" . web-mode)
+         ("\\.json\\'" . web-mode)
+         ("\\.svelte\\'" . web-mode))
+  :config
+  (setq web-mode-markup-indent-offset 2
+        web-mode-code-indent-offset 2
+        web-mode-css-indent-offset 2
+        web-mode-enable-css-colorization t
+        web-mode-enable-auto-pairing t
+        web-mode-enable-auto-indentation nil
+        web-mode-enable-comment-keywords t
+        web-mode-enable-auto-quoting nil
+        web-mode-enable-current-element-highlight t)
+  ;; Register svelte as an engine for proper parsing
+  (add-to-list 'web-mode-engines-alist '("svelte" . "\\.svelte\\'"))
+  :hook (web-mode . (lambda ()
+                      (lsp-deferred)
+                      (when (string-equal "tsx" (file-name-extension buffer-file-name))
                         (setup-tide-mode)))))
 
 ;; TypeScript mode
@@ -51,5 +54,11 @@
     (eldoc-mode +1) 
     (tide-hl-identifier-mode +1) 
     (company-mode +1)))
+
+;; Svelte LSP configuration
+(with-eval-after-load 'lsp-mode
+  ;; Map .svelte files in web-mode to svelte language ID
+  (add-to-list 'lsp-language-id-configuration
+               '(".*\\.svelte$" . "svelte")))
 
 (provide 'web)
