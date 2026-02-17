@@ -45,10 +45,12 @@
   "List of Prettier configuration file names.")
 
 (defun editing--find-prettier-config ()
-  "Find nearest Prettier config file from current buffer's directory."
+  "Find nearest Prettier config file path from current buffer's directory."
   (when-let ((dir (and buffer-file-name
                        (file-name-directory buffer-file-name))))
-    (seq-some (lambda (file) (locate-dominating-file dir file))
+    (seq-some (lambda (file)
+                (when-let ((found-dir (locate-dominating-file dir file)))
+                  (expand-file-name file found-dir)))
               editing--prettier-config-files)))
 
 (defun editing--biome-config-p (dir)
@@ -67,7 +69,8 @@
   :config
   (setf (alist-get 'prettier apheleia-formatters)
         '(npx "prettier"
-              "--config" (or (editing--find-prettier-config) (projectile-project-root))
+              (when-let ((config (editing--find-prettier-config)))
+                (list "--config" config))
               "--stdin-filepath" filepath))
 
   (setf (alist-get 'biome apheleia-formatters)

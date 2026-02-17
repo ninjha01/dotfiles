@@ -14,7 +14,8 @@
   :config
   (setq magit-save-repository-buffers 'dontask
         magit-diff-visit-prefer-worktree t
-        magit-after-save-refresh-status t))
+        magit-after-save-refresh-status t
+        magit-process-connection-type nil))
 
 ;; Projectile for project management
 (use-package projectile
@@ -25,7 +26,6 @@
   (projectile-mode 1)
   :config
   (setq projectile-indexing-method 'native
-        projectile-sort-order 'recently-active
         projectile-git-submodule-command nil
         projectile-require-project-root t
         projectile-ignored-projects '("~/" "/opt/homebrew")

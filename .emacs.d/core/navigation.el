@@ -60,54 +60,21 @@
   :bind (("C-x C-r" . crux-rename-file-and-buffer)
          ("C-x C-k" . crux-delete-buffer-and-file)))
 
-;;; Modern completion stack: Vertico + Consult + Orderless + Embark
-
-(use-package vertico
-  :init (vertico-mode)
+;;; Ivy, Counsel, Swiper for completion
+(use-package ivy
+  :init (ivy-mode)
   :custom
-  (vertico-cycle t)
-  (vertico-resize nil))
+  (ivy-use-virtual-buffers t)
+  (enable-recursive-minibuffers t)
+  :bind (("C-s" . swiper)
+         ("C-c C-r" . ivy-resume)
+         ("C-x b" . ivy-switch-buffer)))
 
-(use-package savehist
-  :ensure nil
-  :init (savehist-mode)
-  :custom
-  (savehist-additional-variables '(search-ring regexp-search-ring project-prefix-history-list))
-  (history-length 1000))
-
-(use-package recentf
-  :ensure nil
-  :init (recentf-mode)
-  :custom
-  (recentf-max-saved-items 200)
-  (recentf-max-menu-items 15))
-
-(use-package orderless
-  :custom
-  (completion-styles '(orderless basic))
-  (completion-category-overrides '((file (styles basic partial-completion)))))
-
-(use-package consult
-  :bind (("C-s" . consult-line)
-         ("C-x b" . consult-buffer)
-         ("C-c k" . consult-ripgrep)
-         ("C-c f" . consult-find)
-         ("M-l" . consult-goto-line)
-         ("M-g o" . consult-outline)
-         ("M-y" . consult-yank-pop)
-         ("C-c C-r" . consult-recent-file))
-  :custom
-  (consult-narrow-key "<")
-  (consult-preview-key "M-."))
-
-(use-package embark
-  :bind (("C-." . embark-act)
-         ("C-;" . embark-dwim))
-  :custom
-  (prefix-help-command #'embark-prefix-help-command))
-
-(use-package embark-consult
-  :after (embark consult))
+(use-package counsel
+  :bind (("M-x" . counsel-M-x)
+         ("C-x C-f" . counsel-find-file)
+         ("C-c k" . counsel-git-grep)
+         ("C-r" . counsel-minibuffer-history)))
 
 ;;; Minibuffer and scrolling
 (setq enable-recursive-minibuffers t

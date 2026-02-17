@@ -69,6 +69,8 @@ function spruce_up {
     sudo shutdown -r now
 }
 
+
+
 function lc {
     fc -ln -1 | awk '{$1=$1}1' | pbcopy
 }
@@ -201,11 +203,18 @@ function collate {
   done
 }
 ### Emacs
-export EDITOR='emacsclient --create-frame --alternate-editor=""'
+export VISUAL='emacsclient --create-frame --alternate-editor=""'
+export EDITOR='emacsclient -tty --alternate-editor=""'
 alias emc='emacsclient --no-wait --create-frame --alternate-editor=""'
 alias emcnw='emacsclient -tty --create-frame --alternate-editor=""'
-alias kille="emacsclient -e '(kill-emacs)'"
-alias remc="kille;emc && exit"
+function kille {
+    emacsclient -e '(kill-emacs)' 2>/dev/null || killall -9 Emacs 2>/dev/null
+    sleep 0.5
+}
+function remc {
+    kille
+    emc && exit
+}
 
 function e {
     if [ "$#" -eq 0 ]; then
