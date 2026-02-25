@@ -15,7 +15,9 @@
   (setq magit-save-repository-buffers 'dontask
         magit-diff-visit-prefer-worktree t
         magit-after-save-refresh-status t
-        magit-process-connection-type nil))
+        magit-process-connection-type nil)
+  (with-eval-after-load 'claude-code
+    (define-key magit-status-mode-map (kbd "C-c c") claude-code-command-map)))
 
 ;; Projectile for project management
 (use-package projectile
@@ -170,6 +172,51 @@
   (with-eval-after-load 'markdown-mode
     (define-key markdown-mode-map (kbd "C-<return>") 'gptel-send)
     (define-key markdown-mode-map (kbd "C-c C-c") 'gptel-send)))
+
+;; Claude Code CLI integration
+(use-package eat
+  :defer t
+  :config
+  (defun my/eat-remap-colors-from-theme ()
+    "Remap eat terminal ANSI colors to zenburn's ansi-color faces."
+    (let ((mappings
+           '((eat-term-color-0  . ansi-color-black)
+             (eat-term-color-1  . ansi-color-red)
+             (eat-term-color-2  . ansi-color-green)
+             (eat-term-color-3  . ansi-color-yellow)
+             (eat-term-color-4  . ansi-color-blue)
+             (eat-term-color-5  . ansi-color-magenta)
+             (eat-term-color-6  . ansi-color-cyan)
+             (eat-term-color-7  . ansi-color-white)
+             (eat-term-color-8  . ansi-color-black)
+             (eat-term-color-9  . ansi-color-red)
+             (eat-term-color-10 . ansi-color-green)
+             (eat-term-color-11 . ansi-color-yellow)
+             (eat-term-color-12 . ansi-color-blue)
+             (eat-term-color-13 . ansi-color-magenta)
+             (eat-term-color-14 . ansi-color-cyan)
+             (eat-term-color-15 . ansi-color-white))))
+      (dolist (map mappings)
+        (let ((fg (face-foreground (cdr map) nil 'default))
+              (bg (face-background (cdr map) nil 'default)))
+          (when fg
+            (set-face-attribute (car map) nil :foreground fg))
+          (when bg
+            (set-face-attribute (car map) nil :background bg))))))
+  (add-hook 'eat-mode-hook #'my/eat-remap-colors-from-theme))
+
+(use-package claude-code
+  :straight (:host github
+                   :repo "stevemolitor/claude-code.el"
+                   :files ("*.el"))
+  :demand t
+  :bind (("C-c 1" . claude-code))
+  :bind-keymap ("C-c c" . claude-code-command-map)
+  :config
+  (claude-code-mode)
+  (setq claude-code-display-window-fn
+        (lambda (buffer)
+          (pop-to-buffer buffer))))
 
 ;; Other file formats
 (use-package graphviz-dot-mode
