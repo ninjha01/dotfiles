@@ -28,11 +28,18 @@
   :type 'string
   :group 'claude-code)
 
-(defcustom claude-code-allowed-tools
-  '("Edit" "Write" "Bash" "Read" "Grep" "Glob" "WebFetch" "WebSearch")
-  "List of tool names to pre-approve via --allowedTools."
+(defcustom claude-code-always-allowed-tools
+  '("Read" "Grep" "Glob")
+  "Tool names permanently approved via --allowedTools.
+These are always passed to the CLI. For session-only approvals,
+use the tools transient (\\[nj/claude-code-tools-transient])."
   :type '(repeat string)
   :group 'claude-code)
+
+(defconst claude-code--known-tools
+  '("Read" "Grep" "Glob" "Edit" "Write" "Bash"
+    "WebFetch" "WebSearch" "NotebookEdit" "TodoWrite")
+  "Known Claude Code tool names.")
 
 (defcustom claude-code-extra-args nil
   "Additional CLI arguments to pass to every invocation."
@@ -128,6 +135,10 @@
 (defvar-local claude-code--pending-tool-uses nil
   "Alist mapping tool_use_id to (name . input) for correlating tool results.")
 
+(defvar-local claude-code--session-allowed-tools nil
+  "Tool names approved for this session only.
+Merged with `claude-code-always-allowed-tools' when building commands.")
+
 (defvar-local claude-code--total-cost 0.0
   "Accumulated cost in USD for this session.")
 
@@ -180,6 +191,7 @@ Called with (TOOL-NAME TOOL-INPUT RESULT).")
   (setq-local claude-code--session-id nil)
   (setq-local claude-code--status 'idle)
   (setq-local claude-code--total-cost 0.0)
+  (setq-local claude-code--session-allowed-tools nil)
   (setq-local claude-code--output-end-marker (point-min-marker))
   (setq-local claude-code--input-start-marker (point-min-marker))
   (setq buffer-read-only nil)
@@ -293,17 +305,25 @@ Called with (TOOL-NAME TOOL-INPUT RESULT).")
 
 ;;;; Process management
 
+(defun claude-code--effective-allowed-tools ()
+  "Return the merged list of allowed tools (permanent + session)."
+  (cl-remove-duplicates
+   (append claude-code-always-allowed-tools
+           claude-code--session-allowed-tools)
+   :test #'string=))
+
 (defun claude-code--build-command (message)
   "Build the CLI argument list for sending MESSAGE."
   (let ((args (list claude-code-executable
                     "-p" message
                     "--output-format" "stream-json"
-                    "--verbose")))
+                    "--verbose"))
+        (tools (claude-code--effective-allowed-tools)))
     (when claude-code--session-id
       (setq args (append args (list "--resume" claude-code--session-id))))
-    (when claude-code-allowed-tools
+    (when tools
       (setq args (append args (list "--allowedTools"
-                                    (string-join claude-code-allowed-tools ",")))))
+                                    (string-join tools ",")))))
     (when claude-code-extra-args
       (setq args (append args claude-code-extra-args)))
     args))
@@ -847,6 +867,127 @@ PROJECT-ROOT defaults to projectile-project-root or `default-directory'."
           (kill-new text)
           (message "Copied %d chars" (length text)))))))
 
+;;;; Tool permission management
+
+(defun claude-code--tool-status (tool)
+  "Return the permission status of TOOL as a string."
+  (cond
+   ((member tool claude-code-always-allowed-tools) "always")
+   ((member tool claude-code--session-allowed-tools) "session")
+   (t "denied")))
+
+(defun claude-code--read-tool (prompt &optional filter)
+  "Prompt for a tool name with PROMPT.
+Optional FILTER is a predicate to narrow the candidates."
+  (let ((candidates (if filter
+                        (cl-remove-if-not filter claude-code--known-tools)
+                      claude-code--known-tools)))
+    (completing-read prompt candidates nil t)))
+
+(defun claude-code--allow-tool-session (tool)
+  "Allow TOOL for the current session only."
+  (interactive
+   (list (claude-code--read-tool
+          "Allow tool (session): "
+          (lambda (t) (not (member t (claude-code--effective-allowed-tools)))))))
+  (unless (member tool claude-code--session-allowed-tools)
+    (push tool claude-code--session-allowed-tools))
+  (message "Allowed %s for this session" tool))
+
+(defun claude-code--allow-tool-permanent (tool)
+  "Allow TOOL permanently by adding to `claude-code-always-allowed-tools'."
+  (interactive
+   (list (claude-code--read-tool
+          "Allow tool (permanent): "
+          (lambda (t) (not (member t claude-code-always-allowed-tools))))))
+  (unless (member tool claude-code-always-allowed-tools)
+    (customize-save-variable
+     'claude-code-always-allowed-tools
+     (append claude-code-always-allowed-tools (list tool))))
+  ;; Also remove from session list if present (now permanent)
+  (setq claude-code--session-allowed-tools
+        (delete tool claude-code--session-allowed-tools))
+  (message "Allowed %s permanently" tool))
+
+(defun claude-code--revoke-tool-session (tool)
+  "Revoke session-level permission for TOOL."
+  (interactive
+   (list (claude-code--read-tool
+          "Revoke tool (session): "
+          (lambda (t) (member t claude-code--session-allowed-tools)))))
+  (setq claude-code--session-allowed-tools
+        (delete tool claude-code--session-allowed-tools))
+  (message "Revoked session permission for %s" tool))
+
+(defun claude-code--revoke-tool-permanent (tool)
+  "Revoke permanent permission for TOOL."
+  (interactive
+   (list (claude-code--read-tool
+          "Revoke tool (permanent): "
+          (lambda (t) (member t claude-code-always-allowed-tools)))))
+  (customize-save-variable
+   'claude-code-always-allowed-tools
+   (delete tool claude-code-always-allowed-tools))
+  (message "Revoked permanent permission for %s" tool))
+
+(defun claude-code--tools-preset-readonly ()
+  "Set tools to read-only preset: Read, Grep, Glob."
+  (interactive)
+  (setq claude-code--session-allowed-tools nil)
+  (customize-save-variable 'claude-code-always-allowed-tools
+                           '("Read" "Grep" "Glob"))
+  (message "Tools set to read-only: Read, Grep, Glob"))
+
+(defun claude-code--tools-preset-standard ()
+  "Set tools to standard preset: read-only + Edit, Write, Bash."
+  (interactive)
+  (setq claude-code--session-allowed-tools nil)
+  (customize-save-variable 'claude-code-always-allowed-tools
+                           '("Read" "Grep" "Glob" "Edit" "Write" "Bash"))
+  (message "Tools set to standard: Read, Grep, Glob, Edit, Write, Bash"))
+
+(defun claude-code--tools-preset-all ()
+  "Allow all known tools permanently."
+  (interactive)
+  (setq claude-code--session-allowed-tools nil)
+  (customize-save-variable 'claude-code-always-allowed-tools
+                           (copy-sequence claude-code--known-tools))
+  (message "All tools allowed"))
+
+(defun claude-code--tools-status-description ()
+  "Return a formatted string showing current tool permissions."
+  (let ((always claude-code-always-allowed-tools)
+        (session claude-code--session-allowed-tools)
+        (denied (cl-remove-if
+                 (lambda (t)
+                   (or (member t claude-code-always-allowed-tools)
+                       (member t claude-code--session-allowed-tools)))
+                 claude-code--known-tools)))
+    (concat
+     (propertize "Always: " 'face 'success)
+     (if always (string-join always ", ") "none")
+     "\n"
+     (propertize "Session: " 'face 'warning)
+     (if session (string-join session ", ") "none")
+     "\n"
+     (propertize "Denied: " 'face 'error)
+     (if denied (string-join denied ", ") "none"))))
+
+;;;###autoload
+(transient-define-prefix nj/claude-code-tools-transient ()
+  "Manage Claude Code tool permissions."
+  [:description claude-code--tools-status-description]
+  ["Allow"
+   ("a" "Allow for session" claude-code--allow-tool-session)
+   ("A" "Allow permanently" claude-code--allow-tool-permanent)]
+  ["Revoke"
+   ("d" "Revoke session" claude-code--revoke-tool-session)
+   ("D" "Revoke permanent" claude-code--revoke-tool-permanent)]
+  ["Presets"
+   ("1" "Read-only" claude-code--tools-preset-readonly)
+   ("2" "Standard (+ Edit, Write, Bash)" claude-code--tools-preset-standard)
+   ("3" "All tools" claude-code--tools-preset-all)])
+
 ;;;; Transient menu
 
 ;;;###autoload
@@ -858,7 +999,8 @@ PROJECT-ROOT defaults to projectile-project-root or `default-directory'."
    ("r" "Resume session" nj/claude-code-resume)
    ("k" "Kill session" nj/claude-code-kill-session)]
   ["Actions"
-   ("w" "Copy last response" claude-code--copy-last-response)])
+   ("w" "Copy last response" claude-code--copy-last-response)
+   ("t" "Tool permissions" nj/claude-code-tools-transient)])
 
 ;;;; Magit integration
 
