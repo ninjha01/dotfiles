@@ -28,14 +28,6 @@
   :type 'string
   :group 'claude-code)
 
-(defcustom claude-code-always-allowed-tools
-  '("Read" "Grep" "Glob")
-  "Tool names permanently approved via --allowedTools.
-These are always passed to the CLI. For session-only approvals,
-use the tools transient (\\[nj/claude-code-tools-transient])."
-  :type '(repeat string)
-  :group 'claude-code)
-
 (defconst claude-code--known-tools
   '("Read" "Grep" "Glob" "Edit" "Write" "Bash"
     "WebFetch" "WebSearch" "NotebookEdit" "TodoWrite")
@@ -135,10 +127,6 @@ use the tools transient (\\[nj/claude-code-tools-transient])."
 (defvar-local claude-code--pending-tool-uses nil
   "Alist mapping tool_use_id to (name . input) for correlating tool results.")
 
-(defvar-local claude-code--session-allowed-tools nil
-  "Tool names approved for this session only.
-Merged with `claude-code-always-allowed-tools' when building commands.")
-
 (defvar-local claude-code--total-cost 0.0
   "Accumulated cost in USD for this session.")
 
@@ -191,7 +179,6 @@ Called with (TOOL-NAME TOOL-INPUT RESULT).")
   (setq-local claude-code--session-id nil)
   (setq-local claude-code--status 'idle)
   (setq-local claude-code--total-cost 0.0)
-  (setq-local claude-code--session-allowed-tools nil)
   (setq-local claude-code--output-end-marker (point-min-marker))
   (setq-local claude-code--input-start-marker (point-min-marker))
   (setq buffer-read-only nil)
@@ -305,25 +292,15 @@ Called with (TOOL-NAME TOOL-INPUT RESULT).")
 
 ;;;; Process management
 
-(defun claude-code--effective-allowed-tools ()
-  "Return the merged list of allowed tools (permanent + session)."
-  (cl-remove-duplicates
-   (append claude-code-always-allowed-tools
-           claude-code--session-allowed-tools)
-   :test #'string=))
-
 (defun claude-code--build-command (message)
-  "Build the CLI argument list for sending MESSAGE."
+  "Build the CLI argument list for sending MESSAGE.
+Permissions are handled by .claude/settings.json — no --allowedTools."
   (let ((args (list claude-code-executable
                     "-p" message
                     "--output-format" "stream-json"
-                    "--verbose"))
-        (tools (claude-code--effective-allowed-tools)))
+                    "--verbose")))
     (when claude-code--session-id
       (setq args (append args (list "--resume" claude-code--session-id))))
-    (when tools
-      (setq args (append args (list "--allowedTools"
-                                    (string-join tools ",")))))
     (when claude-code-extra-args
       (setq args (append args claude-code-extra-args)))
     args))
@@ -867,126 +844,161 @@ PROJECT-ROOT defaults to projectile-project-root or `default-directory'."
           (kill-new text)
           (message "Copied %d chars" (length text)))))))
 
-;;;; Tool permission management
+;;;; Tool permission management — .claude/ settings as source of truth
 
-(defun claude-code--tool-status (tool)
-  "Return the permission status of TOOL as a string."
-  (cond
-   ((member tool claude-code-always-allowed-tools) "always")
-   ((member tool claude-code--session-allowed-tools) "session")
-   (t "denied")))
+(defun claude-code--settings-path (scope)
+  "Return the path to a .claude settings file for SCOPE.
+SCOPE is `local' for settings.local.json or `shared' for settings.json."
+  (let ((root (or claude-code--project-root default-directory)))
+    (expand-file-name
+     (pcase scope
+       ('local ".claude/settings.local.json")
+       ('shared ".claude/settings.json"))
+     root)))
 
-(defun claude-code--read-tool (prompt &optional filter)
-  "Prompt for a tool name with PROMPT.
-Optional FILTER is a predicate to narrow the candidates."
-  (let ((candidates (if filter
-                        (cl-remove-if-not filter claude-code--known-tools)
-                      claude-code--known-tools)))
-    (completing-read prompt candidates nil t)))
+(defun claude-code--read-settings (scope)
+  "Read and parse the .claude settings file for SCOPE.
+Returns an alist. Returns nil if the file doesn't exist."
+  (let ((path (claude-code--settings-path scope)))
+    (when (file-exists-p path)
+      (let ((json-object-type 'alist)
+            (json-array-type 'list)
+            (json-key-type 'symbol))
+        (condition-case nil
+            (json-read-file path)
+          (error nil))))))
 
-(defun claude-code--allow-tool-session (tool)
-  "Allow TOOL for the current session only."
+(defun claude-code--write-settings (scope settings)
+  "Write SETTINGS alist to the .claude settings file for SCOPE."
+  (let ((path (claude-code--settings-path scope)))
+    ;; Ensure .claude/ directory exists
+    (make-directory (file-name-directory path) t)
+    (with-temp-file path
+      (insert (json-encode settings))
+      ;; Pretty-print the JSON
+      (json-pretty-print-buffer))))
+
+(defun claude-code--get-permissions (scope)
+  "Return the permissions alist from SCOPE settings.
+Returns an alist with `allow' and `deny' keys, each a list of strings."
+  (let ((settings (claude-code--read-settings scope)))
+    (or (alist-get 'permissions settings) '())))
+
+(defun claude-code--get-allow-list (scope)
+  "Return the allow list from SCOPE settings."
+  (let ((perms (claude-code--get-permissions scope)))
+    (or (alist-get 'allow perms) '())))
+
+(defun claude-code--get-deny-list (scope)
+  "Return the deny list from SCOPE settings."
+  (let ((perms (claude-code--get-permissions scope)))
+    (or (alist-get 'deny perms) '())))
+
+(defun claude-code--set-permission-list (scope key tools)
+  "Set the permission KEY (allow or deny) to TOOLS in SCOPE settings."
+  (let* ((settings (or (claude-code--read-settings scope) '()))
+         (perms (or (alist-get 'permissions settings) '())))
+    ;; Update the specific key in permissions
+    (setf (alist-get key perms) tools)
+    ;; Update permissions in settings
+    (setf (alist-get 'permissions settings) perms)
+    (claude-code--write-settings scope settings)))
+
+(defun claude-code--read-tool-pattern (prompt)
+  "Prompt for a tool name or pattern with PROMPT.
+Offers known tool names but also accepts free-form patterns like
+Bash(git *) or Edit(/path/*)."
+  (completing-read prompt claude-code--known-tools nil nil))
+
+(defun claude-code--allow-tool-local (tool)
+  "Allow TOOL in .claude/settings.local.json (not committed to git)."
+  (interactive (list (claude-code--read-tool-pattern "Allow tool (local): ")))
+  (let ((allow-list (claude-code--get-allow-list 'local)))
+    (unless (member tool allow-list)
+      (claude-code--set-permission-list 'local 'allow (append allow-list (list tool)))))
+  (message "Allowed %s in settings.local.json" tool))
+
+(defun claude-code--allow-tool-shared (tool)
+  "Allow TOOL in .claude/settings.json (committed to git)."
+  (interactive (list (claude-code--read-tool-pattern "Allow tool (shared): ")))
+  (let ((allow-list (claude-code--get-allow-list 'shared)))
+    (unless (member tool allow-list)
+      (claude-code--set-permission-list 'shared 'allow (append allow-list (list tool)))))
+  (message "Allowed %s in settings.json" tool))
+
+(defun claude-code--deny-tool-local (tool)
+  "Deny TOOL in .claude/settings.local.json."
+  (interactive (list (claude-code--read-tool-pattern "Deny tool (local): ")))
+  (let ((deny-list (claude-code--get-deny-list 'local)))
+    (unless (member tool deny-list)
+      (claude-code--set-permission-list 'local 'deny (append deny-list (list tool)))))
+  (message "Denied %s in settings.local.json" tool))
+
+(defun claude-code--deny-tool-shared (tool)
+  "Deny TOOL in .claude/settings.json."
+  (interactive (list (claude-code--read-tool-pattern "Deny tool (shared): ")))
+  (let ((deny-list (claude-code--get-deny-list 'shared)))
+    (unless (member tool deny-list)
+      (claude-code--set-permission-list 'shared 'deny (append deny-list (list tool)))))
+  (message "Denied %s in settings.json" tool))
+
+(defun claude-code--remove-tool-local (tool)
+  "Remove TOOL from all permission lists in settings.local.json."
   (interactive
-   (list (claude-code--read-tool
-          "Allow tool (session): "
-          (lambda (t) (not (member t (claude-code--effective-allowed-tools)))))))
-  (unless (member tool claude-code--session-allowed-tools)
-    (push tool claude-code--session-allowed-tools))
-  (message "Allowed %s for this session" tool))
+   (let* ((allow (claude-code--get-allow-list 'local))
+          (deny (claude-code--get-deny-list 'local))
+          (all (append allow deny)))
+     (list (completing-read "Remove tool (local): " all nil t))))
+  (let ((allow (claude-code--get-allow-list 'local))
+        (deny (claude-code--get-deny-list 'local)))
+    (claude-code--set-permission-list 'local 'allow (delete tool allow))
+    (claude-code--set-permission-list 'local 'deny (delete tool deny)))
+  (message "Removed %s from settings.local.json" tool))
 
-(defun claude-code--allow-tool-permanent (tool)
-  "Allow TOOL permanently by adding to `claude-code-always-allowed-tools'."
+(defun claude-code--remove-tool-shared (tool)
+  "Remove TOOL from all permission lists in settings.json."
   (interactive
-   (list (claude-code--read-tool
-          "Allow tool (permanent): "
-          (lambda (t) (not (member t claude-code-always-allowed-tools))))))
-  (unless (member tool claude-code-always-allowed-tools)
-    (customize-save-variable
-     'claude-code-always-allowed-tools
-     (append claude-code-always-allowed-tools (list tool))))
-  ;; Also remove from session list if present (now permanent)
-  (setq claude-code--session-allowed-tools
-        (delete tool claude-code--session-allowed-tools))
-  (message "Allowed %s permanently" tool))
-
-(defun claude-code--revoke-tool-session (tool)
-  "Revoke session-level permission for TOOL."
-  (interactive
-   (list (claude-code--read-tool
-          "Revoke tool (session): "
-          (lambda (t) (member t claude-code--session-allowed-tools)))))
-  (setq claude-code--session-allowed-tools
-        (delete tool claude-code--session-allowed-tools))
-  (message "Revoked session permission for %s" tool))
-
-(defun claude-code--revoke-tool-permanent (tool)
-  "Revoke permanent permission for TOOL."
-  (interactive
-   (list (claude-code--read-tool
-          "Revoke tool (permanent): "
-          (lambda (t) (member t claude-code-always-allowed-tools)))))
-  (customize-save-variable
-   'claude-code-always-allowed-tools
-   (delete tool claude-code-always-allowed-tools))
-  (message "Revoked permanent permission for %s" tool))
-
-(defun claude-code--tools-preset-readonly ()
-  "Set tools to read-only preset: Read, Grep, Glob."
-  (interactive)
-  (setq claude-code--session-allowed-tools nil)
-  (customize-save-variable 'claude-code-always-allowed-tools
-                           '("Read" "Grep" "Glob"))
-  (message "Tools set to read-only: Read, Grep, Glob"))
-
-(defun claude-code--tools-preset-standard ()
-  "Set tools to standard preset: read-only + Edit, Write, Bash."
-  (interactive)
-  (setq claude-code--session-allowed-tools nil)
-  (customize-save-variable 'claude-code-always-allowed-tools
-                           '("Read" "Grep" "Glob" "Edit" "Write" "Bash"))
-  (message "Tools set to standard: Read, Grep, Glob, Edit, Write, Bash"))
-
-(defun claude-code--tools-preset-all ()
-  "Allow all known tools permanently."
-  (interactive)
-  (setq claude-code--session-allowed-tools nil)
-  (customize-save-variable 'claude-code-always-allowed-tools
-                           (copy-sequence claude-code--known-tools))
-  (message "All tools allowed"))
+   (let* ((allow (claude-code--get-allow-list 'shared))
+          (deny (claude-code--get-deny-list 'shared))
+          (all (append allow deny)))
+     (list (completing-read "Remove tool (shared): " all nil t))))
+  (let ((allow (claude-code--get-allow-list 'shared))
+        (deny (claude-code--get-deny-list 'shared)))
+    (claude-code--set-permission-list 'shared 'allow (delete tool allow))
+    (claude-code--set-permission-list 'shared 'deny (delete tool deny)))
+  (message "Removed %s from settings.json" tool))
 
 (defun claude-code--tools-status-description ()
-  "Return a formatted string showing current tool permissions."
-  (let ((always claude-code-always-allowed-tools)
-        (session claude-code--session-allowed-tools)
-        (denied (cl-remove-if
-                 (lambda (t)
-                   (or (member t claude-code-always-allowed-tools)
-                       (member t claude-code--session-allowed-tools)))
-                 claude-code--known-tools)))
+  "Return a formatted string showing current .claude/ tool permissions."
+  (let ((shared-allow (claude-code--get-allow-list 'shared))
+        (shared-deny (claude-code--get-deny-list 'shared))
+        (local-allow (claude-code--get-allow-list 'local))
+        (local-deny (claude-code--get-deny-list 'local)))
     (concat
-     (propertize "Always: " 'face 'success)
-     (if always (string-join always ", ") "none")
-     "\n"
-     (propertize "Session: " 'face 'warning)
-     (if session (string-join session ", ") "none")
-     "\n"
-     (propertize "Denied: " 'face 'error)
-     (if denied (string-join denied ", ") "none"))))
+     (propertize "settings.json" 'face 'font-lock-keyword-face) "\n"
+     (propertize "  allow: " 'face 'success)
+     (if shared-allow (string-join shared-allow ", ") "—") "\n"
+     (propertize "  deny:  " 'face 'error)
+     (if shared-deny (string-join shared-deny ", ") "—") "\n"
+     (propertize "settings.local.json" 'face 'font-lock-keyword-face) "\n"
+     (propertize "  allow: " 'face 'success)
+     (if local-allow (string-join local-allow ", ") "—") "\n"
+     (propertize "  deny:  " 'face 'error)
+     (if local-deny (string-join local-deny ", ") "—"))))
 
 ;;;###autoload
 (transient-define-prefix nj/claude-code-tools-transient ()
-  "Manage Claude Code tool permissions."
+  "Manage tool permissions in .claude/ settings files."
   [:description claude-code--tools-status-description]
   ["Allow"
-   ("a" "Allow for session" claude-code--allow-tool-session)
-   ("A" "Allow permanently" claude-code--allow-tool-permanent)]
-  ["Revoke"
-   ("d" "Revoke session" claude-code--revoke-tool-session)
-   ("D" "Revoke permanent" claude-code--revoke-tool-permanent)]
-  ["Presets"
-   ("1" "Read-only" claude-code--tools-preset-readonly)
-   ("2" "Standard (+ Edit, Write, Bash)" claude-code--tools-preset-standard)
-   ("3" "All tools" claude-code--tools-preset-all)])
+   ("a" "Allow (local)" claude-code--allow-tool-local)
+   ("A" "Allow (shared)" claude-code--allow-tool-shared)]
+  ["Deny"
+   ("d" "Deny (local)" claude-code--deny-tool-local)
+   ("D" "Deny (shared)" claude-code--deny-tool-shared)]
+  ["Remove"
+   ("r" "Remove (local)" claude-code--remove-tool-local)
+   ("R" "Remove (shared)" claude-code--remove-tool-shared)])
 
 ;;;; Transient menu
 
