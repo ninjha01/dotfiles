@@ -171,6 +171,11 @@
     (define-key markdown-mode-map (kbd "C-<return>") 'gptel-send)
     (define-key markdown-mode-map (kbd "C-c C-c") 'gptel-send)))
 
+;; Claude Code interface
+(add-to-list 'load-path "~/.emacs.d/elisp")
+(require 'claude-code)
+(global-set-key (kbd "C-c C-l") #'nj/claude-code-transient)
+
 ;; Other file formats
 (use-package graphviz-dot-mode
   )
