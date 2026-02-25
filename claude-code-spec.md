@@ -187,6 +187,14 @@ A single entry keybinding (e.g., `C-c C-l`) opens a transient menu with session 
 | `claude-code-restart`          | Restart a dead session's subprocess      |
 | `claude-code-transient`        | Open the session management transient    |
 
+## Design Principle: Loose Coupling to Claude Code
+
+The implementation should avoid tight coupling to Claude Code specifically. While Claude Code is the initial backend, the architecture should make it relatively straightforward to swap in a different CLI tool or model provider later. This doesn't mean building a full abstraction layer — just keeping CLI-specific details (binary name, flags, JSON output parsing) isolated rather than scattered throughout the codebase. Concretely:
+
+- CLI binary name and flags defined in a small number of variables/functions, not hardcoded everywhere
+- JSON response parsing isolated to a few functions that produce a generic internal representation
+- Buffer rendering and session management work with the internal representation, not raw CLI output
+
 ## Non-Goals
 
 - No model selection UI (use CLI default)
