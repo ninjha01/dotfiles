@@ -38,3 +38,4 @@ Brewfile.lock.json
 /.DS_Store
 /.emacs.d/history
 *.elc
+/.claude/sessions/
