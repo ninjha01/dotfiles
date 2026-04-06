@@ -1,7 +1,5 @@
-# Global Instructions
+# Claude Instructions
 
-## Python
+Use `~/agents/AGENTS.md` as the shared source of truth for agent instructions.
 
-- Always use `uv run` to execute Python. Never use `source .venv/bin/activate` or direct `python` commands.
-  - Example: `uv run python -c "..."`
-  - Example: `uv run invoke lint`
+If Claude-specific behavior is ever needed, keep it here and keep cross-tool instructions in `~/agents/AGENTS.md`.

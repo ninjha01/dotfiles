@@ -50,19 +50,30 @@ alias vie="emacs -Q -nw"
 alias vim="vi"
 alias hgrep="history 0 | grep"
 
-function claude_cleanup {
-    local days=${1:-3}
-    local before=$(du -sh ~/.claude/projects/ 2>/dev/null | cut -f1)
-    find ~/.claude/projects -name "*.jsonl" -mtime +$days -delete 2>/dev/null
-    local after=$(du -sh ~/.claude/projects/ 2>/dev/null | cut -f1)
-    echo "Claude cleanup: $before → $after (deleted sessions older than $days days)"
-}
-
 function spruce_up {
-    osascript -e 'tell application "Finder" to empty trash';
-    rm ~/Desktop/Screen\ Shots/*;
-    claude_cleanup 3;
-    brew cleanup &&
+    local trash_result
+    local trash_status
+    trash_result=$(osascript <<'APPLESCRIPT' 2>&1
+try
+    tell application "Finder" to empty trash
+on error errMsg number errNum
+    if errNum is -128 then
+        return "SKIPPED_FINDER_-128"
+    end if
+    error errMsg number errNum
+end try
+APPLESCRIPT
+)
+    trash_status=$?
+    if [[ "$trash_result" == "SKIPPED_FINDER_-128" ]]; then
+        echo "Trash empty skipped: Finder returned -128"
+    elif (( trash_status != 0 )); then
+        echo "$trash_result" >&2
+        return $trash_status
+    elif [[ -n "$trash_result" ]]; then
+        echo "$trash_result"
+    fi
+    rm -f ~/Desktop/Screen\ Shots/*(N);
     brew update &&
     brew upgrade &&
     brew cleanup &&
@@ -229,10 +240,13 @@ function e {
 }
 echo "setup utils"
 
+### Completion
+autoload -Uz compinit && compinit
+
 ### Autosuggestions
-source /opt/homebrew/share/zsh-autosuggestions/zsh-autosuggestions.zsh
 ZSH_AUTOSUGGEST_STRATEGY=(history completion)
 ZSH_AUTOSUGGEST_USE_ASYNC=1
 ZSH_AUTOSUGGEST_BUFFER_MAX_SIZE=20
 ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=242'
+source /opt/homebrew/share/zsh-autosuggestions/zsh-autosuggestions.zsh
 bindkey '^I' autosuggest-accept

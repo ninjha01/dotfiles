@@ -6,5 +6,5 @@ if ! command -v stow &> /dev/null; then
 fi
 
 cd ~/dotfiles
-mkdir -p ~/.claude
-stow -R zsh bash emacs claude macos
+mkdir -p ~/.claude ~/.codex
+stow -R zsh bash emacs claude codex agents macos
