@@ -1,6 +1,6 @@
 #!/bin/zsh
 ### Aesthetics
-PS1=$'[%(?.%F{green}√.%F{red}X)%f][%*][%F{red}%1d%f]: '
+PS1=$'[%(?.%F{green}√.%F{red}X)%f][%*][%F{green}%m:%F{red}%1d%f]: '
 touch ~/.hushlogin
 export CLICOLOR=1
 export LSCOLORS=gafacadabaegedabagacad
@@ -236,6 +236,18 @@ function e {
     else
         echo "Opening $* in a new Emacs process ..." >&2
         emacs "$@" & disown
+    fi
+}
+
+function enw {
+    if [ "$#" -eq 0 ]; then
+        echo "Starting new terminal Emacs process ..." >&2
+        emacs -nw
+    elif emacsclient -tty "$@" 2> /dev/null; then
+        echo "Opened $* in Emacs server" >&2
+    else
+        echo "Opening $* in a new terminal Emacs process ..." >&2
+        emacs -nw "$@"
     fi
 }
 echo "setup utils"

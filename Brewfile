@@ -51,7 +51,7 @@ brew "watchman"
 brew "wget"
 brew "zlib", link: true
 brew "zsh-autosuggestions"
-brew "d12frosted/emacs-plus/emacs-plus@30", args: ["with-modern-purple-flat-icon"]
+brew "d12frosted/emacs-plus/emacs-plus@30"
 brew "stripe/stripe-cli/stripe"
 cask "bartender"
 cask "chatgpt"

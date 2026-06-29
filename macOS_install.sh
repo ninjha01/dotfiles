@@ -1,6 +1,6 @@
 #!/bin/bash
 set -xe
-xcode-select --install
+#xcode-select --install
 
 # Install brew
 if ! type -P brew; then
