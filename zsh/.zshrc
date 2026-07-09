@@ -50,6 +50,10 @@ alias vie="emacs -Q -nw"
 alias vim="vi"
 alias hgrep="history 0 | grep"
 
+function wcodex {
+    CODEX_HOME="$HOME/.codex-valius" codex "$@"
+}
+
 function spruce_up {
     local trash_result
     local trash_status
