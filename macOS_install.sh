@@ -51,14 +51,22 @@ stow --dir "$DOTFILES_DIR" --target "$HOME" -R zsh bash emacs claude codex agent
 if [[ -f "$TERMINAL_PROFILE" ]]; then
     defaults write com.apple.Terminal "Default Window Settings" -string "Zenburn"
     defaults write com.apple.Terminal "Startup Window Settings" -string "Zenburn"
+    defaults write com.apple.Terminal ShowTabBar -bool true
+    defaults write com.apple.Terminal ShowTabBarInFullScreen -bool true
+    defaults write com.apple.Terminal showTabIfOnlyOneInDesktopScreen -bool true
+    defaults write com.apple.Terminal showTabIfOnlyOneInFullScreen -bool true
 
-    if ! /usr/libexec/PlistBuddy -c "Print :Window Settings" "$TERMINAL_PREFS" >/dev/null 2>&1; then
-        /usr/libexec/PlistBuddy -c "Add :Window Settings dict" "$TERMINAL_PREFS"
+    if ! /usr/libexec/PlistBuddy -c "Print ':Window Settings'" "$TERMINAL_PREFS" >/dev/null 2>&1; then
+        /usr/libexec/PlistBuddy -c "Add ':Window Settings' dict" "$TERMINAL_PREFS"
     fi
 
-    /usr/libexec/PlistBuddy -c "Delete :Window Settings:Zenburn" "$TERMINAL_PREFS" 2>/dev/null || true
-    /usr/libexec/PlistBuddy -c "Add :Window Settings:Zenburn dict" "$TERMINAL_PREFS"
-    /usr/libexec/PlistBuddy -c "Merge $TERMINAL_PROFILE :Window Settings:Zenburn" "$TERMINAL_PREFS"
+    /usr/libexec/PlistBuddy -c "Delete ':Window Settings:Zenburn'" "$TERMINAL_PREFS" 2>/dev/null || true
+    /usr/libexec/PlistBuddy -c "Add ':Window Settings:Zenburn' dict" "$TERMINAL_PREFS"
+    /usr/libexec/PlistBuddy -c "Merge $TERMINAL_PROFILE ':Window Settings:Zenburn'" "$TERMINAL_PREFS"
+    /usr/libexec/PlistBuddy -c "Set ':Window Settings:Zenburn:useOptionAsMetaKey' true" "$TERMINAL_PREFS" 2>/dev/null \
+        || /usr/libexec/PlistBuddy -c "Add ':Window Settings:Zenburn:useOptionAsMetaKey' bool true" "$TERMINAL_PREFS"
+    /usr/libexec/PlistBuddy -c "Set ':Window Settings:Zenburn:shellExitAction' 2" "$TERMINAL_PREFS" 2>/dev/null \
+        || /usr/libexec/PlistBuddy -c "Add ':Window Settings:Zenburn:shellExitAction' integer 2" "$TERMINAL_PREFS"
 else
     echo "Skipping Terminal.app Zenburn profile install: $TERMINAL_PROFILE not found" >&2
 fi
