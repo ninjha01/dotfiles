@@ -66,10 +66,5 @@ In Dired, copy the path of marked files or file at point."
     (end-of-line)
     (hs-toggle-hiding)))
 
-(defun nj/connect-to-vanheron-vm ()
-  "Connect to Nishant's server via TRAMP."
-  (interactive)
-  (find-file "/ssh:ec2-user@vanheron-vm#22:/home/ec2-user/nishant/vhl"))
-
 (provide 'utils)
 ;;; utils.el ends here
