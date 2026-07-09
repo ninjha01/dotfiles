@@ -83,6 +83,10 @@ duti "$HOME/.duti"
 # from https://tonsky.me/blog/monitors/
 defaults -currentHost write -g AppleFontSmoothing -int 0
 
+# Disable the audible alert bell.
+defaults write -g com.apple.sound.beep.volume -float 0
+defaults write -g com.apple.sound.beep.flash -bool false
+
 # Sort folders first in Finder
 defaults write com.apple.finder _FXSortFoldersFirst -bool true
 
