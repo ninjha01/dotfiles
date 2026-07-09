@@ -1,6 +1,4 @@
 tap "d12frosted/emacs-plus"
-tap "homebrew/bundle"
-tap "homebrew/services"
 tap "stripe/stripe-cli"
 brew "awscli"
 brew "bat"
@@ -9,6 +7,7 @@ brew "ruby"
 brew "cocoapods"
 brew "coreutils"
 brew "curl"
+brew "duti"
 brew "eslint"
 brew "exiftool"
 brew "eza"
@@ -42,6 +41,7 @@ brew "ripgrep"
 brew "rust"
 brew "rustup"
 brew "shellcheck"
+brew "stow"
 brew "trash", link: true
 brew "tree"
 brew "uv"
@@ -51,7 +51,7 @@ brew "watchman"
 brew "wget"
 brew "zlib", link: true
 brew "zsh-autosuggestions"
-brew "d12frosted/emacs-plus/emacs-plus@30", args: ["with-modern-purple-flat-icon"]
+brew "d12frosted/emacs-plus/emacs-plus@30"
 brew "stripe/stripe-cli/stripe"
 cask "bartender"
 cask "chatgpt"
@@ -63,18 +63,11 @@ cask "google-chrome"
 cask "google-drive"
 cask "granola"
 cask "itsycal"
-cask "linear-linear"
+cask "linear"
 cask "orbstack"
 cask "raycast"
 cask "rectangle"
 cask "slack"
 cask "steam"
+cask "tailscale-app"
 cask "zoom"
-mas "Flighty", id: 1358823008
-mas "Hue in the Menu", id: 1534707384
-mas "Keynote", id: 409183694
-mas "Mini Motorways", id: 1456188526
-mas "Numbers", id: 409203825
-mas "Pages", id: 409201541
-mas "Strongbox", id: 1270075435
-mas "Xcode", id: 497799835

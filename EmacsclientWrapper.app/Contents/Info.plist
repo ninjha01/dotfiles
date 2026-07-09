@@ -13,17 +13,26 @@
 			<array>
 				<string>*</string>
 			</array>
-			<key>CFBundleTypeOSTypes</key>
-			<array>
-				<string>****</string>
-			</array>
+			<key>CFBundleTypeName</key>
+			<string>Documents</string>
 			<key>CFBundleTypeRole</key>
 			<string>Editor</string>
+			<key>LSHandlerRank</key>
+			<string>Alternate</string>
+			<key>LSItemContentTypes</key>
+			<array>
+				<string>public.item</string>
+				<string>public.data</string>
+				<string>public.text</string>
+				<string>public.source-code</string>
+			</array>
 		</dict>
 	</array>
 	<key>CFBundleExecutable</key>
 	<string>droplet</string>
 	<key>CFBundleIconFile</key>
+	<string>droplet</string>
+	<key>CFBundleIconName</key>
 	<string>droplet</string>
 	<key>CFBundleIdentifier</key>
 	<string>com.local.EmacsclientWrapper</string>

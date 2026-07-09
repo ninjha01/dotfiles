@@ -1,10 +1,6 @@
 #!/bin/bash
-set -e
+set -euo pipefail
 
-if ! command -v stow &> /dev/null; then
-    brew install stow
-fi
+DOTFILES_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
-cd ~/dotfiles
-mkdir -p ~/.claude ~/.codex
-stow -R zsh bash emacs claude codex agents macos
+"$DOTFILES_DIR/macOS_install.sh" "$@"
