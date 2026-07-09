@@ -5,6 +5,8 @@ DOTFILES_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 BREWFILE="$DOTFILES_DIR/Brewfile"
 EMACSCLIENT_WRAPPER="$DOTFILES_DIR/EmacsclientWrapper.app"
 PLIST="$EMACSCLIENT_WRAPPER/Contents/Info.plist"
+TERMINAL_PROFILE="$DOTFILES_DIR/terminal/Zenburn.terminal"
+TERMINAL_PREFS="$HOME/Library/Preferences/com.apple.Terminal.plist"
 SKIP_BREW=0
 WITH_MAS=0
 
@@ -44,6 +46,22 @@ fi
 # Symlink dotfiles.
 mkdir -p "$HOME/.claude" "$HOME/.codex"
 stow --dir "$DOTFILES_DIR" --target "$HOME" -R zsh bash emacs claude codex agents macos
+
+# Install Zenburn Terminal.app profile and use it by default.
+if [[ -f "$TERMINAL_PROFILE" ]]; then
+    defaults write com.apple.Terminal "Default Window Settings" -string "Zenburn"
+    defaults write com.apple.Terminal "Startup Window Settings" -string "Zenburn"
+
+    if ! /usr/libexec/PlistBuddy -c "Print :Window Settings" "$TERMINAL_PREFS" >/dev/null 2>&1; then
+        /usr/libexec/PlistBuddy -c "Add :Window Settings dict" "$TERMINAL_PREFS"
+    fi
+
+    /usr/libexec/PlistBuddy -c "Delete :Window Settings:Zenburn" "$TERMINAL_PREFS" 2>/dev/null || true
+    /usr/libexec/PlistBuddy -c "Add :Window Settings:Zenburn dict" "$TERMINAL_PREFS"
+    /usr/libexec/PlistBuddy -c "Merge $TERMINAL_PROFILE :Window Settings:Zenburn" "$TERMINAL_PREFS"
+else
+    echo "Skipping Terminal.app Zenburn profile install: $TERMINAL_PROFILE not found" >&2
+fi
 
 # Git config
 git config --global rerere.enabled true

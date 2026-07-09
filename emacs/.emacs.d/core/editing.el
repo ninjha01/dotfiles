@@ -78,6 +78,10 @@
 
   (add-hook 'web-mode-hook #'editing--set-js-formatter)
   (add-hook 'typescript-mode-hook #'editing--set-js-formatter)
+  (add-hook 'tsx-ts-mode-hook #'editing--set-js-formatter)
+  (add-to-list 'apheleia-mode-alist '(web-mode . prettier))
+  (add-to-list 'apheleia-mode-alist '(typescript-mode . prettier))
+  (add-to-list 'apheleia-mode-alist '(tsx-ts-mode . prettier))
   (add-to-list 'apheleia-mode-alist '(markdown-mode . prettier))
   (apheleia-global-mode t))
 

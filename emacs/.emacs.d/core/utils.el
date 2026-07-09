@@ -48,9 +48,9 @@ In Dired, copy the path of marked files or file at point."
     (term-line-mode)))
 
 (defun nj/open-terminal-app ()
-  "Open Ghostty terminal at current directory."
+  "Open Terminal.app at current directory."
   (interactive)
-  (shell-command "open -a Ghostty \"$pwd\""))
+  (shell-command "open -a Terminal \"$pwd\""))
 
 (defun nj/open-term-here ()
   "Open a terminal buffer in other window."
